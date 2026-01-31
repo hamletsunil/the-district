@@ -2770,3 +2770,152 @@ a {
 .dc-methodology-editorial .dc-prose p {
   margin-bottom: 0.75rem;
 }
+
+/* ===========================
+   TIMELINE CHART
+   =========================== */
+
+.dc-timeline-chart {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  height: 280px;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .dc-timeline-chart {
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+.dc-timeline-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dc-timeline-bar {
+  width: 40px;
+  min-height: 4px;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transition: height 1s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .dc-timeline-bar {
+    width: 60px;
+  }
+}
+
+.dc-timeline-value {
+  position: absolute;
+  top: -1.75rem;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.8s;
+}
+
+.dc-timeline-bar.animate .dc-timeline-value {
+  opacity: 1;
+}
+
+.dc-timeline-year {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.dc-timeline-cities {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  color: #9ca3af;
+}
+
+/* ===========================
+   COMPANY CHART
+   =========================== */
+
+.dc-company-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.dc-company-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dc-company-label {
+  width: 100px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .dc-company-label {
+    width: 120px;
+  }
+}
+
+.dc-company-name {
+  display: block;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: white;
+}
+
+.dc-company-cities {
+  display: block;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.6875rem;
+  color: #9ca3af;
+}
+
+.dc-company-bar-container {
+  flex: 1;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dc-company-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dc-company-count {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dc-company-count.visible {
+  opacity: 1;
+}

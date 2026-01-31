@@ -47,6 +47,29 @@ const DATA = {
     { city: "Franklin", state: "TN", mentions: 123, sentiment: 48.0 },
     { city: "Farmington", state: "NM", mentions: 110, sentiment: 34.0 },
   ],
+  // NEW: Timeline data showing the explosion in discussions
+  timeline: [
+    { year: 2020, meetings: 3, cities: 3 },
+    { year: 2021, meetings: 1, cities: 1 },
+    { year: 2022, meetings: 1, cities: 1 },
+    { year: 2023, meetings: 61, cities: 38 },
+    { year: 2024, meetings: 57, cities: 39 },
+    { year: 2025, meetings: 734, cities: 260 },
+  ],
+  // NEW: Company mentions in data center discussions
+  companyMentions: [
+    { company: "Meta", mentions: 25, cities: 8 },
+    { company: "Microsoft", mentions: 17, cities: 13 },
+    { company: "Amazon", mentions: 15, cities: 11 },
+    { company: "Google", mentions: 12, cities: 7 },
+    { company: "Apple", mentions: 4, cities: 4 },
+  ],
+  // NEW: Meeting venue breakdown
+  meetingTypes: {
+    cityCouncil: { meetings: 560, segments: 3630 },
+    planningCommission: { meetings: 330, segments: 3054 },
+    other: { meetings: 67, segments: 345 },
+  },
 };
 
 export default function DataCenterArticle() {
@@ -54,7 +77,9 @@ export default function DataCenterArticle() {
     <main className="dc-article">
       <HeroSection />
       <LedeSection />
+      <TheExplosionSection />
       <TheNumbersSection />
+      <ThePlayersSection />
       <TheConcernsSection />
       <TheVoicesSection />
       <TheGeographySection />
@@ -150,7 +175,176 @@ function LedeSection() {
 }
 
 // ============================================================================
-// SECTION 2: THE NUMBERS
+// SECTION 2: THE EXPLOSION
+// ============================================================================
+function TheExplosionSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Explosion</span>
+        <h2>A 12x Surge in Two Years</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          The numbers tell a story of sudden urgency. In 2023, we tracked{" "}
+          <strong>61 municipal meetings</strong> where data centers were discussed
+          across 38 cities. By 2025, that number had exploded to{" "}
+          <strong>734 meetings across 260 cities</strong>&mdash;a twelvefold increase.
+        </p>
+        <p>
+          This isn&rsquo;t gradual growth. It&rsquo;s an inflection point. The AI boom,
+          kicked off by ChatGPT&rsquo;s November 2022 launch and accelerated by the
+          generative AI arms race, has translated into an unprecedented wave of
+          infrastructure proposals hitting local governments simultaneously.
+        </p>
+        <p>
+          Many of these municipalities have never evaluated a data center project before.
+          They&rsquo;re building the regulatory playbook in real-time.
+        </p>
+      </div>
+
+      <div className="dc-graphic" ref={ref}>
+        <div className="dc-timeline-chart">
+          {DATA.timeline.map((item, i) => {
+            const maxMeetings = 734;
+            const height = (item.meetings / maxMeetings) * 200;
+            return (
+              <div key={item.year} className="dc-timeline-bar-container">
+                <div
+                  className={`dc-timeline-bar ${isVisible ? "animate" : ""}`}
+                  style={{
+                    height: isVisible ? height : 0,
+                    transitionDelay: `${i * 0.1}s`,
+                    background: item.year >= 2023
+                      ? "linear-gradient(180deg, #6366f1, #4f46e5)"
+                      : "linear-gradient(180deg, #4b5563, #374151)",
+                  }}
+                >
+                  <span className="dc-timeline-value">{item.meetings}</span>
+                </div>
+                <span className="dc-timeline-year">{item.year}</span>
+                <span className="dc-timeline-cities">{item.cities} cities</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 3: THE PLAYERS
+// ============================================================================
+function ThePlayersSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const colors: Record<string, string> = {
+    Meta: "#0668E1",
+    Microsoft: "#00A4EF",
+    Amazon: "#FF9900",
+    Google: "#4285F4",
+    Apple: "#555555",
+  };
+
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Players</span>
+        <h2>Big Tech at the Podium</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          The transcripts reveal which technology giants are most frequently
+          discussed in local government chambers. <strong>Meta</strong> leads
+          with 25 mentions across 8 cities, followed by{" "}
+          <strong>Microsoft</strong> (17 mentions, 13 cities) and{" "}
+          <strong>Amazon</strong> (15 mentions, 11 cities).
+        </p>
+        <p>
+          Notably, <strong>Microsoft</strong> appears in more cities than Meta
+          despite fewer total mentions, suggesting a broader but less intensive
+          geographic footprint. <strong>Google</strong>, despite its massive data
+          center portfolio, appears in only 7 cities in our dataset.
+        </p>
+        <p>
+          These aren&rsquo;t just abstract corporate names in meeting minutes.
+          They&rsquo;re specific project proposals that residents are weighing
+          against their water bills, their property values, and their quality of life.
+        </p>
+      </div>
+
+      <div className="dc-graphic" ref={ref}>
+        <div className="dc-company-chart">
+          {DATA.companyMentions.map((company, i) => {
+            const maxMentions = 25;
+            return (
+              <div key={company.company} className="dc-company-row">
+                <div className="dc-company-label">
+                  <span className="dc-company-name">{company.company}</span>
+                  <span className="dc-company-cities">{company.cities} cities</span>
+                </div>
+                <div className="dc-company-bar-container">
+                  <div
+                    className={`dc-company-bar ${isVisible ? "animate" : ""}`}
+                    style={{
+                      width: isVisible ? `${(company.mentions / maxMentions) * 100}%` : "0%",
+                      backgroundColor: colors[company.company] || "#6366f1",
+                      transitionDelay: `${i * 0.1}s`,
+                    }}
+                  />
+                  <span
+                    className={`dc-company-count ${isVisible ? "visible" : ""}`}
+                    style={{ transitionDelay: `${i * 0.1 + 0.3}s` }}
+                  >
+                    {company.mentions}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 4: THE NUMBERS
 // ============================================================================
 function TheNumbersSection() {
   return (
