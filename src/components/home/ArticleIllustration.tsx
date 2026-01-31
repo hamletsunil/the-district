@@ -5,6 +5,8 @@
  * with gradients, shadows, glows, and rich details.
  */
 
+import type { ReactElement } from "react";
+
 type IllustrationType = "data-centers" | "housing" | "zoning" | "climate";
 
 interface ArticleIllustrationProps {
@@ -13,7 +15,7 @@ interface ArticleIllustrationProps {
 }
 
 export function ArticleIllustration({ type, className }: ArticleIllustrationProps) {
-  const illustrations: Record<IllustrationType, JSX.Element> = {
+  const illustrations: Record<IllustrationType, ReactElement> = {
     "data-centers": <DataCentersIllustration />,
     housing: <HousingIllustration />,
     zoning: <ZoningIllustration />,
