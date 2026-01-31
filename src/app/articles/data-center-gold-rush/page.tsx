@@ -7,6 +7,10 @@
 
 import { db } from "@/lib/db";
 
+// Force dynamic rendering - data changes and requires database access
+export const dynamic = "force-dynamic";
+export const revalidate = 3600; // Revalidate every hour
+
 // Type definitions
 interface StateData {
   state: string;
@@ -39,15 +43,17 @@ interface SentimentSummary {
   neutralCitiesCount: number;
 }
 
-// Fetch data at build time
+// Fetch data with error handling
 async function getSentimentData() {
-  const topic = await db.topicDefinition.findUnique({
-    where: { slug: "data-centers" },
-  });
+  try {
+    const topic = await db.topicDefinition.findUnique({
+      where: { slug: "data-centers" },
+    });
 
-  if (!topic) {
-    return null;
-  }
+    if (!topic) {
+      console.log("Topic 'data-centers' not found, using fallback data");
+      return getFallbackData();
+    }
 
   const sentimentData = await db.cityTopicSentiment.findMany({
     where: { topicId: topic.id },
@@ -141,6 +147,75 @@ async function getSentimentData() {
     mostPositive: positiveCities
       .sort((a, b) => b.sentimentScore - a.sentimentScore)
       .slice(0, 8),
+  };
+  } catch (error) {
+    console.error("Database error, using fallback data:", error);
+    return getFallbackData();
+  }
+}
+
+// Fallback data for when database is unavailable (e.g., during Vercel build)
+function getFallbackData() {
+  return {
+    topic: {
+      slug: "data-centers",
+      name: "Data Centers",
+      description: "Discussions about data center development, hyperscale facilities, colocation, and cloud infrastructure projects.",
+    },
+    summary: {
+      totalCities: 156,
+      totalMentions: 5007,
+      averageSentiment: 49.9,
+      negativeCitiesCount: 38,
+      positiveCitiesCount: 40,
+      neutralCitiesCount: 78,
+    },
+    byState: [
+      { state: "AZ", cities: 19, totalMentions: 887, avgSentiment: 48.9 },
+      { state: "CA", cities: 14, totalMentions: 534, avgSentiment: 48.5 },
+      { state: "TX", cities: 18, totalMentions: 514, avgSentiment: 49.9 },
+      { state: "MO", cities: 5, totalMentions: 338, avgSentiment: 48.4 },
+      { state: "GA", cities: 6, totalMentions: 312, avgSentiment: 45.6 },
+      { state: "NC", cities: 3, totalMentions: 269, avgSentiment: 47.3 },
+      { state: "TN", cities: 6, totalMentions: 237, avgSentiment: 53.6 },
+      { state: "IL", cities: 4, totalMentions: 231, avgSentiment: 43.8 },
+      { state: "OR", cities: 9, totalMentions: 161, avgSentiment: 50.6 },
+      { state: "LA", cities: 2, totalMentions: 157, avgSentiment: 56.9 },
+    ],
+    topCities: [
+      { city: "Chandler", state: "AZ", population: 275618, sentimentScore: 38.9, mentionFrequency: 336, sampleExcerpts: [] },
+      { city: "Columbia", state: "MO", population: 126172, sentimentScore: 44.0, mentionFrequency: 262, sampleExcerpts: [] },
+      { city: "Athens", state: "GA", population: null, sentimentScore: 41.3, mentionFrequency: 220, sampleExcerpts: ["a data center that was pulling"] },
+      { city: "DeKalb", state: "IL", population: 40697, sentimentScore: 39.3, mentionFrequency: 210, sampleExcerpts: [] },
+      { city: "Statesville", state: "NC", population: 28576, sentimentScore: 50.0, mentionFrequency: 163, sampleExcerpts: ["data center can do all this stuff"] },
+      { city: "Shreveport", state: "LA", population: 186183, sentimentScore: 47.1, mentionFrequency: 153, sampleExcerpts: [] },
+      { city: "Lancaster", state: "CA", population: 171465, sentimentScore: 37.5, mentionFrequency: 139, sampleExcerpts: ["have so much evidence of AI data centers"] },
+      { city: "Franklin", state: "TN", population: 83630, sentimentScore: 48.0, mentionFrequency: 123, sampleExcerpts: [] },
+      { city: "Farmington", state: "NM", population: 46457, sentimentScore: 34.0, mentionFrequency: 110, sampleExcerpts: ["data center. I'm not upset because it's"] },
+      { city: "Mesa", state: "AZ", population: 518012, sentimentScore: 51.4, mentionFrequency: 108, sampleExcerpts: [] },
+      { city: "Murfreesboro", state: "TN", population: 152769, sentimentScore: 50.0, mentionFrequency: 95, sampleExcerpts: [] },
+      { city: "Quincy", state: "WA", population: 8243, sentimentScore: 53.3, mentionFrequency: 88, sampleExcerpts: [] },
+    ],
+    mostNegative: [
+      { city: "Philadelphia", state: "PA", population: 1550542, sentimentScore: 16.7, mentionFrequency: 18, sampleExcerpts: [] },
+      { city: "Eugene", state: "OR", population: 176654, sentimentScore: 16.7, mentionFrequency: 6, sampleExcerpts: [] },
+      { city: "Fairfax", state: "VA", population: 24019, sentimentScore: 20.0, mentionFrequency: 15, sampleExcerpts: [] },
+      { city: "Flagstaff", state: "AZ", population: 73964, sentimentScore: 27.8, mentionFrequency: 54, sampleExcerpts: [] },
+      { city: "Farmington", state: "NM", population: 46457, sentimentScore: 34.0, mentionFrequency: 110, sampleExcerpts: [] },
+      { city: "Lancaster", state: "CA", population: 171465, sentimentScore: 37.5, mentionFrequency: 139, sampleExcerpts: [] },
+      { city: "Chandler", state: "AZ", population: 275618, sentimentScore: 38.9, mentionFrequency: 336, sampleExcerpts: [] },
+      { city: "DeKalb", state: "IL", population: 40697, sentimentScore: 39.3, mentionFrequency: 210, sampleExcerpts: [] },
+    ],
+    mostPositive: [
+      { city: "Middleboro", state: "MA", population: 25470, sentimentScore: 90.0, mentionFrequency: 30, sampleExcerpts: [] },
+      { city: "Waterloo", state: "IA", population: 67314, sentimentScore: 80.0, mentionFrequency: 10, sampleExcerpts: [] },
+      { city: "Prineville", state: "OR", population: 10890, sentimentScore: 76.0, mentionFrequency: 25, sampleExcerpts: [] },
+      { city: "Columbus", state: "GA", population: 206922, sentimentScore: 73.3, mentionFrequency: 15, sampleExcerpts: [] },
+      { city: "Roswell", state: "NM", population: 48366, sentimentScore: 66.7, mentionFrequency: 3, sampleExcerpts: [] },
+      { city: "Hattiesburg", state: "MS", population: 48292, sentimentScore: 66.7, mentionFrequency: 6, sampleExcerpts: [] },
+      { city: "Clovis", state: "NM", population: 39860, sentimentScore: 66.7, mentionFrequency: 3, sampleExcerpts: [] },
+      { city: "Baton Rouge", state: "LA", population: 227470, sentimentScore: 66.7, mentionFrequency: 4, sampleExcerpts: [] },
+    ],
   };
 }
 
