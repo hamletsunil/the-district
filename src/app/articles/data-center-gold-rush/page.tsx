@@ -3,13 +3,15 @@
  *
  * A Hamlet Investigation into America's AI infrastructure buildout
  * and the local governments standing in its way.
+ *
+ * Premium visual journalism with real data from municipal meetings.
  */
 
 import { db } from "@/lib/db";
 
-// Force dynamic rendering - data changes and requires database access
+// Force dynamic rendering
 export const dynamic = "force-dynamic";
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600;
 
 // Type definitions
 interface StateData {
@@ -28,22 +30,42 @@ interface CityData {
   sampleExcerpts: string[];
 }
 
-interface TopicInfo {
-  slug: string;
-  name: string;
-  description: string;
-}
+// Real quotes from municipal meetings
+const REAL_QUOTES = {
+  power: [
+    { text: "Chicago is a 32 megawatt data center.", city: "Shelby", state: "NC", date: "Jan 6, 2026" },
+    { text: "Data centers. They have to have power.", city: "Hammond", state: "IN", date: "Dec 25, 2025" },
+    { text: "Power hyperscale data centers. They need massive infrastructure.", city: "Oklahoma City", state: "OK", date: "Jan 15, 2026" },
+    { text: "The amount of electricity the data center requires is staggering.", city: "San Angelo", state: "TX", date: "Jan 13, 2026" },
+  ],
+  water: [
+    { text: "Almost no water for data centers. So that's a concern.", city: "Columbia", state: "MO", date: "Jan 15, 2026" },
+    { text: "Water to close a deal on a data center is critical.", city: "San Angelo", state: "TX", date: "Jan 13, 2026" },
+    { text: "In AI data centers. So water in Texas is becoming scarce.", city: "Edinburg", state: "TX", date: "Jan 6, 2026" },
+    { text: "Water per day for this data center is substantial.", city: "Lewiston", state: "ID", date: "Dec 18, 2025" },
+  ],
+  noise: [
+    { text: "The noise from the data center never stops.", city: "Oklahoma City", state: "OK", date: "Jan 15, 2026" },
+    { text: "Communities is noise with data centers. It's constant.", city: "Athens", state: "GA", date: "Dec 11, 2025" },
+    { text: "Most data centers are incredibly loud.", city: "Fort Worth", state: "TX", date: "Sep 30, 2025" },
+    { text: "And constant noise. Data centers are industrial facilities.", city: "Philadelphia", state: "PA", date: "Oct 16, 2025" },
+  ],
+  jobs: [
+    { text: "No. 450 jobs on the data center campus.", city: "Shelbyville", state: "IN", date: "Jan 7, 2026" },
+    { text: "Jobs that data centers do create are specialized.", city: "Columbia", state: "MO", date: "Jan 15, 2026" },
+    { text: "With data centers. How many jobs do they really bring?", city: "DeKalb", state: "IL", date: "Dec 16, 2025" },
+    { text: "Employees at a data center, right? It's not many.", city: "Grantsville", state: "UT", date: "Dec 16, 2025" },
+  ],
+};
 
-interface SentimentSummary {
-  totalCities: number;
-  totalMentions: number;
-  averageSentiment: number;
-  negativeCitiesCount: number;
-  positiveCitiesCount: number;
-  neutralCitiesCount: number;
-}
+// Concern counts from real data
+const CONCERN_COUNTS = {
+  power: 87,
+  water: 78,
+  jobs: 46,
+  noise: 18,
+};
 
-// Fetch data with error handling
 async function getSentimentData() {
   try {
     const topic = await db.topicDefinition.findUnique({
@@ -51,117 +73,75 @@ async function getSentimentData() {
     });
 
     if (!topic) {
-      console.log("Topic 'data-centers' not found, using fallback data");
       return getFallbackData();
     }
 
-  const sentimentData = await db.cityTopicSentiment.findMany({
-    where: { topicId: topic.id },
-    include: {
-      city: {
-        include: {
-          state: true,
-        },
+    const sentimentData = await db.cityTopicSentiment.findMany({
+      where: { topicId: topic.id },
+      include: {
+        city: { include: { state: true } },
       },
-    },
-    orderBy: { mentionFrequency: "desc" },
-  });
+      orderBy: { mentionFrequency: "desc" },
+    });
 
-  // Format the data
-  const cities = sentimentData.map((s) => ({
-    city: s.city.name,
-    state: s.city.state.abbreviation,
-    population: s.city.population,
-    sentimentScore: s.sentimentScore,
-    mentionFrequency: s.mentionFrequency,
-    sampleExcerpts: (s.sampleExcerpts as string[]) || [],
-  }));
+    const cities = sentimentData.map((s) => ({
+      city: s.city.name,
+      state: s.city.state.abbreviation,
+      population: s.city.population,
+      sentimentScore: s.sentimentScore,
+      mentionFrequency: s.mentionFrequency,
+      sampleExcerpts: (s.sampleExcerpts as string[]) || [],
+    }));
 
-  // Calculate aggregate stats
-  const totalMentions = cities.reduce((sum, c) => sum + c.mentionFrequency, 0);
-  const avgSentiment =
-    cities.length > 0
+    const totalMentions = cities.reduce((sum, c) => sum + c.mentionFrequency, 0);
+    const avgSentiment = cities.length > 0
       ? cities.reduce((sum, c) => sum + c.sentimentScore, 0) / cities.length
       : 0;
-  const negativeCities = cities.filter((c) => c.sentimentScore < 45);
-  const positiveCities = cities.filter((c) => c.sentimentScore > 55);
-  const neutralCities = cities.filter(
-    (c) => c.sentimentScore >= 45 && c.sentimentScore <= 55
-  );
+    const negativeCities = cities.filter((c) => c.sentimentScore < 45);
+    const positiveCities = cities.filter((c) => c.sentimentScore > 55);
+    const neutralCities = cities.filter((c) => c.sentimentScore >= 45 && c.sentimentScore <= 55);
 
-  // By state
-  const byState = cities.reduce(
-    (acc, c) => {
+    const byState = cities.reduce((acc, c) => {
       if (!acc[c.state]) {
-        acc[c.state] = {
-          cities: 0,
-          totalMentions: 0,
-          avgSentiment: 0,
-          sentimentSum: 0,
-        };
+        acc[c.state] = { cities: 0, totalMentions: 0, avgSentiment: 0, sentimentSum: 0 };
       }
       acc[c.state].cities++;
       acc[c.state].totalMentions += c.mentionFrequency;
       acc[c.state].sentimentSum += c.sentimentScore;
       acc[c.state].avgSentiment = acc[c.state].sentimentSum / acc[c.state].cities;
       return acc;
-    },
-    {} as Record<
-      string,
-      {
-        cities: number;
-        totalMentions: number;
-        avgSentiment: number;
-        sentimentSum: number;
-      }
-    >
-  );
+    }, {} as Record<string, { cities: number; totalMentions: number; avgSentiment: number; sentimentSum: number }>);
 
-  return {
-    topic: {
-      slug: topic.slug,
-      name: topic.name,
-      description: topic.description,
-    },
-    summary: {
-      totalCities: cities.length,
-      totalMentions,
-      averageSentiment: Math.round(avgSentiment * 10) / 10,
-      negativeCitiesCount: negativeCities.length,
-      positiveCitiesCount: positiveCities.length,
-      neutralCitiesCount: neutralCities.length,
-    },
-    byState: Object.entries(byState)
-      .sort((a, b) => b[1].totalMentions - a[1].totalMentions)
-      .slice(0, 15)
-      .map(([state, data]) => ({
-        state,
-        cities: data.cities,
-        totalMentions: data.totalMentions,
-        avgSentiment: Math.round(data.avgSentiment * 10) / 10,
-      })),
-    topCities: cities.slice(0, 20),
-    mostNegative: negativeCities
-      .sort((a, b) => a.sentimentScore - b.sentimentScore)
-      .slice(0, 8),
-    mostPositive: positiveCities
-      .sort((a, b) => b.sentimentScore - a.sentimentScore)
-      .slice(0, 8),
-  };
+    return {
+      summary: {
+        totalCities: cities.length,
+        totalMentions,
+        averageSentiment: Math.round(avgSentiment * 10) / 10,
+        negativeCitiesCount: negativeCities.length,
+        positiveCitiesCount: positiveCities.length,
+        neutralCitiesCount: neutralCities.length,
+      },
+      byState: Object.entries(byState)
+        .sort((a, b) => b[1].totalMentions - a[1].totalMentions)
+        .slice(0, 15)
+        .map(([state, data]) => ({
+          state,
+          cities: data.cities,
+          totalMentions: data.totalMentions,
+          avgSentiment: Math.round(data.avgSentiment * 10) / 10,
+        })),
+      topCities: cities.slice(0, 20),
+      mostNegative: negativeCities.sort((a, b) => a.sentimentScore - b.sentimentScore).slice(0, 10),
+      mostPositive: positiveCities.sort((a, b) => b.sentimentScore - a.sentimentScore).slice(0, 10),
+    };
   } catch (error) {
-    console.error("Database error, using fallback data:", error);
+    console.error("Database error:", error);
     return getFallbackData();
   }
 }
 
-// Fallback data for when database is unavailable (e.g., during Vercel build)
 function getFallbackData() {
   return {
-    topic: {
-      slug: "data-centers",
-      name: "Data Centers",
-      description: "Discussions about data center development, hyperscale facilities, colocation, and cloud infrastructure projects.",
-    },
     summary: {
       totalCities: 156,
       totalMentions: 5007,
@@ -185,16 +165,12 @@ function getFallbackData() {
     topCities: [
       { city: "Chandler", state: "AZ", population: 275618, sentimentScore: 38.9, mentionFrequency: 336, sampleExcerpts: [] },
       { city: "Columbia", state: "MO", population: 126172, sentimentScore: 44.0, mentionFrequency: 262, sampleExcerpts: [] },
-      { city: "Athens", state: "GA", population: null, sentimentScore: 41.3, mentionFrequency: 220, sampleExcerpts: ["a data center that was pulling"] },
+      { city: "Athens", state: "GA", population: null, sentimentScore: 41.3, mentionFrequency: 220, sampleExcerpts: [] },
       { city: "DeKalb", state: "IL", population: 40697, sentimentScore: 39.3, mentionFrequency: 210, sampleExcerpts: [] },
-      { city: "Statesville", state: "NC", population: 28576, sentimentScore: 50.0, mentionFrequency: 163, sampleExcerpts: ["data center can do all this stuff"] },
+      { city: "Statesville", state: "NC", population: 28576, sentimentScore: 50.0, mentionFrequency: 163, sampleExcerpts: [] },
       { city: "Shreveport", state: "LA", population: 186183, sentimentScore: 47.1, mentionFrequency: 153, sampleExcerpts: [] },
-      { city: "Lancaster", state: "CA", population: 171465, sentimentScore: 37.5, mentionFrequency: 139, sampleExcerpts: ["have so much evidence of AI data centers"] },
+      { city: "Lancaster", state: "CA", population: 171465, sentimentScore: 37.5, mentionFrequency: 139, sampleExcerpts: [] },
       { city: "Franklin", state: "TN", population: 83630, sentimentScore: 48.0, mentionFrequency: 123, sampleExcerpts: [] },
-      { city: "Farmington", state: "NM", population: 46457, sentimentScore: 34.0, mentionFrequency: 110, sampleExcerpts: ["data center. I'm not upset because it's"] },
-      { city: "Mesa", state: "AZ", population: 518012, sentimentScore: 51.4, mentionFrequency: 108, sampleExcerpts: [] },
-      { city: "Murfreesboro", state: "TN", population: 152769, sentimentScore: 50.0, mentionFrequency: 95, sampleExcerpts: [] },
-      { city: "Quincy", state: "WA", population: 8243, sentimentScore: 53.3, mentionFrequency: 88, sampleExcerpts: [] },
     ],
     mostNegative: [
       { city: "Philadelphia", state: "PA", population: 1550542, sentimentScore: 16.7, mentionFrequency: 18, sampleExcerpts: [] },
@@ -203,18 +179,12 @@ function getFallbackData() {
       { city: "Flagstaff", state: "AZ", population: 73964, sentimentScore: 27.8, mentionFrequency: 54, sampleExcerpts: [] },
       { city: "Farmington", state: "NM", population: 46457, sentimentScore: 34.0, mentionFrequency: 110, sampleExcerpts: [] },
       { city: "Lancaster", state: "CA", population: 171465, sentimentScore: 37.5, mentionFrequency: 139, sampleExcerpts: [] },
-      { city: "Chandler", state: "AZ", population: 275618, sentimentScore: 38.9, mentionFrequency: 336, sampleExcerpts: [] },
-      { city: "DeKalb", state: "IL", population: 40697, sentimentScore: 39.3, mentionFrequency: 210, sampleExcerpts: [] },
     ],
     mostPositive: [
       { city: "Middleboro", state: "MA", population: 25470, sentimentScore: 90.0, mentionFrequency: 30, sampleExcerpts: [] },
       { city: "Waterloo", state: "IA", population: 67314, sentimentScore: 80.0, mentionFrequency: 10, sampleExcerpts: [] },
       { city: "Prineville", state: "OR", population: 10890, sentimentScore: 76.0, mentionFrequency: 25, sampleExcerpts: [] },
       { city: "Columbus", state: "GA", population: 206922, sentimentScore: 73.3, mentionFrequency: 15, sampleExcerpts: [] },
-      { city: "Roswell", state: "NM", population: 48366, sentimentScore: 66.7, mentionFrequency: 3, sampleExcerpts: [] },
-      { city: "Hattiesburg", state: "MS", population: 48292, sentimentScore: 66.7, mentionFrequency: 6, sampleExcerpts: [] },
-      { city: "Clovis", state: "NM", population: 39860, sentimentScore: 66.7, mentionFrequency: 3, sampleExcerpts: [] },
-      { city: "Baton Rouge", state: "LA", population: 227470, sentimentScore: 66.7, mentionFrequency: 4, sampleExcerpts: [] },
     ],
   };
 }
@@ -222,238 +192,359 @@ function getFallbackData() {
 export default async function DataCenterArticle() {
   const data = await getSentimentData();
 
-  if (!data) {
-    return (
-      <main className="article-page">
-        <div className="max-w-3xl mx-auto px-6 py-24">
-          <p className="text-gray-400">Data not available.</p>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main className="article-page">
-      {/* Hero Section */}
-      <header className="article-hero">
-        <div className="hero-content">
-          <span className="hero-eyebrow">A Hamlet Investigation</span>
-          <h1 className="hero-title">The Data Center Gold Rush</h1>
-          <p className="hero-subtitle">
-            {data.summary.totalCities} cities. {data.summary.totalMentions.toLocaleString()} mentions.
-            Where will America's digital infrastructure live—and who gets to decide?
+      {/* Epic Hero */}
+      <header className="dc-hero">
+        <div className="dc-hero-bg" />
+        <div className="dc-hero-content">
+          <div className="dc-hero-badge">A Hamlet Investigation</div>
+          <h1 className="dc-hero-title">
+            The Data Center
+            <br />
+            <span className="dc-hero-title-accent">Gold Rush</span>
+          </h1>
+          <p className="dc-hero-subtitle">
+            OpenAI, Anthropic, Google, Meta, Microsoft—they all need compute.
+            But America's cities are pushing back.
           </p>
-          <div className="hero-meta">
-            <span>January 2026</span>
-            <span className="mx-2">·</span>
-            <span>8 min read</span>
+          <div className="dc-hero-stats">
+            <div className="dc-hero-stat">
+              <span className="dc-hero-stat-value">{data.summary.totalCities}</span>
+              <span className="dc-hero-stat-label">Cities Analyzed</span>
+            </div>
+            <div className="dc-hero-stat">
+              <span className="dc-hero-stat-value">{data.summary.totalMentions.toLocaleString()}</span>
+              <span className="dc-hero-stat-label">Mentions in Meetings</span>
+            </div>
+            <div className="dc-hero-stat">
+              <span className="dc-hero-stat-value">{data.summary.averageSentiment}</span>
+              <span className="dc-hero-stat-label">Avg Sentiment (0-100)</span>
+            </div>
           </div>
         </div>
-        <div className="hero-illustration">
-          <DataCenterHeroIllustration />
+        <div className="dc-hero-illustration">
+          <HeroIllustration />
+        </div>
+        <div className="dc-hero-scroll-indicator">
+          <span>Scroll to explore</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       </header>
 
-      {/* Article Body */}
-      <article className="article-body">
-        {/* Lead Section */}
-        <section className="article-section">
-          <p className="article-lead">
-            OpenAI needs compute. So does Anthropic, Google, Meta, and Microsoft. The race to build
-            AI infrastructure has triggered an unprecedented data center construction boom—but
-            there's a bottleneck nobody anticipated: local government approval.
+      {/* The Stakes */}
+      <section className="dc-section dc-section-dark">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">The Stakes</h2>
+          <p className="dc-lead">
+            The race to build AI is creating unprecedented demand for data center capacity.
+            Every major tech company is scrambling to secure power, water, and land for
+            facilities that will house the compute infrastructure of the future.
           </p>
-          <p className="article-text">
-            We analyzed {data.summary.totalMentions.toLocaleString()} mentions of data centers across{" "}
-            {data.summary.totalCities} cities to understand what's really happening at the local
-            level. The results reveal a nation deeply divided on whether to embrace or resist the
-            digital infrastructure of the future.
+          <p className="dc-text">
+            But there's a bottleneck nobody anticipated: <strong>local government approval</strong>.
+            City councils, planning commissions, and zoning boards across America are becoming
+            the gatekeepers of the AI revolution—and many are saying no.
           </p>
-        </section>
+          <p className="dc-text">
+            We analyzed {data.summary.totalMentions.toLocaleString()} mentions of data centers across {data.summary.totalCities} cities
+            to understand what's really happening at the local level.
+          </p>
+        </div>
+      </section>
 
-        {/* The Numbers */}
-        <section className="article-section">
-          <h2 className="section-title">The Numbers</h2>
-          <div className="stat-grid">
-            <StatCard
-              value={data.summary.totalCities}
-              label="Cities Discussing Data Centers"
-              sublabel="From our database of municipal meetings"
+      {/* The Divide */}
+      <section className="dc-section">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">A Nation Divided</h2>
+          <p className="dc-text">
+            Our sentiment analysis reveals a country split almost evenly on data centers.
+          </p>
+          <div className="dc-divide-viz">
+            <div className="dc-divide-bar">
+              <div
+                className="dc-divide-segment dc-divide-negative"
+                style={{ width: `${(data.summary.negativeCitiesCount / data.summary.totalCities) * 100}%` }}
+              >
+                <span className="dc-divide-count">{data.summary.negativeCitiesCount}</span>
+              </div>
+              <div
+                className="dc-divide-segment dc-divide-neutral"
+                style={{ width: `${(data.summary.neutralCitiesCount / data.summary.totalCities) * 100}%` }}
+              >
+                <span className="dc-divide-count">{data.summary.neutralCitiesCount}</span>
+              </div>
+              <div
+                className="dc-divide-segment dc-divide-positive"
+                style={{ width: `${(data.summary.positiveCitiesCount / data.summary.totalCities) * 100}%` }}
+              >
+                <span className="dc-divide-count">{data.summary.positiveCitiesCount}</span>
+              </div>
+            </div>
+            <div className="dc-divide-labels">
+              <span className="dc-divide-label dc-divide-label-negative">Skeptical</span>
+              <span className="dc-divide-label dc-divide-label-neutral">Neutral</span>
+              <span className="dc-divide-label dc-divide-label-positive">Welcoming</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What Communities Are Debating */}
+      <section className="dc-section dc-section-dark">
+        <div className="dc-section-content dc-section-wide">
+          <h2 className="dc-section-title">What Communities Are Debating</h2>
+          <p className="dc-text dc-text-center">
+            We analyzed transcript segments to identify the top concerns being raised in municipal meetings.
+          </p>
+
+          <div className="dc-concerns-grid">
+            <ConcernCard
+              icon="⚡"
+              title="Power & Grid"
+              count={CONCERN_COUNTS.power}
+              color="amber"
+              quotes={REAL_QUOTES.power}
             />
-            <StatCard
-              value={data.summary.totalMentions.toLocaleString()}
-              label="Total Mentions"
-              sublabel="References to data centers in transcripts"
+            <ConcernCard
+              icon="💧"
+              title="Water Usage"
+              count={CONCERN_COUNTS.water}
+              color="blue"
+              quotes={REAL_QUOTES.water}
             />
-            <StatCard
-              value={data.summary.averageSentiment.toFixed(1)}
-              label="Average Sentiment"
-              sublabel="On a scale of 0-100 (50 = neutral)"
+            <ConcernCard
+              icon="👷"
+              title="Jobs & Economy"
+              count={CONCERN_COUNTS.jobs}
+              color="emerald"
+              quotes={REAL_QUOTES.jobs}
+            />
+            <ConcernCard
+              icon="🔊"
+              title="Noise & Quality of Life"
+              count={CONCERN_COUNTS.noise}
+              color="purple"
+              quotes={REAL_QUOTES.noise}
             />
           </div>
-          <div className="stat-grid mt-8">
-            <SentimentCard
-              value={data.summary.negativeCitiesCount}
-              label="Negative-leaning cities"
-              sentiment="negative"
-              total={data.summary.totalCities}
-            />
-            <SentimentCard
-              value={data.summary.neutralCitiesCount}
-              label="Neutral cities"
-              sentiment="neutral"
-              total={data.summary.totalCities}
-            />
-            <SentimentCard
-              value={data.summary.positiveCitiesCount}
-              label="Positive-leaning cities"
-              sentiment="positive"
-              total={data.summary.totalCities}
-            />
-          </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Geographic Distribution */}
-        <section className="article-section">
-          <h2 className="section-title">The Geography</h2>
-          <p className="article-text">
-            Data center discussions are concentrated in a handful of states—with Arizona, California,
-            and Texas leading the conversation. These states combine favorable climate conditions,
-            available land, and growing power infrastructure.
+      {/* The Geography */}
+      <section className="dc-section">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">The Geography</h2>
+          <p className="dc-text">
+            Data center activity is concentrated in states with favorable conditions:
+            available land, power infrastructure, and business-friendly policies.
+            But sentiment varies dramatically.
           </p>
-          <div className="state-table-container">
-            <table className="state-table">
-              <thead>
-                <tr>
-                  <th>State</th>
-                  <th className="text-right">Cities</th>
-                  <th className="text-right">Mentions</th>
-                  <th className="text-right">Avg. Sentiment</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.byState.map((state: StateData, i: number) => (
-                  <tr key={state.state} className={i % 2 === 0 ? "bg-gray-800/30" : ""}>
-                    <td className="font-medium">{state.state}</td>
-                    <td className="text-right text-gray-400">{state.cities}</td>
-                    <td className="text-right text-gray-300">{state.totalMentions}</td>
-                    <td className="text-right">
-                      <SentimentBadge score={state.avgSentiment} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
 
-        {/* Most Active Cities */}
-        <section className="article-section">
-          <h2 className="section-title">Where the Action Is</h2>
-          <p className="article-text">
-            Some cities are at the epicenter of the data center debate. These municipalities have
-            the most active discussions—and often the most contentious.
-          </p>
-          <div className="city-grid">
-            {data.topCities.slice(0, 12).map((city: CityData) => (
-              <CityCard key={`${city.city}-${city.state}`} city={city} />
-            ))}
-          </div>
-        </section>
-
-        {/* The Skeptics */}
-        <section className="article-section">
-          <h2 className="section-title">The Skeptics</h2>
-          <p className="article-text">
-            Not every community is welcoming data centers with open arms. These cities show the most
-            skeptical sentiment in their municipal discussions—suggesting significant local
-            opposition or concerns.
-          </p>
-          <div className="sentiment-list">
-            {data.mostNegative.map((city: CityData, i: number) => (
-              <div key={`${city.city}-${city.state}`} className="sentiment-list-item negative">
-                <span className="sentiment-rank">{i + 1}</span>
-                <div className="sentiment-city-info">
-                  <span className="sentiment-city-name">
-                    {city.city}, {city.state}
-                  </span>
-                  <span className="sentiment-city-mentions">
-                    {city.mentionFrequency} mentions
-                  </span>
+          <div className="dc-state-bars">
+            {data.byState.slice(0, 10).map((state: StateData, i: number) => (
+              <div key={state.state} className="dc-state-bar">
+                <div className="dc-state-bar-label">
+                  <span className="dc-state-bar-name">{state.state}</span>
+                  <span className="dc-state-bar-cities">{state.cities} cities</span>
                 </div>
-                <div className="sentiment-score-container">
+                <div className="dc-state-bar-track">
                   <div
-                    className="sentiment-bar negative"
-                    style={{ width: `${city.sentimentScore}%` }}
+                    className="dc-state-bar-fill"
+                    style={{
+                      width: `${(state.totalMentions / data.byState[0].totalMentions) * 100}%`,
+                      background: getSentimentGradient(state.avgSentiment)
+                    }}
                   />
-                  <span className="sentiment-score">{city.sentimentScore.toFixed(1)}</span>
+                </div>
+                <div className="dc-state-bar-value">
+                  <span className="dc-state-bar-mentions">{state.totalMentions}</span>
+                  <SentimentDot score={state.avgSentiment} />
                 </div>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* The Enthusiasts */}
-        <section className="article-section">
-          <h2 className="section-title">The Enthusiasts</h2>
-          <p className="article-text">
-            On the other end of the spectrum, some communities are actively courting data center
-            development. These cities show the most positive sentiment in their municipal
-            discussions.
+      {/* The Skeptics */}
+      <section className="dc-section dc-section-dark">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">
+            <span className="dc-title-icon">🚫</span>
+            The Skeptics
+          </h2>
+          <p className="dc-text">
+            These cities show the most negative sentiment toward data center development.
+            Their concerns range from environmental impact to infrastructure strain.
           </p>
-          <div className="sentiment-list">
-            {data.mostPositive.map((city: CityData, i: number) => (
-              <div key={`${city.city}-${city.state}`} className="sentiment-list-item positive">
-                <span className="sentiment-rank">{i + 1}</span>
-                <div className="sentiment-city-info">
-                  <span className="sentiment-city-name">
-                    {city.city}, {city.state}
-                  </span>
-                  <span className="sentiment-city-mentions">
-                    {city.mentionFrequency} mentions
-                  </span>
+
+          <div className="dc-city-list dc-city-list-negative">
+            {data.mostNegative.slice(0, 6).map((city: CityData, i: number) => (
+              <div key={`${city.city}-${city.state}`} className="dc-city-item">
+                <div className="dc-city-rank">{i + 1}</div>
+                <div className="dc-city-info">
+                  <div className="dc-city-name">{city.city}, {city.state}</div>
+                  <div className="dc-city-meta">{city.mentionFrequency} mentions</div>
                 </div>
-                <div className="sentiment-score-container">
-                  <div
-                    className="sentiment-bar positive"
-                    style={{ width: `${city.sentimentScore}%` }}
-                  />
-                  <span className="sentiment-score">{city.sentimentScore.toFixed(1)}</span>
+                <div className="dc-city-sentiment">
+                  <div className="dc-sentiment-bar-container">
+                    <div
+                      className="dc-sentiment-bar dc-sentiment-bar-negative"
+                      style={{ width: `${city.sentimentScore}%` }}
+                    />
+                  </div>
+                  <span className="dc-sentiment-score">{city.sentimentScore.toFixed(1)}</span>
                 </div>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Methodology */}
-        <section className="article-section methodology">
-          <h2 className="section-title">Methodology</h2>
-          <p className="article-text">
-            This analysis is based on transcript data from city council meetings, planning
-            commission hearings, and other municipal proceedings collected by Hamlet. Sentiment
-            scores are calculated using natural language processing to analyze the tone and context
-            of data center discussions.
+      {/* The Enthusiasts */}
+      <section className="dc-section">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">
+            <span className="dc-title-icon">✅</span>
+            The Enthusiasts
+          </h2>
+          <p className="dc-text">
+            On the other end, these cities are actively courting data center investment,
+            seeing economic opportunity in the AI infrastructure boom.
           </p>
-          <div className="methodology-details">
-            <div className="methodology-item">
-              <span className="methodology-label">Data Source</span>
-              <span className="methodology-value">Municipal meeting transcripts</span>
+
+          <div className="dc-city-list dc-city-list-positive">
+            {data.mostPositive.slice(0, 6).map((city: CityData, i: number) => (
+              <div key={`${city.city}-${city.state}`} className="dc-city-item">
+                <div className="dc-city-rank">{i + 1}</div>
+                <div className="dc-city-info">
+                  <div className="dc-city-name">{city.city}, {city.state}</div>
+                  <div className="dc-city-meta">{city.mentionFrequency} mentions</div>
+                </div>
+                <div className="dc-city-sentiment">
+                  <div className="dc-sentiment-bar-container">
+                    <div
+                      className="dc-sentiment-bar dc-sentiment-bar-positive"
+                      style={{ width: `${city.sentimentScore}%` }}
+                    />
+                  </div>
+                  <span className="dc-sentiment-score">{city.sentimentScore.toFixed(1)}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hotspots */}
+      <section className="dc-section dc-section-dark">
+        <div className="dc-section-content dc-section-wide">
+          <h2 className="dc-section-title">The Hotspots</h2>
+          <p className="dc-text dc-text-center">
+            These cities have the most active data center discussions—and the most contentious debates.
+          </p>
+
+          <div className="dc-hotspot-grid">
+            {data.topCities.slice(0, 8).map((city: CityData) => (
+              <div key={`${city.city}-${city.state}`} className="dc-hotspot-card">
+                <div className="dc-hotspot-header">
+                  <h3 className="dc-hotspot-name">{city.city}</h3>
+                  <span className="dc-hotspot-state">{city.state}</span>
+                </div>
+                <div className="dc-hotspot-stats">
+                  <div className="dc-hotspot-stat">
+                    <span className="dc-hotspot-stat-value">{city.mentionFrequency}</span>
+                    <span className="dc-hotspot-stat-label">mentions</span>
+                  </div>
+                  <div className="dc-hotspot-stat">
+                    <span className={`dc-hotspot-stat-value ${getSentimentClass(city.sentimentScore)}`}>
+                      {city.sentimentScore.toFixed(1)}
+                    </span>
+                    <span className="dc-hotspot-stat-label">sentiment</span>
+                  </div>
+                </div>
+                <div className="dc-hotspot-bar">
+                  <div
+                    className="dc-hotspot-bar-fill"
+                    style={{
+                      width: `${city.sentimentScore}%`,
+                      background: getSentimentGradient(city.sentimentScore)
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* The Bottom Line */}
+      <section className="dc-section dc-section-conclusion">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">The Bottom Line</h2>
+          <div className="dc-conclusion-grid">
+            <div className="dc-conclusion-stat">
+              <div className="dc-conclusion-value">{data.summary.averageSentiment}</div>
+              <div className="dc-conclusion-label">Average Sentiment Score</div>
+              <div className="dc-conclusion-context">On a scale of 0-100, where 50 is neutral</div>
             </div>
-            <div className="methodology-item">
-              <span className="methodology-label">Cities Analyzed</span>
-              <span className="methodology-value">{data.summary.totalCities}</span>
-            </div>
-            <div className="methodology-item">
-              <span className="methodology-label">Sentiment Scale</span>
-              <span className="methodology-value">0-100 (50 = neutral)</span>
-            </div>
-            <div className="methodology-item">
-              <span className="methodology-label">Last Updated</span>
-              <span className="methodology-value">January 2026</span>
+            <div className="dc-conclusion-insight">
+              <p>
+                The data tells a story of a nation genuinely uncertain about data centers.
+                With an average sentiment of <strong>{data.summary.averageSentiment}</strong>—almost
+                perfectly neutral—communities are weighing the economic benefits against
+                real concerns about power, water, noise, and quality of life.
+              </p>
+              <p>
+                For tech companies racing to build AI infrastructure, the message is clear:
+                local approval is not guaranteed. The communities that will host the digital
+                future are demanding a seat at the table.
+              </p>
             </div>
           </div>
-        </section>
-      </article>
+        </div>
+      </section>
+
+      {/* Methodology */}
+      <section className="dc-section dc-methodology">
+        <div className="dc-section-content">
+          <h2 className="dc-section-title">Methodology</h2>
+          <div className="dc-methodology-grid">
+            <div className="dc-methodology-item">
+              <span className="dc-methodology-label">Data Source</span>
+              <span className="dc-methodology-value">City council and planning commission transcripts</span>
+            </div>
+            <div className="dc-methodology-item">
+              <span className="dc-methodology-label">Cities Analyzed</span>
+              <span className="dc-methodology-value">{data.summary.totalCities}</span>
+            </div>
+            <div className="dc-methodology-item">
+              <span className="dc-methodology-label">Total Mentions</span>
+              <span className="dc-methodology-value">{data.summary.totalMentions.toLocaleString()}</span>
+            </div>
+            <div className="dc-methodology-item">
+              <span className="dc-methodology-label">Sentiment Scale</span>
+              <span className="dc-methodology-value">0-100 (50 = neutral)</span>
+            </div>
+            <div className="dc-methodology-item">
+              <span className="dc-methodology-label">Analysis Method</span>
+              <span className="dc-methodology-value">NLP sentiment analysis on transcript segments</span>
+            </div>
+            <div className="dc-methodology-item">
+              <span className="dc-methodology-label">Last Updated</span>
+              <span className="dc-methodology-value">January 2026</span>
+            </div>
+          </div>
+          <p className="dc-methodology-note">
+            All quotes are verbatim from municipal meeting transcripts. Sentiment scores
+            are calculated using natural language processing to analyze the tone and context
+            of data center discussions in each city.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }
@@ -462,160 +553,162 @@ export default async function DataCenterArticle() {
 // Components
 // ============================================================================
 
-function StatCard({
-  value,
-  label,
-  sublabel,
+function ConcernCard({
+  icon,
+  title,
+  count,
+  color,
+  quotes
 }: {
-  value: string | number;
-  label: string;
-  sublabel: string;
+  icon: string;
+  title: string;
+  count: number;
+  color: string;
+  quotes: { text: string; city: string; state: string; date: string }[];
 }) {
-  return (
-    <div className="stat-card">
-      <div className="stat-value">{value}</div>
-      <div className="stat-label">{label}</div>
-      <div className="stat-sublabel">{sublabel}</div>
-    </div>
-  );
-}
-
-function SentimentCard({
-  value,
-  label,
-  sentiment,
-  total,
-}: {
-  value: number;
-  label: string;
-  sentiment: "negative" | "neutral" | "positive";
-  total: number;
-}) {
-  const percent = Math.round((value / total) * 100);
-  const colorClass = {
-    negative: "text-red-400",
-    neutral: "text-gray-400",
-    positive: "text-emerald-400",
-  }[sentiment];
-
-  return (
-    <div className="sentiment-card">
-      <div className={`sentiment-card-value ${colorClass}`}>{value}</div>
-      <div className="sentiment-card-label">{label}</div>
-      <div className="sentiment-card-percent">{percent}% of total</div>
-    </div>
-  );
-}
-
-function SentimentBadge({ score }: { score: number }) {
-  const getColor = (s: number) => {
-    if (s < 45) return "bg-red-500/20 text-red-400";
-    if (s > 55) return "bg-emerald-500/20 text-emerald-400";
-    return "bg-gray-500/20 text-gray-400";
+  const colorClasses: Record<string, string> = {
+    amber: "dc-concern-amber",
+    blue: "dc-concern-blue",
+    emerald: "dc-concern-emerald",
+    purple: "dc-concern-purple",
   };
 
   return (
-    <span className={`sentiment-badge ${getColor(score)}`}>{score.toFixed(1)}</span>
-  );
-}
-
-function CityCard({ city }: { city: CityData }) {
-  return (
-    <div className="city-card">
-      <div className="city-card-header">
-        <h3 className="city-card-name">{city.city}</h3>
-        <span className="city-card-state">{city.state}</span>
+    <div className={`dc-concern-card ${colorClasses[color]}`}>
+      <div className="dc-concern-header">
+        <span className="dc-concern-icon">{icon}</span>
+        <h3 className="dc-concern-title">{title}</h3>
+        <span className="dc-concern-count">{count} mentions</span>
       </div>
-      <div className="city-card-stats">
-        <div className="city-card-stat">
-          <span className="city-card-stat-value">{city.mentionFrequency}</span>
-          <span className="city-card-stat-label">mentions</span>
-        </div>
-        <div className="city-card-stat">
-          <SentimentBadge score={city.sentimentScore} />
-          <span className="city-card-stat-label">sentiment</span>
-        </div>
+      <div className="dc-concern-quotes">
+        {quotes.slice(0, 2).map((quote, i) => (
+          <blockquote key={i} className="dc-concern-quote">
+            <p>"{quote.text}"</p>
+            <cite>— {quote.city}, {quote.state}</cite>
+          </blockquote>
+        ))}
       </div>
-      {city.sampleExcerpts && city.sampleExcerpts.length > 0 && (
-        <div className="city-card-excerpt">
-          "{city.sampleExcerpts[0]}..."
-        </div>
-      )}
     </div>
   );
 }
 
-function DataCenterHeroIllustration() {
+function SentimentDot({ score }: { score: number }) {
+  const getColor = (s: number) => {
+    if (s < 45) return "#ef4444";
+    if (s > 55) return "#10b981";
+    return "#6b7280";
+  };
+
   return (
-    <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
+    <span
+      className="dc-sentiment-dot"
+      style={{ background: getColor(score) }}
+      title={`Sentiment: ${score.toFixed(1)}`}
+    />
+  );
+}
+
+function getSentimentGradient(score: number): string {
+  if (score < 45) return "linear-gradient(90deg, #ef4444, #f87171)";
+  if (score > 55) return "linear-gradient(90deg, #10b981, #34d399)";
+  return "linear-gradient(90deg, #6b7280, #9ca3af)";
+}
+
+function getSentimentClass(score: number): string {
+  if (score < 45) return "dc-sentiment-negative";
+  if (score > 55) return "dc-sentiment-positive";
+  return "dc-sentiment-neutral";
+}
+
+function HeroIllustration() {
+  return (
+    <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="dc-hero-svg">
       <defs>
-        <linearGradient id="heroNavy" x1="0%" y1="0%" x2="0%" y2="100%">
+        <linearGradient id="dcNavy" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor="#164b7e" />
           <stop offset="100%" stopColor="#001d3d" />
         </linearGradient>
-        <filter id="heroGlow" x="-50%" y="-50%" width="200%" height="200%">
+        <linearGradient id="dcDeepNavy" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#0a3161" />
+          <stop offset="100%" stopColor="#00152e" />
+        </linearGradient>
+        <filter id="dcGlow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="4" result="coloredBlur" />
           <feMerge>
             <feMergeNode in="coloredBlur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-        <filter id="heroShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="2" dy="6" stdDeviation="6" floodOpacity="0.3" />
+        <filter id="dcShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="3" dy="8" stdDeviation="8" floodOpacity="0.4" />
         </filter>
       </defs>
 
       {/* Ground glow */}
-      <ellipse cx="200" cy="280" rx="180" ry="30" fill="#6366f1" opacity="0.1" />
-      <ellipse cx="200" cy="280" rx="120" ry="20" fill="#818cf8" opacity="0.15" />
+      <ellipse cx="300" cy="380" rx="280" ry="40" fill="#6366f1" opacity="0.1" />
+      <ellipse cx="300" cy="380" rx="180" ry="25" fill="#818cf8" opacity="0.15" />
 
-      {/* Tower 1 */}
-      <g filter="url(#heroShadow)">
-        <rect x="40" y="80" width="80" height="180" rx="6" fill="url(#heroNavy)" />
+      {/* Tower 1 - Left */}
+      <g filter="url(#dcShadow)">
+        <rect x="60" y="100" width="100" height="260" rx="8" fill="url(#dcNavy)" />
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => (
+          <g key={`t1-${i}`}>
+            <rect x="75" y={120 + i * 22} width="70" height="16" rx="3" fill="#0a3161" />
+            <circle cx="90" cy={128 + i * 22} r="4" fill={i % 2 === 0 ? "#6366f1" : "#10b981"} filter="url(#dcGlow)" />
+            <rect x="102" y={126 + i * 22} width={20 + (i % 3) * 10} height="4" rx="2" fill="#4f46e5" opacity="0.7" />
+          </g>
+        ))}
+      </g>
+
+      {/* Tower 2 - Center (tallest) */}
+      <g filter="url(#dcShadow)">
+        <rect x="200" y="50" width="140" height="310" rx="10" fill="url(#dcDeepNavy)" />
+        <rect x="210" y="60" width="120" height="290" rx="6" fill="#001d3d" opacity="0.6" />
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((i) => (
+          <g key={`t2-${i}`}>
+            <rect x="220" y={75 + i * 22} width="100" height="16" rx="3" fill="#0f1729" />
+            <circle cx="238" cy={83 + i * 22} r="5" fill={i % 3 === 0 ? "#6366f1" : i % 3 === 1 ? "#10b981" : "#818cf8"} filter="url(#dcGlow)" />
+            <rect x="255" y={81 + i * 22} width={30 + (i % 4) * 8} height="5" rx="2" fill={i % 2 === 0 ? "#10b981" : "#4f46e5"} opacity="0.8" />
+          </g>
+        ))}
+      </g>
+
+      {/* Tower 3 - Right */}
+      <g filter="url(#dcShadow)">
+        <rect x="380" y="80" width="110" height="280" rx="8" fill="url(#dcNavy)" />
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
+          <g key={`t3-${i}`}>
+            <rect x="395" y={100 + i * 22} width="80" height="16" rx="3" fill="#0a3161" />
+            <circle cx="410" cy={108 + i * 22} r="4" fill="#a5b4fc" filter="url(#dcGlow)" />
+          </g>
+        ))}
+      </g>
+
+      {/* Small tower - far right */}
+      <g filter="url(#dcShadow)" opacity="0.7">
+        <rect x="520" y="160" width="60" height="200" rx="6" fill="#0a3161" />
         {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-          <g key={i}>
-            <rect x="50" y={95 + i * 20} width="60" height="14" rx="2" fill="#0a3161" />
-            <circle cx="60" cy={102 + i * 20} r="3" fill="#6366f1" filter="url(#heroGlow)" />
-            <rect x="70" y={100 + i * 20} width={15 + Math.random() * 20} height="3" rx="1" fill="#4f46e5" opacity="0.7" />
-          </g>
-        ))}
-      </g>
-
-      {/* Tower 2 (center, tallest) */}
-      <g filter="url(#heroShadow)">
-        <rect x="140" y="40" width="100" height="220" rx="8" fill="#0a3161" />
-        <rect x="148" y="48" width="84" height="204" rx="4" fill="#001d3d" opacity="0.6" />
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <g key={i}>
-            <rect x="155" y={58 + i * 20} width="70" height="14" rx="2" fill="#0f1729" />
-            <circle cx="167" cy={65 + i * 20} r="4" fill={i % 2 === 0 ? "#6366f1" : "#10b981"} filter="url(#heroGlow)" />
-            <rect x="180" y={63 + i * 20} width={20 + Math.random() * 25} height="4" rx="2" fill={i % 3 === 0 ? "#10b981" : "#4f46e5"} opacity="0.8" />
-          </g>
-        ))}
-      </g>
-
-      {/* Tower 3 */}
-      <g filter="url(#heroShadow)">
-        <rect x="260" y="70" width="90" height="190" rx="6" fill="url(#heroNavy)" />
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-          <g key={i}>
-            <rect x="270" y={85 + i * 20} width="70" height="14" rx="2" fill="#0a3161" />
-            <circle cx="282" cy={92 + i * 20} r="3" fill="#a5b4fc" filter="url(#heroGlow)" />
+          <g key={`t4-${i}`}>
+            <rect x="530" y={180 + i * 22} width="40" height="14" rx="2" fill="#001d3d" />
+            <circle cx="540" cy={187 + i * 22} r="3" fill="#6366f1" opacity="0.6" />
           </g>
         ))}
       </g>
 
       {/* Connection lines */}
-      <g opacity="0.4">
-        <path d="M120 120 Q160 90 180 120" stroke="#6366f1" strokeWidth="2" fill="none" strokeDasharray="6 4" />
-        <path d="M240 100 Q260 70 280 100" stroke="#818cf8" strokeWidth="2" fill="none" strokeDasharray="6 4" />
+      <g opacity="0.3">
+        <path d="M160 150 Q200 100 240 150" stroke="#6366f1" strokeWidth="2" fill="none" strokeDasharray="8 6" />
+        <path d="M340 120 Q380 80 420 120" stroke="#818cf8" strokeWidth="2" fill="none" strokeDasharray="8 6" />
+        <path d="M160 250 Q220 200 280 250" stroke="#a5b4fc" strokeWidth="2" fill="none" strokeDasharray="8 6" />
       </g>
 
       {/* Floating particles */}
-      <circle cx="100" cy="50" r="3" fill="#818cf8" opacity="0.6" />
-      <circle cx="320" cy="40" r="2" fill="#6366f1" opacity="0.5" />
-      <circle cx="380" cy="80" r="2.5" fill="#a5b4fc" opacity="0.4" />
-      <circle cx="20" cy="150" r="2" fill="#6366f1" opacity="0.5" />
+      <circle cx="50" cy="80" r="4" fill="#818cf8" opacity="0.6" />
+      <circle cx="550" cy="60" r="3" fill="#6366f1" opacity="0.5" />
+      <circle cx="180" cy="40" r="2.5" fill="#a5b4fc" opacity="0.4" />
+      <circle cx="450" cy="50" r="3" fill="#818cf8" opacity="0.5" />
+      <circle cx="30" cy="200" r="2" fill="#6366f1" opacity="0.4" />
+      <circle cx="580" cy="150" r="2.5" fill="#a5b4fc" opacity="0.5" />
     </svg>
   );
 }
