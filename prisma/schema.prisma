@@ -1,0 +1,1539 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model State {
+  id               String           @id @default(cuid())
+  name             String
+  abbreviation     String           @unique
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  cities           City[]
+  counties         County[]
+  governmentBodies GovernmentBody[]
+  users            User[]
+
+  @@index([abbreviation])
+}
+
+model County {
+  id               String                 @id @default(cuid())
+  name             String
+  stateId          String
+  fipsCode         String?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+  latitude         Float?
+  longitude        Float?
+  cities           City[]
+  civicPlusClients CivicPlusClient[]
+  state            State                  @relation(fields: [stateId], references: [id])
+  topicSentiments  CountyTopicSentiment[]
+  governmentBodies GovernmentBody[]
+  specialDistricts SpecialDistrict[]
+
+  @@unique([name, stateId])
+  @@index([stateId])
+}
+
+model City {
+  id                   String                    @id @default(cuid())
+  name                 String
+  stateId              String
+  countyId             String?
+  population           Int?
+  createdAt            DateTime                  @default(now())
+  updatedAt            DateTime                  @updatedAt
+  latitude             Float?
+  longitude            Float?
+  county               County?                   @relation(fields: [countyId], references: [id])
+  state                State                     @relation(fields: [stateId], references: [id])
+  topicSentiments      CityTopicSentiment[]
+  votingStats          CityVotingStats[]
+  civicPlusClients     CivicPlusClient[]
+  companyJurisdictions CompanyJurisdiction[]
+  developmentProjects  DevelopmentProject[]
+  governmentBodies     GovernmentBody[]
+  legistarClients      LegistarClient[]
+  legistarPersons      LegistarPerson[]
+  rfiScores            RegulatoryFrictionIndex[]
+  rviScores            RegulatoryVelocityIndex[]
+  specialDistricts     SpecialDistrict[]
+
+  @@unique([name, stateId])
+  @@index([stateId])
+  @@index([countyId])
+}
+
+model SpecialDistrict {
+  id               String                          @id @default(cuid())
+  name             String
+  districtType     String
+  cityId           String?
+  stateId          String?
+  createdAt        DateTime                        @default(now())
+  updatedAt        DateTime                        @updatedAt
+  countyId         String?
+  latitude         Float?
+  longitude        Float?
+  governmentBodies GovernmentBody[]
+  city             City?                           @relation(fields: [cityId], references: [id])
+  county           County?                         @relation(fields: [countyId], references: [id])
+  topicSentiments  SpecialDistrictTopicSentiment[]
+
+  @@index([cityId])
+  @@index([countyId])
+}
+
+model GovernmentBody {
+  id                String            @id @default(cuid())
+  name              String
+  bodyType          BodyType
+  cityId            String?
+  specialDistrictId String?
+  channelId         String?
+  channelUrl        String?
+  channelName       String?
+  verified          Boolean           @default(false)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  countyId          String?
+  stateId           String?
+  civicPlusAgendas  CivicPlusAgenda[]
+  city              City?             @relation(fields: [cityId], references: [id])
+  county            County?           @relation(fields: [countyId], references: [id])
+  specialDistrict   SpecialDistrict?  @relation(fields: [specialDistrictId], references: [id])
+  state             State?            @relation(fields: [stateId], references: [id])
+  meetings          Meeting[]
+
+  @@index([stateId])
+  @@index([countyId])
+  @@index([cityId])
+  @@index([bodyType])
+  @@index([channelId])
+}
+
+model Meeting {
+  id                 String              @id @default(cuid())
+  title              String
+  meetingDate        DateTime
+  durationMinutes    Int?
+  videoUrl           String
+  videoId            String?
+  videoSourceType    VideoSourceType     @default(YOUTUBE)
+  thumbnailUrl       String?
+  transcriptStatus   TranscriptStatus    @default(PENDING)
+  governmentBodyId   String
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  streamUrl          String?
+  alertMatches       AlertMatch[]
+  bookmarks          Bookmark[]
+  civicPlusAgendas   CivicPlusAgenda[]
+  legistarEvent      LegistarEvent?
+  governmentBody     GovernmentBody      @relation(fields: [governmentBodyId], references: [id])
+  projectActions     ProjectAction[]
+  projectMentions    ProjectMention[]
+  transcriptAnalysis TranscriptAnalysis?
+  segments           TranscriptSegment[]
+
+  @@index([governmentBodyId])
+  @@index([meetingDate])
+  @@index([transcriptStatus])
+  @@index([videoId])
+  @@index([governmentBodyId, meetingDate(sort: Desc)])
+}
+
+model TranscriptSegment {
+  id                   String                   @id @default(cuid())
+  meetingId            String
+  text                 String
+  startTime            Float
+  endTime              Float
+  speaker              String?
+  confidence           Float?
+  createdAt            DateTime                 @default(now())
+  searchVector         Unsupported("tsvector")?
+  embedding            Unsupported("vector")?
+  embeddingStatus      String?                  @default("PENDING")
+  embeddingGeneratedAt DateTime?
+  bookmarks            Bookmark[]
+  meeting              Meeting                  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@index([meetingId])
+  @@index([startTime])
+  @@index([meetingId, embeddingStatus])
+}
+
+model Company {
+  id                   String                @id @default(cuid())
+  name                 String
+  domain               String?               @unique
+  subscriptionTier     SubscriptionTier      @default(FREE)
+  maxSeats             Int                   @default(1)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  alertLimit           Int                   @default(3)
+  jurisdictionLimit    Int                   @default(1)
+  monthlySearchLimit   Int                   @default(20)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  alerts               Alert[]
+  jurisdictions        CompanyJurisdiction[]
+  memberships          CompanyMembership[]
+
+  @@index([domain])
+  @@index([stripeCustomerId])
+}
+
+model User {
+  id                   String               @id @default(cuid())
+  clerkId              String               @unique
+  email                String               @unique
+  firstName            String?
+  lastName             String?
+  imageUrl             String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  onboardingStep       String?
+  searchCount          Int                  @default(0)
+  searchCountReset     DateTime             @default(now())
+  trialEndsAt          DateTime?
+  selectedStateId      String?
+  userType             UserType?
+  emailDigestFrequency EmailDigestFrequency @default(WEEKLY)
+  emailNotifications   Boolean              @default(true)
+  status               UserStatus           @default(ACTIVE)
+  alerts               Alert[]
+  bookmarks            Bookmark[]
+  collections          Collection[]
+  memberships          CompanyMembership[]
+  searchHistory        SearchHistory[]
+  selectedState        State?               @relation(fields: [selectedStateId], references: [id])
+
+  @@index([clerkId])
+  @@index([email])
+  @@index([selectedStateId])
+}
+
+model CompanyMembership {
+  id        String     @id @default(cuid())
+  companyId String
+  userId    String
+  role      MemberRole @default(MEMBER)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  company   Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, userId])
+  @@index([userId])
+}
+
+model CompanyJurisdiction {
+  id        String   @id @default(cuid())
+  companyId String
+  cityId    String
+  createdAt DateTime @default(now())
+  city      City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, cityId])
+  @@index([companyId])
+  @@index([cityId])
+}
+
+model SearchHistory {
+  id          String   @id @default(cuid())
+  userId      String
+  query       String
+  filters     Json?
+  resultCount Int?
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model Bookmark {
+  id           String             @id @default(cuid())
+  userId       String
+  meetingId    String
+  segmentId    String?
+  collectionId String?
+  note         String?
+  timestamp    Float?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  collection   Collection?        @relation(fields: [collectionId], references: [id])
+  meeting      Meeting            @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+  segment      TranscriptSegment? @relation(fields: [segmentId], references: [id])
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, meetingId, segmentId])
+  @@index([userId])
+  @@index([meetingId])
+  @@index([collectionId])
+}
+
+model Collection {
+  id          String     @id @default(cuid())
+  userId      String
+  name        String
+  description String?
+  isPublic    Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  bookmarks   Bookmark[]
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Alert {
+  id        String       @id @default(cuid())
+  userId    String
+  companyId String?
+  states    String[]
+  bodyTypes BodyType[]
+  isActive  Boolean      @default(true)
+  lastRunAt DateTime?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  cities    String[]
+  query     String?
+  company   Company?     @relation(fields: [companyId], references: [id])
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matches   AlertMatch[]
+
+  @@index([userId])
+  @@index([companyId])
+  @@index([isActive])
+}
+
+model AlertMatch {
+  id        String   @id @default(cuid())
+  alertId   String
+  meetingId String
+  snippet   String?
+  timestamp Float?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  alert     Alert    @relation(fields: [alertId], references: [id], onDelete: Cascade)
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@unique([alertId, meetingId])
+  @@index([alertId])
+  @@index([meetingId])
+  @@index([createdAt])
+}
+
+model LegistarSyncState {
+  id                 String               @id @default(cuid())
+  legistarClientId   String
+  endpoint           String
+  tier               LegistarEndpointTier
+  status             LegistarSyncStatus   @default(PENDING)
+  lastSyncAt         DateTime?
+  lastSuccessAt      DateTime?
+  lastCursor         String?
+  lastModifiedFilter DateTime?
+  errorMessage       String?
+  errorCount         Int                  @default(0)
+  recordsProcessed   Int                  @default(0)
+  totalRecords       Int?
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  legistarClient     LegistarClient       @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+
+  @@unique([legistarClientId, endpoint])
+  @@index([status])
+  @@index([tier])
+  @@index([lastSyncAt])
+}
+
+model LegistarIngestionJob {
+  id               String                @id @default(cuid())
+  jobType          String
+  tier             LegistarEndpointTier?
+  status           LegistarSyncStatus    @default(PENDING)
+  startedAt        DateTime?
+  completedAt      DateTime?
+  clientsTotal     Int                   @default(0)
+  clientsProcessed Int                   @default(0)
+  clientsFailed    Int                   @default(0)
+  recordsTotal     Int                   @default(0)
+  recordsProcessed Int                   @default(0)
+  errorLog         Json?
+  metadata         Json?
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+
+  @@index([status])
+  @@index([jobType])
+  @@index([createdAt])
+}
+
+model LegistarClient {
+  id             String                    @id @default(cuid())
+  clientSlug     String                    @unique
+  cityId         String?
+  apiEndpoint    String
+  hasAgendas     Boolean                   @default(false)
+  lastSyncAt     DateTime?
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
+  isActive       Boolean                   @default(true)
+  metadata       Json?
+  actions        LegistarAction[]
+  bodies         LegistarBody[]
+  bodyTypes      LegistarBodyType[]
+  city           City?                     @relation(fields: [cityId], references: [id])
+  codeSections   LegistarCodeSection[]
+  events         LegistarEvent[]
+  indexes        LegistarIndex[]
+  matters        LegistarMatter[]
+  matterStatuses LegistarMatterStatus[]
+  matterTypes    LegistarMatterType[]
+  officeRecords  LegistarOfficeRecord[]
+  persons        LegistarPerson[]
+  rollCalls      LegistarRollCall[]
+  syncStates     LegistarSyncState[]
+  votes          LegistarVote[]
+  voteTypes      LegistarVoteType[]
+  rviScores      RegulatoryVelocityIndex[]
+
+  @@index([cityId])
+  @@index([isActive])
+}
+
+model LegistarBodyType {
+  id                 String         @id @default(cuid())
+  legistarClientId   String
+  legistarBodyTypeId Int
+  name               String
+  rawJson            Json?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  bodies             LegistarBody[]
+  legistarClient     LegistarClient @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+
+  @@unique([legistarClientId, legistarBodyTypeId])
+  @@index([legistarClientId])
+}
+
+model LegistarBody {
+  id               String                 @id @default(cuid())
+  legistarClientId String
+  legistarBodyId   Int
+  bodyTypeId       String?
+  name             String
+  description      String?
+  isActive         Boolean                @default(true)
+  meetTime         String?
+  meetLocation     String?
+  contactName      String?
+  contactEmail     String?
+  contactPhone     String?
+  usedControlFlag  Boolean?
+  numberOfMembers  Int?
+  rawJson          Json?
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+  bodyType         LegistarBodyType?      @relation(fields: [bodyTypeId], references: [id])
+  legistarClient   LegistarClient         @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  events           LegistarEvent[]
+  matters          LegistarMatter[]
+  officeRecords    LegistarOfficeRecord[]
+
+  @@unique([legistarClientId, legistarBodyId])
+  @@index([legistarClientId])
+  @@index([bodyTypeId])
+  @@index([isActive])
+}
+
+model LegistarAction {
+  id               String                  @id @default(cuid())
+  legistarClientId String
+  legistarActionId Int
+  name             String
+  rawJson          Json?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  legistarClient   LegistarClient          @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  eventItems       LegistarEventItem[]
+  matterHistories  LegistarMatterHistory[]
+
+  @@unique([legistarClientId, legistarActionId])
+  @@index([legistarClientId])
+}
+
+model LegistarVoteType {
+  id                 String         @id @default(cuid())
+  legistarClientId   String
+  legistarVoteTypeId Int
+  name               String
+  pluralName         String?
+  usedFor            Int?
+  rawJson            Json?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  votes              LegistarVote[]
+  legistarClient     LegistarClient @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+
+  @@unique([legistarClientId, legistarVoteTypeId])
+  @@index([legistarClientId])
+}
+
+model LegistarMatterType {
+  id                   String           @id @default(cuid())
+  legistarClientId     String
+  legistarMatterTypeId Int
+  name                 String
+  sort                 Int?
+  rawJson              Json?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  matters              LegistarMatter[]
+  legistarClient       LegistarClient   @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+
+  @@unique([legistarClientId, legistarMatterTypeId])
+  @@index([legistarClientId])
+}
+
+model LegistarMatterStatus {
+  id                     String           @id @default(cuid())
+  legistarClientId       String
+  legistarMatterStatusId Int
+  name                   String
+  sort                   Int?
+  isActive               Boolean          @default(true)
+  description            String?
+  rawJson                Json?
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+  matters                LegistarMatter[]
+  legistarClient         LegistarClient   @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+
+  @@unique([legistarClientId, legistarMatterStatusId])
+  @@index([legistarClientId])
+}
+
+model LegistarCodeSection {
+  id                    String                      @id @default(cuid())
+  legistarClientId      String
+  legistarCodeSectionId Int
+  number                String
+  name                  String
+  rawJson               Json?
+  createdAt             DateTime                    @default(now())
+  updatedAt             DateTime                    @updatedAt
+  legistarClient        LegistarClient              @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  matterCodeSections    LegistarMatterCodeSection[]
+
+  @@unique([legistarClientId, legistarCodeSectionId])
+  @@index([legistarClientId])
+}
+
+model LegistarIndex {
+  id               String                @id @default(cuid())
+  legistarClientId String
+  legistarIndexId  Int
+  name             String
+  rawJson          Json?
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+  legistarClient   LegistarClient        @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  matterIndexes    LegistarMatterIndex[]
+
+  @@unique([legistarClientId, legistarIndexId])
+  @@index([legistarClientId])
+}
+
+model LegistarPerson {
+  id               String                  @id @default(cuid())
+  legistarClientId String
+  legistarPersonId Int
+  guid             String?
+  fullName         String
+  firstName        String?
+  lastName         String?
+  activeFlag       Boolean                 @default(true)
+  email            String?
+  email2           String?
+  website          String?
+  phone            String?
+  fax              String?
+  address1         String?
+  address2         String?
+  city             String?
+  state            String?
+  zip              String?
+  usedSponsorFlag  Boolean?
+  lastModifiedUtc  DateTime?
+  rawJson          Json?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+  primaryCityId    String?
+  matterSponsors   LegistarMatterSponsor[]
+  officeRecords    LegistarOfficeRecord[]
+  legistarClient   LegistarClient          @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  primaryCity      City?                   @relation(fields: [primaryCityId], references: [id])
+  rollCalls        LegistarRollCall[]
+  votes            LegistarVote[]
+  votingStats      PersonVotingStats[]
+
+  @@unique([legistarClientId, legistarPersonId])
+  @@index([legistarClientId])
+  @@index([fullName])
+  @@index([activeFlag])
+  @@index([primaryCityId])
+  @@index([primaryCityId, activeFlag])
+}
+
+model LegistarOfficeRecord {
+  id                     String         @id @default(cuid())
+  legistarClientId       String
+  legistarOfficeRecordId Int
+  personId               String
+  bodyId                 String?
+  title                  String?
+  startDate              DateTime?
+  endDate                DateTime?
+  memberTypeId           Int?
+  memberTypeName         String?
+  supportNameId          Int?
+  supportFullName        String?
+  rawJson                Json?
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+  body                   LegistarBody?  @relation(fields: [bodyId], references: [id])
+  legistarClient         LegistarClient @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  person                 LegistarPerson @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@unique([legistarClientId, legistarOfficeRecordId])
+  @@index([legistarClientId])
+  @@index([personId])
+  @@index([bodyId])
+  @@index([startDate])
+  @@index([endDate])
+}
+
+model LegistarEvent {
+  id                      String              @id @default(cuid())
+  legistarClientId        String
+  legistarEventId         Int
+  eventDate               DateTime
+  eventTime               String?
+  bodyName                String
+  location                String?
+  agendaUrl               String?
+  minutesUrl              String?
+  meetingId               String?             @unique
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
+  agendaLastPublishedUtc  DateTime?
+  agendaStatusId          Int?
+  agendaStatusName        String?
+  bodyId                  String?
+  comment                 String?
+  guid                    String?
+  inSiteUrl               String?
+  lastModifiedUtc         DateTime?
+  minutesLastPublishedUtc DateTime?
+  minutesStatusId         Int?
+  minutesStatusName       String?
+  rawJson                 Json?
+  videoPath               String?
+  videoStatus             String?
+  agendaItems             AgendaItem[]
+  body                    LegistarBody?       @relation(fields: [bodyId], references: [id])
+  legistarClient          LegistarClient      @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  meeting                 Meeting?            @relation(fields: [meetingId], references: [id])
+  eventItems              LegistarEventItem[]
+
+  @@unique([legistarClientId, legistarEventId])
+  @@index([legistarClientId])
+  @@index([bodyId])
+  @@index([meetingId])
+  @@index([eventDate])
+  @@index([lastModifiedUtc])
+}
+
+model LegistarEventItem {
+  id                   String             @id @default(cuid())
+  legistarClientId     String
+  legistarEventItemId  Int
+  eventId              String
+  guid                 String?
+  agendaSequence       Int?
+  minutesSequence      Int?
+  agendaNumber         String?
+  video                Int?
+  videoIndex           Int?
+  version              String?
+  agendaNote           String?
+  minutesNote          String?
+  actionId             String?
+  actionName           String?
+  actionText           String?
+  passedFlag           Int?
+  passedFlagName       String?
+  rollCallFlag         Int?
+  flagExtra            Int?
+  title                String
+  tally                String?
+  accelaRecordId       String?
+  consent              Int?
+  moverId              Int?
+  moverName            String?
+  seconderId           Int?
+  seconderName         String?
+  matterId             String?
+  matterGuid           String?
+  matterFile           String?
+  matterName           String?
+  matterType           String?
+  matterStatus         String?
+  lastModifiedUtc      DateTime?
+  rawJson              Json?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+  aiCategorizedAt      DateTime?
+  aiCategoryConfidence Float?
+  aiTopicCategory      String?
+  action               LegistarAction?    @relation(fields: [actionId], references: [id])
+  event                LegistarEvent      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  matter               LegistarMatter?    @relation(fields: [matterId], references: [id])
+  rollCalls            LegistarRollCall[]
+  votes                LegistarVote[]
+  projectActions       ProjectAction[]
+
+  @@unique([eventId, legistarEventItemId])
+  @@index([eventId])
+  @@index([actionId])
+  @@index([matterId])
+  @@index([matterType])
+  @@index([lastModifiedUtc])
+}
+
+model LegistarMatter {
+  id                  String                      @id @default(cuid())
+  legistarClientId    String
+  legistarMatterId    Int
+  guid                String?
+  file                String?
+  name                String?
+  title               String?
+  matterTypeId        String?
+  matterStatusId      String?
+  bodyId              String?
+  introDate           DateTime?
+  agendaDate          DateTime?
+  passedDate          DateTime?
+  enactmentDate       DateTime?
+  enactmentNumber     String?
+  requester           String?
+  notes               String?
+  version             String?
+  text1               String?
+  text2               String?
+  text3               String?
+  text4               String?
+  text5               String?
+  exText1             String?
+  exText2             String?
+  exText3             String?
+  exText4             String?
+  exText5             String?
+  exText6             String?
+  exText7             String?
+  exText8             String?
+  exText9             String?
+  exText10            String?
+  exText11            String?
+  agiloftId           Int?
+  reference           String?
+  restrictViewViaWeb  Boolean?
+  lastModifiedUtc     DateTime?
+  rawJson             Json?
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
+  developmentProjects DevelopmentProject[]
+  eventItems          LegistarEventItem[]
+  body                LegistarBody?               @relation(fields: [bodyId], references: [id])
+  legistarClient      LegistarClient              @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  matterStatus        LegistarMatterStatus?       @relation(fields: [matterStatusId], references: [id])
+  matterType          LegistarMatterType?         @relation(fields: [matterTypeId], references: [id])
+  attachments         LegistarMatterAttachment[]
+  codeSections        LegistarMatterCodeSection[]
+  histories           LegistarMatterHistory[]
+  indexes             LegistarMatterIndex[]
+  relations           LegistarMatterRelation[]    @relation("MatterRelations")
+  relatedTo           LegistarMatterRelation[]    @relation("RelatedMatters")
+  sponsors            LegistarMatterSponsor[]
+  texts               LegistarMatterText[]
+
+  @@unique([legistarClientId, legistarMatterId])
+  @@index([legistarClientId])
+  @@index([matterTypeId])
+  @@index([matterStatusId])
+  @@index([bodyId])
+  @@index([introDate])
+  @@index([passedDate])
+  @@index([lastModifiedUtc])
+}
+
+model LegistarMatterAttachment {
+  id                   String         @id @default(cuid())
+  legistarClientId     String
+  legistarAttachmentId Int
+  matterId             String
+  guid                 String?
+  name                 String
+  hyperlink            String?
+  fileName             String?
+  matterVersion        String?
+  isHyperlink          Boolean?
+  binary               String?
+  isSupportingDocument Boolean?
+  showOnInternetPage   Boolean?
+  isMinuteOrder        Boolean?
+  isBoardLetter        Boolean?
+  agiloftId            Int?
+  description          String?
+  printWithReports     Boolean?
+  sort                 Int?
+  lastModifiedUtc      DateTime?
+  rawJson              Json?
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  matter               LegistarMatter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, legistarAttachmentId])
+  @@index([matterId])
+  @@index([lastModifiedUtc])
+}
+
+model LegistarMatterSponsor {
+  id                String          @id @default(cuid())
+  legistarClientId  String
+  legistarSponsorId Int
+  matterId          String
+  personId          String?
+  matterVersion     String?
+  sequenceNumber    Int?
+  linkFlag          Int?
+  rawJson           Json?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  matter            LegistarMatter  @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  person            LegistarPerson? @relation(fields: [personId], references: [id])
+
+  @@unique([matterId, legistarSponsorId])
+  @@index([matterId])
+  @@index([personId])
+}
+
+model LegistarMatterHistory {
+  id                String          @id @default(cuid())
+  legistarClientId  String
+  legistarHistoryId Int
+  matterId          String
+  guid              String?
+  date              DateTime?
+  actionId          String?
+  actionName        String?
+  actionText        String?
+  passedFlag        Int?
+  passedFlagName    String?
+  rollCallFlag      Int?
+  flagExtra         Int?
+  tally             String?
+  consent           Int?
+  moverId           Int?
+  moverName         String?
+  seconderId        Int?
+  seconderName      String?
+  matterStatusId    Int?
+  matterStatusName  String?
+  rawJson           Json?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  action            LegistarAction? @relation(fields: [actionId], references: [id])
+  matter            LegistarMatter  @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, legistarHistoryId])
+  @@index([matterId])
+  @@index([actionId])
+  @@index([date])
+}
+
+model LegistarMatterRelation {
+  id                 String          @id @default(cuid())
+  legistarClientId   String
+  legistarRelationId Int
+  matterId           String
+  relatedMatterId    String?
+  flag               Int?
+  rawJson            Json?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  matter             LegistarMatter  @relation("MatterRelations", fields: [matterId], references: [id], onDelete: Cascade)
+  relatedMatter      LegistarMatter? @relation("RelatedMatters", fields: [relatedMatterId], references: [id])
+
+  @@unique([matterId, legistarRelationId])
+  @@index([matterId])
+  @@index([relatedMatterId])
+}
+
+model LegistarMatterCodeSection {
+  id                    String               @id @default(cuid())
+  legistarClientId      String
+  legistarCodeSectionId Int
+  matterId              String
+  codeSectionId         String?
+  matterVersion         String?
+  rawJson               Json?
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  codeSection           LegistarCodeSection? @relation(fields: [codeSectionId], references: [id])
+  matter                LegistarMatter       @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, legistarCodeSectionId])
+  @@index([matterId])
+  @@index([codeSectionId])
+}
+
+model LegistarMatterIndex {
+  id               String         @id @default(cuid())
+  legistarClientId String
+  legistarIndexId  Int
+  matterId         String
+  indexId          String?
+  matterVersion    String?
+  rawJson          Json?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  index            LegistarIndex? @relation(fields: [indexId], references: [id])
+  matter           LegistarMatter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, legistarIndexId])
+  @@index([matterId])
+  @@index([indexId])
+}
+
+model LegistarMatterText {
+  id               String         @id @default(cuid())
+  legistarClientId String
+  legistarTextId   Int
+  matterId         String
+  version          String?
+  name             String?
+  date             DateTime?
+  textPlain        String?
+  textRtf          String?
+  rawJson          Json?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  matter           LegistarMatter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, legistarTextId])
+  @@index([matterId])
+  @@index([date])
+}
+
+model LegistarVote {
+  id               String             @id @default(cuid())
+  legistarClientId String
+  legistarVoteId   Int
+  guid             String?
+  eventItemId      String?
+  personId         String?
+  voteTypeId       String?
+  voteTypeName     String?
+  sort             Int?
+  result           Int?
+  lastModifiedUtc  DateTime?
+  rawJson          Json?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  eventItem        LegistarEventItem? @relation(fields: [eventItemId], references: [id], onDelete: Cascade)
+  legistarClient   LegistarClient     @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  person           LegistarPerson?    @relation(fields: [personId], references: [id])
+  voteType         LegistarVoteType?  @relation(fields: [voteTypeId], references: [id])
+
+  @@unique([legistarClientId, legistarVoteId])
+  @@index([legistarClientId])
+  @@index([eventItemId])
+  @@index([personId])
+  @@index([voteTypeId])
+  @@index([lastModifiedUtc])
+}
+
+model LegistarRollCall {
+  id                 String             @id @default(cuid())
+  legistarClientId   String
+  legistarRollCallId Int
+  guid               String?
+  eventItemId        String?
+  personId           String?
+  voteTypeId         Int?
+  voteTypeName       String?
+  sort               Int?
+  result             Int?
+  lastModifiedUtc    DateTime?
+  rawJson            Json?
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime           @updatedAt
+  eventItem          LegistarEventItem? @relation(fields: [eventItemId], references: [id], onDelete: Cascade)
+  legistarClient     LegistarClient     @relation(fields: [legistarClientId], references: [id], onDelete: Cascade)
+  person             LegistarPerson?    @relation(fields: [personId], references: [id])
+
+  @@unique([legistarClientId, legistarRollCallId])
+  @@index([legistarClientId])
+  @@index([eventItemId])
+  @@index([personId])
+  @@index([lastModifiedUtc])
+}
+
+model PersonVotingStats {
+  id           String         @id @default(cuid())
+  personId     String
+  topicSlug    String
+  yeaCount     Int            @default(0)
+  nayCount     Int            @default(0)
+  abstainCount Int            @default(0)
+  absentCount  Int            @default(0)
+  totalVotes   Int            @default(0)
+  approvalRate Float?
+  calculatedAt DateTime       @default(now())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  person       LegistarPerson @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@unique([personId, topicSlug])
+  @@index([personId])
+  @@index([topicSlug])
+  @@index([calculatedAt])
+}
+
+model CityVotingStats {
+  id            String   @id @default(cuid())
+  cityId        String
+  topicSlug     String
+  totalMatters  Int      @default(0)
+  approvedCount Int      @default(0)
+  rejectedCount Int      @default(0)
+  approvalRate  Float?
+  avgYeaPercent Float?
+  consensusRate Float?
+  calculatedAt  DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  city          City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+
+  @@unique([cityId, topicSlug])
+  @@index([cityId])
+  @@index([topicSlug])
+  @@index([calculatedAt])
+}
+
+model AgendaItem {
+  id              String        @id @default(cuid())
+  legistarEventId String
+  legistarItemId  Int
+  itemNumber      String?
+  title           String
+  description     String?
+  actionText      String?
+  matterType      String?
+  matterId        Int?
+  applicant       String?
+  location        String?
+  attachmentUrl   String?
+  createdAt       DateTime      @default(now())
+  legistarEvent   LegistarEvent @relation(fields: [legistarEventId], references: [id], onDelete: Cascade)
+  votes           Vote[]
+
+  @@unique([legistarEventId, legistarItemId])
+  @@index([legistarEventId])
+  @@index([matterType])
+  @@index([applicant])
+}
+
+model Vote {
+  id           String     @id @default(cuid())
+  agendaItemId String
+  voterName    String
+  voteValue    String
+  createdAt    DateTime   @default(now())
+  agendaItem   AgendaItem @relation(fields: [agendaItemId], references: [id], onDelete: Cascade)
+
+  @@index([agendaItemId])
+}
+
+model CivicPlusClient {
+  id              String              @id @default(cuid())
+  name            String
+  state           String
+  domain          String              @unique
+  agendaCenterUrl String
+  cityId          String?
+  countyId        String?
+  isActive        Boolean             @default(true)
+  lastSyncAt      DateTime?
+  syncStatus      CivicPlusSyncStatus @default(PENDING)
+  errorMessage    String?
+  metadata        Json?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  agendas         CivicPlusAgenda[]
+  city            City?               @relation(fields: [cityId], references: [id])
+  county          County?             @relation(fields: [countyId], references: [id])
+
+  @@index([state])
+  @@index([cityId])
+  @@index([countyId])
+  @@index([syncStatus])
+}
+
+model CivicPlusAgenda {
+  id                String          @id @default(cuid())
+  civicPlusClientId String
+  meetingDate       DateTime
+  meetingTitle      String?
+  bodyName          String?
+  agendaPdfUrl      String?
+  minutesPdfUrl     String?
+  agendaPacketUrl   String?
+  year              Int
+  meetingId         String?
+  governmentBodyId  String?
+  agendaPdfPath     String?
+  minutesPdfPath    String?
+  pdfDownloaded     Boolean         @default(false)
+  rawHtml           String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  civicPlusClient   CivicPlusClient @relation(fields: [civicPlusClientId], references: [id], onDelete: Cascade)
+  governmentBody    GovernmentBody? @relation(fields: [governmentBodyId], references: [id])
+  meeting           Meeting?        @relation(fields: [meetingId], references: [id])
+
+  @@unique([civicPlusClientId, meetingDate, bodyName])
+  @@index([civicPlusClientId])
+  @@index([meetingId])
+  @@index([governmentBodyId])
+  @@index([meetingDate])
+  @@index([year])
+}
+
+model RegulatoryVelocityIndex {
+  id                     String             @id @default(cuid())
+  cityId                 String
+  legistarClientId       String?
+  calculatedAt           DateTime           @default(now())
+  dataStartDate          DateTime
+  dataEndDate            DateTime
+  overallScore           Float
+  nationalPercentile     Int
+  confidenceLevel        RVIConfidenceLevel @default(MEDIUM)
+  timeScore              Float
+  complexityScore        Float
+  approvalRate           Float
+  predictabilityScore    Float
+  medianDaysToResolution Float
+  q1DaysToResolution     Float
+  q3DaysToResolution     Float
+  medianProceduralSteps  Float
+  totalMattersAnalyzed   Int
+  mattersWithLifecycle   Int
+  successfulMatters      Int
+  failedMatters          Int
+  inconclusiveMatters    Int
+  categoryScores         Json
+  historyRecords         Int
+  historyLinkageRate     Float
+  dataQualityFlags       String[]
+  outlierCount           Int
+  previousScore          Float?
+  scoreChange            Float?
+  currentPeriodScore     Float?
+  dataYearsAvailable     Float?
+  earliestPeriodScore    Float?
+  meetsMinimumCoverage   Boolean            @default(false)
+  periodScoresJson       Json?
+  priorPeriodScore       Float?
+  trendDirection         String?
+  trendMagnitude         Float?
+  blurbGeneratedAt       DateTime?
+  powerRankingBlurb      String?
+  city                   City               @relation(fields: [cityId], references: [id])
+  legistarClient         LegistarClient?    @relation(fields: [legistarClientId], references: [id])
+
+  @@index([cityId])
+  @@index([calculatedAt])
+  @@index([overallScore])
+  @@index([legistarClientId])
+}
+
+model RegulatoryFrictionIndex {
+  id                       String             @id @default(cuid())
+  cityId                   String
+  calculatedAt             DateTime           @default(now())
+  dataStartDate            DateTime
+  dataEndDate              DateTime
+  overallScore             Float
+  nationalPercentile       Int
+  confidenceLevel          RVIConfidenceLevel @default(MEDIUM)
+  discussionIntensity      Float
+  contentionRate           Float
+  deferralRate             Float
+  oppositionFrequency      Float
+  meetingsAnalyzed         Int
+  discussionBlocksAnalyzed Int
+  segmentsProcessed        Int
+  categoryScores           Json
+  llmTokensUsed            Int
+  llmModel                 String
+  processingCostUsd        Float?
+  dataQualityFlags         String[]
+  previousScore            Float?
+  scoreChange              Float?
+  currentPeriodScore       Float?
+  dataYearsAvailable       Float?
+  earliestPeriodScore      Float?
+  meetsMinimumCoverage     Boolean            @default(false)
+  periodScoresJson         Json?
+  priorPeriodScore         Float?
+  trendDirection           String?
+  trendMagnitude           Float?
+  wordsAnalyzed            Int                @default(0)
+  blurbGeneratedAt         DateTime?
+  powerRankingBlurb        String?
+  city                     City               @relation(fields: [cityId], references: [id])
+
+  @@index([cityId])
+  @@index([calculatedAt])
+  @@index([overallScore])
+}
+
+model TranscriptAnalysis {
+  id                    String   @id @default(cuid())
+  meetingId             String   @unique
+  analyzedAt            DateTime @default(now())
+  topicBreakdown        Json
+  frictionIndicators    Json
+  avgControversyScore   Float
+  discussionBlocksCount Int
+  tokensUsed            Int
+  modelUsed             String
+  processingTimeMs      Int?
+  meeting               Meeting  @relation(fields: [meetingId], references: [id])
+
+  @@index([analyzedAt])
+}
+
+model DevelopmentProject {
+  id               String           @id @default(cuid())
+  cityId           String
+  canonicalName    String
+  aliases          String[]
+  address          String?
+  applicantName    String?
+  projectType      ProjectType?
+  description      String?
+  unitCount        Int?
+  acreage          Float?
+  density          Float?
+  currentStatus    String?
+  legistarMatterId String?
+  confidence       Float            @default(0.5)
+  manuallyVerified Boolean          @default(false)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  city             City             @relation(fields: [cityId], references: [id])
+  legistarMatter   LegistarMatter?  @relation(fields: [legistarMatterId], references: [id])
+  actions          ProjectAction[]
+  mentions         ProjectMention[]
+
+  @@index([cityId])
+  @@index([legistarMatterId])
+  @@index([canonicalName])
+  @@index([address])
+  @@index([applicantName])
+  @@index([manuallyVerified])
+}
+
+model ProjectAction {
+  id                  String             @id @default(cuid())
+  projectId           String
+  meetingId           String
+  actionDate          DateTime
+  actionBody          String
+  actionDescription   String
+  staffRecommendation String?
+  voteResult          String?
+  approvingMembers    String[]
+  dissentingMembers   String[]
+  abstainedMembers    String[]
+  voteTally           String?
+  keyPoints           String[]
+  concernsRaised      String[]
+  conditionsApplied   String[]
+  legistarEventItemId String?
+  confidence          Float              @default(0.5)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
+  legistarEventItem   LegistarEventItem? @relation(fields: [legistarEventItemId], references: [id])
+  meeting             Meeting            @relation(fields: [meetingId], references: [id])
+  project             DevelopmentProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([meetingId])
+  @@index([actionDate])
+  @@index([legistarEventItemId])
+}
+
+model ProjectMention {
+  id               String              @id @default(cuid())
+  projectId        String?
+  meetingId        String
+  mentionText      String
+  segmentIds       String[]
+  startTime        Float?
+  endTime          Float?
+  extractedDetails Json?
+  resolved         Boolean             @default(false)
+  resolutionMethod String?
+  confidence       Float               @default(0.5)
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  meeting          Meeting             @relation(fields: [meetingId], references: [id])
+  project          DevelopmentProject? @relation(fields: [projectId], references: [id])
+
+  @@index([projectId])
+  @@index([meetingId])
+  @@index([resolved])
+}
+
+model TopicDefinition {
+  id                             String                          @id @default(cuid())
+  slug                           String                          @unique
+  name                           String
+  description                    String?
+  phrasePatterns                 Json
+  isActive                       Boolean                         @default(true)
+  createdAt                      DateTime                        @default(now())
+  updatedAt                      DateTime                        @updatedAt
+  cityTopicSentiments            CityTopicSentiment[]
+  countyTopicSentiments          CountyTopicSentiment[]
+  specialDistrictTopicSentiments SpecialDistrictTopicSentiment[]
+
+  @@index([slug])
+  @@index([isActive])
+}
+
+model CityTopicSentiment {
+  id                 String          @id @default(cuid())
+  cityId             String
+  topicId            String
+  sentimentScore     Float
+  mentionFrequency   Int
+  mentionDensity     Float
+  confidenceLevel    String
+  positiveCount      Int
+  negativeCount      Int
+  neutralCount       Int
+  segmentsAnalyzed   Int
+  meetingsAnalyzed   Int
+  dataStartDate      DateTime
+  dataEndDate        DateTime
+  sampleExcerpts     Json
+  methodologyVersion String
+  llmTokensUsed      Int             @default(0)
+  processingCostUsd  Float?
+  calculatedAt       DateTime        @default(now())
+  city               City            @relation(fields: [cityId], references: [id])
+  topic              TopicDefinition @relation(fields: [topicId], references: [id])
+
+  @@unique([cityId, topicId])
+  @@index([topicId])
+  @@index([sentimentScore])
+  @@index([confidenceLevel])
+  @@index([calculatedAt])
+}
+
+model CountyTopicSentiment {
+  id                 String          @id @default(cuid())
+  countyId           String
+  topicId            String
+  sentimentScore     Float
+  mentionFrequency   Int
+  mentionDensity     Float
+  confidenceLevel    String
+  positiveCount      Int
+  negativeCount      Int
+  neutralCount       Int
+  segmentsAnalyzed   Int
+  meetingsAnalyzed   Int
+  dataStartDate      DateTime
+  dataEndDate        DateTime
+  sampleExcerpts     Json
+  methodologyVersion String
+  llmTokensUsed      Int             @default(0)
+  processingCostUsd  Float?
+  calculatedAt       DateTime        @default(now())
+  county             County          @relation(fields: [countyId], references: [id])
+  topic              TopicDefinition @relation(fields: [topicId], references: [id])
+
+  @@unique([countyId, topicId])
+  @@index([topicId])
+  @@index([sentimentScore])
+  @@index([confidenceLevel])
+}
+
+model SpecialDistrictTopicSentiment {
+  id                 String          @id @default(cuid())
+  specialDistrictId  String
+  topicId            String
+  sentimentScore     Float
+  mentionFrequency   Int
+  mentionDensity     Float
+  confidenceLevel    String
+  positiveCount      Int
+  negativeCount      Int
+  neutralCount       Int
+  segmentsAnalyzed   Int
+  meetingsAnalyzed   Int
+  dataStartDate      DateTime
+  dataEndDate        DateTime
+  sampleExcerpts     Json
+  methodologyVersion String
+  llmTokensUsed      Int             @default(0)
+  processingCostUsd  Float?
+  calculatedAt       DateTime        @default(now())
+  specialDistrict    SpecialDistrict @relation(fields: [specialDistrictId], references: [id])
+  topic              TopicDefinition @relation(fields: [topicId], references: [id])
+
+  @@unique([specialDistrictId, topicId])
+  @@index([topicId])
+  @@index([sentimentScore])
+  @@index([confidenceLevel])
+}
+
+model CronLock {
+  key      String   @id
+  lockedAt DateTime
+  lockedBy String
+}
+
+enum BodyType {
+  CITY_COUNCIL
+  COUNTY_BOARD
+  PLANNING_COMMISSION
+  ZONING_BOARD
+  SCHOOL_BOARD
+  WATER_DISTRICT
+  FIRE_DISTRICT
+  SPECIAL_DISTRICT
+  OTHER
+}
+
+enum VideoSourceType {
+  YOUTUBE
+  VIMEO
+  DIRECT
+  GRANICUS
+  CIVICPLUS
+  PRIMEGOV
+  LEGISTAR
+}
+
+enum TranscriptStatus {
+  PENDING
+  FETCHING
+  COMPLETED
+  FAILED
+  NOT_AVAILABLE
+}
+
+enum SubscriptionTier {
+  FREE
+  STARTER
+  PROFESSIONAL
+  ENTERPRISE
+}
+
+enum MemberRole {
+  OWNER
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum UserType {
+  JOURNALIST
+  DEVELOPER
+  LOBBYIST
+  GOVERNMENT
+  OTHER
+}
+
+enum LegistarSyncStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+  PAUSED
+}
+
+enum LegistarEndpointTier {
+  REFERENCE
+  PEOPLE
+  EVENTS
+  LEGISLATION
+  VOTING
+}
+
+enum CivicPlusSyncStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum RVIConfidenceLevel {
+  HIGH
+  MEDIUM
+  LOW
+  INSUFFICIENT
+}
+
+enum ProjectType {
+  RESIDENTIAL
+  COMMERCIAL
+  MIXED_USE
+  INDUSTRIAL
+  INSTITUTIONAL
+  INFRASTRUCTURE
+  OTHER
+}
+
+enum EmailDigestFrequency {
+  DAILY
+  WEEKLY
+  NONE
+}
+
+enum UserStatus {
+  ACTIVE
+  DEACTIVATED
+  DELETED
+}

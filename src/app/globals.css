@@ -1,0 +1,454 @@
+@import "tailwindcss";
+
+/* ===========================
+   THE DISTRICT
+   A Hamlet Publication
+
+   Stripe Press-Inspired Design
+   Dark + 3D + Motion
+   =========================== */
+
+:root {
+  /* Hamlet Navy */
+  --navy-950: #00152e;
+  --navy-900: #001d3d;
+  --navy-800: #0a3161;
+  --navy-700: #0f3d6e;
+  --navy-600: #164b7e;
+  --navy-500: #1e5a8f;
+  --navy-400: #3a7ab5;
+  --navy-300: #6a9fcf;
+  --navy-200: #a3c5e5;
+  --navy-100: #e0ecf4;
+  --navy-50: #f0f6fb;
+
+  /* Hamlet Indigo */
+  --indigo-600: #4f46e5;
+  --indigo-500: #6366f1;
+  --indigo-400: #818cf8;
+  --indigo-300: #a5b4fc;
+  --indigo-200: #c7d2fe;
+  --indigo-100: #e0e7ff;
+  --indigo-50: #eef2ff;
+
+  /* Hamlet Coral */
+  --coral-600: #ea580c;
+  --coral-500: #f97316;
+  --coral-400: #fb923c;
+  --coral-300: #fdba74;
+  --coral-200: #fed7aa;
+  --coral-100: #ffedd5;
+  --coral-50: #fff7ed;
+
+  /* Sage/Green for Climate */
+  --sage-600: #059669;
+  --sage-500: #10b981;
+  --sage-100: #d1fae5;
+  --sage-50: #ecfdf5;
+
+  /* Grays */
+  --gray-900: #1a1d23;
+  --gray-700: #3d444f;
+  --gray-500: #6e7785;
+  --gray-400: #9199a5;
+  --gray-300: #c2c8d0;
+
+  /* Easing - Stripe's elegant motion */
+  --ease-elegant: cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@theme inline {
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-100: var(--navy-100);
+  --color-indigo-500: var(--indigo-500);
+  --color-indigo-100: var(--indigo-100);
+  --color-coral-500: var(--coral-500);
+  --color-coral-100: var(--coral-100);
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ===========================
+   BASE - Dark Cinematic
+   =========================== */
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--navy-950);
+  color: white;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* ===========================
+   MASTHEAD - Minimal
+   =========================== */
+
+.masthead {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 2rem;
+}
+
+@media (min-width: 768px) {
+  .masthead {
+    padding: 2.5rem 3rem;
+  }
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.wordmark-the {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 0.25rem;
+}
+
+.wordmark-district {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: white;
+}
+
+.wordmark-tagline {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--gray-500);
+  margin-top: 0.5rem;
+}
+
+/* ===========================
+   3D ARTICLE STACK
+   =========================== */
+
+.article-stack {
+  perspective: 1500px;
+  perspective-origin: 50% 40%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 2rem;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .article-stack {
+    padding: 10rem 4rem;
+    gap: 4rem;
+  }
+}
+
+/* ===========================
+   3D ARTICLE CARD
+   =========================== */
+
+.article-card-3d {
+  width: 100%;
+  max-width: 700px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease-elegant), box-shadow 0.6s var(--ease-elegant);
+}
+
+/* Stagger offset for each card */
+.article-card-3d:nth-child(1) { transform: rotateX(12deg) translateZ(0); }
+.article-card-3d:nth-child(2) { transform: rotateX(10deg) translateZ(0); margin-left: 3rem; }
+.article-card-3d:nth-child(3) { transform: rotateX(8deg) translateZ(0); margin-left: 6rem; }
+.article-card-3d:nth-child(4) { transform: rotateX(6deg) translateZ(0); margin-left: 9rem; }
+
+@media (max-width: 768px) {
+  .article-card-3d:nth-child(n) {
+    margin-left: 0;
+  }
+}
+
+.article-card-3d:hover {
+  transform: rotateX(2deg) translateZ(30px) scale(1.02);
+}
+
+/* Card inner */
+.card-inner {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: box-shadow 0.6s var(--ease-elegant);
+}
+
+.article-card-3d:hover .card-inner {
+  box-shadow:
+    0 35px 60px -15px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Card spine effect */
+.card-spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: var(--accent, var(--indigo-500));
+}
+
+/* Card layout with illustration */
+.card-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .card-layout {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Card illustration */
+.card-illustration {
+  flex-shrink: 0;
+  padding: 1.5rem;
+  padding-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .card-illustration {
+    width: 220px;
+    padding: 1.5rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-illustration {
+    width: 260px;
+    padding: 2rem;
+    padding-left: 2.5rem;
+  }
+}
+
+.card-illustration svg {
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+}
+
+.illustration-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card content */
+.card-content {
+  padding: 1.5rem 2.5rem 2.5rem 3rem;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .card-content {
+    padding: 2rem;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-content {
+    padding: 2.5rem;
+    padding-left: 2rem;
+  }
+}
+
+/* ===========================
+   CARD COLOR SCHEMES
+   =========================== */
+
+.card-navy {
+  background: linear-gradient(135deg, #0a3161 0%, #001d3d 100%);
+  color: white;
+  --accent: var(--indigo-400);
+}
+
+.card-coral {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  color: var(--navy-900);
+  --accent: var(--coral-500);
+}
+
+.card-indigo {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  color: var(--navy-900);
+  --accent: var(--indigo-600);
+}
+
+.card-sage {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  color: var(--navy-900);
+  --accent: var(--sage-600);
+}
+
+/* ===========================
+   CARD TYPOGRAPHY
+   =========================== */
+
+.card-topic {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.card-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  max-width: 500px;
+}
+
+.card-meta {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+/* ===========================
+   SCROLL ANIMATIONS
+   =========================== */
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: rotateX(20deg) translateY(40px);
+  transition: opacity 0.8s var(--ease-elegant), transform 0.8s var(--ease-elegant);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: rotateX(12deg) translateY(0);
+}
+
+.animate-on-scroll.visible:nth-child(2) {
+  transform: rotateX(10deg) translateY(0);
+  transition-delay: 0.1s;
+}
+
+.animate-on-scroll.visible:nth-child(3) {
+  transform: rotateX(8deg) translateY(0);
+  transition-delay: 0.2s;
+}
+
+.animate-on-scroll.visible:nth-child(4) {
+  transform: rotateX(6deg) translateY(0);
+  transition-delay: 0.3s;
+}
+
+/* ===========================
+   SIDE NAV DOTS
+   =========================== */
+
+.side-nav {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 50;
+}
+
+.side-nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gray-500);
+  transition: all 0.3s var(--ease-elegant);
+  cursor: pointer;
+}
+
+.side-nav-dot:hover,
+.side-nav-dot.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+/* ===========================
+   FOOTER - Minimal
+   =========================== */
+
+.footer-minimal {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.footer-attribution {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+.footer-attribution a {
+  color: var(--gray-400);
+  transition: color 0.2s ease;
+}
+
+.footer-attribution a:hover {
+  color: white;
+}
+
+/* ===========================
+   UTILITIES
+   =========================== */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--indigo-500);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--indigo-400);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
