@@ -2462,10 +2462,26 @@ a {
    The Economist / Atlantic
    =========================== */
 
-/* Editorial section container */
+/* Editorial section container - PROPER MARGINS */
 .dc-editorial-section {
-  padding: 5rem 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5rem 3rem;
   border-bottom: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+@media (min-width: 768px) {
+  .dc-editorial-section {
+    padding: 6rem 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dc-editorial-section {
+    padding: 7rem 8rem;
+  }
 }
 
 .dc-editorial-section:last-of-type {
@@ -2474,15 +2490,28 @@ a {
 
 /* Prose container - optimized for reading */
 .dc-prose {
-  max-width: 680px;
-  margin: 0 auto;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.1875rem;
-  line-height: 1.8;
-  color: #c9cdd4;
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: #d1d5db;
+}
+
+@media (min-width: 768px) {
+  .dc-prose {
+    font-size: 1.1875rem;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .dc-prose p {
+  margin-top: 0;
   margin-bottom: 1.75rem;
 }
 
@@ -2496,178 +2525,248 @@ a {
 }
 
 .dc-prose em {
-  color: #a5b4fc;
+  color: #c7d2fe;
   font-style: italic;
-}
-
-/* Inline quotes */
-.dc-prose .dc-inline-quote {
-  display: block;
-  margin: 2rem 0;
-  padding-left: 1.5rem;
-  border-left: 3px solid var(--indigo-500);
-  color: #e5e7eb;
-  font-style: italic;
-}
-
-.dc-prose .dc-inline-quote cite {
-  display: block;
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  font-style: normal;
-  color: var(--gray-500);
 }
 
 /* Section headers within prose */
 .dc-prose-header {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   text-align: center;
   margin-bottom: 3rem;
 }
 
+@media (min-width: 768px) {
+  .dc-prose-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .dc-prose-header h2 {
-  font-family: var(--font-sans);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 1.75rem;
   font-weight: 700;
   color: white;
-  margin: 0 0 1rem;
+  margin: 0 0 0.5rem;
   letter-spacing: -0.02em;
 }
 
+@media (min-width: 768px) {
+  .dc-prose-header h2 {
+    font-size: 2.25rem;
+  }
+}
+
 .dc-prose-header .dc-section-number {
-  display: inline-block;
+  display: block;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--indigo-400);
+  color: #818cf8;
   margin-bottom: 0.75rem;
 }
 
 /* Graphics container - appears below prose */
 .dc-graphic {
-  margin-top: 4rem;
+  width: 100%;
   max-width: 900px;
+  margin-top: 4rem;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .dc-graphic {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 /* Lede section - special styling */
 .dc-lede-section {
-  padding: 6rem 1.5rem 5rem;
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .dc-lede-section {
+    padding-top: 5rem;
+  }
 }
 
 .dc-lede-section .dc-prose {
-  font-size: 1.3125rem;
-  line-height: 1.85;
+  font-size: 1.1875rem;
+  line-height: 1.9;
+}
+
+@media (min-width: 768px) {
+  .dc-lede-section .dc-prose {
+    font-size: 1.3125rem;
+  }
 }
 
 .dc-lede-section .dc-prose p:first-child::first-letter {
   float: left;
-  font-size: 4.5rem;
-  line-height: 0.8;
-  padding-right: 0.75rem;
-  padding-top: 0.25rem;
-  color: var(--indigo-400);
+  font-size: 3.5rem;
+  line-height: 0.85;
+  padding-right: 0.625rem;
+  padding-top: 0.125rem;
+  color: #818cf8;
   font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .dc-lede-section .dc-prose p:first-child::first-letter {
+    font-size: 4.5rem;
+    padding-right: 0.75rem;
+  }
 }
 
 /* Pull quote - large featured quote */
 .dc-pull-quote {
+  width: 100%;
   max-width: 800px;
-  margin: 4rem auto;
+  margin: 3rem auto;
   text-align: center;
-  padding: 3rem 2rem;
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .dc-pull-quote {
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+  }
 }
 
 .dc-pull-quote blockquote {
-  font-family: Georgia, serif;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1.375rem;
   font-style: italic;
   line-height: 1.5;
   color: #e5e7eb;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .dc-pull-quote blockquote {
+    font-size: 1.75rem;
+  }
 }
 
 .dc-pull-quote blockquote::before {
   content: '"';
   display: block;
-  font-size: 4rem;
+  font-size: 3rem;
   line-height: 1;
-  color: var(--indigo-500);
+  color: #6366f1;
   margin-bottom: 0.5rem;
 }
 
+@media (min-width: 768px) {
+  .dc-pull-quote blockquote::before {
+    font-size: 4rem;
+  }
+}
+
 .dc-pull-quote cite {
-  font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.8125rem;
   font-style: normal;
-  color: var(--gray-500);
+  color: #9ca3af;
   letter-spacing: 0.05em;
 }
 
 /* Implication callout box */
 .dc-implication-box {
-  max-width: 680px;
+  width: 100%;
+  max-width: 720px;
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 1.5rem;
   background: rgba(99, 102, 241, 0.05);
   border: 1px solid rgba(99, 102, 241, 0.15);
   border-radius: 8px;
 }
 
+@media (min-width: 768px) {
+  .dc-implication-box {
+    padding: 2rem 2.5rem;
+  }
+}
+
 .dc-implication-box .dc-prose {
   margin: 0;
-  font-size: 1.0625rem;
+  padding: 0;
+  font-size: 1rem;
+}
+
+@media (min-width: 768px) {
+  .dc-implication-box .dc-prose {
+    font-size: 1.0625rem;
+  }
 }
 
 /* Hero subtitle for editorial */
 .dc-hero-subtitle-editorial {
-  font-family: Georgia, serif;
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1rem;
   font-style: italic;
-  color: var(--gray-400);
-  max-width: 600px;
+  color: #9ca3af;
+  max-width: 550px;
   margin: 0 auto 2rem;
   line-height: 1.6;
+  padding: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .dc-hero-subtitle-editorial {
+    font-size: 1.1875rem;
+    padding: 0;
+  }
 }
 
 /* Methodology section - editorial style */
 .dc-methodology-editorial {
-  padding: 4rem 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 3rem;
   background: rgba(0, 0, 0, 0.2);
 }
 
+@media (min-width: 768px) {
+  .dc-methodology-editorial {
+    padding: 5rem;
+  }
+}
+
 .dc-methodology-editorial .dc-prose {
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem;
   line-height: 1.7;
-  color: var(--gray-500);
+  color: #9ca3af;
+}
+
+@media (min-width: 768px) {
+  .dc-methodology-editorial .dc-prose {
+    font-size: 0.9375rem;
+  }
 }
 
 .dc-methodology-editorial .dc-prose strong {
-  color: var(--gray-400);
+  color: #d1d5db;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .dc-editorial-section {
-    padding: 3.5rem 1.25rem;
-  }
-
-  .dc-prose {
-    font-size: 1.0625rem;
-    line-height: 1.75;
-  }
-
-  .dc-lede-section .dc-prose {
-    font-size: 1.125rem;
-  }
-
-  .dc-lede-section .dc-prose p:first-child::first-letter {
-    font-size: 3.5rem;
-  }
-
-  .dc-graphic {
-    margin-top: 3rem;
-  }
+.dc-methodology-editorial .dc-prose p {
+  margin-bottom: 0.75rem;
 }
