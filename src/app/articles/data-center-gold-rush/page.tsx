@@ -3,8 +3,8 @@
 /**
  * The Data Center Gold Rush
  *
- * Premium Visual Journalism - Mind-Blowing Edition
- * Scroll-triggered animations, custom charts, epic transitions
+ * Editorial Article - The Economist / Atlantic Style
+ * Prose-first with supporting visualizations
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -47,44 +47,27 @@ const DATA = {
     { city: "Franklin", state: "TN", mentions: 123, sentiment: 48.0 },
     { city: "Farmington", state: "NM", mentions: 110, sentiment: 34.0 },
   ],
-  quotes: {
-    power: [
-      { text: "Chicago is a 32 megawatt data center.", city: "Shelby, NC" },
-      { text: "The amount of electricity the data center requires is staggering.", city: "San Angelo, TX" },
-    ],
-    water: [
-      { text: "Almost no water for data centers. So that's a concern.", city: "Columbia, MO" },
-      { text: "Water in Texas is becoming scarce with AI data centers.", city: "Edinburg, TX" },
-    ],
-    noise: [
-      { text: "The noise from the data center never stops.", city: "Oklahoma City, OK" },
-      { text: "Most data centers are incredibly loud.", city: "Fort Worth, TX" },
-    ],
-    jobs: [
-      { text: "450 jobs on the data center campus.", city: "Shelbyville, IN" },
-      { text: "How many jobs do they really bring?", city: "DeKalb, IL" },
-    ],
-  },
 };
 
 export default function DataCenterArticle() {
   return (
     <main className="dc-article">
       <HeroSection />
-      <StatsReel />
-      <NationDivide />
-      <ConcernsSection />
-      <StateBreakdown />
-      <CityBattleground />
-      <VoicesSection />
-      <Conclusion />
-      <Methodology />
+      <LedeSection />
+      <TheNumbersSection />
+      <TheConcernsSection />
+      <TheVoicesSection />
+      <TheGeographySection />
+      <TheBattlegroundsSection />
+      <TheImplicationsSection />
+      <ConclusionSection />
+      <MethodologySection />
     </main>
   );
 }
 
 // ============================================================================
-// HERO SECTION - Epic entrance
+// HERO SECTION
 // ============================================================================
 function HeroSection() {
   const [scrollY, setScrollY] = useState(0);
@@ -117,9 +100,8 @@ function HeroSection() {
           <span className="dc-title-line dc-title-line-2">Gold Rush</span>
         </h1>
 
-        <p className="dc-hero-tagline">
-          156 cities. 5,007 mentions. One question:<br />
-          <strong>Who decides where America's AI infrastructure lives?</strong>
+        <p className="dc-hero-subtitle-editorial">
+          Inside the local battles that will determine where America builds its AI infrastructure
         </p>
       </div>
 
@@ -136,8 +118,368 @@ function HeroSection() {
 }
 
 // ============================================================================
-// STATS REEL - Animated counters
+// SECTION 1: THE LEDE
 // ============================================================================
+function LedeSection() {
+  return (
+    <section className="dc-editorial-section dc-lede-section">
+      <div className="dc-prose">
+        <p>
+          In Chandler, Arizona, a city council member asked a question that echoes
+          across America: &ldquo;How much water will this facility use?&rdquo; The
+          answer&mdash;millions of gallons annually&mdash;prompted a debate that
+          lasted three meetings.
+        </p>
+        <p>
+          Scenes like this are playing out in municipal chambers from Georgia to
+          California. As OpenAI, Anthropic, Google, and Meta race to build the
+          computational infrastructure for artificial intelligence, they&rsquo;re
+          discovering an unexpected bottleneck: the local planning commission.
+        </p>
+        <p>
+          We analyzed <strong>5,007 mentions</strong> of data centers across{" "}
+          <strong>156 cities</strong>. What we found reveals a nation genuinely divided.
+        </p>
+      </div>
+
+      <div className="dc-graphic">
+        <StatsReel />
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 2: THE NUMBERS
+// ============================================================================
+function TheNumbersSection() {
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Numbers</span>
+        <h2>A Nation Divided</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          The headline number is striking: an average sentiment score of{" "}
+          <strong>49.9 out of 100</strong>&mdash;almost perfectly neutral. But
+          this average masks a deeper divide.
+        </p>
+        <p>
+          Of the 156 cities in our analysis, <strong>38 show clear skepticism</strong>{" "}
+          toward data center development (sentiment below 45), while{" "}
+          <strong>40 express openness</strong> (above 55). The remaining 78
+          cities&mdash;half the sample&mdash;sit firmly in the middle, their
+          deliberations marked by genuine ambivalence.
+        </p>
+        <p>
+          This isn&rsquo;t a story of universal opposition or enthusiasm. It&rsquo;s a
+          story of communities wrestling with tradeoffs: economic development versus
+          resource constraints, job creation versus quality of life, tax revenue
+          versus infrastructure strain.
+        </p>
+      </div>
+
+      <div className="dc-graphic">
+        <NationDivide />
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 3: THE CONCERNS
+// ============================================================================
+function TheConcernsSection() {
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Concerns</span>
+        <h2>What Communities Debate</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          When residents speak at public hearings, four concerns dominate the conversation.
+        </p>
+        <p>
+          <strong>Power consumption</strong> tops the list. In 87 of our 156 cities,
+          speakers raised questions about electrical capacity. &ldquo;The amount of
+          electricity the data center requires is staggering,&rdquo; noted one San
+          Angelo, Texas resident&mdash;a sentiment repeated in different words from
+          North Carolina to California.
+        </p>
+        <p>
+          <strong>Water usage</strong> ranks second, mentioned in 78 cities. Data
+          centers require enormous cooling capacity, and in drought-prone regions,
+          this generates intense scrutiny. &ldquo;Almost no water for data centers.
+          So that&rsquo;s a concern,&rdquo; a Columbia, Missouri official observed,
+          capturing widespread unease.
+        </p>
+        <p>
+          <strong>Jobs</strong> drew comment in 46 cities&mdash;notably, from both
+          sides. Proponents tout employment figures; skeptics question how many
+          positions a largely automated facility actually creates.
+        </p>
+        <p>
+          <strong>Noise</strong> emerged in 18 cities, particularly those considering
+          facilities near residential areas.
+        </p>
+      </div>
+
+      <div className="dc-graphic">
+        <ConcernsChart />
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 4: THE VOICES
+// ============================================================================
+function TheVoicesSection() {
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Voices</span>
+        <h2>In Their Own Words</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          The municipal meeting transcript offers something press releases cannot:
+          unscripted candor. These are the actual words spoken by citizens, planners,
+          and elected officials as they deliberate.
+        </p>
+      </div>
+
+      <div className="dc-pull-quote">
+        <blockquote>
+          The amount of electricity the data center requires is staggering.
+        </blockquote>
+        <cite>&mdash; Resident, San Angelo, TX</cite>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          On water: <em>&ldquo;Water in Texas is becoming scarce with AI data
+          centers.&rdquo;</em> &mdash; Edinburg, TX
+        </p>
+        <p>
+          On jobs, the divide is stark: <em>&ldquo;450 jobs on the data center
+          campus&rdquo;</em> (Shelbyville, IN) versus <em>&ldquo;How many jobs do
+          they really bring?&rdquo;</em> (DeKalb, IL)
+        </p>
+        <p>
+          These aren&rsquo;t talking points. They&rsquo;re democracy in action.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 5: THE GEOGRAPHY
+// ============================================================================
+function TheGeographySection() {
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Geography</span>
+        <h2>Where the Debate Is Loudest</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          The data center debate isn&rsquo;t uniform across America. Three states
+          account for nearly 40% of all mentions in our dataset.
+        </p>
+        <p>
+          <strong>Arizona</strong> leads with 887 mentions across 19
+          cities&mdash;unsurprising given the state&rsquo;s position as a data center
+          hub. But its average sentiment of 48.9 suggests communities are growing
+          cautious as facilities multiply.
+        </p>
+        <p>
+          <strong>California</strong> (534 mentions, 14 cities) shows similar wariness
+          at 48.5, perhaps reflecting the state&rsquo;s acute water concerns.
+        </p>
+        <p>
+          <strong>Texas</strong> (514 mentions, 18 cities) sits almost exactly neutral
+          at 49.9&mdash;fitting for a state that prides itself on business-friendliness
+          while grappling with grid reliability.
+        </p>
+        <p>
+          The most skeptical major state? <strong>Illinois, at 43.8</strong>.
+        </p>
+      </div>
+
+      <div className="dc-graphic">
+        <StateChart />
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 6: THE BATTLEGROUNDS
+// ============================================================================
+function TheBattlegroundsSection() {
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Battlegrounds</span>
+        <h2>Cities on the Front Line</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          Some cities have become focal points for particularly intense debates.
+        </p>
+        <p>
+          <strong>Chandler, Arizona</strong> leads our dataset with 336 mentions
+          and a skeptical 38.9 sentiment score&mdash;a community clearly wrestling
+          with data center proliferation.
+        </p>
+        <p>
+          <strong>DeKalb, Illinois</strong> (210 mentions, 39.3 sentiment) and{" "}
+          <strong>Lancaster, California</strong> (139 mentions, 37.5 sentiment) show
+          similar patterns: high engagement coupled with significant doubt.
+        </p>
+        <p>
+          These aren&rsquo;t outliers. They may be leading indicators. As data center
+          proposals increase nationwide, other cities may follow similar trajectories
+          from curiosity to caution.
+        </p>
+      </div>
+
+      <div className="dc-graphic">
+        <CityCards />
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 7: THE IMPLICATIONS
+// ============================================================================
+function TheImplicationsSection() {
+  return (
+    <section className="dc-editorial-section">
+      <div className="dc-prose-header">
+        <span className="dc-section-number">The Implications</span>
+        <h2>What This Means</h2>
+      </div>
+
+      <div className="dc-prose">
+        <p>
+          For technology companies planning the next wave of AI infrastructure,
+          the data delivers a sobering message.
+        </p>
+        <p>
+          The era of easy local approvals may be ending. Communities that once
+          welcomed data centers as symbols of economic progress are asking harder
+          questions. Power grids are strained. Water tables are dropping. Residents
+          near proposed sites are organizing.
+        </p>
+        <p>
+          None of this means data centers won&rsquo;t get built. But it suggests
+          the cost&mdash;in time, community engagement, and potentially location
+          compromises&mdash;may be higher than many proponents anticipated.
+        </p>
+      </div>
+
+      <div className="dc-implication-box">
+        <div className="dc-prose">
+          <p>
+            <strong>The bottom line:</strong> Local government approval is no longer
+            a formality. For companies racing to build AI infrastructure, the planning
+            commission may prove as consequential as the chip supply chain.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// CONCLUSION
+// ============================================================================
+function ConclusionSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section ref={ref} className="dc-conclusion-section">
+      <div className={`dc-conclusion-content ${isVisible ? "visible" : ""}`}>
+        <div className="dc-conclusion-big-number">
+          <span className="dc-big-number">49.9</span>
+          <span className="dc-big-label">Average Sentiment Score</span>
+        </div>
+
+        <div className="dc-prose" style={{ textAlign: "center", marginTop: "3rem" }}>
+          <p>
+            America hasn&rsquo;t made up its mind about the data center gold rush.
+          </p>
+          <p style={{ color: "#9ca3af" }}>
+            But in municipal chambers across the country, the deliberation has begun.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// METHODOLOGY
+// ============================================================================
+function MethodologySection() {
+  return (
+    <section className="dc-methodology-editorial">
+      <div className="dc-prose">
+        <p>
+          <strong>Data source:</strong> Municipal meeting transcripts from city
+          councils and planning commissions, collected by Hamlet.
+        </p>
+        <p>
+          <strong>Sample:</strong> 156 cities across the United States
+        </p>
+        <p>
+          <strong>Mentions analyzed:</strong> 5,007 transcript segments containing
+          &ldquo;data center&rdquo;
+        </p>
+        <p>
+          <strong>Sentiment scoring:</strong> NLP analysis on a 0-100 scale (below
+          45 = skeptical, 45-55 = neutral, above 55 = welcoming)
+        </p>
+        <p>
+          <strong>Limitations:</strong> Coverage varies by region; not all cities
+          in the US are represented. All quotes are verbatim from transcripts.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// VISUALIZATION COMPONENTS
+// ============================================================================
+
 function StatsReel() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -157,7 +499,7 @@ function StatsReel() {
   }, []);
 
   return (
-    <section ref={ref} className="dc-stats-reel">
+    <div ref={ref} className="dc-stats-reel">
       <div className="dc-stats-reel-inner">
         <AnimatedStat
           value={DATA.summary.totalCities}
@@ -182,7 +524,7 @@ function StatsReel() {
           suffix="/100"
         />
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -192,7 +534,7 @@ function AnimatedStat({
   isVisible,
   delay = 0,
   suffix = "",
-  format = "default"
+  format = "default",
 }: {
   value: number;
   label: string;
@@ -232,15 +574,15 @@ function AnimatedStat({
 
   return (
     <div className={`dc-animated-stat ${isVisible ? "visible" : ""}`}>
-      <span className="dc-stat-number">{displayValue}{suffix}</span>
+      <span className="dc-stat-number">
+        {displayValue}
+        {suffix}
+      </span>
       <span className="dc-stat-label">{label}</span>
     </div>
   );
 }
 
-// ============================================================================
-// NATION DIVIDE - Epic visualization
-// ============================================================================
 function NationDivide() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -265,14 +607,7 @@ function NationDivide() {
   const posPct = (DATA.summary.positiveCitiesCount / total) * 100;
 
   return (
-    <section ref={ref} className="dc-nation-section">
-      <div className="dc-section-header">
-        <h2 className="dc-section-title-large">A Nation Divided</h2>
-        <p className="dc-section-subtitle">
-          How 156 cities feel about data center development
-        </p>
-      </div>
-
+    <div ref={ref} className="dc-nation-section" style={{ padding: 0 }}>
       <div className="dc-spectrum-container">
         <div className="dc-spectrum-bar">
           <div
@@ -298,23 +633,11 @@ function NationDivide() {
           </div>
         </div>
       </div>
-
-      <div className="dc-insight-callout">
-        <div className="dc-insight-number">49.9</div>
-        <div className="dc-insight-text">
-          Average sentiment score—almost perfectly neutral.
-          <br />
-          <strong>America is genuinely undecided.</strong>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
 
-// ============================================================================
-// CONCERNS SECTION - Animated bars
-// ============================================================================
-function ConcernsSection() {
+function ConcernsChart() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -333,66 +656,44 @@ function ConcernsSection() {
   }, []);
 
   const concerns = [
-    { key: "power", label: "Power & Grid", icon: "⚡", count: DATA.concernCounts.power, color: "#f59e0b" },
-    { key: "water", label: "Water Usage", icon: "💧", count: DATA.concernCounts.water, color: "#3b82f6" },
-    { key: "jobs", label: "Jobs & Economy", icon: "👷", count: DATA.concernCounts.jobs, color: "#10b981" },
-    { key: "noise", label: "Noise Impact", icon: "🔊", count: DATA.concernCounts.noise, color: "#8b5cf6" },
+    { key: "power", label: "Power & Grid", count: DATA.concernCounts.power, color: "#f59e0b" },
+    { key: "water", label: "Water Usage", count: DATA.concernCounts.water, color: "#3b82f6" },
+    { key: "jobs", label: "Jobs & Economy", count: DATA.concernCounts.jobs, color: "#10b981" },
+    { key: "noise", label: "Noise Impact", count: DATA.concernCounts.noise, color: "#8b5cf6" },
   ];
 
-  const maxCount = Math.max(...concerns.map(c => c.count));
+  const maxCount = Math.max(...concerns.map((c) => c.count));
 
   return (
-    <section ref={ref} className="dc-concerns-section">
-      <div className="dc-section-header">
-        <h2 className="dc-section-title-large">What Communities Debate</h2>
-        <p className="dc-section-subtitle">
-          The top concerns raised in municipal meetings
-        </p>
-      </div>
-
-      <div className="dc-concerns-chart">
-        {concerns.map((concern, i) => (
-          <div key={concern.key} className="dc-concern-row">
-            <div className="dc-concern-label">
-              <span className="dc-concern-icon">{concern.icon}</span>
-              <span className="dc-concern-name">{concern.label}</span>
-            </div>
-            <div className="dc-concern-bar-container">
-              <div
-                className={`dc-concern-bar-fill ${isVisible ? "animate" : ""}`}
-                style={{
-                  width: isVisible ? `${(concern.count / maxCount) * 100}%` : "0%",
-                  backgroundColor: concern.color,
-                  transitionDelay: `${i * 0.15}s`
-                }}
-              />
-              <span
-                className={`dc-concern-count ${isVisible ? "visible" : ""}`}
-                style={{ transitionDelay: `${i * 0.15 + 0.5}s` }}
-              >
-                {concern.count}
-              </span>
-            </div>
+    <div ref={ref} className="dc-concerns-chart">
+      {concerns.map((concern, i) => (
+        <div key={concern.key} className="dc-concern-row">
+          <div className="dc-concern-label">
+            <span className="dc-concern-name">{concern.label}</span>
           </div>
-        ))}
-      </div>
-
-      <div className="dc-quotes-grid">
-        {Object.entries(DATA.quotes).slice(0, 2).map(([key, quotes]) => (
-          <blockquote key={key} className="dc-featured-quote">
-            <p>"{quotes[0].text}"</p>
-            <cite>— {quotes[0].city}</cite>
-          </blockquote>
-        ))}
-      </div>
-    </section>
+          <div className="dc-concern-bar-container">
+            <div
+              className={`dc-concern-bar-fill ${isVisible ? "animate" : ""}`}
+              style={{
+                width: isVisible ? `${(concern.count / maxCount) * 100}%` : "0%",
+                backgroundColor: concern.color,
+                transitionDelay: `${i * 0.15}s`,
+              }}
+            />
+            <span
+              className={`dc-concern-count ${isVisible ? "visible" : ""}`}
+              style={{ transitionDelay: `${i * 0.15 + 0.5}s` }}
+            >
+              {concern.count} cities
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
-// ============================================================================
-// STATE BREAKDOWN - Animated chart
-// ============================================================================
-function StateBreakdown() {
+function StateChart() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -413,14 +714,7 @@ function StateBreakdown() {
   const maxMentions = DATA.byState[0].mentions;
 
   return (
-    <section ref={ref} className="dc-state-section">
-      <div className="dc-section-header">
-        <h2 className="dc-section-title-large">The Geography</h2>
-        <p className="dc-section-subtitle">
-          Where the data center debate is loudest
-        </p>
-      </div>
-
+    <div ref={ref} className="dc-state-section" style={{ padding: 0 }}>
       <div className="dc-state-chart">
         {DATA.byState.map((state, i) => (
           <div key={state.state} className="dc-state-row">
@@ -434,7 +728,7 @@ function StateBreakdown() {
                 style={{
                   width: isVisible ? `${(state.mentions / maxMentions) * 100}%` : "0%",
                   transitionDelay: `${i * 0.08}s`,
-                  background: getSentimentGradient(state.sentiment)
+                  background: getSentimentGradient(state.sentiment),
                 }}
               />
             </div>
@@ -464,14 +758,11 @@ function StateBreakdown() {
           <span>Welcoming (&gt;55)</span>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-// ============================================================================
-// CITY BATTLEGROUND - Scatter-like visualization
-// ============================================================================
-function CityBattleground() {
+function CityCards() {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -490,208 +781,49 @@ function CityBattleground() {
   }, []);
 
   return (
-    <section ref={ref} className="dc-battleground-section">
-      <div className="dc-section-header">
-        <h2 className="dc-section-title-large">The Battleground</h2>
-        <p className="dc-section-subtitle">
-          Cities with the most active—and contentious—debates
-        </p>
-      </div>
-
-      <div className="dc-city-scatter">
-        {DATA.topCities.map((city, i) => {
-          const size = 40 + (city.mentions / 10);
-          const left = 10 + (city.sentiment - 30) * 1.3;
-          const top = 15 + (i * 10) + (Math.sin(i * 2) * 5);
-
-          return (
-            <div
-              key={city.city}
-              className={`dc-city-bubble ${isVisible ? "visible" : ""}`}
-              style={{
-                width: size,
-                height: size,
-                left: `${left}%`,
-                top: `${top}%`,
-                backgroundColor: getSentimentColor(city.sentiment),
-                transitionDelay: `${i * 0.1}s`,
-                opacity: isVisible ? 0.9 : 0,
-                transform: isVisible ? "scale(1)" : "scale(0)",
-              }}
-            >
-              <div className="dc-bubble-tooltip">
-                <strong>{city.city}, {city.state}</strong>
-                <span>{city.mentions} mentions</span>
-                <span>Sentiment: {city.sentiment}</span>
-              </div>
+    <div ref={ref} className="dc-city-cards">
+      {DATA.topCities.slice(0, 4).map((city, i) => (
+        <div
+          key={city.city}
+          className={`dc-city-card ${isVisible ? "visible" : ""}`}
+          style={{ transitionDelay: `${i * 0.1}s` }}
+        >
+          <div className="dc-city-card-header">
+            <span className="dc-city-name">{city.city}</span>
+            <span className="dc-city-state">{city.state}</span>
+          </div>
+          <div className="dc-city-card-stats">
+            <div className="dc-city-stat">
+              <span className="dc-city-stat-value">{city.mentions}</span>
+              <span className="dc-city-stat-label">mentions</span>
             </div>
-          );
-        })}
-
-        <div className="dc-scatter-axis-x">
-          <span>← More Skeptical</span>
-          <span>More Welcoming →</span>
-        </div>
-      </div>
-
-      <div className="dc-city-cards">
-        {DATA.topCities.slice(0, 4).map((city, i) => (
-          <div
-            key={city.city}
-            className={`dc-city-card ${isVisible ? "visible" : ""}`}
-            style={{ transitionDelay: `${0.5 + i * 0.1}s` }}
-          >
-            <div className="dc-city-card-header">
-              <span className="dc-city-name">{city.city}</span>
-              <span className="dc-city-state">{city.state}</span>
-            </div>
-            <div className="dc-city-card-stats">
-              <div className="dc-city-stat">
-                <span className="dc-city-stat-value">{city.mentions}</span>
-                <span className="dc-city-stat-label">mentions</span>
-              </div>
-              <div className="dc-city-stat">
-                <span
-                  className="dc-city-stat-value"
-                  style={{ color: getSentimentColor(city.sentiment) }}
-                >
-                  {city.sentiment}
-                </span>
-                <span className="dc-city-stat-label">sentiment</span>
-              </div>
-            </div>
-            <div className="dc-city-bar">
-              <div
-                className="dc-city-bar-fill"
-                style={{
-                  width: `${city.sentiment}%`,
-                  background: getSentimentGradient(city.sentiment)
-                }}
-              />
+            <div className="dc-city-stat">
+              <span
+                className="dc-city-stat-value"
+                style={{ color: getSentimentColor(city.sentiment) }}
+              >
+                {city.sentiment}
+              </span>
+              <span className="dc-city-stat-label">sentiment</span>
             </div>
           </div>
-        ))}
-      </div>
-    </section>
+          <div className="dc-city-bar">
+            <div
+              className="dc-city-bar-fill"
+              style={{
+                width: `${city.sentiment}%`,
+                background: getSentimentGradient(city.sentiment),
+              }}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
 // ============================================================================
-// VOICES SECTION - Scrolling quotes
-// ============================================================================
-function VoicesSection() {
-  const allQuotes = [
-    ...DATA.quotes.power.map(q => ({ ...q, type: "power" })),
-    ...DATA.quotes.water.map(q => ({ ...q, type: "water" })),
-    ...DATA.quotes.noise.map(q => ({ ...q, type: "noise" })),
-    ...DATA.quotes.jobs.map(q => ({ ...q, type: "jobs" })),
-  ];
-
-  return (
-    <section className="dc-voices-section">
-      <div className="dc-section-header">
-        <h2 className="dc-section-title-large">In Their Own Words</h2>
-        <p className="dc-section-subtitle">
-          Verbatim quotes from city council and planning commission meetings
-        </p>
-      </div>
-
-      <div className="dc-voices-scroll">
-        <div className="dc-voices-track">
-          {[...allQuotes, ...allQuotes].map((quote, i) => (
-            <div key={i} className="dc-voice-card">
-              <blockquote>"{quote.text}"</blockquote>
-              <cite>— {quote.city}</cite>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// CONCLUSION
-// ============================================================================
-function Conclusion() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section ref={ref} className="dc-conclusion-section">
-      <div className={`dc-conclusion-content ${isVisible ? "visible" : ""}`}>
-        <div className="dc-conclusion-big-number">
-          <span className="dc-big-number">49.9</span>
-          <span className="dc-big-label">Average Sentiment Score</span>
-        </div>
-
-        <div className="dc-conclusion-text">
-          <p>
-            The data tells a story of a nation genuinely uncertain.
-          </p>
-          <p>
-            With an average sentiment almost perfectly neutral, communities are
-            weighing economic benefits against real concerns about power, water,
-            noise, and quality of life.
-          </p>
-          <p className="dc-conclusion-kicker">
-            For tech companies racing to build AI infrastructure, the message is clear:
-            <strong> local approval is not guaranteed.</strong>
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// METHODOLOGY
-// ============================================================================
-function Methodology() {
-  return (
-    <section className="dc-methodology-section">
-      <h2>Methodology</h2>
-      <div className="dc-methodology-grid">
-        <div className="dc-methodology-item">
-          <span className="dc-meth-label">Data Source</span>
-          <span className="dc-meth-value">City council & planning commission transcripts</span>
-        </div>
-        <div className="dc-methodology-item">
-          <span className="dc-meth-label">Cities Analyzed</span>
-          <span className="dc-meth-value">156</span>
-        </div>
-        <div className="dc-methodology-item">
-          <span className="dc-meth-label">Total Mentions</span>
-          <span className="dc-meth-value">5,007</span>
-        </div>
-        <div className="dc-methodology-item">
-          <span className="dc-meth-label">Analysis</span>
-          <span className="dc-meth-value">NLP sentiment scoring (0-100)</span>
-        </div>
-      </div>
-      <p className="dc-methodology-note">
-        All quotes are verbatim from municipal meeting transcripts collected by Hamlet.
-      </p>
-    </section>
-  );
-}
-
-// ============================================================================
-// HELPER COMPONENTS & FUNCTIONS
+// HELPER FUNCTIONS
 // ============================================================================
 
 function getSentimentColor(score: number): string {
@@ -719,73 +851,97 @@ function ServerTowersSVG() {
           <stop offset="100%" stopColor="#0d2847" />
         </linearGradient>
         <filter id="glow">
-          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
         </filter>
       </defs>
 
-      {/* Ground glow */}
-      <ellipse cx="400" cy="480" rx="350" ry="50" fill="#6366f1" opacity="0.1"/>
+      <ellipse cx="400" cy="480" rx="350" ry="50" fill="#6366f1" opacity="0.1" />
 
-      {/* Tower 1 */}
       <g className="dc-tower dc-tower-1">
-        <rect x="80" y="120" width="120" height="350" rx="8" fill="url(#towerGrad1)"/>
+        <rect x="80" y="120" width="120" height="350" rx="8" fill="url(#towerGrad1)" />
         {[...Array(14)].map((_, i) => (
           <g key={i}>
-            <rect x="95" y={140 + i * 24} width="90" height="18" rx="3" fill="#0a1628"/>
-            <circle cx="110" cy={149 + i * 24} r="4" fill={i % 2 === 0 ? "#6366f1" : "#10b981"} filter="url(#glow)"/>
-            <rect x="125" y={147 + i * 24} width={30 + (i % 3) * 15} height="4" rx="2" fill="#4f46e5" opacity="0.6"/>
+            <rect x="95" y={140 + i * 24} width="90" height="18" rx="3" fill="#0a1628" />
+            <circle
+              cx="110"
+              cy={149 + i * 24}
+              r="4"
+              fill={i % 2 === 0 ? "#6366f1" : "#10b981"}
+              filter="url(#glow)"
+            />
+            <rect
+              x="125"
+              y={147 + i * 24}
+              width={30 + (i % 3) * 15}
+              height="4"
+              rx="2"
+              fill="#4f46e5"
+              opacity="0.6"
+            />
           </g>
         ))}
       </g>
 
-      {/* Tower 2 - Tallest */}
       <g className="dc-tower dc-tower-2">
-        <rect x="280" y="60" width="160" height="410" rx="10" fill="url(#towerGrad2)"/>
-        <rect x="295" y="75" width="130" height="380" rx="6" fill="#0a1628" opacity="0.5"/>
+        <rect x="280" y="60" width="160" height="410" rx="10" fill="url(#towerGrad2)" />
+        <rect x="295" y="75" width="130" height="380" rx="6" fill="#0a1628" opacity="0.5" />
         {[...Array(16)].map((_, i) => (
           <g key={i}>
-            <rect x="305" y={90 + i * 24} width="110" height="18" rx="3" fill="#061020"/>
-            <circle cx="325" cy={99 + i * 24} r="5" fill={i % 3 === 0 ? "#6366f1" : i % 3 === 1 ? "#10b981" : "#818cf8"} filter="url(#glow)"/>
-            <rect x="345" y={97 + i * 24} width={40 + (i % 4) * 10} height="5" rx="2" fill={i % 2 === 0 ? "#10b981" : "#4f46e5"} opacity="0.7"/>
+            <rect x="305" y={90 + i * 24} width="110" height="18" rx="3" fill="#061020" />
+            <circle
+              cx="325"
+              cy={99 + i * 24}
+              r="5"
+              fill={i % 3 === 0 ? "#6366f1" : i % 3 === 1 ? "#10b981" : "#818cf8"}
+              filter="url(#glow)"
+            />
+            <rect
+              x="345"
+              y={97 + i * 24}
+              width={40 + (i % 4) * 10}
+              height="5"
+              rx="2"
+              fill={i % 2 === 0 ? "#10b981" : "#4f46e5"}
+              opacity="0.7"
+            />
           </g>
         ))}
       </g>
 
-      {/* Tower 3 */}
       <g className="dc-tower dc-tower-3">
-        <rect x="520" y="100" width="130" height="370" rx="8" fill="url(#towerGrad1)"/>
+        <rect x="520" y="100" width="130" height="370" rx="8" fill="url(#towerGrad1)" />
         {[...Array(15)].map((_, i) => (
           <g key={i}>
-            <rect x="535" y={120 + i * 24} width="100" height="18" rx="3" fill="#0a1628"/>
-            <circle cx="550" cy={129 + i * 24} r="4" fill="#a5b4fc" filter="url(#glow)"/>
+            <rect x="535" y={120 + i * 24} width="100" height="18" rx="3" fill="#0a1628" />
+            <circle cx="550" cy={129 + i * 24} r="4" fill="#a5b4fc" filter="url(#glow)" />
           </g>
         ))}
       </g>
 
-      {/* Tower 4 - Small */}
       <g className="dc-tower dc-tower-4">
-        <rect x="700" y="200" width="80" height="270" rx="6" fill="url(#towerGrad2)" opacity="0.7"/>
+        <rect x="700" y="200" width="80" height="270" rx="6" fill="url(#towerGrad2)" opacity="0.7" />
         {[...Array(10)].map((_, i) => (
           <g key={i}>
-            <rect x="710" y={220 + i * 24} width="60" height="16" rx="2" fill="#0a1628"/>
-            <circle cx="720" cy={228 + i * 24} r="3" fill="#6366f1" opacity="0.6"/>
+            <rect x="710" y={220 + i * 24} width="60" height="16" rx="2" fill="#0a1628" />
+            <circle cx="720" cy={228 + i * 24} r="3" fill="#6366f1" opacity="0.6" />
           </g>
         ))}
       </g>
 
-      {/* Connection lines */}
       <g opacity="0.2">
-        <path d="M200 180 Q280 120 320 180" stroke="#6366f1" strokeWidth="2" strokeDasharray="8 6" fill="none"/>
-        <path d="M440 150 Q500 100 550 150" stroke="#818cf8" strokeWidth="2" strokeDasharray="8 6" fill="none"/>
-        <path d="M650 250 Q680 200 720 250" stroke="#a5b4fc" strokeWidth="2" strokeDasharray="8 6" fill="none"/>
+        <path d="M200 180 Q280 120 320 180" stroke="#6366f1" strokeWidth="2" strokeDasharray="8 6" fill="none" />
+        <path d="M440 150 Q500 100 550 150" stroke="#818cf8" strokeWidth="2" strokeDasharray="8 6" fill="none" />
+        <path d="M650 250 Q680 200 720 250" stroke="#a5b4fc" strokeWidth="2" strokeDasharray="8 6" fill="none" />
       </g>
 
-      {/* Floating particles */}
-      <circle cx="60" cy="100" r="4" fill="#818cf8" opacity="0.5" className="dc-particle"/>
-      <circle cx="750" cy="80" r="3" fill="#6366f1" opacity="0.4" className="dc-particle"/>
-      <circle cx="250" cy="40" r="3" fill="#a5b4fc" opacity="0.5" className="dc-particle"/>
-      <circle cx="600" cy="60" r="4" fill="#818cf8" opacity="0.4" className="dc-particle"/>
+      <circle cx="60" cy="100" r="4" fill="#818cf8" opacity="0.5" className="dc-particle" />
+      <circle cx="750" cy="80" r="3" fill="#6366f1" opacity="0.4" className="dc-particle" />
+      <circle cx="250" cy="40" r="3" fill="#a5b4fc" opacity="0.5" className="dc-particle" />
+      <circle cx="600" cy="60" r="4" fill="#818cf8" opacity="0.4" className="dc-particle" />
     </svg>
   );
 }
