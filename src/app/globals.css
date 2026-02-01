@@ -1291,6 +1291,20 @@ a {
   flex-shrink: 0;
 }
 
+/* Mobile responsive for state bars */
+@media (max-width: 640px) {
+  .dc-state-bar {
+    grid-template-columns: 50px 1fr 50px;
+    gap: 0.75rem;
+  }
+  .dc-state-bar-name {
+    font-size: 0.875rem;
+  }
+  .dc-state-bar-mentions {
+    font-size: 0.75rem;
+  }
+}
+
 /* City Lists */
 .dc-city-list {
   display: flex;
@@ -1379,6 +1393,33 @@ a {
   color: var(--gray-300);
   min-width: 2.5rem;
   text-align: right;
+}
+
+/* Mobile responsive for city items */
+@media (max-width: 768px) {
+  .dc-city-item {
+    grid-template-columns: 30px 1fr 120px;
+    padding: 0.875rem 1rem;
+  }
+  .dc-city-rank {
+    font-size: 1rem;
+  }
+  .dc-city-name {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dc-city-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .dc-city-rank {
+    display: none;
+  }
+  .dc-city-sentiment {
+    justify-content: flex-start;
+  }
 }
 
 /* Hotspot Grid */
@@ -2114,6 +2155,23 @@ a {
   border-radius: 50%;
 }
 
+/* Mobile responsive for state rows (Geography Section) */
+@media (max-width: 640px) {
+  .dc-state-row {
+    grid-template-columns: 60px 1fr 60px;
+    gap: 0.75rem;
+  }
+  .dc-state-abbr {
+    font-size: 1rem;
+  }
+  .dc-state-mentions {
+    font-size: 0.875rem;
+  }
+  .dc-legend {
+    gap: 1rem;
+  }
+}
+
 /* Battleground Section */
 .dc-battleground-section {
   padding: 8rem 2rem;
@@ -2298,7 +2356,7 @@ a {
 
 .dc-voice-card {
   flex-shrink: 0;
-  width: 320px;
+  width: clamp(280px, 85vw, 320px);
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 1rem;
@@ -4904,5 +4962,84 @@ a {
 
   .temp-state-label {
     flex: 0 0 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .temp-heat-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .temp-heat-rank {
+    display: none;
+  }
+  .temp-heat-score {
+    font-size: 1.25rem;
+  }
+  .temp-calm-info {
+    flex: 1;
+  }
+  .temp-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ============================================================
+   CONSOLIDATED RESPONSIVE FIXES
+   Tablet and Small Phone Breakpoints
+   ============================================================ */
+
+/* Tablet: 2-column grids instead of jumping from 3 to 1 */
+@media (max-width: 900px) and (min-width: 641px) {
+  .abundance-takeaway-grid,
+  .vote-takeaway-grid,
+  .temp-takeaway-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small phone: Vote Leaderboard */
+@media (max-width: 480px) {
+  .vote-leaderboard-header,
+  .vote-leaderboard-row {
+    grid-template-columns: 1fr 50px 40px;
+    font-size: 0.7rem;
+    padding: 0.625rem 0.75rem;
+  }
+  .vote-official-location {
+    display: none;
+  }
+  .vote-official-name {
+    font-size: 0.8125rem;
+  }
+  .vote-overview-stats {
+    gap: 2rem;
+  }
+  .vote-overview-stat .value {
+    font-size: 1.75rem;
+  }
+}
+
+/* Small phone: Abundance Index */
+@media (max-width: 480px) {
+  .abundance-champion-grid {
+    grid-template-columns: 1fr;
+  }
+  .abundance-overview-value {
+    font-size: 4rem;
+  }
+  .abundance-overview-stats {
+    gap: 1.5rem;
+  }
+  .abundance-quote-comparison {
+    gap: 1rem;
+  }
+}
+
+/* Article stack padding on mobile */
+@media (max-width: 640px) {
+  .article-stack {
+    padding: 4rem 1.5rem;
   }
 }
