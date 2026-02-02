@@ -89,7 +89,7 @@ function HeroSection() {
       <div className="temp-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
         <div className="temp-badge">
           <span className="temp-badge-dot" />
-          A Hamlet Investigation
+          From The District
         </div>
 
         <h1 className="temp-hero-title">

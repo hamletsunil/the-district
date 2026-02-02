@@ -117,7 +117,7 @@ function HeroSection() {
       <div className="dc-hero-content-epic" style={{ opacity, transform: `translateY(${translateY}px)` }}>
         <div className="dc-hero-badge-animated">
           <span className="dc-badge-dot" />
-          A Hamlet Investigation
+          From The District
         </div>
 
         <h1 className="dc-hero-title-epic">

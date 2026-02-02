@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArticleIllustration } from "@/components/home";
 
 const articles = [
@@ -70,6 +70,9 @@ export default function Home() {
 
   return (
     <main>
+      {/* Hero Section */}
+      <HeroSection />
+
       {/* Side navigation dots */}
       <nav className="side-nav hidden lg:flex">
         {articles.map((_, i) => (
@@ -108,5 +111,79 @@ export default function Home() {
         ))}
       </section>
     </main>
+  );
+}
+
+// ============================================================================
+// HERO SECTION
+// ============================================================================
+function HeroSection() {
+  const [email, setEmail] = useState("");
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const opacity = Math.max(0, 1 - scrollY / 600);
+  const translateY = scrollY / 4;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Placeholder - will be replaced with Beehiiv integration
+    alert(`Thanks! We'll add ${email} to our list when we launch.`);
+    setEmail("");
+  };
+
+  return (
+    <section className="district-hero">
+      <div className="district-hero-bg">
+        <div className="district-hero-gradient" />
+        <div className="district-hero-grid" style={{ opacity: opacity * 0.15 }} />
+      </div>
+
+      <div className="district-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
+        <div className="district-hero-badge">
+          <span className="district-badge-dot" />
+          A Hamlet Publication
+        </div>
+
+        <h1 className="district-hero-title">
+          Data-driven stories from<br />
+          <span className="district-title-accent">local government</span>
+        </h1>
+
+        <p className="district-hero-subtitle">
+          We analyze transcripts, votes, and records from 3,000+ city halls
+          to uncover what&rsquo;s really happening in local democracy.
+        </p>
+
+        <form className="district-newsletter" onSubmit={handleSubmit}>
+          <div className="district-newsletter-input-wrapper">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="district-newsletter-input"
+            />
+            <button type="submit" className="district-newsletter-button">
+              Subscribe
+            </button>
+          </div>
+          <p className="district-newsletter-note">
+            Free weekly insights. No spam, ever.
+          </p>
+        </form>
+      </div>
+
+      <div className="district-hero-scroll-cue" style={{ opacity }}>
+        <div className="district-scroll-line" />
+        <span>Explore stories</span>
+      </div>
+    </section>
   );
 }

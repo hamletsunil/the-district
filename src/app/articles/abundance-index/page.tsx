@@ -107,7 +107,7 @@ function HeroSection() {
       <div className="abundance-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
         <div className="abundance-badge">
           <span className="abundance-badge-dot" />
-          A Hamlet Investigation
+          From The District
         </div>
 
         <h1 className="abundance-hero-title">

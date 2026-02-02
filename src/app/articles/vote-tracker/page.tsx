@@ -101,7 +101,7 @@ function HeroSection() {
       <div className="vote-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
         <div className="vote-badge">
           <span className="vote-badge-dot" />
-          A Hamlet Investigation
+          From The District
         </div>
 
         <h1 className="vote-hero-title">
