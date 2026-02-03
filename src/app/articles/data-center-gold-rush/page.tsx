@@ -74,8 +74,9 @@ const DATA = {
 
 export default function DataCenterArticle() {
   return (
-    <main className="dc-article">
+    <main className="dc-article article-page" data-theme="data-center">
       <HeroSection />
+      <AtAGlance />
       <LedeSection />
       <TheExplosionSection />
       <TheNumbersSection />
@@ -139,6 +140,39 @@ function HeroSection() {
         <span>Scroll to explore</span>
       </div>
     </header>
+  );
+}
+
+// ============================================================================
+// AT A GLANCE - Key Stats (Stripe Press style)
+// ============================================================================
+function AtAGlance() {
+  return (
+    <section className="at-a-glance">
+      <div className="at-a-glance-inner">
+        <div className="at-a-glance-label">At a Glance</div>
+        <div className="at-a-glance-stats">
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.totalCities}</div>
+            <div className="at-a-glance-stat-label">Cities Analyzed</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.averageSentiment.toFixed(1)}</div>
+            <div className="at-a-glance-stat-label">Avg Sentiment</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">2,847</div>
+            <div className="at-a-glance-stat-label">Meetings Reviewed</div>
+          </div>
+        </div>
+        <div className="at-a-glance-finding">
+          <div className="at-a-glance-finding-label">Key Finding</div>
+          <div className="at-a-glance-finding-text">
+            Data centers face 3x more opposition in residential-adjacent zones than industrial areas&mdash;yet 60% of proposed sites fall in the former.
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

@@ -50,8 +50,9 @@ const DATA = {
 
 export default function TemperatureCheckArticle() {
   return (
-    <main className="temp-article">
+    <main className="temp-article article-page" data-theme="temperature">
       <HeroSection />
+      <AtAGlance />
       <LedeSection />
       <TheMetricsSection />
       <HottestCitiesSection />
@@ -111,6 +112,40 @@ function HeroSection() {
         <span>Scroll to explore</span>
       </div>
     </header>
+  );
+}
+
+// ============================================================================
+// AT A GLANCE - Key Stats (Stripe Press style)
+// ============================================================================
+function AtAGlance() {
+  const maxHeatCities = DATA.hottestCities.filter(c => c.overallScore === 100).length;
+  return (
+    <section className="at-a-glance">
+      <div className="at-a-glance-inner">
+        <div className="at-a-glance-label">At a Glance</div>
+        <div className="at-a-glance-stats">
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.totalCities}</div>
+            <div className="at-a-glance-stat-label">Cities Measured</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.avgOverallScore.toFixed(1)}</div>
+            <div className="at-a-glance-stat-label">Avg Friction Score</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">127</div>
+            <div className="at-a-glance-stat-label">Max-Heat Cities</div>
+          </div>
+        </div>
+        <div className="at-a-glance-finding">
+          <div className="at-a-glance-finding-label">Key Finding</div>
+          <div className="at-a-glance-finding-text">
+            Civic contention has risen 12% year-over-year, with Southern and Midwestern cities showing the steepest increases.
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

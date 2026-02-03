@@ -61,8 +61,9 @@ const DATA = {
 
 export default function VoteTrackerArticle() {
   return (
-    <main className="vote-article">
+    <main className="vote-article article-page" data-theme="vote-tracker">
       <HeroSection />
+      <AtAGlance />
       <LedeSection />
       <TheNumbersSection />
       <YesVotersSection />
@@ -123,6 +124,39 @@ function HeroSection() {
         <span>Scroll to explore</span>
       </div>
     </header>
+  );
+}
+
+// ============================================================================
+// AT A GLANCE - Key Stats (Stripe Press style)
+// ============================================================================
+function AtAGlance() {
+  return (
+    <section className="at-a-glance">
+      <div className="at-a-glance-inner">
+        <div className="at-a-glance-label">At a Glance</div>
+        <div className="at-a-glance-stats">
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.totalOfficials.toLocaleString()}</div>
+            <div className="at-a-glance-stat-label">Officials Tracked</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.totalVotes.toLocaleString()}</div>
+            <div className="at-a-glance-stat-label">Votes Recorded</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.avgApprovalRate}%</div>
+            <div className="at-a-glance-stat-label">Avg Approval Rate</div>
+          </div>
+        </div>
+        <div className="at-a-glance-finding">
+          <div className="at-a-glance-finding-label">Key Finding</div>
+          <div className="at-a-glance-finding-text">
+            Most development votes are nearly unanimous&mdash;but the 3.5% of contentious votes determine billions in construction outcomes.
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 

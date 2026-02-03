@@ -67,8 +67,9 @@ const DATA = {
 
 export default function AbundanceIndexArticle() {
   return (
-    <main className="abundance-article">
+    <main className="abundance-article article-page" data-theme="abundance">
       <HeroSection />
+      <AtAGlance />
       <LedeSection />
       <TheIndexSection />
       <ChampionsSection />
@@ -129,6 +130,39 @@ function HeroSection() {
         <span>Scroll to explore</span>
       </div>
     </header>
+  );
+}
+
+// ============================================================================
+// AT A GLANCE - Key Stats (Stripe Press style)
+// ============================================================================
+function AtAGlance() {
+  return (
+    <section className="at-a-glance">
+      <div className="at-a-glance-inner">
+        <div className="at-a-glance-label">At a Glance</div>
+        <div className="at-a-glance-stats">
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.totalCities}</div>
+            <div className="at-a-glance-stat-label">Cities Ranked</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.averageAbundanceIndex.toFixed(1)}</div>
+            <div className="at-a-glance-stat-label">Avg Index Score</div>
+          </div>
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">{DATA.summary.yimbyCount}</div>
+            <div className="at-a-glance-stat-label">Pro-Growth Cities</div>
+          </div>
+        </div>
+        <div className="at-a-glance-finding">
+          <div className="at-a-glance-finding-label">Key Finding</div>
+          <div className="at-a-glance-finding-text">
+            West Coast and Sun Belt cities lead in openness to development, while older Northeast metros show 40% more resistance on average.
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
