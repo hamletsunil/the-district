@@ -55,6 +55,16 @@ const DATA = {
 // Note: Friction scores are derived from NLP analysis of Hamlet transcript data
 const SOURCES = [
   {
+    title: "Supreme Court issues decision in Oregon homelessness case, siding with Grants Pass",
+    outlet: "KGW",
+    url: "https://www.kgw.com/article/news/local/homeless/us-supreme-court-ruling-grants-pass-homeless-camping-ban/283-cf6e28ac-929b-4700-bd49-8f9dc8278fd3"
+  },
+  {
+    title: "City of Grants Pass v. Johnson - Supreme Court opinion",
+    outlet: "Supreme Court",
+    url: "https://www.supremecourt.gov/opinions/23pdf/23-175_19m2.pdf"
+  },
+  {
     title: "Tiffin, Ohio city data - U.S. Census Bureau",
     outlet: "Census.gov",
     url: "https://www.census.gov/quickfacts/tiffincityohio"
@@ -63,11 +73,6 @@ const SOURCES = [
     title: "Dalton, Georgia city data - U.S. Census Bureau",
     outlet: "Census.gov",
     url: "https://www.census.gov/quickfacts/daltoncitygeorgia"
-  },
-  {
-    title: "Grants Pass, Oregon city data - U.S. Census Bureau",
-    outlet: "Census.gov",
-    url: "https://www.census.gov/quickfacts/grantspasscityoregon"
   }
 ];
 
@@ -392,9 +397,35 @@ function CalmestCitiesSection() {
           about 11% of meetings&mdash;still far below the national average of 76%.
         </p>
         <p>
-          The calm-city list skews toward wealthy suburbs (Highland Park, Cupertino)
-          and smaller Western cities (Grants Pass, Sumner). Whether this reflects
-          genuine consensus or selective participation is worth investigating.
+          But here&rsquo;s an irony worth investigating: Grants Pass scored as our
+          calmest city&mdash;yet this is the same city that took a homeless camping
+          ban all the way to the Supreme Court. In June 2024, the Court ruled 6-3 in
+          <em>City of Grants Pass v. Johnson</em> that municipalities can fine people
+          for sleeping outside, even when shelter is unavailable.
+        </p>
+        <p>
+          How does a city at the center of a landmark national controversy score as
+          America&rsquo;s calmest? Multiple explanations:
+        </p>
+        <p>
+          <strong>First:</strong> The litigation may have channeled conflict into
+          courts rather than council chambers. When the battle moves to lawyers,
+          citizen comment periods quiet down.
+        </p>
+        <p>
+          <strong>Second:</strong> Our data measures meetings where policy is debated,
+          not where it&rsquo;s enforced. Grants Pass may have reached internal consensus
+          on its approach&mdash;the conflict was external, with civil liberties groups.
+        </p>
+        <p>
+          <strong>Third:</strong> Selection effects. Perhaps residents who would oppose
+          the policy have stopped showing up, left town, or never had housing that
+          allowed them civic participation in the first place.
+        </p>
+        <p>
+          The Grants Pass case illustrates why friction scores need context. Low meeting
+          friction doesn&rsquo;t mean a city is conflict-free. It means conflict may
+          be happening elsewhere.
         </p>
       </div>
 

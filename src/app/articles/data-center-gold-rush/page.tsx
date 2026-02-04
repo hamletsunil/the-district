@@ -83,14 +83,14 @@ const SOURCES = [
     url: "https://www.foxbusiness.com/politics/arizona-city-unanimously-rejects-ai-data-center-after-residents-outcry"
   },
   {
-    title: "Meta turns on the power for $1 billion DeKalb data center",
-    outlet: "Chicago Tribune",
-    url: "https://www.chicagotribune.com/2023/11/29/meta-turns-on-the-power-for-1-billion-dekalb-data-center/"
+    title: "$64 billion in data center projects blocked or delayed by local opposition",
+    outlet: "Data Center Watch",
+    url: "https://www.publicpower.org/periodical/article/strategies-address-water-use-emerge-wake-community-opposition-data-centers"
   },
   {
-    title: "Water and energy use is growing as data centers are built across the Midwest",
-    outlet: "KCUR",
-    url: "https://www.kcur.org/news/2025-07-21/data-centers-water-electricity-growing-usage"
+    title: "Data centers and water consumption",
+    outlet: "Environmental and Energy Study Institute",
+    url: "https://www.eesi.org/articles/view/data-centers-and-water-consumption"
   },
   {
     title: "Lawmakers seek ways to prevent data centers from straining Illinois' power grids",
@@ -462,29 +462,46 @@ function TheConcernsSection() {
       <div className="dc-prose">
         <p>
           When residents speak at public hearings, four concerns dominate the conversation.
+          But why these concerns? Five layers of questioning reveals something important.
         </p>
         <p>
           <strong>Power consumption</strong> tops the list. In 87 of our 156 cities,
-          speakers raised questions about electrical capacity. &ldquo;The amount of
-          electricity the data center requires is staggering,&rdquo; noted one San
-          Angelo, Texas resident&mdash;a sentiment repeated in different words from
-          North Carolina to California.
+          speakers raised questions about electrical capacity. Why? Because the numbers
+          are staggering: U.S. data centers now consume about 4.4% of national
+          electricity, up from 1.9% in 2018. By 2028, projections suggest 12%.
         </p>
         <p>
-          <strong>Water usage</strong> ranks second, mentioned in 78 cities. Data
-          centers require enormous cooling capacity, and in drought-prone regions,
-          this generates intense scrutiny. &ldquo;Almost no water for data centers.
-          So that&rsquo;s a concern,&rdquo; a Columbia, Missouri official observed,
-          capturing widespread unease.
+          Why does this matter locally? Because in places like The Dalles, Oregon,
+          Google&rsquo;s data centers consumed more than 355 million gallons of water
+          in 2021&mdash;over one-quarter of the town&rsquo;s annual supply. That number
+          had tripled since 2016.
         </p>
         <p>
-          <strong>Jobs</strong> drew comment in 46 cities&mdash;from both
-          sides. Proponents tout employment figures; skeptics question how many
-          positions a largely automated facility actually creates.
+          <strong>Water usage</strong> ranks second, mentioned in 78 cities. A 2024
+          Lawrence Berkeley report estimated U.S. data centers consumed 17 billion
+          gallons directly in 2023, with projections to double or quadruple by 2028.
+          When a resident asks &ldquo;how much water will this use?&rdquo;&mdash;the
+          question that opened Chandler&rsquo;s debate&mdash;they&rsquo;re asking an
+          answerable question with material stakes.
+        </p>
+        <p>
+          <strong>Jobs</strong> drew comment in 46 cities&mdash;from both sides.
+          Proponents cite construction jobs and permanent positions; skeptics note
+          that a facility requiring hundreds of megawatts may employ only dozens of
+          people once operational. Both are correct. The question is what the
+          community values.
         </p>
         <p>
           <strong>Noise</strong> emerged in 18 cities, particularly those considering
           facilities near residential areas.
+        </p>
+        <p>
+          The pattern: communities aren&rsquo;t reflexively opposed. They&rsquo;re
+          asking for answers that companies have historically declined to provide.
+          A Data Center Watch report found $64 billion in projects blocked or delayed
+          by local opposition between May 2024 and March 2025. The question isn&rsquo;t
+          whether data centers will get built. It&rsquo;s whether the information
+          asymmetry between developers and communities gets resolved.
         </p>
       </div>
 

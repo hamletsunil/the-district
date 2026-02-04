@@ -72,24 +72,24 @@ const DATA = {
 // Note: Abundance Index scores derived from Hamlet's NLP analysis of meeting transcripts
 const SOURCES = [
   {
-    title: "Temple, Texas city data - U.S. Census Bureau",
-    outlet: "Census.gov",
-    url: "https://www.census.gov/quickfacts/templecitytexas"
+    title: "Temple population growth 'astronomical' as city hits 102,000 residents",
+    outlet: "Temple Daily Telegram",
+    url: "https://www.tdtnews.com/news/central_texas_news/article_a50bafc6-0c5d-4229-b68d-445588413256.html"
   },
   {
-    title: "Dubuque, Iowa city data - U.S. Census Bureau",
-    outlet: "Census.gov",
-    url: "https://www.census.gov/quickfacts/dubuquecityiowa"
+    title: "City of Temple looks to future with 2025-29 growth plan",
+    outlet: "KXXV",
+    url: "https://www.kxxv.com/news/local-news/city-of-temple-looks-to-future-with-2025-29-growth-plan"
+  },
+  {
+    title: "Temple, Texas sees growth in 2024, says EDC",
+    outlet: "KCEN-TV",
+    url: "https://www.kcentv.com/article/news/community/122-million-invested-124-jobs-created-temple-2024-temple-edc/500-ef9f772d-3381-4939-bf93-7d67324c3f99"
   },
   {
     title: "Fairfax, Virginia city data - U.S. Census Bureau",
     outlet: "Census.gov",
     url: "https://www.census.gov/quickfacts/fairfaxcityvirginia"
-  },
-  {
-    title: "Hayward, California city data - U.S. Census Bureau",
-    outlet: "Census.gov",
-    url: "https://www.census.gov/quickfacts/haywardcitycalifornia"
   }
 ];
 
@@ -354,15 +354,26 @@ function ChampionsSection() {
           positive.
         </p>
         <p>
-          These cities didn&rsquo;t stumble into pro-development postures. They made
-          strategic decisions. In Dubuque, Iowa (index: 78.6), officials called their
-          data center &ldquo;an example of the kind of economic development we want
-          to see in our community.&rdquo;
+          Why Temple? Ask five layers deep and a pattern emerges. Temple grew from
+          82,000 residents in 2020 to over 102,000 by early 2025&mdash;nearly 4%
+          annual growth even during the pandemic. The city&rsquo;s Economic Development
+          Corporation reported $122 million in capital investments in 2024 alone.
+          When your population is growing that fast, you need infrastructure to support
+          it. Data centers, in this context, aren&rsquo;t a question mark&mdash;they&rsquo;re
+          part of the plan.
+        </p>
+        <p>
+          In Dubuque, Iowa (index: 78.6), officials called their data center &ldquo;an
+          example of the kind of economic development we want to see in our community.&rdquo;
+          A different context: a Midwestern city competing for investment against larger
+          metros.
         </p>
         <p>
           The YIMBY champions span the political spectrum: California (Hayward), the
           Midwest (Dubuque), the Mountain West (Rapid City), and the Sun Belt (Temple,
-          Coolidge, Spring Hill). No single ideology explains the pattern.
+          Coolidge, Spring Hill). What they share isn&rsquo;t ideology&mdash;it&rsquo;s
+          a growth posture, whether driven by population influx (Temple) or economic
+          repositioning (Dubuque).
         </p>
       </div>
 
@@ -435,16 +446,26 @@ function StrongholdsSection() {
           positive toward data center development.
         </p>
         <p>
-          The pattern in NIMBY strongholds is consistent: residents worry about
-          infrastructure strain, question whether the economic benefits reach them
-          directly, and express concern about cumulative impacts. In Fairfax,
-          a resident complained that &ldquo;with the data centers being built,
-          infrastructure is not keeping pace.&rdquo;
+          But why? Here, too, multiple explanations compete.
+        </p>
+        <p>
+          <strong>One interpretation:</strong> Wealthy homeowners protecting property
+          values. Fairfax median household income exceeds $130,000. Residents there
+          don&rsquo;t need the jobs a data center provides&mdash;they need the quiet
+          streets they already have.
+        </p>
+        <p>
+          <strong>Another interpretation:</strong> Infrastructure saturation. Northern
+          Virginia is already America&rsquo;s largest data center corridor. &ldquo;With
+          the data centers being built, infrastructure is not keeping pace,&rdquo; a
+          resident complained. When you&rsquo;ve absorbed dozens of facilities, skepticism
+          about the next one isn&rsquo;t reflexive opposition&mdash;it&rsquo;s experience.
         </p>
         <p>
           Not all NIMBY cities are wealthy suburbs. Copperas Cove, Texas (population
           36,000), scored just 25.7, with 100% of mentions coded negative. The concerns
-          there: grid reliability and competition for resources.
+          there: grid reliability in a state where power failures make national news.
+          Both interpretations might be valid simultaneously.
         </p>
       </div>
 

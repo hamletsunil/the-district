@@ -82,14 +82,14 @@ const SOURCES = [
     url: "https://www.dailyprincetonian.com/article/2025/12/princeton-features-controversial-stockton-street-development"
   },
   {
-    title: "Newark West Side affordable housing development approved",
-    outlet: "Jersey Digs",
-    url: "https://jerseydigs.com/666-676-south-12th-street-newark/"
+    title: "Chicago City Council sheds rubber stamp reputation",
+    outlet: "Chicago Sun-Times",
+    url: "https://chicago.suntimes.com/city-hall/2022/6/7/23156715/chicago-city-council-sheds-rubber-stamp-reputation-dick-simpson-uic-report"
   },
   {
-    title: "Mixed-use development in downtown Newark approved for NJEDA Aspire Awards",
-    outlet: "New Jersey EDA",
-    url: "https://www.njeda.gov/mixed-use-development-in-downtown-newark-approved-for-njeda-aspire-awards/"
+    title: "City Council Voting Records - UIC Political Science",
+    outlet: "University of Illinois Chicago",
+    url: "https://pols.uic.edu/chicago-politics/city-council-voting-records/"
   }
 ];
 
@@ -251,15 +251,31 @@ function TheNumbersSection() {
           alignment on every recorded matter.
         </p>
         <p>
-          One interpretation: Newark receives well-prepared proposals, and the
-          council genuinely agrees. Another: the real decisions happen before the
-          public meeting, and the vote is theater. A third: party discipline is
-          absolute.
+          Why? Ask five times and different explanations emerge.
         </p>
         <p>
-          The data can&rsquo;t distinguish between consensus and conformity. But it
-          does identify which councils deserve scrutiny&mdash;and Newark&rsquo;s
-          unanimity is unusual enough to warrant it.
+          <strong>First:</strong> Perhaps Newark receives well-prepared proposals.
+          The city has a professional staff, experienced administrators, and a
+          council that reviews items before public meetings. If problems get fixed
+          in committee, public votes become formalities.
+        </p>
+        <p>
+          <strong>Second:</strong> Perhaps the real decisions happen before the cameras
+          turn on. Party caucuses, pre-meeting discussions, and informal negotiations
+          could produce consensus that makes public meetings ceremonial. Chicago&rsquo;s
+          city council operated this way for decades under mayors Daley and Emanuel&mdash;researchers
+          at the University of Illinois Chicago called it a &ldquo;rubber stamp&rdquo;
+          until divided roll calls increased under Mayor Lightfoot.
+        </p>
+        <p>
+          <strong>Third:</strong> Perhaps one-party dominance creates discipline.
+          Newark is a Democratic stronghold. In cities with overwhelming partisan
+          majorities, dissent can carry political costs.
+        </p>
+        <p>
+          The data can&rsquo;t distinguish between these explanations. That&rsquo;s
+          a job for Newark&rsquo;s local reporters. But the pattern is distinctive
+          enough to warrant investigation.
         </p>
       </div>
 
@@ -316,15 +332,35 @@ function NoVotersSection() {
           another 31 no votes and just 2 yes votes.
         </p>
         <p>
-          What are they opposing? The sources suggest housing development&mdash;particularly
-          affordable housing proposals that would increase density in wealthy neighborhoods.
-          Princeton has been embroiled in contentious debates over the Stockton Street
-          development and similar projects.
+          What are they opposing? The most visible flashpoint is the Stockton Street
+          development&mdash;a proposed 238-unit apartment complex on Princeton Theological
+          Seminary land, near Albert Einstein&rsquo;s former home. Critics point out
+          that only 48 units would be affordable; the other 190 are market-rate. The
+          Princeton Coalition for Responsible Development, led by former councilwoman
+          Jo Butler, has filed three lawsuits against the project.
         </p>
         <p>
-          Whether this bloc represents principled planning concerns or homeowner
-          protectionism depends on perspective. What&rsquo;s clear: Princeton&rsquo;s
-          council operates nothing like Newark&rsquo;s.
+          But here, too, the Five Whys reveals complexity.
+        </p>
+        <p>
+          <strong>One interpretation:</strong> Wealthy homeowners protecting property
+          values. Princeton sits within commuting distance of New York. Density threatens
+          the suburban character. The &ldquo;affordable housing&rdquo; framing gives
+          cover to what is mostly a market-rate luxury development.
+        </p>
+        <p>
+          <strong>Another interpretation:</strong> Principled opposition to developers
+          gaming state mandates. New Jersey requires municipalities to build affordable
+          housing. Critics argue developers use the 20% affordable requirement as a
+          &ldquo;shoehorn&rdquo; to force through projects that don&rsquo;t fit the
+          neighborhood. Princeton history professor Sean Wilentz called the Stockton
+          Street proposal &ldquo;a city-sized private housing development on the oldest
+          residential neighborhood in Princeton.&rdquo;
+        </p>
+        <p>
+          The voting records can&rsquo;t tell us which interpretation is correct. They
+          can tell us that Princeton has an organized, persistent opposition bloc&mdash;and
+          that housing is the battleground.
         </p>
       </div>
 

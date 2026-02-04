@@ -209,4 +209,60 @@ Before publishing, read aloud and ask:
 
 ---
 
+## IX. INVESTIGATIVE DEPTH
+
+Data journalism without investigation is a spreadsheet. Every article must dig deep.
+
+### Article Length Requirement
+**Minimum 500-700 words per article.** Every article must have enough space to:
+- Present the finding
+- Explain why it matters
+- Explore the cause
+- Consider alternatives
+- Connect to external reporting
+
+### The Five Whys
+For every significant data point, ask "why" five layers deep:
+
+**Example: Newark council unanimity**
+1. WHY does Newark vote unanimously? → Officials always agree
+2. WHY do they always agree? → Either pre-meeting alignment or groupthink
+3. WHY would there be pre-meeting alignment? → Party caucuses, staff preparation, consensus culture
+4. WHY would a city have strong consensus culture? → One-party dominance, professional staff, low-stakes agenda items
+5. WHY would this matter to readers? → Either good governance or captured process—research determines which
+
+Each "why" demands external research, not speculation.
+
+### External Research Requirement
+**Every article must include at least 2-3 external sources** that:
+- Validate or contextualize the data pattern found
+- Provide possible explanations for the pattern
+- Connect the local finding to broader trends or scholarship
+
+Sources must be:
+- Local news reporting on the specific cities/issues
+- Academic research on the phenomenon
+- Government reports or official statements
+
+### Alternative Explanations Requirement
+**Never present a single interpretation.** For every pattern:
+
+| Pattern Found | Suspicious Read | Benign Read |
+|---------------|-----------------|-------------|
+| 100% approval rate | Rubber-stamping | Well-prepared agenda, professional staff |
+| 0% approval rate | Obstructionist, NIMBY | Principled opposition, representing constituents |
+| Low environmental approval | Anti-environment | Contentious projects, genuine policy debate |
+
+Present both. Let research (and the reader) determine which is more credible.
+
+### The Investigation Checklist
+Before publishing, verify:
+- [ ] Did I ask "why" at least 5 times for the main finding?
+- [ ] Did I search for external sources explaining this pattern?
+- [ ] Did I present at least 2 possible explanations?
+- [ ] Did I identify what additional reporting would determine the truth?
+- [ ] Is the article 500+ words of actual narrative (not data tables)?
+
+---
+
 *This document complements EDITORIAL_STANDARDS.md. Together they govern what we say and how we say it.*
