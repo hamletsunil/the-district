@@ -680,8 +680,7 @@ function MethodologySection() {
           <strong>Data Source:</strong> Municipal meeting transcripts from{" "}
           <strong>84 cities</strong> across the United States, collected via
           public records and council streaming services. Only cities with 10+
-          mentions of &ldquo;data center&rdquo; in their transcripts were included
-          to ensure statistical significance.
+          mentions of &ldquo;data center&rdquo; in their transcripts were included.
         </p>
         <p>
           <strong>Sentiment Analysis:</strong> Transcript segments were analyzed
@@ -691,18 +690,33 @@ function MethodologySection() {
         </p>
         <p>
           <strong>Abundance Index Calculation:</strong> The index combines sentiment
-          score (60% weight) with positive mention ratio (40% weight). Formula:{" "}
-          <code>Abundance Index = (Sentiment Score × 0.6) + (Positive Ratio × 0.4)</code>
+          score (60% weight) with positive mention ratio (40% weight). This weighting
+          emphasizes overall tone while still accounting for the balance of favorable
+          vs. unfavorable mentions. Alternative weightings would shift rankings modestly
+          but preserve the general pattern.
         </p>
         <p>
           <strong>Classification:</strong> Cities with Abundance Index ≥55 are
-          classified as YIMBY; ≤45 as NIMBY; between 45-55 as Neutral.
+          classified as YIMBY; ≤45 as NIMBY; between 45-55 as Neutral. These thresholds
+          are analytical conventions, not bright lines&mdash;a city at 54 is functionally
+          similar to one at 56.
         </p>
         <p>
-          <strong>Limitations:</strong> This analysis covers data center discussions
-          specifically and may not reflect broader development attitudes. Sentiment
-          analysis has inherent limitations in capturing sarcasm, irony, or complex
-          positions. Population data from U.S. Census Bureau estimates.
+          <strong>Sample Size Variation:</strong> Mention counts vary significantly
+          by city (from 10 to 300+). Cities with fewer mentions should be interpreted
+          with more caution, as a single heated meeting can skew their scores.
+        </p>
+        <p>
+          <strong>Selection Bias:</strong> These 84 cities self-selected into our
+          dataset by having active data center discussions. They are not a random
+          sample of American cities and likely skew toward areas with existing tech
+          infrastructure or active development proposals.
+        </p>
+        <p>
+          <strong>Limitations:</strong> Sentiment analysis has inherent limitations
+          in capturing sarcasm, irony, or complex positions. This analysis measures
+          how cities <em>discuss</em> data centers, which may differ from how they
+          ultimately <em>vote</em>. Population data from U.S. Census Bureau estimates.
         </p>
         <p>
           <strong>Date Range:</strong> Transcripts analyzed span January 2023 through

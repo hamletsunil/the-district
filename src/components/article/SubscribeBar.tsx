@@ -43,9 +43,13 @@ export function SubscribeBar() {
     if (dismissed) return;
 
     const handleScroll = () => {
-      const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
       setVisible(scrollPercent > 0.6);
     };
+
+    // Check immediately in case page loads already scrolled
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -85,8 +89,10 @@ export function SubscribeBar() {
     }
   };
 
-  if (dismissed || !visible) return null;
+  // Don't render at all if dismissed
+  if (dismissed) return null;
 
+  // Always render, but use CSS class to animate visibility
   return (
     <div className={`subscribe-bar ${visible ? "subscribe-bar--visible" : ""}`}>
       <div className="subscribe-bar__content">

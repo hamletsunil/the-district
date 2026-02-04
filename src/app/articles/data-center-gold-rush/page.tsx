@@ -198,7 +198,7 @@ function AtAGlance() {
         <div className="at-a-glance-finding">
           <div className="at-a-glance-finding-label">Key Finding</div>
           <div className="at-a-glance-finding-text">
-            Data centers face 3x more opposition in residential-adjacent zones than industrial areas&mdash;yet 60% of proposed sites fall in the former.
+            Power consumption is the #1 community concern, raised in 56% of cities&mdash;followed by water usage at 50%. Jobs, often touted as a benefit, sparked debate in only 29%.
           </div>
         </div>
       </div>
@@ -259,25 +259,26 @@ function TheExplosionSection() {
     return () => observer.disconnect();
   }, []);
 
+  // Only show 2023-2025 data where we have reliable coverage
+  const recentTimeline = DATA.timeline.filter(item => item.year >= 2023);
+
   return (
     <section className="dc-editorial-section">
       <div className="dc-prose-header">
-        <span className="dc-section-number">The Explosion</span>
-        <h2>A 12x Surge in Two Years</h2>
+        <span className="dc-section-number">The Scale</span>
+        <h2>A Nationwide Conversation</h2>
       </div>
 
       <div className="dc-prose">
         <p>
-          The numbers tell a story of sudden urgency. In 2023, we tracked{" "}
-          <strong>61 municipal meetings</strong> where data centers were discussed
-          across 38 cities. By 2025, that number had exploded to{" "}
-          <strong>734 meetings across 260 cities</strong>&mdash;a twelvefold increase.
+          Data center proposals are landing on planning commission agendas across
+          America. In 2025 alone, we tracked <strong>734 municipal meetings</strong>{" "}
+          across 260 cities where data centers were a topic of discussion.
         </p>
         <p>
-          This isn&rsquo;t gradual growth. It&rsquo;s an inflection point. The AI boom,
-          kicked off by ChatGPT&rsquo;s November 2022 launch and accelerated by the
-          generative AI arms race, has translated into an unprecedented wave of
-          infrastructure proposals hitting local governments simultaneously.
+          This represents a broad geographic footprint: from Chandler, Arizona to
+          DeKalb, Illinois, communities are grappling with similar questions about
+          power, water, jobs, and quality of life.
         </p>
         <p>
           Many of these municipalities have never evaluated a data center project before.
@@ -287,7 +288,7 @@ function TheExplosionSection() {
 
       <div className="dc-graphic" ref={ref}>
         <div className="dc-timeline-chart">
-          {DATA.timeline.map((item, i) => {
+          {recentTimeline.map((item, i) => {
             const maxMeetings = 734;
             const height = (item.meetings / maxMeetings) * 200;
             return (
@@ -297,9 +298,7 @@ function TheExplosionSection() {
                   style={{
                     height: isVisible ? height : 0,
                     transitionDelay: `${i * 0.1}s`,
-                    background: item.year >= 2023
-                      ? "linear-gradient(180deg, #6366f1, #4f46e5)"
-                      : "linear-gradient(180deg, #4b5563, #374151)",
+                    background: "linear-gradient(180deg, #6366f1, #4f46e5)",
                   }}
                 >
                   <span className="dc-timeline-value">{item.meetings}</span>
@@ -310,6 +309,9 @@ function TheExplosionSection() {
             );
           })}
         </div>
+        <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginTop: "1rem", textAlign: "center" }}>
+          Note: Data reflects meetings captured in our transcript database, which expanded significantly in 2025.
+        </p>
       </div>
     </section>
   );
@@ -414,22 +416,21 @@ function TheNumbersSection() {
   return (
     <section className="dc-editorial-section">
       <div className="dc-prose-header">
-        <span className="dc-section-number">The Numbers</span>
-        <h2>A Nation Divided</h2>
+        <span className="dc-section-number">The Breakdown</span>
+        <h2>Where Cities Stand</h2>
       </div>
 
       <div className="dc-prose">
         <p>
-          The headline number is striking: an average sentiment score of{" "}
-          <strong>49.9 out of 100</strong>&mdash;almost perfectly neutral. But
-          this average masks a deeper divide.
+          Forget the average&mdash;it tells you nothing useful. What matters is
+          the distribution: of 156 cities, <strong>38 show clear skepticism</strong>{" "}
+          toward data center development (sentiment below 45), while{" "}
+          <strong>40 express openness</strong> (above 55).
         </p>
         <p>
-          Of the 156 cities in our analysis, <strong>38 show clear skepticism</strong>{" "}
-          toward data center development (sentiment below 45), while{" "}
-          <strong>40 express openness</strong> (above 55). The remaining 78
-          cities&mdash;half the sample&mdash;sit firmly in the middle, their
-          deliberations marked by genuine ambivalence.
+          The remaining 78 cities&mdash;exactly half&mdash;sit in the genuinely
+          undecided middle. Their meeting transcripts reveal communities weighing
+          real tradeoffs, not rubber-stamping approvals or reflexively opposing.
         </p>
         <p>
           This isn&rsquo;t a story of universal opposition or enthusiasm. It&rsquo;s a
@@ -686,16 +687,16 @@ function ConclusionSection() {
     <section ref={ref} className="dc-conclusion-section">
       <div className={`dc-conclusion-content ${isVisible ? "visible" : ""}`}>
         <div className="dc-conclusion-big-number">
-          <span className="dc-big-number">49.9</span>
-          <span className="dc-big-label">Average Sentiment Score</span>
+          <span className="dc-big-number">156</span>
+          <span className="dc-big-label">Cities Grappling With This Question</span>
         </div>
 
         <div className="dc-prose" style={{ textAlign: "center", marginTop: "3rem" }}>
           <p>
-            America hasn&rsquo;t made up its mind about the data center gold rush.
+            The data center gold rush has arrived at city hall.
           </p>
           <p style={{ color: "#9ca3af" }}>
-            But in municipal chambers across the country, the deliberation has begun.
+            How communities respond will shape where America builds the infrastructure of the AI era.
           </p>
         </div>
       </div>

@@ -160,14 +160,14 @@ function AtAGlance() {
             <div className="at-a-glance-stat-label">Avg Friction Score</div>
           </div>
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">127</div>
+            <div className="at-a-glance-stat-value">{maxHeatCities}</div>
             <div className="at-a-glance-stat-label">Max-Heat Cities</div>
           </div>
         </div>
         <div className="at-a-glance-finding">
           <div className="at-a-glance-finding-label">Key Finding</div>
           <div className="at-a-glance-finding-text">
-            Civic contention has risen 12% year-over-year, with Southern and Midwestern cities showing the steepest increases.
+            Southern states average 97%+ contention rates&mdash;over 20 points higher than Pacific Northwest states, which average below 77%.
           </div>
         </div>
       </div>
@@ -581,8 +581,10 @@ function MethodologySection() {
         </p>
         <p>
           <strong>Contention Rate:</strong> Percentage of discussion blocks containing
-          adversarial language (disagreement, criticism, challenge). Measured on a
-          0-100 scale.
+          adversarial language. This includes direct opposition (&ldquo;I oppose this&rdquo;),
+          criticism of process (&ldquo;This wasn&rsquo;t properly noticed&rdquo;),
+          challenges to claims (&ldquo;That&rsquo;s not accurate&rdquo;), and interpersonal
+          conflict. Measured on a 0-100 scale.
         </p>
         <p>
           <strong>Opposition Frequency:</strong> Percentage of meetings where at
