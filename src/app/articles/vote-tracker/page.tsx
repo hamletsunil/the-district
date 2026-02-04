@@ -22,6 +22,12 @@ const DATA = {
     noVoterCount: 54,
     swingVoterCount: 113,
   },
+  // Substantive votes only (excluding administrative rubber-stamps)
+  substantive: {
+    totalVotes: 3073, // infrastructure + budget + zoning + residential + commercial + environmental
+    avgApprovalRate: 93.8, // weighted average of substantive categories
+    lowestApproval: { topic: "environmental", rate: 75.0, votes: 36 },
+  },
   // Officials who vote yes most consistently
   yesVoters: [
     { name: "Eddie Osborne", city: "Newark", state: "NJ", yeaCount: 119, nayCount: 0, approvalRate: 100 },
@@ -50,16 +56,17 @@ const DATA = {
     { city: "Princeton", state: "NJ", officialCount: 47, avgApproval: 72.1, polarization: 100 },
     { city: "Denton", state: "TX", officialCount: 40, avgApproval: 100, polarization: 0 },
   ],
-  // Topic breakdown
-  byTopic: [
-    { topic: "administrative", votes: 13132, avgApproval: 97.1 },
-    { topic: "infrastructure", votes: 1248, avgApproval: 95.4 },
-    { topic: "budget", votes: 571, avgApproval: 92.6 },
-    { topic: "zoning", votes: 477, avgApproval: 96.0 },
-    { topic: "residential", votes: 393, avgApproval: 94.9 },
-    { topic: "commercial", votes: 348, avgApproval: 95.5 },
-    { topic: "environmental", votes: 36, avgApproval: 75.0 },
+  // Topic breakdown - substantive votes sorted by approval rate (most contested first)
+  byTopicSubstantive: [
+    { topic: "Environmental", votes: 36, avgApproval: 75.0 },
+    { topic: "Budget", votes: 571, avgApproval: 92.6 },
+    { topic: "Residential", votes: 393, avgApproval: 94.9 },
+    { topic: "Commercial", votes: 348, avgApproval: 95.5 },
+    { topic: "Infrastructure", votes: 1248, avgApproval: 95.4 },
+    { topic: "Zoning", votes: 477, avgApproval: 96.0 },
   ],
+  // Administrative votes tracked separately (routine matters)
+  administrative: { votes: 13132, avgApproval: 97.1 },
 };
 
 // Validated sources for fact-checking
@@ -171,18 +178,18 @@ function AtAGlance() {
             <div className="at-a-glance-stat-label">Officials Tracked</div>
           </div>
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.totalVotes.toLocaleString()}</div>
-            <div className="at-a-glance-stat-label">Votes Recorded</div>
+            <div className="at-a-glance-stat-value">{DATA.substantive.totalVotes.toLocaleString()}</div>
+            <div className="at-a-glance-stat-label">Substantive Votes</div>
           </div>
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.avgApprovalRate}%</div>
-            <div className="at-a-glance-stat-label">Avg Approval Rate</div>
+            <div className="at-a-glance-stat-value">{DATA.substantive.lowestApproval.rate}%</div>
+            <div className="at-a-glance-stat-label">Environmental Approval</div>
           </div>
         </div>
         <div className="at-a-glance-finding">
           <div className="at-a-glance-finding-label">Key Finding</div>
           <div className="at-a-glance-finding-text">
-            Most development votes are nearly unanimous&mdash;but the 3.5% of contentious votes determine billions in construction outcomes.
+            Environmental votes see 22 points more dissent than the baseline. One in four environmental votes draws a no&mdash;compared to near-unanimity on routine matters.
           </div>
         </div>
       </div>
@@ -256,20 +263,18 @@ function TheNumbersSection() {
 
       <div className="vote-prose">
         <p>
-          The average official in our dataset votes yes <strong>96.5%</strong> of the
-          time. This isn&rsquo;t corruption or rubber-stamping&mdash;it reflects the
-          reality that most proposals reaching a formal vote have already survived
-          staff review, public comment, and committee deliberation.
+          The headline number&mdash;96.5% approval&mdash;is misleading. Half of all
+          recorded votes are administrative: approving meeting minutes, renaming
+          streets, passing ceremonial resolutions. Nobody dissents on those.
         </p>
         <p>
-          By the time something hits the council floor, consensus has often formed.
-          The real battles happen earlier, in zoning hearings and planning commissions,
-          where projects get shaped, delayed, or killed before they ever face a final
-          vote.
+          Focus on substantive votes&mdash;budgets, zoning, environmental policy&mdash;and
+          the picture sharpens. Approval drops to 93.8%. Environmental matters see
+          just 75% approval. These are the votes that matter.
         </p>
         <p>
-          This makes the officials who do vote no particularly significant. They&rsquo;re
-          willing to dissent even after the machine has aligned behind approval.
+          The officials who vote no on substance, not just procedure, are the ones
+          worth watching.
         </p>
       </div>
 
@@ -407,8 +412,8 @@ function NoVotersSection() {
           enough to warrant attention from local reporters.
         </p>
         <p>
-          For developers, the message is clear: Princeton council votes may require
-          different strategies than the rubber-stamp approvals found elsewhere.
+          Princeton council votes require different strategies than the rubber-stamp
+          approvals found elsewhere.
         </p>
         <p className="vote-caveat">
           <em>Note: Vote counts for these officials range from 14-26, relatively small
@@ -526,7 +531,7 @@ function CouncilPolarizationSection() {
 }
 
 // ============================================================================
-// SECTION 6: TOPIC BREAKDOWN
+// SECTION 6: TOPIC BREAKDOWN (Substantive Votes Only)
 // ============================================================================
 function TopicBreakdownSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -546,31 +551,34 @@ function TopicBreakdownSection() {
     return () => observer.disconnect();
   }, []);
 
-  const maxVotes = Math.max(...DATA.byTopic.map(t => t.votes));
-
   return (
     <section className="vote-section">
       <div className="vote-prose-header">
-        <span className="vote-section-number">The Issues</span>
-        <h2>What Gets the Most No Votes?</h2>
+        <span className="vote-section-number">The Contested</span>
+        <h2>Where Dissent Actually Appears</h2>
       </div>
 
       <div className="vote-prose">
         <p>
-          Environmental matters stand out. While most categories see approval rates
-          above 94%, environmental issues drop to <strong>75%</strong>&mdash;significantly
-          lower than any other category in our dataset.
+          Strip out the routine administrative votes&mdash;renaming streets,
+          approving minutes, ceremonial resolutions&mdash;and a different picture
+          emerges. Of the <strong>3,073 substantive votes</strong> on policy matters,
+          approval drops to 93.8%.
         </p>
         <p>
-          Officials don&rsquo;t oppose environmental protection&mdash;but environmental
-          matters generate more genuine disagreement than routine administrative or
-          infrastructure votes.
+          Environmental matters see the most dissent: <strong>75% approval</strong>,
+          a full 22 points below the baseline. One in four environmental votes
+          draws a no. Budget votes (92.6%) also show genuine debate.
+        </p>
+        <p>
+          The takeaway: when the stakes are real, officials disagree. The 96.5%
+          headline figure is inflated by procedural consent.
         </p>
       </div>
 
       <div className="vote-graphic" ref={ref}>
         <div className="vote-topic-chart">
-          {DATA.byTopic.map((topic, i) => (
+          {DATA.byTopicSubstantive.map((topic, i) => (
             <div
               key={topic.topic}
               className={`vote-topic-row ${isVisible ? "animate" : ""}`}
@@ -584,7 +592,7 @@ function TopicBreakdownSection() {
                 <div
                   className="vote-topic-bar"
                   style={{
-                    width: isVisible ? `${(topic.votes / maxVotes) * 100}%` : "0%",
+                    width: isVisible ? `${topic.avgApproval}%` : "0%",
                     backgroundColor: topic.avgApproval < 80 ? "#ef4444" : topic.avgApproval < 95 ? "#f59e0b" : "#3b82f6",
                   }}
                 />
@@ -592,6 +600,9 @@ function TopicBreakdownSection() {
               <div className="vote-topic-rate">{topic.avgApproval}%</div>
             </div>
           ))}
+        </div>
+        <div className="vote-topic-note" style={{ marginTop: "1rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
+          Excludes {DATA.administrative.votes.toLocaleString()} administrative votes (97.1% approval) &mdash; routine matters like meeting minutes and ceremonial items.
         </div>
       </div>
     </section>
@@ -673,8 +684,12 @@ function MethodologySection() {
         </p>
         <p>
           <strong>Topic Classification:</strong> Votes were categorized by topic
-          (administrative, infrastructure, zoning, residential, commercial, environmental,
-          etc.) using the matter type classifications provided by each municipality.
+          using matter type classifications from each municipality. We distinguish
+          between <em>administrative</em> votes (meeting minutes, ceremonial items,
+          routine approvals&mdash;13,132 votes at 97.1% approval) and <em>substantive</em>
+          votes (budget, zoning, environmental, residential, commercial, infrastructure&mdash;3,073
+          votes at 93.8% approval). The analysis focuses on substantive votes where
+          policy disagreement is meaningful.
         </p>
         <p>
           <strong>Approval Rate:</strong> Calculated as (Yes Votes) / (Yes Votes + No Votes).

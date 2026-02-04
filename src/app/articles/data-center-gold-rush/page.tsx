@@ -478,7 +478,7 @@ function TheConcernsSection() {
           capturing widespread unease.
         </p>
         <p>
-          <strong>Jobs</strong> drew comment in 46 cities&mdash;notably, from both
+          <strong>Jobs</strong> drew comment in 46 cities&mdash;from both
           sides. Proponents tout employment figures; skeptics question how many
           positions a largely automated facility actually creates.
         </p>
