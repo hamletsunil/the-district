@@ -264,8 +264,8 @@ function TheIndexSection() {
       <div className="abundance-prose">
         <p>
           Most analyses of local government stop at approval rates. But a city that
-          approves 80% of projects reluctantly, after contentious debate, is fundamentally
-          different from one that approves 80% with enthusiasm and speed.
+          approves 80% of projects reluctantly, after contentious debate, is not the
+          same as one that approves 80% with enthusiasm and speed.
         </p>
         <p>
           Our Abundance Index combines two signals: the <strong>sentiment score</strong>
@@ -275,9 +275,9 @@ function TheIndexSection() {
           below 45 as &ldquo;NIMBY&rdquo; (Not In My Backyard).
         </p>
         <p>
-          The results reveal a nation more welcoming than conventional wisdom suggests&mdash;but
-          with pockets of fierce resistance that could reshape where America builds its
-          digital infrastructure.
+          The split: 46 cities are welcoming, 14 are resistant, and 24 sit in the middle.
+          Where the resistant pockets cluster could determine where the next wave of
+          data centers actually gets built.
         </p>
       </div>
 
@@ -353,17 +353,15 @@ function ChampionsSection() {
           positive.
         </p>
         <p>
-          These aren&rsquo;t cities rubber-stamping projects without consideration.
-          They&rsquo;re cities that have made a strategic decision: they <em>want</em>
-          this industry. In Dubuque, Iowa (index: 78.6), officials described their
-          data center as &ldquo;an example of the kind of economic development we want
+          These cities didn&rsquo;t stumble into pro-development postures. They made
+          strategic decisions. In Dubuque, Iowa (index: 78.6), officials called their
+          data center &ldquo;an example of the kind of economic development we want
           to see in our community.&rdquo;
         </p>
         <p>
-          Notably, the YIMBY champions span the political spectrum and cross regional
-          boundaries. You&rsquo;ll find them in California (Hayward), the Midwest
-          (Dubuque), the Mountain West (Rapid City), and the Sun Belt (Temple, Coolidge,
-          Spring Hill).
+          The YIMBY champions span the political spectrum: California (Hayward), the
+          Midwest (Dubuque), the Mountain West (Rapid City), and the Sun Belt (Temple,
+          Coolidge, Spring Hill). No single ideology explains the pattern.
         </p>
       </div>
 
@@ -443,10 +441,9 @@ function StrongholdsSection() {
           infrastructure is not keeping pace.&rdquo;
         </p>
         <p>
-          Perhaps surprisingly, not all NIMBY cities are wealthy suburbs. Copperas
-          Cove, Texas (population 36,000), scored just 25.7, with 100% of mentions
-          coded negative. The concerns there center on grid reliability and
-          competition for resources.
+          Not all NIMBY cities are wealthy suburbs. Copperas Cove, Texas (population
+          36,000), scored just 25.7, with 100% of mentions coded negative. The concerns
+          there: grid reliability and competition for resources.
         </p>
       </div>
 
@@ -490,9 +487,9 @@ function TheVoicesSection() {
 
       <div className="abundance-prose">
         <p>
-          The Abundance Index isn&rsquo;t just numbers&mdash;it reflects real
-          conversations happening in municipal chambers across America. The
-          contrast in language is striking.
+          The Abundance Index measures language&mdash;what officials and residents
+          actually say in municipal chambers. Here&rsquo;s the difference between
+          an 80-point city and a 12-point city:
         </p>
       </div>
 
@@ -563,16 +560,14 @@ function StateRankingsSection() {
 
       <div className="abundance-prose">
         <p>
-          When we aggregate city-level data by state, an interesting pattern emerges:
-          most states cluster in the &ldquo;neutral&rdquo; zone. Tennessee leads with
-          an average sentiment of 53.8 across 4 cities, while North Carolina and
-          Missouri trail at 47.3.
+          State-level averages cluster in the neutral zone. Tennessee leads at 53.8
+          across 4 cities; North Carolina and Missouri trail at 47.3. No state is
+          uniformly welcoming or resistant.
         </p>
         <p>
-          The absence of extreme state-level scores suggests that attitudes toward
-          development are fundamentally local. Two cities in the same state&mdash;like
-          Temple and Copperas Cove in Texas&mdash;can have radically different positions.
-          State policy matters less than city-level political economy.
+          The real action is local. Temple and Copperas Cove are both in Texas. One
+          scores 80; the other scores 26. State policy matters less than the specific
+          city council you&rsquo;re standing in front of.
         </p>
       </div>
 
@@ -625,22 +620,19 @@ function ImplicationsSection() {
 
       <div className="abundance-prose">
         <p>
-          For developers and site selectors, the Abundance Index offers actionable
-          intelligence. Cities like Temple, Dubuque, and Hayward aren&rsquo;t just
-          approving projects&mdash;they&rsquo;re actively seeking them. The regulatory
-          environment will likely be streamlined; community opposition minimal.
+          Cities like Temple, Dubuque, and Hayward aren&rsquo;t just approving
+          projects&mdash;they&rsquo;re actively seeking them. Regulatory processes
+          there are streamlined; community opposition is minimal.
         </p>
         <p>
-          For residents of NIMBY strongholds, the data raises questions. Is resistance
-          protecting quality of life, or is it pushing economic opportunity to
-          neighboring jurisdictions? When Fairfax says no, does Northern Virginia
-          lose the project, or does it simply land in a more welcoming county?
+          In NIMBY strongholds, resistance protects quality of life&mdash;or pushes
+          economic opportunity to neighboring jurisdictions. When Fairfax says no,
+          the project doesn&rsquo;t vanish. It lands in a more welcoming county.
         </p>
         <p>
-          The 55% of cities classified as YIMBY suggests that, despite headlines
-          about NIMBY opposition, most of America is prepared to build. The
-          infrastructure for the AI era will rise somewhere. These numbers show
-          exactly where.
+          Fifty-five percent of cities in our dataset are classified as YIMBY. Despite
+          headlines about opposition, most of America is prepared to build. These
+          numbers show exactly where.
         </p>
       </div>
 

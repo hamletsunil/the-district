@@ -214,20 +214,22 @@ function LedeSection() {
     <section className="dc-editorial-section dc-lede-section">
       <div className="dc-prose">
         <p>
-          In Chandler, Arizona, a city council member asked a question that echoes
-          across America: &ldquo;How much water will this facility use?&rdquo; The
-          answer&mdash;millions of gallons annually&mdash;prompted a debate that
-          lasted three meetings.
+          &ldquo;How much water will this facility use?&rdquo;
         </p>
         <p>
-          Scenes like this are playing out in municipal chambers from Georgia to
-          California. As OpenAI, Anthropic, Google, and Meta race to build the
-          computational infrastructure for artificial intelligence, they&rsquo;re
-          discovering an unexpected bottleneck: the local planning commission.
+          The question, posed by a Chandler, Arizona council member, took three
+          meetings to answer. The facility in question would consume millions of
+          gallons annually. The debate consumed the council for weeks.
+        </p>
+        <p>
+          OpenAI, Anthropic, Google, and Meta are racing to build AI infrastructure.
+          Their bottleneck is not chips or capital. It&rsquo;s the local planning
+          commission.
         </p>
         <p>
           We analyzed <strong>5,007 mentions</strong> of data centers across{" "}
-          <strong>156 cities</strong>. What we found reveals a nation genuinely divided.
+          <strong>156 cities</strong>. The nation is split: 38 cities lean skeptical,
+          40 lean welcoming, and 78 sit undecided.
         </p>
       </div>
 
@@ -362,15 +364,15 @@ function ThePlayersSection() {
           <strong>Amazon</strong> (15 mentions, 11 cities).
         </p>
         <p>
-          Notably, <strong>Microsoft</strong> appears in more cities than Meta
-          despite fewer total mentions, suggesting a broader but less intensive
-          geographic footprint. <strong>Google</strong>, despite its massive data
-          center portfolio, appears in only 7 cities in our dataset.
+          <strong>Microsoft</strong> appears in more cities than Meta despite fewer
+          total mentions&mdash;a broader but less concentrated footprint.{" "}
+          <strong>Google</strong>, despite its massive existing portfolio, shows up
+          in only 7 cities.
         </p>
         <p>
-          These aren&rsquo;t just abstract corporate names in meeting minutes.
-          They&rsquo;re specific project proposals that residents are weighing
-          against their water bills, their property values, and their quality of life.
+          When Meta comes up in a DeKalb meeting, it&rsquo;s not abstract. Residents
+          are calculating: what happens to my water bill? My property value? My
+          commute?
         </p>
       </div>
 
@@ -433,10 +435,9 @@ function TheNumbersSection() {
           real tradeoffs, not rubber-stamping approvals or reflexively opposing.
         </p>
         <p>
-          This isn&rsquo;t a story of universal opposition or enthusiasm. It&rsquo;s a
-          story of communities wrestling with tradeoffs: economic development versus
-          resource constraints, job creation versus quality of life, tax revenue
-          versus infrastructure strain.
+          The transcripts read like cost-benefit analyses performed in public:
+          economic development versus resource constraints, job creation versus
+          quality of life, tax revenue versus infrastructure strain.
         </p>
       </div>
 
@@ -531,7 +532,7 @@ function TheVoicesSection() {
           they really bring?&rdquo;</em> (DeKalb, IL)
         </p>
         <p>
-          These aren&rsquo;t talking points. They&rsquo;re democracy in action.
+          No PR team wrote these lines. They came from people who showed up.
         </p>
       </div>
     </section>
@@ -555,10 +556,9 @@ function TheGeographySection() {
           account for nearly 40% of all mentions in our dataset.
         </p>
         <p>
-          <strong>Arizona</strong> leads with 887 mentions across 19
-          cities&mdash;unsurprising given the state&rsquo;s position as a data center
-          hub. But its average sentiment of 48.9 suggests communities are growing
-          cautious as facilities multiply.
+          <strong>Arizona</strong> leads with 887 mentions across 19 cities. No
+          surprise&mdash;it&rsquo;s already a data center hub. The average sentiment
+          of 48.9 (below neutral) signals that familiarity has bred skepticism.
         </p>
         <p>
           <strong>California</strong> (534 mentions, 14 cities) shows similar wariness
@@ -607,9 +607,9 @@ function TheBattlegroundsSection() {
           similar patterns: high engagement coupled with significant doubt.
         </p>
         <p>
-          These aren&rsquo;t outliers. They may be leading indicators. As data center
-          proposals increase nationwide, other cities may follow similar trajectories
-          from curiosity to caution.
+          Chandler, DeKalb, and Lancaster have something in common: they&rsquo;ve
+          already hosted multiple data center discussions. Other cities are just
+          starting. The pattern&mdash;curiosity, then caution&mdash;could repeat.
         </p>
       </div>
 
@@ -633,28 +633,22 @@ function TheImplicationsSection() {
 
       <div className="dc-prose">
         <p>
-          For technology companies planning the next wave of AI infrastructure,
-          the data delivers a sobering message.
+          Easy approvals are over. Communities that once welcomed data centers as
+          economic wins are now asking harder questions. Grids are strained. Water
+          tables are dropping. Residents near proposed sites are organizing.
         </p>
         <p>
-          The era of easy local approvals may be ending. Communities that once
-          welcomed data centers as symbols of economic progress are asking harder
-          questions. Power grids are strained. Water tables are dropping. Residents
-          near proposed sites are organizing.
-        </p>
-        <p>
-          None of this means data centers won&rsquo;t get built. But it suggests
-          the cost&mdash;in time, community engagement, and potentially location
-          compromises&mdash;may be higher than many proponents anticipated.
+          Data centers will still get built. But the cost&mdash;in time, in
+          community engagement, in location compromises&mdash;is rising.
         </p>
       </div>
 
       <div className="dc-implication-box">
         <div className="dc-prose">
           <p>
-            <strong>The bottom line:</strong> Local government approval is no longer
-            a formality. For companies racing to build AI infrastructure, the planning
-            commission may prove as consequential as the chip supply chain.
+            <strong>The constraint that matters:</strong> Local government approval
+            is no longer a formality. The planning commission is now as consequential
+            as the chip supply chain.
           </p>
         </div>
       </div>
@@ -696,7 +690,7 @@ function ConclusionSection() {
             The data center gold rush has arrived at city hall.
           </p>
           <p style={{ color: "#9ca3af" }}>
-            How communities respond will shape where America builds the infrastructure of the AI era.
+            Where it goes next depends on what happens in rooms like these.
           </p>
         </div>
       </div>

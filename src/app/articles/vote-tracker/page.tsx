@@ -203,21 +203,19 @@ function LedeSection() {
           100% approval.
         </p>
         <p>
-          Thirty miles south, in Princeton, a different pattern emerges. Council member
-          Mark Freda has also achieved a perfect record&mdash;but in the opposite
-          direction. Of his 26 recorded votes, every single one was against.
+          Thirty miles south, in Princeton, the inverse: Council member Mark Freda
+          has also achieved a perfect record&mdash;but in the opposite direction. Of
+          his 26 recorded votes, every single one was against.
         </p>
         <p>
-          These aren&rsquo;t aberrations. They&rsquo;re the extremes of a spectrum we
-          can now measure. For the first time, we&rsquo;ve compiled individual voting
-          records for <strong>1,524 local officials</strong> across America, tracking{" "}
-          <strong>25,219 votes</strong> on development, zoning, and infrastructure
-          matters.
+          Osborne and Freda are the extremes of a spectrum we can now measure. We
+          compiled voting records for <strong>1,524 local officials</strong> across
+          America, tracking <strong>25,219 votes</strong> on development, zoning,
+          and infrastructure matters.
         </p>
         <p>
-          What we found: most officials vote yes almost all the time. But the exceptions
-          matter&mdash;and knowing who they are could reshape how developers, activists,
-          and residents approach local politics.
+          Most officials vote yes almost all the time. The exceptions matter. And now
+          you can see exactly who they are.
         </p>
       </div>
 
@@ -336,9 +334,8 @@ function YesVotersSection() {
           else is a question for local reporters to investigate.
         </p>
         <p>
-          What we can say: if you&rsquo;re a developer seeking approval in these
-          jurisdictions, the data suggests you&rsquo;ll face minimal council-level
-          resistance once your project clears staff review.
+          The implication: a developer seeking approval in Newark or Milwaukee will
+          face minimal council-level resistance once a project clears staff review.
         </p>
       </div>
 
@@ -400,16 +397,14 @@ function NoVotersSection() {
 
       <div className="vote-prose">
         <p>
-          Princeton, New Jersey emerges as an outlier&mdash;a jurisdiction where
-          multiple council members have approval rates near zero. Mark Freda, Dawn
-          Mount, and Dave Cohen form a bloc that consistently votes against development
-          proposals.
+          Princeton, New Jersey is an outlier. Multiple council members have approval
+          rates near zero. Mark Freda, Dawn Mount, and Dave Cohen form a bloc that
+          consistently votes against development proposals.
         </p>
         <p>
           In most councils, a single dissenter is an anomaly. In Princeton, it&rsquo;s
-          a pattern. This concentration of no-voters in one wealthy suburb raises
-          questions about whether Princeton&rsquo;s development politics differ
-          systematically from other municipalities.
+          a pattern. This concentration of no-voters in one wealthy suburb is unusual
+          enough to warrant attention from local reporters.
         </p>
         <p>
           For developers, the message is clear: Princeton council votes may require
@@ -490,9 +485,9 @@ function CouncilPolarizationSection() {
           ranging from 0% to 100% approval.
         </p>
         <p>
-          A polarized council isn&rsquo;t necessarily bad. It may indicate robust
-          debate and diverse viewpoints. A unified council could mean healthy consensus&mdash;or
-          groupthink.
+          A polarized council isn&rsquo;t necessarily bad&mdash;it could indicate
+          genuine debate and diverse viewpoints. A unified council could mean healthy
+          consensus, or it could mean groupthink. The data doesn&rsquo;t tell us which.
         </p>
       </div>
 
@@ -567,9 +562,9 @@ function TopicBreakdownSection() {
           lower than any other category in our dataset.
         </p>
         <p>
-          This doesn&rsquo;t mean officials oppose environmental protection. Rather,
-          it suggests that environmental matters generate more genuine disagreement
-          than routine administrative or infrastructure votes.
+          Officials don&rsquo;t oppose environmental protection&mdash;but environmental
+          matters generate more genuine disagreement than routine administrative or
+          infrastructure votes.
         </p>
       </div>
 
@@ -618,19 +613,17 @@ function ImplicationsSection() {
         <p>
           Individual voting records are public data&mdash;but rarely compiled, analyzed,
           or made searchable. By aggregating these records across cities, we&rsquo;ve
-          created a tool that didn&rsquo;t exist before: a way to compare official
-          behavior across jurisdictions.
+          created a comparison tool: how does your council member stack up against
+          officials elsewhere?
         </p>
         <p>
-          For developers, this data identifies which councils require more outreach
-          and which are likely to approve with minimal resistance. For activists,
-          it reveals which officials are genuinely swing votes versus reliable allies
-          or opponents.
+          The data identifies which councils require more outreach and which approve
+          with minimal resistance. It shows which officials are genuinely swing votes
+          versus reliable allies or opponents.
         </p>
         <p>
-          For voters, it offers accountability. The next time an official claims to
-          support or oppose development, you can check whether their votes match
-          their rhetoric.
+          And it offers accountability. The next time an official claims to support
+          or oppose development, you can check whether their votes match their rhetoric.
         </p>
       </div>
 

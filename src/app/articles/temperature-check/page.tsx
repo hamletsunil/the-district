@@ -229,9 +229,9 @@ function TheMetricsSection() {
         </p>
         <p>
           A city scoring 100 on the overall index isn&rsquo;t necessarily dysfunctional&mdash;it
-          may simply have engaged citizens who show up and speak out. But understanding
-          where friction concentrates can help developers anticipate challenges, help
-          activists find kindred spirits, and help journalists identify stories.
+          has engaged citizens who show up and speak out. Understanding where friction
+          concentrates reveals where proposals will face headwinds, where advocacy
+          networks are active, and where stories are waiting to be reported.
         </p>
       </div>
 
@@ -302,9 +302,9 @@ function HottestCitiesSection() {
           can investigate.
         </p>
         <p>
-          Notable: these aren&rsquo;t just large cities with complex issues. Tiffin
-          (population 17,000) and Dalton (34,000) are small cities where local politics
-          apparently runs just as hot as anywhere else.
+          These aren&rsquo;t just large cities with complex issues. Tiffin (population
+          17,000) and Dalton (34,000) are small cities where local politics runs just
+          as hot as anywhere else.
         </p>
       </div>
 
@@ -524,20 +524,19 @@ function ImplicationsSection() {
           A city with zero opposition might indicate apathy, not harmony.
         </p>
         <p>
-          But for anyone working with local government&mdash;developers, activists,
-          reporters&mdash;friction scores offer predictive value. A project in
-          Grants Pass will face a different reception than one in Sparks. Understanding
-          these patterns before engagement can inform strategy.
+          But friction scores have predictive value. A project in Grants Pass will
+          face a different reception than one in Sparks. Understanding the pattern
+          before engagement can inform strategy.
         </p>
         <p>
-          The data also raises questions. Why do some states consistently run hotter
-          than others? Why do wealthy suburbs tend toward consensus? What
+          The data prompts specific questions. Why do some states consistently run
+          hotter than others? Why do wealthy suburbs tend toward consensus? What
           explains cities like Tiffin and Dalton, where every meeting becomes
           contentious?
         </p>
         <p>
-          These are questions for local journalists and researchers to investigate.
-          We&rsquo;ve provided the map. The stories behind the numbers await discovery.
+          The answers require local reporting. We&rsquo;ve provided the map. The
+          stories behind the numbers await discovery.
         </p>
       </div>
 
