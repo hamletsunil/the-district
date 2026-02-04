@@ -1,0 +1,151 @@
+"use client";
+
+/**
+ * [ARTICLE TITLE]
+ *
+ * [Brief description of what this article covers]
+ *
+ * BEFORE PUBLISHING: Complete the validation checklist in /EDITORIAL_GUIDELINES.md
+ */
+
+import { useEffect, useRef, useState } from "react";
+import { SourcesCitations, Source } from "@/components/article/SourcesCitations";
+
+// =============================================================================
+// ARTICLE DATA
+// =============================================================================
+const DATA = {
+  summary: {
+    // Add your summary statistics here
+  },
+  // Add more data structures as needed
+};
+
+// =============================================================================
+// VALIDATED SOURCES - REQUIRED FOR ALL ARTICLES
+//
+// Before adding sources, run the validation checklist:
+// 1. Search "[City/Topic] [Year]" on news sources
+// 2. Verify URL loads and isn't paywalled
+// 3. Use Tier 1/2 sources only (see /EDITORIAL_GUIDELINES.md)
+// 4. Minimum 3 sources per article
+// =============================================================================
+const SOURCES: Source[] = [
+  {
+    title: "Article headline from the source",
+    outlet: "News Outlet Name",
+    url: "https://example.com/article"
+  },
+  // Add more validated sources...
+];
+
+// =============================================================================
+// MAIN COMPONENT
+// =============================================================================
+export default function ArticleName() {
+  return (
+    <main className="article-page" data-theme="your-theme">
+      <HeroSection />
+      <AtAGlance />
+      {/* Add your content sections here */}
+      <MethodologySection />
+      <SourcesCitations sources={SOURCES} />
+    </main>
+  );
+}
+
+// =============================================================================
+// HERO SECTION
+// =============================================================================
+function HeroSection() {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const opacity = Math.max(0, 1 - scrollY / 600);
+  const translateY = scrollY / 3;
+
+  return (
+    <header className="your-hero-class">
+      <div className="your-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
+        <div className="your-badge">
+          <span className="your-badge-dot" />
+          From The District
+        </div>
+
+        <h1 className="your-hero-title">
+          <span>Your Article</span>
+          <span>Title Here</span>
+        </h1>
+
+        <p className="your-hero-subtitle">
+          A compelling subtitle that explains what this article reveals
+        </p>
+      </div>
+    </header>
+  );
+}
+
+// =============================================================================
+// AT A GLANCE - Key Stats (Stripe Press style)
+// =============================================================================
+function AtAGlance() {
+  return (
+    <section className="at-a-glance">
+      <div className="at-a-glance-inner">
+        <div className="at-a-glance-label">At a Glance</div>
+        <div className="at-a-glance-stats">
+          <div className="at-a-glance-stat">
+            <div className="at-a-glance-stat-value">XXX</div>
+            <div className="at-a-glance-stat-label">Stat Label</div>
+          </div>
+          {/* Add 2-3 key stats */}
+        </div>
+        <div className="at-a-glance-finding">
+          <div className="at-a-glance-finding-label">Key Finding</div>
+          <div className="at-a-glance-finding-text">
+            Your main takeaway in one sentence.
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// =============================================================================
+// METHODOLOGY SECTION
+// =============================================================================
+function MethodologySection() {
+  return (
+    <section className="your-methodology">
+      <div className="your-prose-header">
+        <span className="your-section-number">Methodology</span>
+        <h2>How We Built This Analysis</h2>
+      </div>
+
+      <div className="your-prose your-prose-small">
+        <p>
+          <strong>Data Source:</strong> Describe your data source here.
+        </p>
+        <p>
+          <strong>Sample:</strong> Describe your sample size and scope.
+        </p>
+        <p>
+          <strong>Analysis Method:</strong> Describe your methodology.
+        </p>
+        <p>
+          <strong>Limitations:</strong> Be transparent about limitations.
+        </p>
+        <p>
+          <strong>Date Range:</strong> Specify the time period covered.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// Add more section components as needed...

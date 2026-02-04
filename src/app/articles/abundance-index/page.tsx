@@ -9,6 +9,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { SourcesCitations } from "@/components/article/SourcesCitations";
 
 // Real data from our analysis of 84 cities with 10+ data center mentions
 const DATA = {
@@ -65,6 +66,30 @@ const DATA = {
   },
 };
 
+// Validated sources for fact-checking
+const SOURCES = [
+  {
+    title: "Arizona city unanimously rejects AI data center after residents' outcry",
+    outlet: "Fox Business",
+    url: "https://www.foxbusiness.com/politics/arizona-city-unanimously-rejects-ai-data-center-after-residents-outcry"
+  },
+  {
+    title: "Petition against 560-acre data center in DeKalb circulating",
+    outlet: "Shaw Local",
+    url: "https://www.shawlocal.com/daily-chronicle/2025/12/07/petition-against-endeavour-energys-560-acre-data-center-in-dekalb-circulating/"
+  },
+  {
+    title: "Chandler data center proposal draws heavy opposition",
+    outlet: "Fox 10 Phoenix",
+    url: "https://www.fox10phoenix.com/news/chandler-data-center-proposal-draws-heavy-opposition-council-meeting"
+  },
+  {
+    title: "Chandler City Council shoots down proposed data center",
+    outlet: "12 News",
+    url: "https://www.12news.com/article/news/local/valley/chandler-arizona-city-council-shoots-down-proposed-ai-data-center/75-7e385023-85da-4f7c-ad2f-91fd43c6c75f"
+  }
+];
+
 export default function AbundanceIndexArticle() {
   return (
     <main className="abundance-article article-page" data-theme="abundance">
@@ -78,6 +103,7 @@ export default function AbundanceIndexArticle() {
       <StateRankingsSection />
       <ImplicationsSection />
       <MethodologySection />
+      <SourcesCitations sources={SOURCES} />
     </main>
   );
 }

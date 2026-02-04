@@ -8,6 +8,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { SourcesCitations } from "@/components/article/SourcesCitations";
 
 // Real data from our analysis of 1,524 officials across multiple cities
 const DATA = {
@@ -59,6 +60,30 @@ const DATA = {
   ],
 };
 
+// Validated sources for fact-checking
+const SOURCES = [
+  {
+    title: "Princeton advances affordable housing plan for one of its wealthiest neighborhoods",
+    outlet: "Gothamist",
+    url: "https://gothamist.com/news/princeton-nj-advances-affordable-housing-plan-for-one-of-its-wealthiest-neighborhoods"
+  },
+  {
+    title: "Controversial Stockton Street development debate continues",
+    outlet: "The Daily Princetonian",
+    url: "https://www.dailyprincetonian.com/article/2025/12/princeton-features-controversial-stockton-street-development"
+  },
+  {
+    title: "Newark West Side affordable housing development approved",
+    outlet: "Jersey Digs",
+    url: "https://jerseydigs.com/666-676-south-12th-street-newark/"
+  },
+  {
+    title: "Mixed-use development in downtown Newark approved for NJEDA Aspire Awards",
+    outlet: "New Jersey EDA",
+    url: "https://www.njeda.gov/mixed-use-development-in-downtown-newark-approved-for-njeda-aspire-awards/"
+  }
+];
+
 export default function VoteTrackerArticle() {
   return (
     <main className="vote-article article-page" data-theme="vote-tracker">
@@ -72,6 +97,7 @@ export default function VoteTrackerArticle() {
       <TopicBreakdownSection />
       <ImplicationsSection />
       <MethodologySection />
+      <SourcesCitations sources={SOURCES} />
     </main>
   );
 }

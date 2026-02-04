@@ -8,6 +8,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { SourcesCitations } from "@/components/article/SourcesCitations";
 
 // Real data from our analysis of 438 cities with friction metrics
 const DATA = {
@@ -48,6 +49,26 @@ const DATA = {
   ],
 };
 
+// Validated sources for fact-checking
+// Note: Friction scores are derived from NLP analysis of Hamlet transcript data
+const SOURCES = [
+  {
+    title: "Tiffin, Ohio city data - U.S. Census Bureau",
+    outlet: "Census.gov",
+    url: "https://www.census.gov/quickfacts/tiffincityohio"
+  },
+  {
+    title: "Dalton, Georgia city data - U.S. Census Bureau",
+    outlet: "Census.gov",
+    url: "https://www.census.gov/quickfacts/daltoncitygeorgia"
+  },
+  {
+    title: "Grants Pass, Oregon city data - U.S. Census Bureau",
+    outlet: "Census.gov",
+    url: "https://www.census.gov/quickfacts/grantspasscityoregon"
+  }
+];
+
 export default function TemperatureCheckArticle() {
   return (
     <main className="temp-article article-page" data-theme="temperature">
@@ -60,6 +81,7 @@ export default function TemperatureCheckArticle() {
       <StatePatternSection />
       <ImplicationsSection />
       <MethodologySection />
+      <SourcesCitations sources={SOURCES} />
     </main>
   );
 }

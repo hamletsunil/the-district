@@ -119,6 +119,8 @@ export default function Home() {
 // ============================================================================
 function HeroSection() {
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -130,11 +132,31 @@ function HeroSection() {
   const opacity = Math.max(0, 1 - scrollY / 600);
   const translateY = scrollY / 4;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder - will be replaced with Beehiiv integration
-    alert(`Thanks! We'll add ${email} to our list when we launch.`);
-    setEmail("");
+    setStatus("loading");
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setMessage(data.message || "Welcome to The District!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Network error. Please try again.");
+    }
   };
 
   return (
@@ -160,24 +182,40 @@ function HeroSection() {
           to uncover what&rsquo;s really happening in local democracy.
         </p>
 
-        <form className="district-newsletter" onSubmit={handleSubmit}>
-          <div className="district-newsletter-input-wrapper">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              className="district-newsletter-input"
-            />
-            <button type="submit" className="district-newsletter-button">
-              Subscribe
-            </button>
+        {status === "success" ? (
+          <div className="district-newsletter-success">
+            <span className="district-success-icon">✓</span>
+            <p>{message}</p>
           </div>
-          <p className="district-newsletter-note">
-            Free weekly insights. No spam, ever.
-          </p>
-        </form>
+        ) : (
+          <form className="district-newsletter" onSubmit={handleSubmit}>
+            <div className="district-newsletter-input-wrapper">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                disabled={status === "loading"}
+                className="district-newsletter-input"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="district-newsletter-button"
+              >
+                {status === "loading" ? "..." : "Subscribe"}
+              </button>
+            </div>
+            {status === "error" ? (
+              <p className="district-newsletter-error">{message}</p>
+            ) : (
+              <p className="district-newsletter-note">
+                Free weekly insights. No spam, ever.
+              </p>
+            )}
+          </form>
+        )}
       </div>
 
       <div className="district-hero-scroll-cue" style={{ opacity }}>

@@ -8,6 +8,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { SourcesCitations } from "@/components/article/SourcesCitations";
 
 // Real data from our analysis
 const DATA = {
@@ -72,6 +73,30 @@ const DATA = {
   },
 };
 
+// Validated sources for fact-checking
+const SOURCES = [
+  {
+    title: "Arizona city unanimously rejects AI data center after residents' outcry",
+    outlet: "Fox Business",
+    url: "https://www.foxbusiness.com/politics/arizona-city-unanimously-rejects-ai-data-center-after-residents-outcry"
+  },
+  {
+    title: "Meta turns on the power for $1 billion DeKalb data center",
+    outlet: "Chicago Tribune",
+    url: "https://www.chicagotribune.com/2023/11/29/meta-turns-on-the-power-for-1-billion-dekalb-data-center/"
+  },
+  {
+    title: "Water and energy use is growing as data centers are built across the Midwest",
+    outlet: "KCUR",
+    url: "https://www.kcur.org/news/2025-07-21/data-centers-water-electricity-growing-usage"
+  },
+  {
+    title: "Lawmakers seek ways to prevent data centers from straining Illinois' power grids",
+    outlet: "Capitol News Illinois",
+    url: "https://capitolnewsillinois.com/news/lawmakers-seek-ways-to-prevent-data-centers-from-straining-illinois-power-grids/"
+  }
+];
+
 export default function DataCenterArticle() {
   return (
     <main className="dc-article article-page" data-theme="data-center">
@@ -88,6 +113,7 @@ export default function DataCenterArticle() {
       <TheImplicationsSection />
       <ConclusionSection />
       <MethodologySection />
+      <SourcesCitations sources={SOURCES} />
     </main>
   );
 }
