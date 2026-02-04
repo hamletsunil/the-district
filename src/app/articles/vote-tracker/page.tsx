@@ -209,13 +209,9 @@ function LedeSection() {
           delegation votes in lockstep.
         </p>
         <p>
-          Thirty miles away, Princeton tells a different story. Five officials have
-          built careers on opposition. Mark Freda has voted against 26 consecutive
-          proposals. Dawn Mount, 21. Dave Cohen, 17. Between them, they&rsquo;ve cast
-          95 no votes and exactly 2 yes votes.
-        </p>
-        <p>
-          Same state. Same types of proposals. Opposite instincts.
+          Princeton&rsquo;s council operates differently. Mark Freda has voted against
+          26 consecutive proposals. Dawn Mount: 21. Dave Cohen: 17. Five officials,
+          95 no votes, 2 yes votes total.
         </p>
         <p>
           Newark&rsquo;s unanimity could reflect genuine consensus&mdash;or a council
@@ -251,31 +247,18 @@ function TheNumbersSection() {
           alignment on every recorded matter.
         </p>
         <p>
-          Why? Ask five times and different explanations emerge.
+          Newark&rsquo;s unanimity has several plausible explanations. The city
+          employs professional staff who vet proposals in committee&mdash;if problems
+          get fixed before the public meeting, votes become formalities. Chicago&rsquo;s
+          council operated this way for decades under Daley and Emanuel; UIC
+          researchers called it a &ldquo;rubber stamp&rdquo; until Lightfoot&rsquo;s
+          tenure brought divided roll calls. One-party dominance may also suppress
+          visible dissent&mdash;Newark is a Democratic stronghold where bucking
+          consensus carries political risk.
         </p>
         <p>
-          <strong>First:</strong> Perhaps Newark receives well-prepared proposals.
-          The city has a professional staff, experienced administrators, and a
-          council that reviews items before public meetings. If problems get fixed
-          in committee, public votes become formalities.
-        </p>
-        <p>
-          <strong>Second:</strong> Perhaps the real decisions happen before the cameras
-          turn on. Party caucuses, pre-meeting discussions, and informal negotiations
-          could produce consensus that makes public meetings ceremonial. Chicago&rsquo;s
-          city council operated this way for decades under mayors Daley and Emanuel&mdash;researchers
-          at the University of Illinois Chicago called it a &ldquo;rubber stamp&rdquo;
-          until divided roll calls increased under Mayor Lightfoot.
-        </p>
-        <p>
-          <strong>Third:</strong> Perhaps one-party dominance creates discipline.
-          Newark is a Democratic stronghold. In cities with overwhelming partisan
-          majorities, dissent can carry political costs.
-        </p>
-        <p>
-          The data can&rsquo;t distinguish between these explanations. That&rsquo;s
-          a job for Newark&rsquo;s local reporters. But the pattern is distinctive
-          enough to warrant investigation.
+          The data can&rsquo;t distinguish between these explanations. But they
+          point local reporters toward the right questions.
         </p>
       </div>
 
@@ -340,27 +323,18 @@ function NoVotersSection() {
           Jo Butler, has filed three lawsuits against the project.
         </p>
         <p>
-          But here, too, the Five Whys reveals complexity.
+          The resistance has competing explanations. Wealthy homeowners may be protecting
+          property values&mdash;Princeton sits within commuting distance of New York, and
+          the &ldquo;affordable housing&rdquo; framing covers what is mostly a market-rate
+          luxury project. But critics make a different argument: developers are gaming state
+          mandates. New Jersey requires municipalities to build affordable housing; the 20%
+          affordable requirement becomes a &ldquo;shoehorn&rdquo; for projects that don&rsquo;t
+          fit. Princeton historian Sean Wilentz called Stockton Street &ldquo;a city-sized
+          private housing development on the oldest residential neighborhood in Princeton.&rdquo;
         </p>
         <p>
-          <strong>One interpretation:</strong> Wealthy homeowners protecting property
-          values. Princeton sits within commuting distance of New York. Density threatens
-          the suburban character. The &ldquo;affordable housing&rdquo; framing gives
-          cover to what is mostly a market-rate luxury development.
-        </p>
-        <p>
-          <strong>Another interpretation:</strong> Principled opposition to developers
-          gaming state mandates. New Jersey requires municipalities to build affordable
-          housing. Critics argue developers use the 20% affordable requirement as a
-          &ldquo;shoehorn&rdquo; to force through projects that don&rsquo;t fit the
-          neighborhood. Princeton history professor Sean Wilentz called the Stockton
-          Street proposal &ldquo;a city-sized private housing development on the oldest
-          residential neighborhood in Princeton.&rdquo;
-        </p>
-        <p>
-          The voting records can&rsquo;t tell us which interpretation is correct. They
-          can tell us that Princeton has an organized, persistent opposition bloc&mdash;and
-          that housing is the battleground.
+          The voting records show an organized opposition bloc. Housing is the battleground.
+          What the records can&rsquo;t show is which interpretation is correct.
         </p>
       </div>
 

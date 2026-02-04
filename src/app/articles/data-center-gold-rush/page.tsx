@@ -461,47 +461,39 @@ function TheConcernsSection() {
 
       <div className="dc-prose">
         <p>
-          When residents speak at public hearings, four concerns dominate the conversation.
-          But why these concerns? Five layers of questioning reveals something important.
+          When residents speak at public hearings, four concerns dominate.
         </p>
         <p>
-          <strong>Power consumption</strong> tops the list. In 87 of our 156 cities,
-          speakers raised questions about electrical capacity. Why? Because the numbers
-          are staggering: U.S. data centers now consume about 4.4% of national
-          electricity, up from 1.9% in 2018. By 2028, projections suggest 12%.
-        </p>
-        <p>
-          Why does this matter locally? Because in places like The Dalles, Oregon,
-          Google&rsquo;s data centers consumed more than 355 million gallons of water
-          in 2021&mdash;over one-quarter of the town&rsquo;s annual supply. That number
-          had tripled since 2016.
+          <strong>Power consumption</strong> tops the list, raised in 87 of 156 cities.
+          The numbers explain the attention: U.S. data centers now consume 4.4% of
+          national electricity, up from 1.9% in 2018. Projections suggest 12% by 2028.
+          In The Dalles, Oregon, Google&rsquo;s facilities consumed over 355 million
+          gallons of water in 2021&mdash;more than a quarter of the town&rsquo;s annual
+          supply. That number had tripled since 2016.
         </p>
         <p>
           <strong>Water usage</strong> ranks second, mentioned in 78 cities. A 2024
           Lawrence Berkeley report estimated U.S. data centers consumed 17 billion
           gallons directly in 2023, with projections to double or quadruple by 2028.
-          When a resident asks &ldquo;how much water will this use?&rdquo;&mdash;the
-          question that opened Chandler&rsquo;s debate&mdash;they&rsquo;re asking an
-          answerable question with material stakes.
+          When a Chandler resident asks &ldquo;how much water will this use?&rdquo;&mdash;the
+          question that opened that city&rsquo;s debate&mdash;they&rsquo;re asking
+          something answerable with material stakes.
         </p>
         <p>
           <strong>Jobs</strong> drew comment in 46 cities&mdash;from both sides.
           Proponents cite construction jobs and permanent positions; skeptics note
           that a facility requiring hundreds of megawatts may employ only dozens of
-          people once operational. Both are correct. The question is what the
-          community values.
+          people once operational. Both are correct.
         </p>
         <p>
           <strong>Noise</strong> emerged in 18 cities, particularly those considering
           facilities near residential areas.
         </p>
         <p>
-          The pattern: communities aren&rsquo;t reflexively opposed. They&rsquo;re
-          asking for answers that companies have historically declined to provide.
-          A Data Center Watch report found $64 billion in projects blocked or delayed
-          by local opposition between May 2024 and March 2025. The question isn&rsquo;t
-          whether data centers will get built. It&rsquo;s whether the information
-          asymmetry between developers and communities gets resolved.
+          Communities aren&rsquo;t reflexively opposed. They&rsquo;re asking for answers
+          that companies have historically declined to provide. A Data Center Watch
+          report found $64 billion in projects blocked or delayed by local opposition
+          between May 2024 and March 2025.
         </p>
       </div>
 

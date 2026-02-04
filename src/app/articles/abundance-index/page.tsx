@@ -446,20 +446,13 @@ function StrongholdsSection() {
           positive toward data center development.
         </p>
         <p>
-          But why? Here, too, multiple explanations compete.
-        </p>
-        <p>
-          <strong>One interpretation:</strong> Wealthy homeowners protecting property
-          values. Fairfax median household income exceeds $130,000. Residents there
-          don&rsquo;t need the jobs a data center provides&mdash;they need the quiet
-          streets they already have.
-        </p>
-        <p>
-          <strong>Another interpretation:</strong> Infrastructure saturation. Northern
-          Virginia is already America&rsquo;s largest data center corridor. &ldquo;With
-          the data centers being built, infrastructure is not keeping pace,&rdquo; a
-          resident complained. When you&rsquo;ve absorbed dozens of facilities, skepticism
-          about the next one isn&rsquo;t reflexive opposition&mdash;it&rsquo;s experience.
+          Fairfax&rsquo;s resistance has competing explanations. Median household income
+          exceeds $130,000&mdash;residents don&rsquo;t need data center jobs; they need the
+          quiet streets they have. But Northern Virginia is already America&rsquo;s largest
+          data center corridor. &ldquo;With the data centers being built, infrastructure is
+          not keeping pace,&rdquo; a resident complained. When you&rsquo;ve absorbed dozens
+          of facilities, skepticism about the next one isn&rsquo;t reflexive&mdash;it&rsquo;s
+          experience.
         </p>
         <p>
           Not all NIMBY cities are wealthy suburbs. Copperas Cove, Texas (population

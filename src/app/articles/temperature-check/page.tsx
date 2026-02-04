@@ -404,28 +404,17 @@ function CalmestCitiesSection() {
           for sleeping outside, even when shelter is unavailable.
         </p>
         <p>
-          How does a city at the center of a landmark national controversy score as
-          America&rsquo;s calmest? Multiple explanations:
+          The irony requires explanation. Grants Pass took its homeless camping ban
+          to the Supreme Court&mdash;yet its council meetings show no opposition. The
+          litigation may have channeled conflict into courtrooms rather than council
+          chambers. Our data measures debate, not enforcement; Grants Pass may have
+          internal consensus even as civil liberties groups sue. Or perhaps residents
+          who would oppose have stopped showing up, left town, or never had housing
+          that allowed civic participation.
         </p>
         <p>
-          <strong>First:</strong> The litigation may have channeled conflict into
-          courts rather than council chambers. When the battle moves to lawyers,
-          citizen comment periods quiet down.
-        </p>
-        <p>
-          <strong>Second:</strong> Our data measures meetings where policy is debated,
-          not where it&rsquo;s enforced. Grants Pass may have reached internal consensus
-          on its approach&mdash;the conflict was external, with civil liberties groups.
-        </p>
-        <p>
-          <strong>Third:</strong> Selection effects. Perhaps residents who would oppose
-          the policy have stopped showing up, left town, or never had housing that
-          allowed them civic participation in the first place.
-        </p>
-        <p>
-          The Grants Pass case illustrates why friction scores need context. Low meeting
-          friction doesn&rsquo;t mean a city is conflict-free. It means conflict may
-          be happening elsewhere.
+          Low meeting friction doesn&rsquo;t mean a city is conflict-free. It means
+          conflict may be happening elsewhere.
         </p>
       </div>
 
