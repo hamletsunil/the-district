@@ -100,9 +100,7 @@ export default function VoteTrackerArticle() {
       <AtAGlance />
       <LedeSection />
       <TheNumbersSection />
-      <YesVotersSection />
       <NoVotersSection />
-      <CouncilPolarizationSection />
       <TopicBreakdownSection />
       <ImplicationsSection />
       <MethodologySection />
@@ -148,7 +146,7 @@ function HeroSection() {
         </h1>
 
         <p className="vote-hero-subtitle">
-          How your city officials actually vote&mdash;and what it reveals about local power
+          Newark agrees on everything. Princeton fights about everything. Why?
         </p>
       </div>
 
@@ -174,22 +172,22 @@ function AtAGlance() {
         <div className="at-a-glance-label">At a Glance</div>
         <div className="at-a-glance-stats">
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.totalOfficials.toLocaleString()}</div>
-            <div className="at-a-glance-stat-label">Officials Tracked</div>
+            <div className="at-a-glance-stat-value">5</div>
+            <div className="at-a-glance-stat-label">Princeton No-Voters</div>
           </div>
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.substantive.totalVotes.toLocaleString()}</div>
-            <div className="at-a-glance-stat-label">Substantive Votes</div>
+            <div className="at-a-glance-stat-value">0</div>
+            <div className="at-a-glance-stat-label">Newark No Votes (Ever)</div>
           </div>
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.substantive.lowestApproval.rate}%</div>
-            <div className="at-a-glance-stat-label">Environmental Approval</div>
+            <div className="at-a-glance-stat-value">25%</div>
+            <div className="at-a-glance-stat-label">Environmental Dissent</div>
           </div>
         </div>
         <div className="at-a-glance-finding">
           <div className="at-a-glance-finding-label">Key Finding</div>
           <div className="at-a-glance-finding-text">
-            Environmental votes see 22 points more dissent than the baseline. One in four environmental votes draws a no&mdash;compared to near-unanimity on routine matters.
+            Princeton&rsquo;s five-member resistance bloc has voted no 95 times and yes twice. Newark&rsquo;s council has never recorded a single dissenting vote. Same state, opposite cultures.
           </div>
         </div>
       </div>
@@ -205,97 +203,71 @@ function LedeSection() {
     <section className="vote-section vote-lede">
       <div className="vote-prose">
         <p>
-          In Newark, New Jersey, Councilman Eddie Osborne has never voted no. Not once.
-          Across 119 recorded votes on development matters, his record is perfect:
-          100% approval.
+          In Newark, the city council agrees on everything. Literally everything.
+          Councilman Eddie Osborne has cast 119 votes. Not one was &ldquo;no.&rdquo;
+          His colleague Luis Quintana: 116 votes, zero dissent. The entire Newark
+          delegation votes in lockstep.
         </p>
         <p>
-          Thirty miles south, in Princeton, the inverse: Council member Mark Freda
-          has also achieved a perfect record&mdash;but in the opposite direction. Of
-          his 26 recorded votes, every single one was against.
+          Thirty miles away, Princeton tells a different story. Five officials have
+          built careers on opposition. Mark Freda has voted against 26 consecutive
+          proposals. Dawn Mount, 21. Dave Cohen, 17. Between them, they&rsquo;ve cast
+          95 no votes and exactly 2 yes votes.
         </p>
         <p>
-          Osborne and Freda are the extremes of a spectrum we can now measure. We
-          compiled voting records for <strong>1,524 local officials</strong> across
-          America, tracking <strong>25,219 votes</strong> on development, zoning,
-          and infrastructure matters.
+          Same state. Same types of proposals. Opposite instincts.
         </p>
         <p>
-          Most officials vote yes almost all the time. The exceptions matter. And now
-          you can see exactly who they are.
+          Newark&rsquo;s unanimity could reflect genuine consensus&mdash;or a council
+          that makes its real decisions before the public meeting. Princeton&rsquo;s
+          resistance could reflect principled opposition to overdevelopment&mdash;or
+          wealthy homeowners protecting property values. The voting records alone
+          can&rsquo;t tell us. But they tell us where to look.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// SECTION 2: NEWARK'S PERFECT RECORD
+// ============================================================================
+function TheNumbersSection() {
+  return (
+    <section className="vote-section">
+      <div className="vote-prose-header">
+        <span className="vote-section-number">The Unanimity</span>
+        <h2>Newark&rsquo;s Perfect Record</h2>
+      </div>
+
+      <div className="vote-prose">
+        <p>
+          Newark&rsquo;s city council hasn&rsquo;t recorded a single dissenting vote
+          in our dataset. Seven officials. Hundreds of votes. Zero &ldquo;no.&rdquo;
+        </p>
+        <p>
+          Eddie Osborne leads with 119 consecutive yes votes. Luis Quintana follows
+          with 116. Carlos Gonzalez: 66. The entire delegation votes in perfect
+          alignment on every recorded matter.
+        </p>
+        <p>
+          One interpretation: Newark receives well-prepared proposals, and the
+          council genuinely agrees. Another: the real decisions happen before the
+          public meeting, and the vote is theater. A third: party discipline is
+          absolute.
+        </p>
+        <p>
+          The data can&rsquo;t distinguish between consensus and conformity. But it
+          does identify which councils deserve scrutiny&mdash;and Newark&rsquo;s
+          unanimity is unusual enough to warrant it.
         </p>
       </div>
 
       <div className="vote-graphic">
-        <VoteOverview />
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// SECTION 2: THE NUMBERS
-// ============================================================================
-function TheNumbersSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section className="vote-section">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Pattern</span>
-        <h2>A Culture of Yes</h2>
-      </div>
-
-      <div className="vote-prose">
-        <p>
-          The headline number&mdash;96.5% approval&mdash;is misleading. Half of all
-          recorded votes are administrative: approving meeting minutes, renaming
-          streets, passing ceremonial resolutions. Nobody dissents on those.
-        </p>
-        <p>
-          Focus on substantive votes&mdash;budgets, zoning, environmental policy&mdash;and
-          the picture sharpens. Approval drops to 93.8%. Environmental matters see
-          just 75% approval. These are the votes that matter.
-        </p>
-        <p>
-          The officials who vote no on substance, not just procedure, are the ones
-          worth watching.
-        </p>
-      </div>
-
-      <div className="vote-graphic" ref={ref}>
-        <div className="vote-approval-viz">
-          <div className="vote-approval-bar-container">
-            <div
-              className={`vote-approval-bar yes ${isVisible ? "animate" : ""}`}
-              style={{ width: isVisible ? "96.5%" : "0%" }}
-            >
-              <span>Yes Votes: 96.5%</span>
-            </div>
-            <div
-              className={`vote-approval-bar no ${isVisible ? "animate" : ""}`}
-              style={{ width: isVisible ? "3.5%" : "0%", transitionDelay: "0.3s" }}
-            >
-              <span>No</span>
-            </div>
-          </div>
-          <div className="vote-approval-context">
-            Based on {DATA.summary.totalVotes.toLocaleString()} votes by {DATA.summary.totalOfficials.toLocaleString()} officials
+        <div className="vote-newark-highlight">
+          <div className="vote-newark-stat">
+            <span className="vote-newark-big">0</span>
+            <span className="vote-newark-label">No votes recorded across entire Newark council</span>
           </div>
         </div>
       </div>
@@ -303,77 +275,9 @@ function TheNumbersSection() {
   );
 }
 
-// ============================================================================
-// SECTION 3: THE YES VOTERS
-// ============================================================================
-function YesVotersSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section className="vote-section vote-yes-section">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Approvers</span>
-        <h2>Officials Who Say Yes</h2>
-      </div>
-
-      <div className="vote-prose">
-        <p>
-          Newark and Milwaukee dominate the top of our yes-voter rankings. In both
-          cities, officials have cast hundreds of votes without a single dissent.
-          Whether this reflects genuine consensus, strong party discipline, or something
-          else is a question for local reporters to investigate.
-        </p>
-        <p>
-          The implication: a developer seeking approval in Newark or Milwaukee will
-          face minimal council-level resistance once a project clears staff review.
-        </p>
-      </div>
-
-      <div className="vote-graphic" ref={ref}>
-        <div className="vote-leaderboard">
-          <div className="vote-leaderboard-header">
-            <span>Official</span>
-            <span>Location</span>
-            <span>Yes</span>
-            <span>No</span>
-            <span>Rate</span>
-          </div>
-          {DATA.yesVoters.map((official, i) => (
-            <div
-              key={`${official.name}-${i}`}
-              className={`vote-leaderboard-row yes ${isVisible ? "animate" : ""}`}
-              style={{ transitionDelay: `${i * 0.08}s` }}
-            >
-              <span className="vote-official-name">{official.name}</span>
-              <span className="vote-official-location">{official.city}, {official.state}</span>
-              <span className="vote-official-yes">{official.yeaCount}</span>
-              <span className="vote-official-no">{official.nayCount}</span>
-              <span className="vote-official-rate">{official.approvalRate}%</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================================
-// SECTION 4: THE NO VOTERS
+// SECTION 3: THE PRINCETON BLOC
 // ============================================================================
 function NoVotersSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -396,28 +300,31 @@ function NoVotersSection() {
   return (
     <section className="vote-section vote-no-section">
       <div className="vote-prose-header">
-        <span className="vote-section-number">The Resisters</span>
-        <h2>Officials Who Push Back</h2>
+        <span className="vote-section-number">The Resistance</span>
+        <h2>Princeton&rsquo;s Five-Member Bloc</h2>
       </div>
 
       <div className="vote-prose">
         <p>
-          Princeton, New Jersey is an outlier. Multiple council members have approval
-          rates near zero. Mark Freda, Dawn Mount, and Dave Cohen form a bloc that
-          consistently votes against development proposals.
+          Princeton is one of America&rsquo;s wealthiest towns. Median household income
+          exceeds $150,000. Home values routinely top $1 million. And five members of
+          its local government have made careers of voting no.
         </p>
         <p>
-          In most councils, a single dissenter is an anomaly. In Princeton, it&rsquo;s
-          a pattern. This concentration of no-voters in one wealthy suburb is unusual
-          enough to warrant attention from local reporters.
+          Mark Freda: 26 votes, all against. Dawn Mount: 21 votes, all against. Dave
+          Cohen: 17 votes, all against. Between them, Leticia Fraga and Mia Sacks add
+          another 31 no votes and just 2 yes votes.
         </p>
         <p>
-          Princeton council votes require different strategies than the rubber-stamp
-          approvals found elsewhere.
+          What are they opposing? The sources suggest housing development&mdash;particularly
+          affordable housing proposals that would increase density in wealthy neighborhoods.
+          Princeton has been embroiled in contentious debates over the Stockton Street
+          development and similar projects.
         </p>
-        <p className="vote-caveat">
-          <em>Note: Vote counts for these officials range from 14-26, relatively small
-          samples. Patterns may shift as more votes are recorded.</em>
+        <p>
+          Whether this bloc represents principled planning concerns or homeowner
+          protectionism depends on perspective. What&rsquo;s clear: Princeton&rsquo;s
+          council operates nothing like Newark&rsquo;s.
         </p>
       </div>
 
@@ -449,86 +356,6 @@ function NoVotersSection() {
   );
 }
 
-// ============================================================================
-// SECTION 5: COUNCIL POLARIZATION
-// ============================================================================
-function CouncilPolarizationSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <section className="vote-section">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Divide</span>
-        <h2>How Polarized Is Your Council?</h2>
-      </div>
-
-      <div className="vote-prose">
-        <p>
-          We calculated a &ldquo;polarization index&rdquo; for each council&mdash;the
-          gap between the highest and lowest approval rates among officials with
-          significant voting records.
-        </p>
-        <p>
-          Cities like Fresno, Long Beach, and Denton show <strong>zero polarization</strong>:
-          every tracked official votes yes 100% of the time. In contrast, El Dorado,
-          Arkansas, and Princeton, New Jersey, show maximum polarization&mdash;officials
-          ranging from 0% to 100% approval.
-        </p>
-        <p>
-          A polarized council isn&rsquo;t necessarily bad&mdash;it could indicate
-          genuine debate and diverse viewpoints. A unified council could mean healthy
-          consensus, or it could mean groupthink. The data doesn&rsquo;t tell us which.
-        </p>
-      </div>
-
-      <div className="vote-graphic" ref={ref}>
-        <div className="vote-polarization-chart">
-          {DATA.councils.map((council, i) => (
-            <div
-              key={council.city}
-              className={`vote-polarization-row ${isVisible ? "animate" : ""}`}
-              style={{ transitionDelay: `${i * 0.08}s` }}
-            >
-              <div className="vote-polarization-city">
-                <span className="city-name">{council.city}, {council.state}</span>
-                <span className="official-count">{council.officialCount} officials</span>
-              </div>
-              <div className="vote-polarization-bar-container">
-                <div
-                  className="vote-polarization-bar"
-                  style={{
-                    width: isVisible ? `${council.polarization}%` : "0%",
-                    backgroundColor: council.polarization > 50 ? "#ef4444" : council.polarization > 20 ? "#f59e0b" : "#22c55e",
-                  }}
-                />
-              </div>
-              <div className="vote-polarization-score">{council.polarization}</div>
-            </div>
-          ))}
-        </div>
-        <div className="vote-polarization-legend">
-          <span>0 = Perfect consensus</span>
-          <span>100 = Maximum division</span>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================================
 // SECTION 6: TOPIC BREAKDOWN (Substantive Votes Only)
@@ -610,49 +437,31 @@ function TopicBreakdownSection() {
 }
 
 // ============================================================================
-// SECTION 7: IMPLICATIONS
+// SECTION 5: IMPLICATIONS
 // ============================================================================
 function ImplicationsSection() {
   return (
     <section className="vote-section vote-implications">
       <div className="vote-prose-header">
-        <span className="vote-section-number">The Stakes</span>
-        <h2>What This Means</h2>
+        <span className="vote-section-number">The Pattern</span>
+        <h2>What the Votes Reveal</h2>
       </div>
 
       <div className="vote-prose">
         <p>
-          Individual voting records are public data&mdash;but rarely compiled, analyzed,
-          or made searchable. By aggregating these records across cities, we&rsquo;ve
-          created a comparison tool: how does your council member stack up against
-          officials elsewhere?
+          Voting records don&rsquo;t explain motives. They reveal patterns. Newark&rsquo;s
+          unanimity could be healthy consensus; it could be something else. Princeton&rsquo;s
+          resistance bloc could be principled skepticism; it could be NIMBYism.
         </p>
         <p>
-          The data identifies which councils require more outreach and which approve
-          with minimal resistance. It shows which officials are genuinely swing votes
-          versus reliable allies or opponents.
+          What the data does is point. It identifies where the interesting questions are.
+          Why does one New Jersey council never disagree while another fights over every
+          proposal? Why does environmental policy divide officials when budgets and
+          zoning pass easily?
         </p>
         <p>
-          And it offers accountability. The next time an official claims to support
-          or oppose development, you can check whether their votes match their rhetoric.
+          These are questions for local reporters. The voting records are the map.
         </p>
-      </div>
-
-      <div className="vote-graphic">
-        <div className="vote-takeaway-grid">
-          <div className="vote-takeaway">
-            <div className="vote-takeaway-number">{DATA.summary.totalOfficials.toLocaleString()}</div>
-            <div className="vote-takeaway-label">Officials tracked</div>
-          </div>
-          <div className="vote-takeaway">
-            <div className="vote-takeaway-number">{DATA.summary.totalVotes.toLocaleString()}</div>
-            <div className="vote-takeaway-label">Votes recorded</div>
-          </div>
-          <div className="vote-takeaway">
-            <div className="vote-takeaway-number">{DATA.summary.avgApprovalRate}%</div>
-            <div className="vote-takeaway-label">Average approval rate</div>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -753,48 +562,3 @@ function BallotIconSVG() {
   );
 }
 
-function VoteOverview() {
-  const [animatedVotes, setAnimatedVotes] = useState(0);
-  const [animatedOfficials, setAnimatedOfficials] = useState(0);
-
-  useEffect(() => {
-    const duration = 2000;
-    const votesTarget = DATA.summary.totalVotes;
-    const officialsTarget = DATA.summary.totalOfficials;
-    const startTime = Date.now();
-
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-
-      setAnimatedVotes(Math.round(eased * votesTarget));
-      setAnimatedOfficials(Math.round(eased * officialsTarget));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, []);
-
-  return (
-    <div className="vote-overview">
-      <div className="vote-overview-stats">
-        <div className="vote-overview-stat">
-          <span className="value">{animatedVotes.toLocaleString()}</span>
-          <span className="label">Votes Analyzed</span>
-        </div>
-        <div className="vote-overview-stat">
-          <span className="value">{animatedOfficials.toLocaleString()}</span>
-          <span className="label">Officials Tracked</span>
-        </div>
-        <div className="vote-overview-stat highlight">
-          <span className="value">{DATA.summary.avgApprovalRate}%</span>
-          <span className="label">Avg Approval</span>
-        </div>
-      </div>
-    </div>
-  );
-}
