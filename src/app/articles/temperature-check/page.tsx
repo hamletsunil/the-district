@@ -253,7 +253,7 @@ function TheMetricsSection() {
             <div className="temp-metric-icon">{DATA.summary.totalCities}</div>
             <div className="temp-metric-value">Cities</div>
             <div className="temp-metric-label">Analyzed</div>
-            <div className="temp-metric-desc">Across all 50 states</div>
+            <div className="temp-metric-desc">From Hamlet transcript database</div>
           </div>
         </div>
       </div>
@@ -574,10 +574,17 @@ function MethodologySection() {
 
       <div className="temp-prose temp-prose-small">
         <p>
-          <strong>Data Source:</strong> Meeting transcripts from 438 cities analyzed
-          using natural language processing. We processed transcript segments to
-          identify adversarial language patterns, opposition statements, and
-          discussion intensity.
+          <strong>Data Source:</strong> Meeting transcripts from 438 cities in the
+          Hamlet transcript database, analyzed using natural language processing.
+          We processed transcript segments to identify adversarial language patterns,
+          opposition statements, and discussion intensity.
+        </p>
+        <p>
+          <strong>Selection Criteria:</strong> Cities were included if they had 9+
+          transcribed meetings in Hamlet&rsquo;s database with sufficient audio quality
+          for analysis. This creates selection bias: we over-represent cities with
+          active civic engagement infrastructure and accessible meeting recordings.
+          Cities without transcribed meetings are not represented.
         </p>
         <p>
           <strong>Contention Rate:</strong> Percentage of discussion blocks containing
@@ -603,6 +610,9 @@ function MethodologySection() {
           municipalities don&rsquo;t transcribe all meetings or may edit transcripts.
           Our NLP models may misclassify some language as adversarial. Friction
           scores should be interpreted as indicators, not definitive measures.
+          The external sources cited validate city demographics; the friction scores
+          themselves are derived from Hamlet&rsquo;s proprietary NLP analysis of
+          meeting transcripts.
         </p>
         <p>
           <strong>Date Range:</strong> Transcripts analyzed span 2023 through

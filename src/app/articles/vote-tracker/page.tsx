@@ -415,6 +415,10 @@ function NoVotersSection() {
           For developers, the message is clear: Princeton council votes may require
           different strategies than the rubber-stamp approvals found elsewhere.
         </p>
+        <p className="vote-caveat">
+          <em>Note: Vote counts for these officials range from 14-26, relatively small
+          samples. Patterns may shift as more votes are recorded.</em>
+        </p>
       </div>
 
       <div className="vote-graphic" ref={ref}>
@@ -670,8 +674,9 @@ function MethodologySection() {
         <p>
           <strong>Officials Included:</strong> We tracked 1,524 officials who cast at
           least 3 votes on development-related matters. This threshold ensures
-          statistical significance while including part-time and recently-elected
-          officials.
+          a minimum sample while including part-time and recently-elected
+          officials. Officials with fewer than 20 votes should be interpreted with
+          caution&mdash;their rates may change significantly with additional data.
         </p>
         <p>
           <strong>Topic Classification:</strong> Votes were categorized by topic
@@ -688,10 +693,19 @@ function MethodologySection() {
           approval rates.
         </p>
         <p>
-          <strong>Limitations:</strong> Not all cities use Legistar. Some cities
-          don&rsquo;t record roll-call votes for routine matters. Our dataset
-          over-represents larger cities with more sophisticated record-keeping.
+          <strong>Selection Bias:</strong> Our dataset only includes cities that use
+          Legistar and publish machine-readable roll-call votes. This over-represents
+          larger cities with sophisticated record-keeping and excludes municipalities
+          using other systems. The cities in our analysis self-selected by having
+          accessible data infrastructure.
+        </p>
+        <p>
+          <strong>Limitations:</strong> Some cities
+          don&rsquo;t record roll-call votes for routine matters.
           Vote counts may include procedural votes alongside substantive ones.
+          The sources cited validate that housing and development debates are active
+          in these cities, but do not independently verify individual vote tallies&mdash;those
+          come directly from Legistar records.
         </p>
         <p>
           <strong>Date Range:</strong> Records span 2023 through January 2025,

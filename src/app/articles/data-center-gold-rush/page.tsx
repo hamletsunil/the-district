@@ -719,16 +719,26 @@ function MethodologySection() {
           <strong>Sample:</strong> 156 cities across the United States
         </p>
         <p>
+          <strong>Selection criteria:</strong> Cities were included if they had
+          transcript segments containing &ldquo;data center&rdquo; in Hamlet&rsquo;s
+          database. This creates selection bias&mdash;we over-represent cities with
+          accessible meeting recordings and active data center discussions.
+        </p>
+        <p>
           <strong>Mentions analyzed:</strong> 5,007 transcript segments containing
           &ldquo;data center&rdquo;
         </p>
         <p>
           <strong>Sentiment scoring:</strong> NLP analysis on a 0-100 scale (below
-          45 = skeptical, 45-55 = neutral, above 55 = welcoming)
+          45 = skeptical, 45-55 = neutral, above 55 = welcoming). These thresholds
+          are analytical conventions.
         </p>
         <p>
           <strong>Limitations:</strong> Coverage varies by region; not all cities
-          in the US are represented. All quotes are verbatim from transcripts.
+          in the US are represented. The external sources cited validate that data
+          center debates are active in specific cities; sentiment scores are derived
+          from Hamlet&rsquo;s proprietary NLP analysis. All quotes are verbatim
+          from transcripts.
         </p>
       </div>
     </section>
