@@ -191,7 +191,7 @@ function AtAGlance() {
             <div className="at-a-glance-stat-label">Avg Sentiment</div>
           </div>
           <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">2,847</div>
+            <div className="at-a-glance-stat-value">{DATA.meetingTypes.cityCouncil.meetings + DATA.meetingTypes.planningCommission.meetings + DATA.meetingTypes.other.meetings}</div>
             <div className="at-a-glance-stat-label">Meetings Reviewed</div>
           </div>
         </div>

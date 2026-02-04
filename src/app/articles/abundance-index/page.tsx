@@ -188,7 +188,7 @@ function AtAGlance() {
         <div className="at-a-glance-finding">
           <div className="at-a-glance-finding-label">Key Finding</div>
           <div className="at-a-glance-finding-text">
-            West Coast and Sun Belt cities lead in openness to development, while older Northeast metros show 40% more resistance on average.
+            The gap between most welcoming and most resistant cities is stark: an Abundance Index of 80 (Temple, TX) versus 12 (Fairfax, VA)&mdash;a 68-point spread.
           </div>
         </div>
       </div>
