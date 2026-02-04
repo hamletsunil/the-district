@@ -9,6 +9,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
+import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
+import { SubscribeBar } from "@/components/article/SubscribeBar";
 
 // Real data from our analysis
 const DATA = {
@@ -113,7 +115,9 @@ export default function DataCenterArticle() {
       <TheImplicationsSection />
       <ConclusionSection />
       <MethodologySection />
+      <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <SubscribeBar />
     </main>
   );
 }

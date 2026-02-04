@@ -10,6 +10,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SourcesCitations, Source } from "@/components/article/SourcesCitations";
+import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
+import { SubscribeBar } from "@/components/article/SubscribeBar";
 
 // =============================================================================
 // ARTICLE DATA
@@ -49,7 +51,9 @@ export default function ArticleName() {
       <AtAGlance />
       {/* Add your content sections here */}
       <MethodologySection />
+      <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <SubscribeBar />
     </main>
   );
 }

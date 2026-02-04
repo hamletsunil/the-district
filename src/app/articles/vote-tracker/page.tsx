@@ -9,6 +9,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
+import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
+import { SubscribeBar } from "@/components/article/SubscribeBar";
 
 // Real data from our analysis of 1,524 officials across multiple cities
 const DATA = {
@@ -97,7 +99,9 @@ export default function VoteTrackerArticle() {
       <TopicBreakdownSection />
       <ImplicationsSection />
       <MethodologySection />
+      <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <SubscribeBar />
     </main>
   );
 }

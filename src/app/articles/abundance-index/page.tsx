@@ -10,6 +10,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
+import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
+import { SubscribeBar } from "@/components/article/SubscribeBar";
 
 // Real data from our analysis of 84 cities with 10+ data center mentions
 const DATA = {
@@ -103,7 +105,9 @@ export default function AbundanceIndexArticle() {
       <StateRankingsSection />
       <ImplicationsSection />
       <MethodologySection />
+      <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <SubscribeBar />
     </main>
   );
 }
