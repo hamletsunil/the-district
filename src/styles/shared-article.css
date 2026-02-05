@@ -522,6 +522,91 @@
 }
 
 /* ===========================
+   COLOPHON PAGE
+   =========================== */
+
+.colophon-page {
+  min-height: 100vh;
+  background: var(--navy-950);
+  color: white;
+  padding: 8rem 2rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .colophon-page {
+    padding: 10rem 3rem 6rem;
+  }
+}
+
+.colophon-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.colophon-header {
+  margin-bottom: 4rem;
+}
+
+.colophon-label {
+  font-family: var(--font-sans);
+  font-size: var(--type-tiny);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 1rem;
+}
+
+.colophon-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.colophon-section {
+  margin-bottom: 3rem;
+}
+
+.colophon-section-title {
+  font-family: var(--font-display);
+  font-size: var(--type-subsection);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.colophon-prose {
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: var(--leading-relaxed);
+  color: var(--gray-300);
+  margin-bottom: 1.25rem;
+}
+
+.colophon-prose strong {
+  color: white;
+  font-weight: 600;
+}
+
+.colophon-prose a {
+  color: var(--indigo-400);
+  transition: color 0.2s var(--ease-elegant);
+}
+
+.colophon-prose a:hover {
+  color: var(--indigo-300);
+}
+
+.colophon-footer-section {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===========================
    UTILITIES
    =========================== */
 
