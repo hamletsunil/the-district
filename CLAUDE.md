@@ -200,14 +200,13 @@ const SOURCES: Source[] = [
 ];
 ```
 
-### Tests will enforce
-- `AtAGlance` import (not a local function)
-- `SocialShare` import
-- `ArticleEndCTA`, `SourcesCitations`, `SubscribeBar` imports
-- Valid `data-theme` value (must be in known themes list)
-- `article-page` class on `<main>`
-- `const DATA` and `const SOURCES` present
-- Minimum 3 sources
+### Tests will catch
+- Missing shared component imports (must import from `@/components/`, not redefine locally)
+- Local `AtAGlance` function (must use shared component)
+- Missing `data-theme` attribute
+- Missing `const DATA` or `const SOURCES`
+- Fewer than 3 sources
+- Malformed source URLs
 
 ## Design Tokens (Always Use)
 
