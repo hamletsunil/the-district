@@ -7,7 +7,7 @@
   background: var(--page-bg, #292524);
   color: var(--page-text, white);
   min-height: 100vh;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Hero Section */
@@ -76,7 +76,7 @@
 }
 
 .temp-hero-title {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(3rem, 10vw, 6rem);
   font-weight: 900;
   line-height: 0.95;
@@ -188,7 +188,7 @@
 .temp-prose {
   max-width: 720px;
   margin: 0 auto 3rem;
-  font-family: "Georgia", serif;
+  font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.85);
