@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { SocialShare } from "@/components/article/SocialShare";
 
 // Real data from our analysis
 const DATA = {
@@ -115,6 +116,7 @@ export default function DataCenterArticle() {
       <TheImplicationsSection />
       <ConclusionSection />
       <MethodologySection />
+      <SocialShare title="The Data Center Gold Rush: Inside the local battles for AI infrastructure" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />

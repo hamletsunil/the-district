@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { SocialShare } from "@/components/article/SocialShare";
 
 // Real data from our analysis of 1,524 officials across multiple cities
 const DATA = {
@@ -104,6 +105,7 @@ export default function VoteTrackerArticle() {
       <TopicBreakdownSection />
       <ImplicationsSection />
       <MethodologySection />
+      <SocialShare title="The Vote Tracker: Newark agrees on everything. Princeton fights about everything. Why?" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />

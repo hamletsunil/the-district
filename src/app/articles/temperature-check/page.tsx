@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { SocialShare } from "@/components/article/SocialShare";
 
 // Real data from our analysis of 438 cities with friction metrics
 const DATA = {
@@ -88,6 +89,7 @@ export default function TemperatureCheckArticle() {
       <StatePatternSection />
       <ImplicationsSection />
       <MethodologySection />
+      <SocialShare title="The Temperature Check: Where local politics runs hot" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />

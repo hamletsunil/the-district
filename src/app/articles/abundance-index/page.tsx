@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { SocialShare } from "@/components/article/SocialShare";
 
 // Real data from our analysis of 84 cities with 10+ data center mentions
 const DATA = {
@@ -106,6 +107,7 @@ export default function AbundanceIndexArticle() {
       <StateRankingsSection />
       <ImplicationsSection />
       <MethodologySection />
+      <SocialShare title="The Abundance Index: America's most welcoming and resistant cities for development" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />
