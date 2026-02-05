@@ -13,6 +13,7 @@ import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { SocialShare } from "@/components/article/SocialShare";
+import { AtAGlance } from "@/components/article/AtAGlance";
 
 // Real data from our analysis of 84 cities with 10+ data center mentions
 const DATA = {
@@ -98,7 +99,14 @@ export default function AbundanceIndexArticle() {
   return (
     <main className="abundance-article article-page" data-theme="abundance">
       <HeroSection />
-      <AtAGlance />
+      <AtAGlance
+        stats={[
+          { value: DATA.summary.totalCities, label: "Cities Ranked" },
+          { value: DATA.summary.averageAbundanceIndex.toFixed(1), label: "Avg Index Score" },
+          { value: DATA.summary.yimbyCount, label: "Pro-Growth Cities" },
+        ]}
+        finding="The gap between most welcoming and most resistant cities is stark: an Abundance Index of 80 (Temple, TX) versus 12 (Fairfax, VA)\u2014a 68-point spread."
+      />
       <LedeSection />
       <TheIndexSection />
       <ChampionsSection />
@@ -166,38 +174,6 @@ function HeroSection() {
   );
 }
 
-// ============================================================================
-// AT A GLANCE - Key Stats (Stripe Press style)
-// ============================================================================
-function AtAGlance() {
-  return (
-    <section className="at-a-glance">
-      <div className="at-a-glance-inner">
-        <div className="at-a-glance-label">At a Glance</div>
-        <div className="at-a-glance-stats">
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.totalCities}</div>
-            <div className="at-a-glance-stat-label">Cities Ranked</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.averageAbundanceIndex.toFixed(1)}</div>
-            <div className="at-a-glance-stat-label">Avg Index Score</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.yimbyCount}</div>
-            <div className="at-a-glance-stat-label">Pro-Growth Cities</div>
-          </div>
-        </div>
-        <div className="at-a-glance-finding">
-          <div className="at-a-glance-finding-label">Key Finding</div>
-          <div className="at-a-glance-finding-text">
-            The gap between most welcoming and most resistant cities is stark: an Abundance Index of 80 (Temple, TX) versus 12 (Fairfax, VA)&mdash;a 68-point spread.
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================================
 // SECTION 1: THE LEDE

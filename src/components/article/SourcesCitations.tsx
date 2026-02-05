@@ -5,12 +5,10 @@
  * Shows a "Fact-Checked" badge to demonstrate editorial rigor.
  */
 
-export interface Source {
-  title: string;
-  outlet: string;
-  url: string;
-  accessDate?: string;
-}
+import type { Source } from "@/types/article";
+
+// Re-export for backwards compatibility — articles import Source from here
+export type { Source };
 
 interface SourcesCitationsProps {
   sources: Source[];

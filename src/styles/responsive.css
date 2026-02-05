@@ -1,0 +1,59 @@
+/* ============================================================
+   CONSOLIDATED RESPONSIVE FIXES
+   Tablet and Small Phone Breakpoints
+   ============================================================ */
+
+/* Tablet: 2-column grids instead of jumping from 3 to 1 */
+@media (max-width: 900px) and (min-width: 641px) {
+  .abundance-takeaway-grid,
+  .vote-takeaway-grid,
+  .temp-takeaway-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small phone: Vote Leaderboard */
+@media (max-width: 480px) {
+  .vote-leaderboard-header,
+  .vote-leaderboard-row {
+    grid-template-columns: 1fr 50px 40px;
+    font-size: 0.7rem;
+    padding: 0.625rem 0.75rem;
+  }
+  .vote-official-location {
+    display: none;
+  }
+  .vote-official-name {
+    font-size: 0.8125rem;
+  }
+  .vote-overview-stats {
+    gap: 2rem;
+  }
+  .vote-overview-stat .value {
+    font-size: 1.75rem;
+  }
+}
+
+/* Small phone: Abundance Index */
+@media (max-width: 480px) {
+  .abundance-champion-grid {
+    grid-template-columns: 1fr;
+  }
+  .abundance-overview-value {
+    font-size: 4rem;
+  }
+  .abundance-overview-stats {
+    gap: 1.5rem;
+  }
+  .abundance-quote-comparison {
+    gap: 1rem;
+  }
+}
+
+/* Article stack padding on mobile */
+@media (max-width: 640px) {
+  .article-stack {
+    padding: 4rem 1.5rem;
+  }
+}
+

@@ -12,6 +12,7 @@ import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { SocialShare } from "@/components/article/SocialShare";
+import { AtAGlance } from "@/components/article/AtAGlance";
 
 // Real data from our analysis of 438 cities with friction metrics
 const DATA = {
@@ -81,7 +82,14 @@ export default function TemperatureCheckArticle() {
   return (
     <main className="temp-article article-page" data-theme="temperature">
       <HeroSection />
-      <AtAGlance />
+      <AtAGlance
+        stats={[
+          { value: DATA.summary.totalCities, label: "Cities Measured" },
+          { value: DATA.summary.avgOverallScore.toFixed(1), label: "Avg Friction Score" },
+          { value: DATA.hottestCities.filter(c => c.overallScore === 100).length, label: "Max-Heat Cities" },
+        ]}
+        finding="Southern states average 97%+ contention rates\u2014over 20 points higher than Pacific Northwest states, which average below 77%."
+      />
       <LedeSection />
       <TheMetricsSection />
       <HottestCitiesSection />
@@ -148,39 +156,6 @@ function HeroSection() {
   );
 }
 
-// ============================================================================
-// AT A GLANCE - Key Stats (Stripe Press style)
-// ============================================================================
-function AtAGlance() {
-  const maxHeatCities = DATA.hottestCities.filter(c => c.overallScore === 100).length;
-  return (
-    <section className="at-a-glance">
-      <div className="at-a-glance-inner">
-        <div className="at-a-glance-label">At a Glance</div>
-        <div className="at-a-glance-stats">
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.totalCities}</div>
-            <div className="at-a-glance-stat-label">Cities Measured</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.avgOverallScore.toFixed(1)}</div>
-            <div className="at-a-glance-stat-label">Avg Friction Score</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{maxHeatCities}</div>
-            <div className="at-a-glance-stat-label">Max-Heat Cities</div>
-          </div>
-        </div>
-        <div className="at-a-glance-finding">
-          <div className="at-a-glance-finding-label">Key Finding</div>
-          <div className="at-a-glance-finding-text">
-            Southern states average 97%+ contention rates&mdash;over 20 points higher than Pacific Northwest states, which average below 77%.
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================================
 // SECTION 1: THE LEDE

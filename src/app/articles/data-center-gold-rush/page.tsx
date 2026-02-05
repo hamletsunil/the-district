@@ -12,6 +12,7 @@ import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { SocialShare } from "@/components/article/SocialShare";
+import { AtAGlance } from "@/components/article/AtAGlance";
 
 // Real data from our analysis
 const DATA = {
@@ -104,7 +105,14 @@ export default function DataCenterArticle() {
   return (
     <main className="dc-article article-page" data-theme="data-center">
       <HeroSection />
-      <AtAGlance />
+      <AtAGlance
+        stats={[
+          { value: DATA.summary.totalCities, label: "Cities Analyzed" },
+          { value: DATA.summary.averageSentiment.toFixed(1), label: "Avg Sentiment" },
+          { value: DATA.meetingTypes.cityCouncil.meetings + DATA.meetingTypes.planningCommission.meetings + DATA.meetingTypes.other.meetings, label: "Meetings Reviewed" },
+        ]}
+        finding="Power consumption is the #1 community concern, raised in 56% of cities\u2014followed by water usage at 50%. Jobs, often touted as a benefit, sparked debate in only 29%."
+      />
       <LedeSection />
       <TheExplosionSection />
       <TheNumbersSection />
@@ -175,38 +183,6 @@ function HeroSection() {
   );
 }
 
-// ============================================================================
-// AT A GLANCE - Key Stats (Stripe Press style)
-// ============================================================================
-function AtAGlance() {
-  return (
-    <section className="at-a-glance">
-      <div className="at-a-glance-inner">
-        <div className="at-a-glance-label">At a Glance</div>
-        <div className="at-a-glance-stats">
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.totalCities}</div>
-            <div className="at-a-glance-stat-label">Cities Analyzed</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.summary.averageSentiment.toFixed(1)}</div>
-            <div className="at-a-glance-stat-label">Avg Sentiment</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">{DATA.meetingTypes.cityCouncil.meetings + DATA.meetingTypes.planningCommission.meetings + DATA.meetingTypes.other.meetings}</div>
-            <div className="at-a-glance-stat-label">Meetings Reviewed</div>
-          </div>
-        </div>
-        <div className="at-a-glance-finding">
-          <div className="at-a-glance-finding-label">Key Finding</div>
-          <div className="at-a-glance-finding-text">
-            Power consumption is the #1 community concern, raised in 56% of cities&mdash;followed by water usage at 50%. Jobs, often touted as a benefit, sparked debate in only 29%.
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================================
 // SECTION 1: THE LEDE

@@ -1,0 +1,745 @@
+/* ============================================================
+   ABUNDANCE INDEX ARTICLE STYLES
+   A Hamlet Investigation - YIMBY/NIMBY Analysis
+   ============================================================ */
+
+.abundance-article {
+  background: var(--page-bg, #faf7f2);
+  color: var(--page-text, #1e293b);
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Hero Section */
+.abundance-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.abundance-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.abundance-hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(22, 101, 52, 0.08), transparent 60%),
+              radial-gradient(ellipse 60% 40% at 70% 70%, rgba(22, 101, 52, 0.05), transparent 50%);
+  transform-origin: center;
+}
+
+.abundance-hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(90deg, rgba(22, 101, 52, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(22, 101, 52, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.abundance-hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 800px;
+}
+
+.abundance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(22, 101, 52, 0.08);
+  border: 1px solid rgba(22, 101, 52, 0.2);
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #166534;
+  margin-bottom: 2rem;
+}
+
+.abundance-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.abundance-hero-title {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+}
+
+.abundance-title-line {
+  display: block;
+}
+
+.abundance-title-accent {
+  background: linear-gradient(135deg, #166534 0%, #22c55e 50%, #4ade80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.abundance-hero-subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  color: #64748b;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.abundance-hero-visual {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  max-width: 90%;
+  z-index: 5;
+}
+
+.abundance-gauge-svg {
+  width: 100%;
+  height: auto;
+}
+
+.abundance-needle {
+  animation: needleSwing 3s ease-out 0.5s forwards;
+  transform-origin: bottom center;
+}
+
+@keyframes needleSwing {
+  0% { transform: rotate(-60deg); }
+  100% { transform: rotate(25deg); }
+}
+
+.abundance-scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.abundance-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, transparent, rgba(22, 101, 52, 0.4), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Editorial Sections */
+.abundance-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-bottom: 1px solid rgba(22, 101, 52, 0.1);
+}
+
+.abundance-section:last-child {
+  border-bottom: none;
+}
+
+.abundance-prose-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.abundance-section-number {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #22c55e;
+  margin-bottom: 1rem;
+}
+
+.abundance-prose-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+}
+
+.abundance-prose {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  font-family: "Georgia", serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.abundance-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.abundance-prose strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.abundance-prose em {
+  font-style: italic;
+}
+
+.abundance-prose code {
+  background: rgba(22, 101, 52, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.875em;
+}
+
+.abundance-prose-small {
+  font-size: 0.9375rem;
+  color: #64748b;
+}
+
+.abundance-graphic {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Lede Section Stats */
+.abundance-lede {
+  padding-top: 8rem;
+}
+
+.abundance-overview {
+  background: #ffffff;
+  border: 1px solid rgba(22, 101, 52, 0.15);
+  box-shadow: 0 4px 24px rgba(22, 101, 52, 0.08);
+  border-radius: 16px;
+  padding: 3rem;
+  text-align: center;
+}
+
+.abundance-overview-main {
+  margin-bottom: 2.5rem;
+}
+
+.abundance-overview-value {
+  font-size: clamp(4rem, 12vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.abundance-overview-label {
+  font-size: 0.9375rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+.abundance-overview-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.abundance-overview-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.abundance-overview-stat .value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.abundance-overview-stat .label {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.abundance-overview-stat.yimby .value {
+  color: #22c55e;
+}
+
+.abundance-overview-stat.nimby .value {
+  color: #ef4444;
+}
+
+/* Distribution Bars */
+.abundance-distribution {
+  background: #ffffff;
+  border: 1px solid rgba(22, 101, 52, 0.15);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(22, 101, 52, 0.06);
+}
+
+.abundance-dist-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.abundance-dist-bars {
+  display: flex;
+  gap: 0.5rem;
+  height: 60px;
+  margin-bottom: 1.5rem;
+}
+
+.abundance-dist-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: white;
+}
+
+.abundance-dist-bar.nimby {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.abundance-dist-bar.neutral {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+}
+
+.abundance-dist-bar.yimby {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+
+.abundance-dist-label {
+  text-align: center;
+  font-size: 0.9375rem;
+  color: #475569;
+}
+
+/* Champion Cards */
+.abundance-champion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.abundance-champion-card {
+  background: #ffffff;
+  border: 1px solid rgba(22, 101, 52, 0.2);
+  border-radius: 16px;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(22, 101, 52, 0.08);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.abundance-champion-card.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.abundance-champion-card:hover {
+  border-color: rgba(22, 101, 52, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(22, 101, 52, 0.15);
+}
+
+.abundance-card-rank {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #166534;
+}
+
+.abundance-card-city {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.125rem;
+}
+
+.abundance-card-state {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.abundance-card-index {
+  margin-bottom: 1rem;
+}
+
+.abundance-index-value {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #166534;
+}
+
+.abundance-index-label {
+  display: block;
+  font-size: 0.6875rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.abundance-card-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.abundance-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.abundance-stat-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.abundance-stat-label {
+  font-size: 0.6875rem;
+  color: #94a3b8;
+}
+
+/* Stronghold List */
+.abundance-stronghold-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.abundance-stronghold-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.06);
+}
+
+.abundance-stronghold-row.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.abundance-stronghold-info {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.abundance-stronghold-city {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.abundance-stronghold-pop {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.abundance-stronghold-bar-container {
+  flex: 1;
+  height: 24px;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.abundance-stronghold-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ef4444 0%, #f87171 100%);
+  border-radius: 6px;
+  transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.abundance-stronghold-score {
+  flex: 0 0 50px;
+  text-align: right;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ef4444;
+}
+
+/* Quote Comparison */
+.abundance-quote-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .abundance-quote-comparison {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .abundance-quote-divider {
+    display: none;
+  }
+}
+
+.abundance-quote-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.abundance-quote-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.abundance-quote-column.yimby .abundance-quote-header {
+  color: #22c55e;
+}
+
+.abundance-quote-column.nimby .abundance-quote-header {
+  color: #ef4444;
+}
+
+.abundance-quote-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.abundance-quote-column.yimby .abundance-quote-icon {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.abundance-quote-column.nimby .abundance-quote-icon {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.abundance-quote {
+  background: #ffffff;
+  border-left: 3px solid;
+  padding: 1.25rem;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.abundance-quote-column.yimby .abundance-quote {
+  border-color: #22c55e;
+}
+
+.abundance-quote-column.nimby .abundance-quote {
+  border-color: #ef4444;
+}
+
+.abundance-quote p {
+  font-family: "Georgia", serif;
+  font-style: italic;
+  color: #374151;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.abundance-quote cite {
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: #64748b;
+}
+
+.abundance-quote-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 200px;
+}
+
+.abundance-quote-divider span {
+  background: rgba(22, 101, 52, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* State Rankings */
+.abundance-state-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.abundance-state-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.abundance-state-row.animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.abundance-state-label {
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.abundance-state-abbr {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.abundance-state-cities {
+  font-size: 0.6875rem;
+  color: #64748b;
+}
+
+.abundance-state-bar-container {
+  flex: 1;
+  height: 32px;
+  position: relative;
+}
+
+.abundance-state-bar-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 101, 52, 0.08);
+  border-radius: 6px;
+}
+
+.abundance-state-midline {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(22, 101, 52, 0.2);
+}
+
+.abundance-state-bar {
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.abundance-state-score {
+  flex: 0 0 50px;
+  text-align: right;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* Takeaway Grid */
+.abundance-takeaway-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 640px) {
+  .abundance-takeaway-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.abundance-takeaway {
+  text-align: center;
+  padding: 2rem;
+  background: #ffffff;
+  border: 1px solid rgba(22, 101, 52, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(22, 101, 52, 0.06);
+}
+
+.abundance-takeaway-number {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #166534;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.abundance-takeaway-label {
+  font-size: 0.8125rem;
+  color: #64748b;
+}
+
+/* Methodology Section */
+.abundance-methodology {
+  background: rgba(22, 101, 52, 0.05);
+}
+

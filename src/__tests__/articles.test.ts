@@ -41,11 +41,19 @@ describe('Article Structure', () => {
         expect(content).toMatch(/data-theme=["']/)
       })
 
-      it('should import shared components', () => {
+      it('should import shared components from @/components/', () => {
         const content = fs.readFileSync(articlePath, 'utf-8')
-        expect(content).toContain('ArticleEndCTA')
-        expect(content).toContain('SourcesCitations')
-        expect(content).toContain('SubscribeBar')
+        // Check for actual imports, not just name mentions — catches local redefinitions
+        expect(content).toContain('from "@/components/article/ArticleEndCTA"')
+        expect(content).toContain('from "@/components/article/SocialShare"')
+        expect(content).toContain('from "@/components/article/SourcesCitations"')
+        expect(content).toContain('from "@/components/article/SubscribeBar"')
+      })
+
+      it('should import AtAGlance from shared components, not define locally', () => {
+        const content = fs.readFileSync(articlePath, 'utf-8')
+        expect(content).toContain('from "@/components/article/AtAGlance"')
+        expect(content).not.toMatch(/^function AtAGlance\b/m)
       })
 
       it('should have at least 3 sources', () => {
@@ -91,6 +99,7 @@ describe('Template', () => {
     expect(content).toContain('const DATA')
     expect(content).toContain('const SOURCES')
     expect(content).toContain('ArticleEndCTA')
+    expect(content).toContain('SocialShare')
     expect(content).toContain('SourcesCitations')
     expect(content).toContain('SubscribeBar')
     expect(content).toContain('data-theme')
