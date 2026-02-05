@@ -502,6 +502,44 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Newark Highlight Callout */
+.vote-newark-highlight {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.06) 0%, rgba(239, 68, 68, 0.02) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  border-radius: 16px;
+  margin-top: 2rem;
+}
+
+.vote-newark-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.vote-newark-big {
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #ef4444 40%, rgba(239, 68, 68, 0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vote-newark-label {
+  font-size: var(--type-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 280px;
+}
+
 /* Yes/No Section backgrounds */
 .vote-yes-section {
   background: linear-gradient(180deg, rgba(34, 197, 94, 0.02) 0%, transparent 100%);
