@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Literata } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
