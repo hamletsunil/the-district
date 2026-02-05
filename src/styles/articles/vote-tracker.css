@@ -7,7 +7,7 @@
   background: var(--page-bg, #1e293b);
   color: var(--page-text, white);
   min-height: 100vh;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Hero Section */
@@ -76,14 +76,7 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-.vote-hero-title {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-}
+/* vote-hero-title: inherits all styles from .article-hero-title */
 
 .vote-title-line {
   display: block;
@@ -97,11 +90,7 @@
 }
 
 .vote-hero-subtitle {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .vote-hero-visual {
@@ -163,37 +152,12 @@
   border-bottom: none;
 }
 
-.vote-prose-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.vote-section-number {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+/* Vote tracker section overrides — preserve current colors */
+.vote-article .article-section-num {
   color: #6366f1;
-  margin-bottom: 1rem;
 }
 
-.vote-prose-header h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: linear-gradient(180deg, white 40%, rgba(255,255,255,0.6) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.vote-prose {
-  max-width: 720px;
-  margin: 0 auto 3rem;
-  font-family: "Georgia", serif;
-  font-size: 1.125rem;
-  line-height: 1.8;
+.vote-article .article-body-prose {
   color: rgba(255, 255, 255, 0.85);
 }
 
@@ -204,11 +168,6 @@
 .vote-prose strong {
   color: white;
   font-weight: 600;
-}
-
-.vote-prose-small {
-  font-size: 0.9375rem;
-  color: rgba(255, 255, 255, 0.7);
 }
 
 .vote-graphic {

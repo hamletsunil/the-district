@@ -7,7 +7,7 @@
   background: var(--page-bg, #faf7f2);
   color: var(--page-text, #1e293b);
   min-height: 100vh;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* Hero Section */
@@ -77,12 +77,6 @@
 }
 
 .abundance-hero-title {
-  font-family: "Inter", system-ui, sans-serif;
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
   color: #1e293b;
 }
 
@@ -98,11 +92,7 @@
 }
 
 .abundance-hero-subtitle {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   color: #64748b;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .abundance-hero-visual {
@@ -169,34 +159,12 @@
   border-bottom: none;
 }
 
-.abundance-prose-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.abundance-section-number {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+/* Abundance section overrides — preserve current colors */
+.abundance-article .article-section-num {
   color: #22c55e;
-  margin-bottom: 1rem;
 }
 
-.abundance-prose-header h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #1e293b;
-}
-
-.abundance-prose {
-  max-width: 720px;
-  margin: 0 auto 3rem;
-  font-family: "Georgia", serif;
-  font-size: 1.125rem;
-  line-height: 1.8;
+.abundance-article .article-body-prose {
   color: #475569;
 }
 
@@ -219,11 +187,6 @@
   border-radius: 4px;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.875em;
-}
-
-.abundance-prose-small {
-  font-size: 0.9375rem;
-  color: #64748b;
 }
 
 .abundance-graphic {
@@ -596,7 +559,7 @@
 }
 
 .abundance-quote p {
-  font-family: "Georgia", serif;
+  font-family: var(--font-body);
   font-style: italic;
   color: #374151;
   line-height: 1.6;

@@ -161,7 +161,7 @@ function HeroSection() {
           From The District
         </div>
 
-        <h1 className="dc-hero-title-epic">
+        <h1 className="article-hero-title dc-hero-title-epic">
           <span className="dc-title-line dc-title-line-1">The Data Center</span>
           <span className="dc-title-line dc-title-line-2">Gold Rush</span>
         </h1>
@@ -190,7 +190,7 @@ function HeroSection() {
 function LedeSection() {
   return (
     <section className="dc-editorial-section dc-lede-section">
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           &ldquo;How much water will this facility use?&rdquo;
         </p>
@@ -244,12 +244,12 @@ function TheExplosionSection() {
 
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Scale</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Scale</span>
         <h2>A Nationwide Conversation</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           Data center proposals are landing on planning commission agendas across
           America. In 2025 alone, we tracked <strong>734 municipal meetings</strong>{" "}
@@ -328,12 +328,12 @@ function ThePlayersSection() {
 
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Players</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Players</span>
         <h2>Big Tech at the Podium</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           The transcripts reveal which technology giants are most frequently
           discussed in local government chambers. <strong>Meta</strong> leads
@@ -395,12 +395,12 @@ function ThePlayersSection() {
 function TheNumbersSection() {
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Breakdown</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Breakdown</span>
         <h2>Where Cities Stand</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           Forget the average&mdash;it tells you nothing useful. What matters is
           the distribution: of 156 cities, <strong>38 show clear skepticism</strong>{" "}
@@ -432,12 +432,12 @@ function TheNumbersSection() {
 function TheConcernsSection() {
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Concerns</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Concerns</span>
         <h2>What Communities Debate</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           When residents speak at public hearings, four concerns dominate.
         </p>
@@ -488,12 +488,12 @@ function TheConcernsSection() {
 function TheVoicesSection() {
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Voices</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Voices</span>
         <h2>In Their Own Words</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           The municipal meeting transcript offers something press releases cannot:
           unscripted candor. These are the actual words spoken by citizens, planners,
@@ -508,7 +508,7 @@ function TheVoicesSection() {
         <cite>&mdash; Resident, San Angelo, TX</cite>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           On water: <em>&ldquo;Water in Texas is becoming scarce with AI data
           centers.&rdquo;</em> &mdash; Edinburg, TX
@@ -532,12 +532,12 @@ function TheVoicesSection() {
 function TheGeographySection() {
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Geography</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Geography</span>
         <h2>Where the Debate Is Loudest</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           The data center debate isn&rsquo;t uniform across America. Three states
           account for nearly 40% of all mentions in our dataset.
@@ -574,12 +574,12 @@ function TheGeographySection() {
 function TheBattlegroundsSection() {
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Battlegrounds</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Battlegrounds</span>
         <h2>Cities on the Front Line</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           Some cities have become focal points for particularly intense debates.
         </p>
@@ -613,12 +613,12 @@ function TheBattlegroundsSection() {
 function TheImplicationsSection() {
   return (
     <section className="dc-editorial-section">
-      <div className="dc-prose-header">
-        <span className="dc-section-number">The Implications</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Implications</span>
         <h2>What This Means</h2>
       </div>
 
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           Easy approvals are over. Communities that once welcomed data centers as
           economic wins are now asking harder questions. Grids are strained. Water
@@ -631,7 +631,7 @@ function TheImplicationsSection() {
       </div>
 
       <div className="dc-implication-box">
-        <div className="dc-prose">
+        <div className="article-body-prose">
           <p>
             <strong>The constraint that matters:</strong> Local government approval
             is no longer a formality. The planning commission is now as consequential
@@ -672,7 +672,7 @@ function ConclusionSection() {
           <span className="dc-big-label">Cities Grappling With This Question</span>
         </div>
 
-        <div className="dc-prose" style={{ textAlign: "center", marginTop: "3rem" }}>
+        <div className="article-body-prose" style={{ textAlign: "center", marginTop: "3rem" }}>
           <p>
             The data center gold rush has arrived at city hall.
           </p>
@@ -691,7 +691,7 @@ function ConclusionSection() {
 function MethodologySection() {
   return (
     <section className="dc-methodology-editorial">
-      <div className="dc-prose">
+      <div className="article-body-prose">
         <p>
           <strong>Data source:</strong> Municipal meeting transcripts from city
           councils and planning commissions, collected by Hamlet.

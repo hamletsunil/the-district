@@ -152,12 +152,12 @@ function HeroSection() {
           From The District
         </div>
 
-        <h1 className="abundance-hero-title">
+        <h1 className="article-hero-title abundance-hero-title">
           <span className="abundance-title-line">The Abundance</span>
           <span className="abundance-title-line abundance-title-accent">Index</span>
         </h1>
 
-        <p className="abundance-hero-subtitle">
+        <p className="article-hero-subtitle abundance-hero-subtitle">
           Mapping America&rsquo;s most welcoming&mdash;and resistant&mdash;cities for development
         </p>
       </div>
@@ -181,7 +181,7 @@ function HeroSection() {
 function LedeSection() {
   return (
     <section className="abundance-section abundance-lede">
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           In Temple, Texas, the planning commission took just 12 minutes to approve a
           data center project. The staff recommendation was clear: &ldquo;Data centers
@@ -235,12 +235,12 @@ function TheIndexSection() {
 
   return (
     <section className="abundance-section">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">The Methodology</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Methodology</span>
         <h2>Beyond Approval Rates</h2>
       </div>
 
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           Most analyses of local government stop at approval rates. But a city that
           approves 80% of projects reluctantly, after contentious debate, is not the
@@ -319,12 +319,12 @@ function ChampionsSection() {
 
   return (
     <section className="abundance-section abundance-champions">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">The Champions</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Champions</span>
         <h2>America&rsquo;s Most Welcoming Cities</h2>
       </div>
 
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           At the top of our index sits Temple, Texas, with an Abundance Index of{" "}
           <strong>80.0</strong>&mdash;the highest score in our dataset. Every single
@@ -411,12 +411,12 @@ function StrongholdsSection() {
 
   return (
     <section className="abundance-section abundance-strongholds">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">The Resistance</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Resistance</span>
         <h2>Where Development Faces Headwinds</h2>
       </div>
 
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           At the opposite end sits Fairfax, Virginia&mdash;a wealthy suburb of
           Washington, D.C.&mdash;with an Abundance Index of just <strong>12.0</strong>,
@@ -473,12 +473,12 @@ function StrongholdsSection() {
 function TheVoicesSection() {
   return (
     <section className="abundance-section abundance-voices">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">The Contrast</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Contrast</span>
         <h2>Hearing the Divide</h2>
       </div>
 
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           The Abundance Index measures language&mdash;what officials and residents
           actually say in municipal chambers. Here&rsquo;s the difference between
@@ -546,12 +546,12 @@ function StateRankingsSection() {
 
   return (
     <section className="abundance-section">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">The Geography</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Geography</span>
         <h2>State-Level Patterns</h2>
       </div>
 
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           State-level averages cluster in the neutral zone. Tennessee leads at 53.8
           across 4 cities; North Carolina and Missouri trail at 47.3. No state is
@@ -606,12 +606,12 @@ function StateRankingsSection() {
 function ImplicationsSection() {
   return (
     <section className="abundance-section abundance-implications">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">The Stakes</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Stakes</span>
         <h2>What This Means</h2>
       </div>
 
-      <div className="abundance-prose">
+      <div className="article-body-prose">
         <p>
           Cities like Temple, Dubuque, and Hayward aren&rsquo;t just approving
           projects&mdash;they&rsquo;re actively seeking them. Regulatory processes
@@ -655,12 +655,12 @@ function ImplicationsSection() {
 function MethodologySection() {
   return (
     <section className="abundance-section abundance-methodology">
-      <div className="abundance-prose-header">
-        <span className="abundance-section-number">Methodology</span>
+      <div className="article-prose-header">
+        <span className="article-section-num">Methodology</span>
         <h2>How We Calculated the Index</h2>
       </div>
 
-      <div className="abundance-prose abundance-prose-small">
+      <div className="article-body-prose article-body-prose-small">
         <p>
           <strong>Data Source:</strong> Municipal meeting transcripts from{" "}
           <strong>84 cities</strong> across the United States, collected via

@@ -60,7 +60,7 @@
      =========================== */
 
   /* Display */
-  --type-hero: clamp(2.5rem, 8vw, 5rem);
+  --type-hero: clamp(3rem, 10vw, 6rem);
   --type-section-title: clamp(1.5rem, 4vw, 2.25rem);
   --type-subsection: clamp(1.25rem, 3vw, 1.5rem);
 
@@ -82,6 +82,11 @@
   --tracking-wide: 0.1em;
   --tracking-wider: 0.15em;
 
+  /* Font Families */
+  --font-display: "Literata", Georgia, serif;
+  --font-body: "Literata", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
   /* ===========================
      SEMANTIC COLORS
      =========================== */
@@ -93,6 +98,13 @@
   --status-hot: #ef4444;
   --status-warm: #f59e0b;
   --status-cool: #22c55e;
+}
+
+/* Alias --font-display to the next/font-loaded Literata on body.
+   Without this, --font-display would only resolve to the CSS string
+   fallback, not the optimised font file loaded by next/font. */
+body {
+  --font-display: var(--font-body);
 }
 
 /* ===========================
@@ -158,4 +170,6 @@
   --color-coral-500: var(--coral-500);
   --color-coral-100: var(--coral-100);
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Literata", Georgia, serif;
+  --font-body: "Literata", Georgia, serif;
 }

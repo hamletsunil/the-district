@@ -43,22 +43,6 @@
   background: rgba(99, 102, 241, 0.1);
 }
 
-.dc-hero-title {
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-bottom: 1.5rem;
-  color: white;
-}
-
-.dc-hero-title-accent {
-  background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #4f46e5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .dc-hero-subtitle {
   font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   line-height: 1.6;
@@ -154,6 +138,7 @@
 }
 
 .dc-section-title {
+  font-family: var(--font-display);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -801,14 +786,13 @@
 }
 
 .dc-hero-title-epic {
+  letter-spacing: -0.01em;
+  line-height: 1;
   margin: 0 0 1.5rem;
 }
 
 .dc-title-line {
   display: block;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1;
 }
 
 .dc-title-line-1 {
@@ -955,8 +939,9 @@
 }
 
 .dc-section-title-large {
+  font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
   color: white;
   margin: 0 0 1rem;
@@ -1523,7 +1508,7 @@
   font-weight: 800;
   color: white;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
 }
 
 .dc-big-label {
@@ -1623,50 +1608,14 @@
 
 /* Editorial section container - PROPER MARGINS */
 .dc-editorial-section {
-  width: 100%;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 5rem 3rem;
+  margin: 0 auto;
+  padding: 6rem 2rem;
   border-bottom: 1px solid rgba(99, 102, 241, 0.08);
-}
-
-@media (min-width: 768px) {
-  .dc-editorial-section {
-    padding: 6rem 5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .dc-editorial-section {
-    padding: 7rem 8rem;
-  }
 }
 
 .dc-editorial-section:last-of-type {
   border-bottom: none;
-}
-
-/* Prose container - optimized for reading */
-.dc-prose {
-  width: 100%;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 1.125rem;
-  line-height: 1.85;
-  color: #d1d5db;
-}
-
-@media (min-width: 768px) {
-  .dc-prose {
-    font-size: 1.1875rem;
-    padding-left: 0;
-    padding-right: 0;
-  }
 }
 
 .dc-prose p {
@@ -1688,49 +1637,13 @@
   font-style: italic;
 }
 
-/* Section headers within prose */
-.dc-prose-header {
-  width: 100%;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-@media (min-width: 768px) {
-  .dc-prose-header {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
-.dc-prose-header h2 {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: white;
-  margin: 0 0 0.5rem;
-  letter-spacing: -0.02em;
-}
-
-@media (min-width: 768px) {
-  .dc-prose-header h2 {
-    font-size: 2.25rem;
-  }
-}
-
-.dc-prose-header .dc-section-number {
-  display: block;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+/* DC section overrides — color only */
+.dc-article .article-section-num {
   color: #818cf8;
-  margin-bottom: 0.75rem;
+}
+
+.dc-article .article-body-prose {
+  color: #d1d5db;
 }
 
 /* Graphics container - appears below prose */
@@ -1808,12 +1721,13 @@
 }
 
 .dc-pull-quote blockquote {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-body);
   font-size: 1.375rem;
   font-style: italic;
   line-height: 1.5;
   color: #e5e7eb;
   margin: 0 0 1.25rem;
+  text-wrap: balance;
 }
 
 @media (min-width: 768px) {
@@ -1838,7 +1752,7 @@
 }
 
 .dc-pull-quote cite {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-style: normal;
   color: #9ca3af;
@@ -1876,7 +1790,7 @@
 
 /* Hero subtitle for editorial */
 .dc-hero-subtitle-editorial {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-style: italic;
   color: #9ca3af;
@@ -1910,7 +1824,7 @@
 }
 
 .dc-methodology-editorial .dc-prose {
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   line-height: 1.7;
   color: #9ca3af;
@@ -1977,7 +1891,7 @@
 .dc-timeline-value {
   position: absolute;
   top: -1.75rem;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 700;
   color: white;
@@ -1990,14 +1904,14 @@
 }
 
 .dc-timeline-year {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
   color: #d1d5db;
 }
 
 .dc-timeline-cities {
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.6875rem;
   color: #9ca3af;
 }
@@ -2034,7 +1948,7 @@
 
 .dc-company-name {
   display: block;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.9375rem;
   font-weight: 600;
   color: white;
@@ -2042,7 +1956,7 @@
 
 .dc-company-cities {
   display: block;
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.6875rem;
   color: #9ca3af;
 }
@@ -2067,7 +1981,7 @@
   right: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
-  font-family: "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 700;
   color: white;

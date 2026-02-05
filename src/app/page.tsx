@@ -173,8 +173,8 @@ function HeroSection() {
         </div>
 
         <h1 className="district-hero-title">
-          Data-driven stories from<br />
-          <span className="district-title-accent">local government</span>
+          Data-driven stories<br />
+          from <span className="district-title-accent">local government</span>
         </h1>
 
         <p className="district-hero-subtitle">
