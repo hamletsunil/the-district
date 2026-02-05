@@ -12,6 +12,7 @@ import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { SocialShare } from "@/components/article/SocialShare";
+import { AtAGlance } from "@/components/article/AtAGlance";
 
 // Real data from our analysis of 1,524 officials across multiple cities
 const DATA = {
@@ -98,7 +99,14 @@ export default function VoteTrackerArticle() {
   return (
     <main className="vote-article article-page" data-theme="vote-tracker">
       <HeroSection />
-      <AtAGlance />
+      <AtAGlance
+        stats={[
+          { value: 5, label: "Princeton No-Voters" },
+          { value: 0, label: "Newark No Votes (Ever)" },
+          { value: "25%", label: "Environmental Dissent" },
+        ]}
+        finding="Princeton\u2019s five-member resistance bloc has voted no 95 times and yes twice. Newark\u2019s council has never recorded a single dissenting vote. Same state, opposite cultures."
+      />
       <LedeSection />
       <TheNumbersSection />
       <NoVotersSection />
@@ -164,38 +172,6 @@ function HeroSection() {
   );
 }
 
-// ============================================================================
-// AT A GLANCE - Key Stats (Stripe Press style)
-// ============================================================================
-function AtAGlance() {
-  return (
-    <section className="at-a-glance">
-      <div className="at-a-glance-inner">
-        <div className="at-a-glance-label">At a Glance</div>
-        <div className="at-a-glance-stats">
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">5</div>
-            <div className="at-a-glance-stat-label">Princeton No-Voters</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">0</div>
-            <div className="at-a-glance-stat-label">Newark No Votes (Ever)</div>
-          </div>
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">25%</div>
-            <div className="at-a-glance-stat-label">Environmental Dissent</div>
-          </div>
-        </div>
-        <div className="at-a-glance-finding">
-          <div className="at-a-glance-finding-label">Key Finding</div>
-          <div className="at-a-glance-finding-text">
-            Princeton&rsquo;s five-member resistance bloc has voted no 95 times and yes twice. Newark&rsquo;s council has never recorded a single dissenting vote. Same state, opposite cultures.
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ============================================================================
 // SECTION 1: THE LEDE

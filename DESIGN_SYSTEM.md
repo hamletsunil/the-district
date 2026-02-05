@@ -26,6 +26,32 @@ These values are defined in `globals.css` under `:root`. **Never hardcode altern
 | `--indigo-400` | `#818cf8` | Hover states |
 | `--indigo-300` | `#a5b4fc` | Subtle accents |
 
+#### Coral (Warm Accent)
+| Token | Value | Use |
+|-------|-------|-----|
+| `--coral-600` | `#ea580c` | Darker warm accent |
+| `--coral-500` | `#f97316` | Primary warm accent |
+| `--coral-400` | `#fb923c` | Hover warm accent |
+| `--coral-300` | `#fdba74` | Subtle warm |
+| `--coral-200` | `#fed7aa` | Very subtle warm |
+| `--coral-100` | `#ffedd5` | Light warm bg |
+| `--coral-50` | `#fff7ed` | Lightest warm bg |
+
+#### Sage / Green
+| Token | Value | Use |
+|-------|-------|-----|
+| `--sage-600` | `#059669` | Primary green |
+| `--sage-500` | `#10b981` | Positive / welcoming |
+| `--sage-100` | `#d1fae5` | Light green bg |
+| `--sage-50` | `#ecfdf5` | Lightest green bg |
+
+#### Status Colors
+| Token | Value | Use |
+|-------|-------|-----|
+| `--status-hot` | `#ef4444` | High friction / contentious |
+| `--status-warm` | `#f59e0b` | Moderate friction |
+| `--status-cool` | `#22c55e` | Low friction / consensus |
+
 #### Semantic Colors (Never Change)
 | Token | Value | Use |
 |-------|-------|-----|
@@ -182,6 +208,7 @@ Every article must include these elements in this order:
 | Component | Import | Purpose |
 |-----------|--------|---------|
 | `ArticleEndCTA` | `@/components/article/ArticleEndCTA` | Subscribe prompt before sources |
+| `SocialShare` | `@/components/article/SocialShare` | Social sharing buttons (X, LinkedIn, Facebook) |
 | `SourcesCitations` | `@/components/article/SourcesCitations` | Source list at article end |
 | `SubscribeBar` | `@/components/article/SubscribeBar` | Fixed bottom subscribe bar |
 
@@ -196,16 +223,31 @@ Every article must include these elements in this order:
 .at-a-glance-stat         /* Individual stat */
 .at-a-glance-stat-value   /* Big number */
 .at-a-glance-stat-label   /* Stat description */
-.at-a-glance-finding      /* Key finding callout */
-.at-a-glance-finding-text /* Finding prose */
+.at-a-glance-finding       /* Key finding callout */
+.at-a-glance-finding-label /* "Key Finding" label */
+.at-a-glance-finding-text  /* Finding prose */
 ```
 
 #### Article Cards
 ```css
 .article-card             /* Base card */
 .article-card:hover       /* Hover state (auto) */
-.card-bg                  /* Uses theme --card-bg */
-.card-border              /* Uses theme --card-border */
+```
+
+> **Note:** Card backgrounds and borders use CSS variables `--card-bg` and `--card-border` (set per theme), not utility classes.
+
+#### Hero & Section Base Classes
+```css
+.article-hero             /* Full-height hero wrapper */
+.article-hero-content     /* Hero content container */
+.article-hero-badge       /* "From The District" badge */
+.article-hero-badge-dot   /* Animated pulse dot on badge */
+.article-hero-title       /* Hero h1 styling */
+.article-hero-subtitle    /* Hero subtitle text */
+.article-section          /* Content section wrapper */
+.article-section-inner    /* Max-width section container */
+.article-section-number   /* Section number label */
+.article-section-title    /* Section heading */
 ```
 
 #### Prose
@@ -296,12 +338,13 @@ Each article gets a prefix. Use it consistently:
 
 ### CSS Organization
 
-New article styles go at the **end** of `globals.css` under a clear header:
+New article styles go in their own file under `src/styles/articles/`:
+```
+src/styles/articles/your-article.css
+```
+Then add an `@import` in `src/app/globals.css`:
 ```css
-/* ============================================================
-   [ARTICLE NAME] ARTICLE
-   [Brief description of visual approach]
-   ============================================================ */
+@import "../styles/articles/your-article.css";
 ```
 
 ---
@@ -312,31 +355,35 @@ New article styles go at the **end** of `globals.css` under a clear header:
 2. **Never change semantic sentiment colors** — Red/gray/green are universal
 3. **Never skip AtAGlance** — Every article needs key stats
 4. **Never create new easing functions** — Use `--ease-elegant` or `--ease-bounce`
-5. **Never put article CSS in separate files** — Keep in `globals.css` (for now)
+5. **Never put article CSS inline in components** — Keep in `src/styles/` files
 6. **Never remove shared components** — `ArticleEndCTA`, `SourcesCitations`, `SubscribeBar` are required
 
 ---
 
 ## VIII. CSS FILE STRUCTURE
 
-Current: Everything in `globals.css` (~6000 lines)
+CSS is split into organized files under `src/styles/`, imported via `globals.css`:
 
-**Section order:**
-1. `:root` variables (tokens)
-2. `[data-theme]` definitions
-3. `@theme inline` (Tailwind bridge)
-4. Base/reset styles
-5. Masthead/wordmark
-6. Homepage hero
-7. **Shared article components** (`.article-*`, `.at-a-glance-*`)
-8. Homepage article cards
-9. Footer
-10. Utilities
-11. **Per-article styles** (`.dc-*`, `.abundance-*`, etc.)
+```
+src/
+├── app/globals.css              # @import hub only
+├── styles/
+│   ├── tokens.css               # :root variables, themes, typography, @theme bridge
+│   ├── base.css                 # HTML/body, masthead, homepage hero
+│   ├── shared-article.css       # Shared article components (.article-*, .at-a-glance-*, cards, footer, utilities)
+│   ├── articles/
+│   │   ├── data-center.css      # .dc-* styles
+│   │   ├── abundance.css        # .abundance-* styles
+│   │   ├── vote-tracker.css     # .vote-* styles
+│   │   └── temperature.css      # .temp-* styles
+│   ├── responsive.css           # Consolidated responsive fixes
+│   └── theme-overrides.css      # Sources, subscribe bar, CTA, social share
+```
 
 **Finding things:**
-- Search for `/* ===` to find section headers
-- Article-specific styles start around line 1485
+- Token variables → `src/styles/tokens.css`
+- Shared article classes → `src/styles/shared-article.css`
+- Article-specific styles → `src/styles/articles/[name].css`
 
 ---
 
@@ -348,9 +395,9 @@ Current: Everything in `globals.css` (~6000 lines)
 2. Rename to `page.tsx`
 3. Choose or create a `data-theme`
 4. Pick a class prefix (e.g., `myarticle-`)
-5. Add article styles to end of `globals.css`
+5. Create `src/styles/articles/[name].css` and add `@import` to `globals.css`
 6. Reuse `.at-a-glance-*` and `.article-prose` classes
-7. Import and use shared components
+7. Import and use shared components (`AtAGlance`, `ArticleEndCTA`, `SocialShare`, `SourcesCitations`, `SubscribeBar`)
 
 ### Checklist Before Committing
 
@@ -365,4 +412,4 @@ Current: Everything in `globals.css` (~6000 lines)
 
 ---
 
-*This document complements VOICE_GUIDELINES.md (writing style) and EDITORIAL_STANDARDS.md (data integrity). Together they define The District's complete article standard.*
+*This document complements VOICE_GUIDELINES.md (writing style), EDITORIAL_STANDARDS.md (data integrity), and EDITORIAL_GUIDELINES.md (fact-checking and source validation). Together they define The District's complete article standard.*

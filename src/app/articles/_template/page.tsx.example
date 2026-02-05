@@ -11,6 +11,8 @@
 import { useEffect, useRef, useState } from "react";
 import { SourcesCitations, Source } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
+import { SocialShare } from "@/components/article/SocialShare";
+import { AtAGlance } from "@/components/article/AtAGlance";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 
 // =============================================================================
@@ -48,9 +50,16 @@ export default function ArticleName() {
   return (
     <main className="article-page" data-theme="your-theme">
       <HeroSection />
-      <AtAGlance />
+      <AtAGlance
+        stats={[
+          { value: "XXX", label: "Stat Label" },
+          // Add 2-3 key stats
+        ]}
+        finding="Your main takeaway in one sentence."
+      />
       {/* Add your content sections here */}
       <MethodologySection />
+      <SocialShare title="Your Article Title" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />
@@ -91,32 +100,6 @@ function HeroSection() {
         </p>
       </div>
     </header>
-  );
-}
-
-// =============================================================================
-// AT A GLANCE - Key Stats (Stripe Press style)
-// =============================================================================
-function AtAGlance() {
-  return (
-    <section className="at-a-glance">
-      <div className="at-a-glance-inner">
-        <div className="at-a-glance-label">At a Glance</div>
-        <div className="at-a-glance-stats">
-          <div className="at-a-glance-stat">
-            <div className="at-a-glance-stat-value">XXX</div>
-            <div className="at-a-glance-stat-label">Stat Label</div>
-          </div>
-          {/* Add 2-3 key stats */}
-        </div>
-        <div className="at-a-glance-finding">
-          <div className="at-a-glance-finding-label">Key Finding</div>
-          <div className="at-a-glance-finding-text">
-            Your main takeaway in one sentence.
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 

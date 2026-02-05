@@ -4,6 +4,9 @@ import path from 'path'
 
 const ARTICLES_DIR = path.join(process.cwd(), 'src/app/articles')
 
+// Known themes defined in globals.css
+const VALID_THEMES = ['data-center', 'abundance', 'vote-tracker', 'temperature']
+
 // Get all article directories (excluding _template)
 function getArticleDirs(): string[] {
   return fs.readdirSync(ARTICLES_DIR)
@@ -41,9 +44,22 @@ describe('Article Structure', () => {
         expect(content).toMatch(/data-theme=["']/)
       })
 
+      it('should use a valid data-theme value', () => {
+        const content = fs.readFileSync(articlePath, 'utf-8')
+        const themeMatch = content.match(/data-theme=["']([^"']+)["']/)
+        expect(themeMatch).not.toBeNull()
+        expect(VALID_THEMES).toContain(themeMatch![1])
+      })
+
+      it('should have article-page class on main element', () => {
+        const content = fs.readFileSync(articlePath, 'utf-8')
+        expect(content).toMatch(/<main[^>]*className="[^"]*article-page/)
+      })
+
       it('should import shared components', () => {
         const content = fs.readFileSync(articlePath, 'utf-8')
         expect(content).toContain('ArticleEndCTA')
+        expect(content).toContain('SocialShare')
         expect(content).toContain('SourcesCitations')
         expect(content).toContain('SubscribeBar')
       })
@@ -91,6 +107,7 @@ describe('Template', () => {
     expect(content).toContain('const DATA')
     expect(content).toContain('const SOURCES')
     expect(content).toContain('ArticleEndCTA')
+    expect(content).toContain('SocialShare')
     expect(content).toContain('SourcesCitations')
     expect(content).toContain('SubscribeBar')
     expect(content).toContain('data-theme')
