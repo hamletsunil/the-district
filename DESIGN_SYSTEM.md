@@ -69,6 +69,16 @@ These values are defined in `globals.css` under `:root`. **Never hardcode altern
 
 ---
 
+### Font Families
+
+| Token | Font | Fallback | Role |
+|-------|------|----------|------|
+| `--font-display` | Fraunces | Georgia, serif | Headlines, article titles, section titles |
+| `--font-body` | Literata | Georgia, serif | Prose, subtitles, pull quotes, findings |
+| `--font-sans` | Inter | system-ui, sans-serif | UI, labels, navigation, data viz, buttons |
+
+All three fonts are loaded via `next/font/google` in `layout.tsx`. Never use hardcoded font-family values — always reference the CSS variables.
+
 ### Typography Scale
 
 All type sizes use CSS `clamp()` for responsive scaling. **Use these tokens, not raw values.**
