@@ -521,6 +521,22 @@
   color: white;
 }
 
+.footer-colophon {
+  font-size: 0.6875rem;
+  color: var(--gray-500);
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-colophon a {
+  color: var(--gray-400);
+  transition: color 0.2s ease;
+}
+
+.footer-colophon a:hover {
+  color: white;
+}
+
 /* ===========================
    COLOPHON PAGE
    =========================== */
