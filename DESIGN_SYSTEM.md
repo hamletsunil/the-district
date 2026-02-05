@@ -358,149 +358,22 @@ Then add an `@import` in `src/app/globals.css`:
 
 ---
 
-## VII. ACCESSIBILITY STANDARDS
+## VII. CONTRAST REFERENCE
 
-**Target: WCAG 2.1 AA compliance.** The District covers government and civic data for a broad public audience. Accessibility is not optional — it is both a legal consideration and an editorial one. A data journalism publication about public meetings that some members of the public cannot read has failed its mission.
+Computed contrast ratios for each theme (WCAG AA requires 4.5:1 for body text, 3:1 for large text):
 
----
+| Theme | Combination | Ratio | Status |
+|-------|-------------|------:|:------:|
+| `data-center` | `--page-text` on `--page-bg` | 17.33:1 | OK |
+| `data-center` | `--page-text-muted` on `--page-bg` | 7.07:1 | OK |
+| `abundance` | `--page-text` on `--page-bg` | 13.69:1 | OK |
+| `abundance` | `--page-text-muted` on `--page-bg` | 4.45:1 | Large text only |
+| `vote-tracker` | `--page-text` on `--page-bg` | 13.98:1 | OK |
+| `vote-tracker` | `--page-text-muted` on `--page-bg` | 5.71:1 | OK |
+| `temperature` | `--page-text` on `--page-bg` | 14.52:1 | OK |
+| `temperature` | `--page-text-muted` on `--page-bg` | 6.01:1 | OK |
 
-### Color & Contrast
-
-#### WCAG AA Minimums
-
-| Context | Required Ratio | Applies To |
-|---------|---------------|------------|
-| Normal text (under 18pt / 24px) | 4.5:1 | Body prose, captions, labels |
-| Large text (18pt+ bold or 24px+ regular) | 3:1 | Headlines, section titles |
-| UI components & graphical objects | 3:1 | Buttons, form inputs, chart elements |
-
-#### Theme Audit (current values from `tokens.css`)
-
-| Theme | Combination | Ratio | AA Normal | AA Large |
-|-------|-------------|------:|:---------:|:--------:|
-| `data-center` | `--page-text` on `--page-bg` | 17.33:1 | PASS | PASS |
-| `data-center` | `--page-text-muted` on `--page-bg` | 7.07:1 | PASS | PASS |
-| `abundance` | `--page-text` on `--page-bg` | 13.69:1 | PASS | PASS |
-| `abundance` | `--page-text-muted` on `--page-bg` | 4.45:1 | **FAIL** | PASS |
-| `vote-tracker` | `--page-text` on `--page-bg` | 13.98:1 | PASS | PASS |
-| `vote-tracker` | `--page-text-muted` on `--page-bg` | 5.71:1 | PASS | PASS |
-| `temperature` | `--page-text` on `--page-bg` | 14.52:1 | PASS | PASS |
-| `temperature` | `--page-text-muted` on `--page-bg` | 6.01:1 | PASS | PASS |
-
-**Known issue:** The `abundance` theme's muted text (#64748b on #faf7f2) hits 4.45:1 — just below the 4.5:1 AA threshold for normal text. Use `--page-text-muted` in the abundance theme only for large text (section labels, captions at `--type-section-title` or above). For normal-sized muted text, use `--page-text` or darken the muted value to at least #5f6d7e.
-
-#### Sentiment & Accent Color Rules
-
-Several sentiment colors fail AA for normal-sized text on certain backgrounds. Rules:
-
-1. **Never use sentiment colors as the sole text color for normal-sized body text.** Safe for large labels, bar fills, and decorative elements — not readable prose.
-2. **Never rely on color alone to convey meaning.** Every sentiment bar, status indicator, and data point must also have a text label ("Positive", "Neutral", "Negative"), a pattern, or an icon.
-3. When sentiment colors appear as inline labels, pair them with the value:
-
-```tsx
-/* Good: color reinforces the text label */
-<span style={{ color: getSentimentColor(score) }}>
-  {score}% — {score < 45 ? "Skeptical" : score > 55 ? "Welcoming" : "Neutral"}
-</span>
-
-/* Bad: color is the only differentiator */
-<span style={{ color: getSentimentColor(score) }}>{score}%</span>
-```
-
-### Data Visualization
-
-#### Text Alternatives
-
-All visualizations need a text alternative:
-
-```tsx
-<div
-  role="img"
-  aria-label="Bar chart showing Newark at 100% unanimous votes, Jersey City at 87%"
-  className="dc-chart"
->
-  {/* visual bars */}
-</div>
-```
-
-#### Bar Charts
-
-Always render the numeric value as visible text, not just bar width:
-
-```tsx
-<div className="bar-row">
-  <span className="bar-label">Newark</span>
-  <div className="bar-track">
-    <div className="bar-fill" style={{ width: `${pct}%` }} />
-  </div>
-  <span className="bar-value">{pct}%</span> {/* Required — never omit */}
-</div>
-```
-
-#### Leaderboard Tables
-
-Use semantic HTML tables or ARIA table roles. Screen readers cannot parse a `<div>` grid as tabular data.
-
-### Motion & Animation
-
-#### `prefers-reduced-motion`
-
-All animations must respect `prefers-reduced-motion`:
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  .bar-fill { transition: none; }
-  .article-hero-badge-dot { animation: none; }
-  [data-animate] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-```
-
-**Rules:**
-- Scroll-triggered fade-ins: skip to final state immediately
-- Animated counters: show the final number, no counting animation
-- Hero parallax: disable the transform, keep content static
-- Bar chart transitions: remove `transition`, render at final width
-
-### Keyboard Navigation
-
-- All interactive elements must work via keyboard (Tab, Enter, Space)
-- Use real `<button>` and `<a>` elements — never clickable `<div>` without `role`, `tabIndex`, and `onKeyDown`
-- Focus styles must be visible:
-
-```css
-:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-:focus:not(:focus-visible) {
-  outline: none;
-}
-```
-
-- Long articles need a skip link (`<a href="#main-content" className="skip-link">Skip to main content</a>`)
-
-### Semantic HTML
-
-- **Heading hierarchy**: `h1` → `h2` → `h3`, never skip levels. Style down visually with CSS if needed.
-- **Landmarks**: Use `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
-- **Images**: Informational images need descriptive `alt` text. Decorative SVGs get `aria-hidden="true"`.
-
-### Accessibility Checklist
-
-- [ ] All text/background combinations pass WCAG AA (4.5:1 body, 3:1 large)
-- [ ] Muted text not used at normal size in `abundance` theme
-- [ ] Sentiment colors never sole indicator of meaning — text labels present
-- [ ] Every chart has `aria-label` or visible caption
-- [ ] Bar charts display numeric values as text
-- [ ] `prefers-reduced-motion` handled for all animations
-- [ ] All interactive elements keyboard-accessible
-- [ ] `:focus-visible` outlines present on focusable elements
-- [ ] Heading hierarchy sequential (no skipping)
-- [ ] Decorative SVGs have `aria-hidden="true"`
+**Note:** Abundance muted text (#64748b on #faf7f2) is just under 4.5:1. Use it only for large text, or darken to #5f6d7e.
 
 ---
 
