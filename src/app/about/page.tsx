@@ -64,7 +64,7 @@ export default function AboutPage() {
               />
               <div>
                 <p className="about-author-name">Paige Saez</p>
-                <p className="about-author-role">Head of Design &amp; Research, Hamlet</p>
+                <p className="about-author-role">Designer</p>
               </div>
             </div>
           </div>
