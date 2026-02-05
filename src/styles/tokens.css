@@ -82,6 +82,11 @@
   --tracking-wide: 0.1em;
   --tracking-wider: 0.15em;
 
+  /* Font Families */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Literata", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
   /* ===========================
      SEMANTIC COLORS
      =========================== */
@@ -158,4 +163,6 @@
   --color-coral-500: var(--coral-500);
   --color-coral-100: var(--coral-100);
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Literata", Georgia, serif;
 }
