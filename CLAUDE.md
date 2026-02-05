@@ -215,8 +215,8 @@ const SOURCES: Source[] = [
 - Thresholds: <45 = negative, 45-55 = neutral, >55 = positive
 
 ### Typography
-- Display/Headlines: `--font-display` (Fraunces) — `--type-hero`, `--tracking-tight`
-- Body/Prose: `--font-body` (Literata) — `--type-body`, `--leading-relaxed`
+- Display/Headlines: `--font-display` (Literata) — `--type-hero`, weight 500–600
+- Body/Prose: `--font-body` (Literata) — `--type-body`, weight 400
 - UI/Labels: `--font-sans` (Inter) — `--type-tiny`, `--tracking-wider`, uppercase
 - Never hardcode font-family values — always use `var(--font-display)`, `var(--font-body)`, or `var(--font-sans)`
 

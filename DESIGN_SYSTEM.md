@@ -73,11 +73,11 @@ These values are defined in `globals.css` under `:root`. **Never hardcode altern
 
 | Token | Font | Fallback | Role |
 |-------|------|----------|------|
-| `--font-display` | Fraunces | Georgia, serif | Headlines, article titles, section titles |
-| `--font-body` | Literata | Georgia, serif | Prose, subtitles, pull quotes, findings |
+| `--font-display` | Literata | Georgia, serif | Headlines, article titles, section titles (weight 500–600) |
+| `--font-body` | Literata | Georgia, serif | Prose, subtitles, pull quotes, findings (weight 400) |
 | `--font-sans` | Inter | system-ui, sans-serif | UI, labels, navigation, data viz, buttons |
 
-All three fonts are loaded via `next/font/google` in `layout.tsx`. Never use hardcoded font-family values — always reference the CSS variables.
+Both `--font-display` and `--font-body` resolve to Literata (single-font approach). Display headings are differentiated by weight (500–600) and size, not by typeface. Fonts are loaded via `next/font/google` in `layout.tsx`. Never use hardcoded font-family values — always reference the CSS variables.
 
 ### Typography Scale
 
