@@ -15,8 +15,7 @@ export function Footer() {
         Publication
       </p>
       <p className="footer-colophon">
-        Set in Fraunces &amp; Literata &middot;{" "}
-        <Link href="/colophon">Colophon</Link>
+        <Link href="/about">About</Link>
       </p>
     </footer>
   );

@@ -257,13 +257,15 @@
 }
 
 .article-end-cta__headline {
+  font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--page-text, white);
   margin-bottom: 0.5rem;
 }
 
 .article-end-cta__subtext {
+  font-family: var(--font-body);
   font-size: 1rem;
   color: var(--page-text-muted, rgba(255, 255, 255, 0.6));
   line-height: 1.6;

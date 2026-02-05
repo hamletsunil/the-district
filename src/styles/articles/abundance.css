@@ -77,12 +77,6 @@
 }
 
 .abundance-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
   color: #1e293b;
 }
 
@@ -98,11 +92,7 @@
 }
 
 .abundance-hero-subtitle {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   color: #64748b;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .abundance-hero-visual {

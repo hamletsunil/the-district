@@ -75,14 +75,7 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-.temp-hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-}
+/* temp-hero-title: inherits all styles from .article-hero-title */
 
 .temp-title-line {
   display: block;
@@ -96,11 +89,7 @@
 }
 
 .temp-hero-subtitle {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   color: rgba(255, 255, 255, 0.6);
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
 .temp-hero-visual {

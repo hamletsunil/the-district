@@ -150,12 +150,12 @@ function HeroSection() {
           From The District
         </div>
 
-        <h1 className="vote-hero-title">
+        <h1 className="article-hero-title vote-hero-title">
           <span className="vote-title-line">The Vote</span>
           <span className="vote-title-line vote-title-accent">Tracker</span>
         </h1>
 
-        <p className="vote-hero-subtitle">
+        <p className="article-hero-subtitle vote-hero-subtitle">
           Newark agrees on everything. Princeton fights about everything. Why?
         </p>
       </div>

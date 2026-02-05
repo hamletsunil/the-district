@@ -152,12 +152,12 @@ function HeroSection() {
           From The District
         </div>
 
-        <h1 className="abundance-hero-title">
+        <h1 className="article-hero-title abundance-hero-title">
           <span className="abundance-title-line">The Abundance</span>
           <span className="abundance-title-line abundance-title-accent">Index</span>
         </h1>
 
-        <p className="abundance-hero-subtitle">
+        <p className="article-hero-subtitle abundance-hero-subtitle">
           Mapping America&rsquo;s most welcoming&mdash;and resistant&mdash;cities for development
         </p>
       </div>

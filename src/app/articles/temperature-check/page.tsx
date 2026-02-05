@@ -134,12 +134,12 @@ function HeroSection() {
           From The District
         </div>
 
-        <h1 className="temp-hero-title">
+        <h1 className="article-hero-title temp-hero-title">
           <span className="temp-title-line">The Temperature</span>
           <span className="temp-title-line temp-title-accent">Check</span>
         </h1>
 
-        <p className="temp-hero-subtitle">
+        <p className="article-hero-subtitle temp-hero-subtitle">
           Mapping civic friction&mdash;where local debates run hot and where consensus reigns
         </p>
       </div>

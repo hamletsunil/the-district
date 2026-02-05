@@ -161,7 +161,7 @@ function HeroSection() {
           From The District
         </div>
 
-        <h1 className="dc-hero-title-epic">
+        <h1 className="article-hero-title dc-hero-title-epic">
           <span className="dc-title-line dc-title-line-1">The Data Center</span>
           <span className="dc-title-line dc-title-line-2">Gold Rush</span>
         </h1>
