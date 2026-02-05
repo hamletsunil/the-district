@@ -46,9 +46,14 @@ export function DistrictLogo({ className, showTagline = true, size = "default" }
             <span className="text-[11px] font-normal italic district-logo-tagline mt-0.5">
               Stories from city halls
             </span>
-            <span className="text-[9px] font-medium tracking-[0.15em] district-logo-attribution uppercase mt-2">
+            <a
+              href="https://myhamlet.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[9px] font-medium tracking-[0.15em] district-logo-attribution uppercase mt-2 hamlet-link"
+            >
               A Hamlet Publication
-            </span>
+            </a>
           </>
         )}
       </div>

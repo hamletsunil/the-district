@@ -20,11 +20,24 @@ export const metadata: Metadata = {
   title: "The District",
   description:
     "Visual journalism about what happens in 3,000+ city halls across America. A publication by Hamlet.",
+  metadataBase: new URL("https://thedistrict.pub"),
   openGraph: {
     title: "The District",
     description:
       "Visual journalism about what happens in 3,000+ city halls across America.",
     type: "website",
+    siteName: "The District",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The District",
+    description:
+      "Visual journalism about what happens in 3,000+ city halls across America.",
+  },
+  icons: {
+    icon: "/icon",
+    shortcut: "/icon",
+    apple: "/apple-icon",
   },
 };
 

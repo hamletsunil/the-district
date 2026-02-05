@@ -169,7 +169,16 @@ function HeroSection() {
       <div className="district-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
         <div className="district-hero-badge">
           <span className="district-badge-dot" />
-          A Hamlet Publication
+          A{" "}
+          <a
+            href="https://myhamlet.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hamlet-link"
+          >
+            Hamlet
+          </a>{" "}
+          Publication
         </div>
 
         <h1 className="district-hero-title">
