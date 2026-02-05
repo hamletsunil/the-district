@@ -77,6 +77,7 @@ export default function Home() {
       <nav className="side-nav hidden lg:flex">
         {articles.map((_, i) => (
           <button
+            type="button"
             key={i}
             className={`side-nav-dot ${i === 0 ? "active" : ""}`}
             aria-label={`Go to article ${i + 1}`}
