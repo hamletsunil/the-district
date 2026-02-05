@@ -121,6 +121,83 @@
   margin-bottom: 1.5rem;
 }
 
+/* ===========================
+   SHARED ARTICLE SECTIONS
+   Prose headers, section numbers, body prose
+   =========================== */
+
+.article-prose-header {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .article-prose-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.article-prose-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--page-text);
+}
+
+.article-section-num {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--type-section-num);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+}
+
+.article-body-prose {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: var(--leading-relaxed);
+  color: var(--page-text-muted);
+}
+
+@media (min-width: 768px) {
+  .article-body-prose {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.article-body-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.article-body-prose-small {
+  font-size: 0.9375rem;
+}
+
+.gradient-text {
+  background: linear-gradient(180deg, white 40%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .article-prose strong {
   color: var(--page-text);
   font-weight: 600;

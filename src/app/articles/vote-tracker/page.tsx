@@ -179,7 +179,7 @@ function HeroSection() {
 function LedeSection() {
   return (
     <section className="vote-section vote-lede">
-      <div className="vote-prose">
+      <div className="article-body-prose">
         <p>
           In Newark, the city council agrees on everything. Literally everything.
           Councilman Eddie Osborne has cast 119 votes. Not one was &ldquo;no.&rdquo;
@@ -209,12 +209,12 @@ function LedeSection() {
 function TheNumbersSection() {
   return (
     <section className="vote-section">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Unanimity</span>
-        <h2>Newark&rsquo;s Perfect Record</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Unanimity</span>
+        <h2 className="gradient-text">Newark&rsquo;s Perfect Record</h2>
       </div>
 
-      <div className="vote-prose">
+      <div className="article-body-prose">
         <p>
           Newark&rsquo;s city council hasn&rsquo;t recorded a single dissenting vote
           in our dataset. Seven officials. Hundreds of votes. Zero &ldquo;no.&rdquo;
@@ -276,12 +276,12 @@ function NoVotersSection() {
 
   return (
     <section className="vote-section vote-no-section">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Resistance</span>
-        <h2>Princeton&rsquo;s Five-Member Bloc</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Resistance</span>
+        <h2 className="gradient-text">Princeton&rsquo;s Five-Member Bloc</h2>
       </div>
 
-      <div className="vote-prose">
+      <div className="article-body-prose">
         <p>
           Princeton is one of America&rsquo;s wealthiest towns. Median household income
           exceeds $150,000. Home values routinely top $1 million. And five members of
@@ -368,12 +368,12 @@ function TopicBreakdownSection() {
 
   return (
     <section className="vote-section">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Contested</span>
-        <h2>Where Dissent Actually Appears</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Contested</span>
+        <h2 className="gradient-text">Where Dissent Actually Appears</h2>
       </div>
 
-      <div className="vote-prose">
+      <div className="article-body-prose">
         <p>
           Strip out the routine administrative votes&mdash;renaming streets,
           approving minutes, ceremonial resolutions&mdash;and a different picture
@@ -430,12 +430,12 @@ function TopicBreakdownSection() {
 function ImplicationsSection() {
   return (
     <section className="vote-section vote-implications">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">The Pattern</span>
-        <h2>What the Votes Reveal</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Pattern</span>
+        <h2 className="gradient-text">What the Votes Reveal</h2>
       </div>
 
-      <div className="vote-prose">
+      <div className="article-body-prose">
         <p>
           Voting records don&rsquo;t explain motives. They reveal patterns. Newark&rsquo;s
           unanimity could be healthy consensus; it could be something else. Princeton&rsquo;s
@@ -461,12 +461,12 @@ function ImplicationsSection() {
 function MethodologySection() {
   return (
     <section className="vote-section vote-methodology">
-      <div className="vote-prose-header">
-        <span className="vote-section-number">Methodology</span>
-        <h2>How We Built This Dataset</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">Methodology</span>
+        <h2 className="gradient-text">How We Built This Dataset</h2>
       </div>
 
-      <div className="vote-prose vote-prose-small">
+      <div className="article-body-prose article-body-prose-small">
         <p>
           <strong>Data Source:</strong> Voting records from Legistar, the municipal
           government software used by hundreds of U.S. cities. We extracted individual

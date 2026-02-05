@@ -163,7 +163,7 @@ function HeroSection() {
 function LedeSection() {
   return (
     <section className="temp-section temp-lede">
-      <div className="temp-prose">
+      <div className="article-body-prose">
         <p>
           In Grants Pass, Oregon, city council meetings are a model of civility.
           Opposition speakers are rare. Debates are brief. The contention rate&mdash;our
@@ -196,12 +196,12 @@ function LedeSection() {
 function TheMetricsSection() {
   return (
     <section className="temp-section">
-      <div className="temp-prose-header">
-        <span className="temp-section-number">The Method</span>
-        <h2>Measuring Civic Heat</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Method</span>
+        <h2 className="gradient-text">Measuring Civic Heat</h2>
       </div>
 
-      <div className="temp-prose">
+      <div className="article-body-prose">
         <p>
           Our Friction Index combines three signals. <strong>Contention Rate</strong>
           measures what percentage of discussion blocks contain adversarial language&mdash;disagreement,
@@ -266,12 +266,12 @@ function HottestCitiesSection() {
 
   return (
     <section className="temp-section temp-hot-section">
-      <div className="temp-prose-header">
-        <span className="temp-section-number">The Hotspots</span>
-        <h2>Where Debates Run Hottest</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Hotspots</span>
+        <h2 className="gradient-text">Where Debates Run Hottest</h2>
       </div>
 
-      <div className="temp-prose">
+      <div className="article-body-prose">
         <p>
           Six cities in our dataset achieved the maximum friction score of 100:
           Sparks, Nevada; Tiffin, Ohio; High Point, North Carolina; Dalton, Georgia;
@@ -357,12 +357,12 @@ function CalmestCitiesSection() {
 
   return (
     <section className="temp-section temp-calm-section">
-      <div className="temp-prose-header">
-        <span className="temp-section-number">The Cool Zones</span>
-        <h2>Where Consensus Reigns</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Cool Zones</span>
+        <h2 className="gradient-text">Where Consensus Reigns</h2>
       </div>
 
-      <div className="temp-prose">
+      <div className="article-body-prose">
         <p>
           At the other extreme sits Grants Pass, Oregon, with a friction score of
           just 38.2&mdash;the lowest in our dataset. Highland Park, Illinois (41.4)
@@ -445,12 +445,12 @@ function StatePatternSection() {
 
   return (
     <section className="temp-section">
-      <div className="temp-prose-header">
-        <span className="temp-section-number">The Geography</span>
-        <h2>Regional Friction Patterns</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Geography</span>
+        <h2 className="gradient-text">Regional Friction Patterns</h2>
       </div>
 
-      <div className="temp-prose">
+      <div className="article-body-prose">
         <p>
           Aggregating to the state level reveals a pattern: the South runs hot.
           New Mexico, Kentucky, Alabama, and Mississippi all show average contention
@@ -509,12 +509,12 @@ function StatePatternSection() {
 function ImplicationsSection() {
   return (
     <section className="temp-section temp-implications">
-      <div className="temp-prose-header">
-        <span className="temp-section-number">The Stakes</span>
-        <h2>What Friction Means</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">The Stakes</span>
+        <h2 className="gradient-text">What Friction Means</h2>
       </div>
 
-      <div className="temp-prose">
+      <div className="article-body-prose">
         <p>
           High friction isn&rsquo;t inherently bad. Engaged citizens who show up,
           speak out, and challenge proposals are the lifeblood of local democracy.
@@ -563,12 +563,12 @@ function ImplicationsSection() {
 function MethodologySection() {
   return (
     <section className="temp-section temp-methodology">
-      <div className="temp-prose-header">
-        <span className="temp-section-number">Methodology</span>
-        <h2>How We Measured Friction</h2>
+      <div className="article-prose-header">
+        <span className="article-section-num">Methodology</span>
+        <h2 className="gradient-text">How We Measured Friction</h2>
       </div>
 
-      <div className="temp-prose temp-prose-small">
+      <div className="article-body-prose article-body-prose-small">
         <p>
           <strong>Data Source:</strong> Meeting transcripts from 438 cities in the
           Hamlet transcript database, analyzed using natural language processing.

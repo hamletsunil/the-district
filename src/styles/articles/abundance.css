@@ -169,34 +169,12 @@
   border-bottom: none;
 }
 
-.abundance-prose-header {
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.abundance-section-number {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
+/* Abundance section overrides — preserve current colors */
+.abundance-article .article-section-num {
   color: #22c55e;
-  margin-bottom: 1rem;
 }
 
-.abundance-prose-header h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: #1e293b;
-}
-
-.abundance-prose {
-  max-width: 720px;
-  margin: 0 auto 3rem;
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.8;
+.abundance-article .article-body-prose {
   color: #475569;
 }
 
@@ -219,11 +197,6 @@
   border-radius: 4px;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.875em;
-}
-
-.abundance-prose-small {
-  font-size: 0.9375rem;
-  color: #64748b;
 }
 
 .abundance-graphic {
