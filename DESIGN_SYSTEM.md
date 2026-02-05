@@ -6,7 +6,7 @@
 
 ## I. DESIGN TOKENS (Non-Negotiable)
 
-These values are defined in `globals.css` under `:root`. **Never hardcode alternatives.**
+These values are defined in `src/styles/tokens.css` under `:root`. **Never hardcode alternatives.**
 
 ### Color Palettes
 
@@ -86,7 +86,7 @@ All type sizes use CSS `clamp()` for responsive scaling. **Use these tokens, not
 #### Display
 | Token | Value | Use |
 |-------|-------|-----|
-| `--type-hero` | `clamp(2.5rem, 8vw, 5rem)` | Article main titles |
+| `--type-hero` | `clamp(3rem, 10vw, 6rem)` | Article main titles |
 | `--type-section-title` | `clamp(1.5rem, 4vw, 2.25rem)` | Section headings |
 | `--type-subsection` | `clamp(1.25rem, 3vw, 1.5rem)` | Subsection headings |
 
@@ -103,8 +103,8 @@ All type sizes use CSS `clamp()` for responsive scaling. **Use these tokens, not
 | Token | Value | Use |
 |-------|-------|-----|
 | `--leading-tight` | `1.1` | Headlines |
-| `--leading-normal` | `1.6` | Body text |
-| `--leading-relaxed` | `1.8` | Long-form prose |
+| `--leading-normal` | `1.6` | Body text, prose |
+| `--leading-relaxed` | `1.8` | Pull quotes, special emphasis only |
 
 #### Letter Spacing
 | Token | Value | Use |
@@ -163,7 +163,7 @@ Each theme must define:
 
 ### Creating a New Theme
 
-1. Add to `globals.css` under the theme section (~line 105)
+1. Add to `src/styles/tokens.css` under the theme section
 2. Define all 9 variables
 3. Test against existing article components
 
@@ -217,7 +217,10 @@ Every article must include these elements in this order:
 
 | Component | Import | Purpose |
 |-----------|--------|---------|
+| `AtAGlance` | `@/components/article/AtAGlance` | Key stats + finding summary |
 | `ArticleEndCTA` | `@/components/article/ArticleEndCTA` | Subscribe prompt before sources |
+| `MethodologySection` | `@/components/article/MethodologySection` | Structured methodology items |
+| `PullQuote` | `@/components/article/PullQuote` | Blockquote with city attribution |
 | `SocialShare` | `@/components/article/SocialShare` | Social sharing buttons (X, LinkedIn, Facebook) |
 | `SourcesCitations` | `@/components/article/SourcesCitations` | Source list at article end |
 | `SubscribeBar` | `@/components/article/SubscribeBar` | Fixed bottom subscribe bar |
@@ -262,7 +265,7 @@ Every article must include these elements in this order:
 
 #### Prose
 ```css
-.article-prose            /* Georgia font, relaxed leading */
+.article-prose            /* Literata (serif), relaxed leading */
 .article-prose p          /* Paragraph spacing */
 .article-prose strong     /* Bold = page-text color */
 ```
@@ -285,23 +288,19 @@ Every article must include these elements in this order:
 
 ### Animated Counters
 
-Use IntersectionObserver pattern:
-```tsx
-const [isVisible, setIsVisible] = useState(false);
+Use the `useIntersectionObserver` hook and `AnimatedStat` component instead of raw IntersectionObserver:
 
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        observer.disconnect();
-      }
-    },
-    { threshold: 0.2 }
-  );
-  if (ref.current) observer.observe(ref.current);
-  return () => observer.disconnect();
-}, []);
+```tsx
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { AnimatedStat } from "@/components/viz/AnimatedStat";
+
+// For simple number counters, use the component directly:
+<AnimatedStat value={156} label="Cities Analyzed" format="comma" />
+<AnimatedStat value={49.9} label="Avg Score" format="decimal" />
+
+// For custom scroll-triggered animations, use the hook:
+const { ref, isVisible } = useIntersectionObserver({ threshold: 0.2 });
+// Attach ref to container, use isVisible to trigger animations
 ```
 
 ### Horizontal Bar Charts
@@ -359,7 +358,153 @@ Then add an `@import` in `src/app/globals.css`:
 
 ---
 
-## VII. DO NOT
+## VII. ACCESSIBILITY STANDARDS
+
+**Target: WCAG 2.1 AA compliance.** The District covers government and civic data for a broad public audience. Accessibility is not optional — it is both a legal consideration and an editorial one. A data journalism publication about public meetings that some members of the public cannot read has failed its mission.
+
+---
+
+### Color & Contrast
+
+#### WCAG AA Minimums
+
+| Context | Required Ratio | Applies To |
+|---------|---------------|------------|
+| Normal text (under 18pt / 24px) | 4.5:1 | Body prose, captions, labels |
+| Large text (18pt+ bold or 24px+ regular) | 3:1 | Headlines, section titles |
+| UI components & graphical objects | 3:1 | Buttons, form inputs, chart elements |
+
+#### Theme Audit (current values from `tokens.css`)
+
+| Theme | Combination | Ratio | AA Normal | AA Large |
+|-------|-------------|------:|:---------:|:--------:|
+| `data-center` | `--page-text` on `--page-bg` | 17.33:1 | PASS | PASS |
+| `data-center` | `--page-text-muted` on `--page-bg` | 7.07:1 | PASS | PASS |
+| `abundance` | `--page-text` on `--page-bg` | 13.69:1 | PASS | PASS |
+| `abundance` | `--page-text-muted` on `--page-bg` | 4.45:1 | **FAIL** | PASS |
+| `vote-tracker` | `--page-text` on `--page-bg` | 13.98:1 | PASS | PASS |
+| `vote-tracker` | `--page-text-muted` on `--page-bg` | 5.71:1 | PASS | PASS |
+| `temperature` | `--page-text` on `--page-bg` | 14.52:1 | PASS | PASS |
+| `temperature` | `--page-text-muted` on `--page-bg` | 6.01:1 | PASS | PASS |
+
+**Known issue:** The `abundance` theme's muted text (#64748b on #faf7f2) hits 4.45:1 — just below the 4.5:1 AA threshold for normal text. Use `--page-text-muted` in the abundance theme only for large text (section labels, captions at `--type-section-title` or above). For normal-sized muted text, use `--page-text` or darken the muted value to at least #5f6d7e.
+
+#### Sentiment & Accent Color Rules
+
+Several sentiment colors fail AA for normal-sized text on certain backgrounds. Rules:
+
+1. **Never use sentiment colors as the sole text color for normal-sized body text.** Safe for large labels, bar fills, and decorative elements — not readable prose.
+2. **Never rely on color alone to convey meaning.** Every sentiment bar, status indicator, and data point must also have a text label ("Positive", "Neutral", "Negative"), a pattern, or an icon.
+3. When sentiment colors appear as inline labels, pair them with the value:
+
+```tsx
+/* Good: color reinforces the text label */
+<span style={{ color: getSentimentColor(score) }}>
+  {score}% — {score < 45 ? "Skeptical" : score > 55 ? "Welcoming" : "Neutral"}
+</span>
+
+/* Bad: color is the only differentiator */
+<span style={{ color: getSentimentColor(score) }}>{score}%</span>
+```
+
+### Data Visualization
+
+#### Text Alternatives
+
+All visualizations need a text alternative:
+
+```tsx
+<div
+  role="img"
+  aria-label="Bar chart showing Newark at 100% unanimous votes, Jersey City at 87%"
+  className="dc-chart"
+>
+  {/* visual bars */}
+</div>
+```
+
+#### Bar Charts
+
+Always render the numeric value as visible text, not just bar width:
+
+```tsx
+<div className="bar-row">
+  <span className="bar-label">Newark</span>
+  <div className="bar-track">
+    <div className="bar-fill" style={{ width: `${pct}%` }} />
+  </div>
+  <span className="bar-value">{pct}%</span> {/* Required — never omit */}
+</div>
+```
+
+#### Leaderboard Tables
+
+Use semantic HTML tables or ARIA table roles. Screen readers cannot parse a `<div>` grid as tabular data.
+
+### Motion & Animation
+
+#### `prefers-reduced-motion`
+
+All animations must respect `prefers-reduced-motion`:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill { transition: none; }
+  .article-hero-badge-dot { animation: none; }
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+```
+
+**Rules:**
+- Scroll-triggered fade-ins: skip to final state immediately
+- Animated counters: show the final number, no counting animation
+- Hero parallax: disable the transform, keep content static
+- Bar chart transitions: remove `transition`, render at final width
+
+### Keyboard Navigation
+
+- All interactive elements must work via keyboard (Tab, Enter, Space)
+- Use real `<button>` and `<a>` elements — never clickable `<div>` without `role`, `tabIndex`, and `onKeyDown`
+- Focus styles must be visible:
+
+```css
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+```
+
+- Long articles need a skip link (`<a href="#main-content" className="skip-link">Skip to main content</a>`)
+
+### Semantic HTML
+
+- **Heading hierarchy**: `h1` → `h2` → `h3`, never skip levels. Style down visually with CSS if needed.
+- **Landmarks**: Use `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+- **Images**: Informational images need descriptive `alt` text. Decorative SVGs get `aria-hidden="true"`.
+
+### Accessibility Checklist
+
+- [ ] All text/background combinations pass WCAG AA (4.5:1 body, 3:1 large)
+- [ ] Muted text not used at normal size in `abundance` theme
+- [ ] Sentiment colors never sole indicator of meaning — text labels present
+- [ ] Every chart has `aria-label` or visible caption
+- [ ] Bar charts display numeric values as text
+- [ ] `prefers-reduced-motion` handled for all animations
+- [ ] All interactive elements keyboard-accessible
+- [ ] `:focus-visible` outlines present on focusable elements
+- [ ] Heading hierarchy sequential (no skipping)
+- [ ] Decorative SVGs have `aria-hidden="true"`
+
+---
+
+## VIII. DO NOT
 
 1. **Never hardcode colors** — Use CSS variables
 2. **Never change semantic sentiment colors** — Red/gray/green are universal
@@ -370,7 +515,7 @@ Then add an `@import` in `src/app/globals.css`:
 
 ---
 
-## VIII. CSS FILE STRUCTURE
+## IX. CSS FILE STRUCTURE
 
 CSS is split into organized files under `src/styles/`, imported via `globals.css`:
 
@@ -397,7 +542,7 @@ src/
 
 ---
 
-## IX. QUICK REFERENCE
+## X. QUICK REFERENCE
 
 ### Starting a New Article
 

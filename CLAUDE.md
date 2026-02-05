@@ -99,7 +99,7 @@ the-district/
 │   ├── app/
 │   │   ├── page.tsx              # Homepage
 │   │   ├── globals.css           # CSS import hub (imports from ../styles/)
-│   │   ├── api/                  # 11 API routes
+│   │   ├── api/                  # 12 API routes
 │   │   │   ├── subscribe/        # Beehiiv newsletter integration
 │   │   │   ├── abundance-index/  # Abundance data endpoints
 │   │   │   ├── friction-index/   # Friction index data
@@ -109,6 +109,7 @@ the-district/
 │   │   │   ├── dc-excerpts/      # Data center excerpts
 │   │   │   ├── dc-sentiment/     # Data center sentiment analysis
 │   │   │   ├── dc-deep-analysis/ # Data center deep analysis
+│   │   │   ├── explore-budget/   # Budget exploration data
 │   │   │   ├── explore-concerns/ # Concern exploration data
 │   │   │   └── explore-data/     # General data exploration
 │   │   └── articles/
@@ -124,7 +125,9 @@ the-district/
 │   │   ├── articles/             # Per-article CSS (data-center, abundance, etc.)
 │   │   ├── responsive.css        # Responsive breakpoint fixes
 │   │   └── theme-overrides.css   # Sources, subscribe bar, CTA, social share
-│   ├── types/article.ts          # Shared article types (Source, AtAGlanceStat)
+│   ├── types/
+│   │   ├── article.ts            # Shared article types (Source, AtAGlanceStat)
+│   │   └── scrollama.d.ts        # Type declarations for scrollama library
 │   ├── hooks/useIntersectionObserver.ts  # Scroll-triggered visibility hook
 │   └── components/
 │       ├── article/              # Shared: AtAGlance, ArticleEndCTA, MethodologySection, PullQuote, SocialShare, SourcesCitations, SubscribeBar
