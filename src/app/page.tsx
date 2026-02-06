@@ -293,7 +293,19 @@ function RevealFooter() {
           happening in local democracy.
         </p>
 
-        {/* Authors */}
+        {/* How It's Made */}
+        <section className="reveal-footer-how">
+          <h3 className="reveal-footer-section-title">How It&rsquo;s Made</h3>
+          <p className="reveal-footer-prose">
+            Every story in The District starts with data. Hamlet&rsquo;s platform
+            processes transcripts, agendas, and voting records from city
+            council meetings across the country. Our journalism team uses
+            this data to find patterns, anomalies, and stories that would
+            be impossible to uncover by hand.
+          </p>
+        </section>
+
+        {/* Author */}
         <div className="reveal-footer-authors">
           <div className="reveal-footer-author">
             <img
@@ -306,19 +318,6 @@ function RevealFooter() {
             <div>
               <p className="reveal-footer-author-name">Sunil Rajaraman</p>
               <p className="reveal-footer-author-role">Founder &amp; CEO</p>
-            </div>
-          </div>
-          <div className="reveal-footer-author">
-            <img
-              src="https://www.myhamlet.com/team/paige-saez.jpg"
-              alt="Paige Saez"
-              width={48}
-              height={48}
-              className="reveal-footer-avatar"
-            />
-            <div>
-              <p className="reveal-footer-author-name">Paige Saez</p>
-              <p className="reveal-footer-author-role">Designer</p>
             </div>
           </div>
         </div>
@@ -352,6 +351,16 @@ function RevealFooter() {
             <p className="reveal-footer-error">{message}</p>
           )}
         </div>
+
+        {/* Team Link */}
+        <a
+          href="https://www.myhamlet.com/about"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="reveal-footer-team-link"
+        >
+          Meet the full team at Hamlet →
+        </a>
 
         {/* Attribution */}
         <div className="reveal-footer-attribution">

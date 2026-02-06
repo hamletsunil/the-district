@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export function Footer() {
   return (
     <footer className="footer-minimal">
@@ -15,7 +13,13 @@ export function Footer() {
         Publication
       </p>
       <p className="footer-colophon">
-        <Link href="/about">About</Link>
+        <a
+          href="https://www.myhamlet.com/about"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          About
+        </a>
       </p>
     </footer>
   );
