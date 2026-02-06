@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ArticleIllustration } from "@/components/home";
 
@@ -297,7 +296,7 @@ function RevealFooter() {
         {/* Authors */}
         <div className="reveal-footer-authors">
           <div className="reveal-footer-author">
-            <Image
+            <img
               src="https://www.myhamlet.com/team/sunil-rajaraman.jpg"
               alt="Sunil Rajaraman"
               width={48}
@@ -310,7 +309,7 @@ function RevealFooter() {
             </div>
           </div>
           <div className="reveal-footer-author">
-            <Image
+            <img
               src="https://www.myhamlet.com/team/paige-saez.jpg"
               alt="Paige Saez"
               width={48}
