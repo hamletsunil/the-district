@@ -70,10 +70,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Reveal Footer - sits behind main content */}
-      <RevealFooter />
-
-      {/* Main content - scrolls over footer */}
+      {/* Main content */}
       <main className="main-content-layer">
         {/* Hero Section */}
         <HeroSection />
@@ -117,6 +114,9 @@ export default function Home() {
           ))}
         </section>
       </main>
+
+      {/* Reveal Footer - revealed when scrolling past main content */}
+      <RevealFooter />
     </>
   );
 }
