@@ -22,11 +22,12 @@ body {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   z-index: 100;
   padding: 1.25rem 1.5rem;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   transition: background 0.3s ease;
 }
