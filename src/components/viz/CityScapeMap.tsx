@@ -271,7 +271,7 @@ export function CityScapeMap() {
             pitch: 50,
             bearing: -15,
           }}
-          style={{ width: "100%", height: 550 }}
+          style={{ width: "100%", height: "clamp(320px, 60vw, 550px)" }}
           mapStyle="mapbox://styles/mapbox/dark-v11"
           mapboxAccessToken={MAPBOX_TOKEN}
           onLoad={onMapLoad}
@@ -312,7 +312,7 @@ export function CityScapeMap() {
         <div
           className="absolute pointer-events-none z-30 px-4 py-3 rounded-xl shadow-2xl"
           style={{
-            left: Math.min(tooltip.x + 16, 480),
+            left: Math.min(tooltip.x + 16, typeof window !== "undefined" ? window.innerWidth - 250 : 480),
             top: Math.max(tooltip.y - 100, 50),
             background: "rgba(15, 23, 42, 0.94)",
             border: "1px solid rgba(255,255,255,0.12)",

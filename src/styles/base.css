@@ -24,12 +24,29 @@ body {
   top: 0;
   left: 0;
   z-index: 100;
-  padding: 2rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.3s ease;
 }
 
 @media (min-width: 768px) {
   .masthead {
-    padding: 2.5rem 3rem;
+    padding: 2rem 3rem;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+  }
+}
+
+/* Hide tagline and attribution on mobile to keep masthead compact */
+@media (max-width: 767px) {
+  .masthead .district-logo-tagline,
+  .masthead .district-logo-attribution {
+    display: none;
   }
 }
 
@@ -82,6 +99,18 @@ body {
 
 .district-logo-attribution {
   color: var(--page-text-muted, #6b7280);
+}
+
+/* H mark link — subtle hover to hint it's clickable */
+.hamlet-mark-link {
+  color: var(--page-text, white);
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hamlet-mark-link:hover {
+  opacity: 1;
+  transform: scale(1.08);
 }
 
 /* ===========================
