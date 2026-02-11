@@ -1,0 +1,202 @@
+[
+  {
+    "year": 2005,
+    "population_estimate": 390724,
+    "violent_count": 7858,
+    "property_count": 23050,
+    "total_count": 30908,
+    "violent_rate_per_100k": 2011.1,
+    "property_rate_per_100k": 5899.3,
+    "total_rate_per_100k": 7910.4
+  },
+  {
+    "year": 2006,
+    "population_estimate": 390724,
+    "violent_count": 9187,
+    "property_count": 24040,
+    "total_count": 33227,
+    "violent_rate_per_100k": 2351.3,
+    "property_rate_per_100k": 6152.7,
+    "total_rate_per_100k": 8504.0
+  },
+  {
+    "year": 2007,
+    "population_estimate": 390724,
+    "violent_count": 9398,
+    "property_count": 23722,
+    "total_count": 33120,
+    "violent_rate_per_100k": 2405.3,
+    "property_rate_per_100k": 6071.3,
+    "total_rate_per_100k": 8476.6
+  },
+  {
+    "year": 2008,
+    "population_estimate": 390724,
+    "violent_count": 9193,
+    "property_count": 22823,
+    "total_count": 32016,
+    "violent_rate_per_100k": 2352.8,
+    "property_rate_per_100k": 5841.2,
+    "total_rate_per_100k": 8194.0
+  },
+  {
+    "year": 2009,
+    "population_estimate": 390724,
+    "violent_count": 8523,
+    "property_count": 23225,
+    "total_count": 31748,
+    "violent_rate_per_100k": 2181.3,
+    "property_rate_per_100k": 5944.1,
+    "total_rate_per_100k": 8125.4
+  },
+  {
+    "year": 2010,
+    "population_estimate": 390724,
+    "violent_count": 8819,
+    "property_count": 20763,
+    "total_count": 29582,
+    "violent_rate_per_100k": 2257.1,
+    "property_rate_per_100k": 5314.0,
+    "total_rate_per_100k": 7571.1
+  },
+  {
+    "year": 2011,
+    "population_estimate": 395716,
+    "violent_count": 9199,
+    "property_count": 22869,
+    "total_count": 32068,
+    "violent_rate_per_100k": 2324.6,
+    "property_rate_per_100k": 5779.1,
+    "total_rate_per_100k": 8103.8
+  },
+  {
+    "year": 2012,
+    "population_estimate": 400708,
+    "violent_count": 11522,
+    "property_count": 28739,
+    "total_count": 40261,
+    "violent_rate_per_100k": 2875.4,
+    "property_rate_per_100k": 7172.1,
+    "total_rate_per_100k": 10047.5
+  },
+  {
+    "year": 2013,
+    "population_estimate": 405700,
+    "violent_count": 11563,
+    "property_count": 28375,
+    "total_count": 39938,
+    "violent_rate_per_100k": 2850.1,
+    "property_rate_per_100k": 6994.1,
+    "total_rate_per_100k": 9844.2
+  },
+  {
+    "year": 2014,
+    "population_estimate": 410692,
+    "violent_count": 11181,
+    "property_count": 29068,
+    "total_count": 40249,
+    "violent_rate_per_100k": 2722.5,
+    "property_rate_per_100k": 7077.8,
+    "total_rate_per_100k": 9800.3
+  },
+  {
+    "year": 2015,
+    "population_estimate": 415685,
+    "violent_count": 10974,
+    "property_count": 29025,
+    "total_count": 39999,
+    "violent_rate_per_100k": 2640.0,
+    "property_rate_per_100k": 6982.5,
+    "total_rate_per_100k": 9622.4
+  },
+  {
+    "year": 2016,
+    "population_estimate": 420677,
+    "violent_count": 10759,
+    "property_count": 28470,
+    "total_count": 39229,
+    "violent_rate_per_100k": 2557.5,
+    "property_rate_per_100k": 6767.7,
+    "total_rate_per_100k": 9325.2
+  },
+  {
+    "year": 2017,
+    "population_estimate": 425669,
+    "violent_count": 10410,
+    "property_count": 31081,
+    "total_count": 41491,
+    "violent_rate_per_100k": 2445.6,
+    "property_rate_per_100k": 7301.7,
+    "total_rate_per_100k": 9747.2
+  },
+  {
+    "year": 2018,
+    "population_estimate": 430661,
+    "violent_count": 10347,
+    "property_count": 27818,
+    "total_count": 38165,
+    "violent_rate_per_100k": 2402.6,
+    "property_rate_per_100k": 6459.4,
+    "total_rate_per_100k": 8862.0
+  },
+  {
+    "year": 2019,
+    "population_estimate": 435653,
+    "violent_count": 10549,
+    "property_count": 35689,
+    "total_count": 46238,
+    "violent_rate_per_100k": 2421.4,
+    "property_rate_per_100k": 8192.1,
+    "total_rate_per_100k": 10613.5
+  },
+  {
+    "year": 2020,
+    "population_estimate": 440646,
+    "violent_count": 12109,
+    "property_count": 28925,
+    "total_count": 41034,
+    "violent_rate_per_100k": 2748.0,
+    "property_rate_per_100k": 6564.2,
+    "total_rate_per_100k": 9312.2
+  },
+  {
+    "year": 2021,
+    "population_estimate": 437825,
+    "violent_count": 12924,
+    "property_count": 33676,
+    "total_count": 46600,
+    "violent_rate_per_100k": 2951.9,
+    "property_rate_per_100k": 7691.7,
+    "total_rate_per_100k": 10643.5
+  },
+  {
+    "year": 2022,
+    "population_estimate": 437825,
+    "violent_count": 12239,
+    "property_count": 42074,
+    "total_count": 54313,
+    "violent_rate_per_100k": 2795.4,
+    "property_rate_per_100k": 9609.8,
+    "total_rate_per_100k": 12405.2
+  },
+  {
+    "year": 2023,
+    "population_estimate": 437825,
+    "violent_count": 13726,
+    "property_count": 47910,
+    "total_count": 61636,
+    "violent_rate_per_100k": 3135.0,
+    "property_rate_per_100k": 10942.7,
+    "total_rate_per_100k": 14077.8
+  },
+  {
+    "year": 2024,
+    "population_estimate": 437825,
+    "violent_count": 11892,
+    "property_count": 33857,
+    "total_count": 45749,
+    "violent_rate_per_100k": 2716.2,
+    "property_rate_per_100k": 7733.0,
+    "total_rate_per_100k": 10449.2
+  }
+]

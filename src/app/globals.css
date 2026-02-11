@@ -14,6 +14,7 @@
 @import "../styles/articles/abundance.css";
 @import "../styles/articles/vote-tracker.css";
 @import "../styles/articles/temperature.css";
+@import "../styles/articles/oakland.css";
 
 /* Responsive breakpoint fixes */
 @import "../styles/responsive.css";

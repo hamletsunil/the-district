@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -20,6 +20,7 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     housing: <HousingIllustration />,
     zoning: <ZoningIllustration />,
     climate: <ClimateIllustration />,
+    oakland: <OaklandIllustration />,
   };
 
   return (
@@ -475,6 +476,122 @@ function ClimateIllustration() {
 
       {/* Ground line */}
       <rect x="0" y="160" width="280" height="20" fill="#d1fae5" opacity="0.25" />
+    </svg>
+  );
+}
+
+/**
+ * Oakland: Port cranes, oak tree, hills, Lake Merritt, city skyline
+ */
+function OaklandIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      {/* Oakland green gradients */}
+      <defs>
+        <linearGradient id="oaklandGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#00845a" />
+          <stop offset="100%" stopColor="#006341" />
+        </linearGradient>
+        <linearGradient id="oaklandDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#0c1621" />
+          <stop offset="100%" stopColor="#00152e" />
+        </linearGradient>
+        <linearGradient id="hillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#059669" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#006341" stopOpacity="0.3" />
+        </linearGradient>
+        <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.15" />
+        </linearGradient>
+      </defs>
+
+      {/* Background glow */}
+      <ellipse cx="140" cy="165" rx="120" ry="20" fill="#006341" opacity="0.1" />
+
+      {/* Oakland hills silhouette */}
+      <path d="M0 100 Q30 60 70 80 Q100 65 140 75 Q180 60 220 70 Q250 55 280 75 L280 180 L0 180Z" fill="url(#hillGradient)" />
+
+      {/* Lake Merritt water */}
+      <ellipse cx="195" cy="140" rx="35" ry="14" fill="url(#waterGradient)" />
+      <ellipse cx="195" cy="138" rx="25" ry="8" fill="#0ea5e9" opacity="0.1" />
+
+      {/* Port crane 1 - Left */}
+      <g filter="url(#softShadow)">
+        <rect x="18" y="65" width="5" height="95" fill="#164b7e" />
+        <rect x="10" y="62" width="22" height="6" rx="1" fill="#0a3161" />
+        {/* Boom arm */}
+        <line x1="20" y1="65" x2="60" y2="55" stroke="#3a7ab5" strokeWidth="3" />
+        <line x1="20" y1="65" x2="5" y2="80" stroke="#3a7ab5" strokeWidth="2" />
+        {/* Cable lines */}
+        <line x1="40" y1="59" x2="40" y2="85" stroke="#6a9fcf" strokeWidth="1" opacity="0.6" />
+        <line x1="50" y1="57" x2="50" y2="90" stroke="#6a9fcf" strokeWidth="1" opacity="0.5" />
+      </g>
+
+      {/* Port crane 2 */}
+      <g filter="url(#softShadow)" opacity="0.7">
+        <rect x="55" y="75" width="4" height="85" fill="#164b7e" />
+        <rect x="49" y="72" width="18" height="5" rx="1" fill="#0a3161" />
+        <line x1="57" y1="75" x2="88" y2="66" stroke="#3a7ab5" strokeWidth="2.5" />
+        <line x1="57" y1="75" x2="44" y2="87" stroke="#3a7ab5" strokeWidth="1.5" />
+        <line x1="73" y1="70" x2="73" y2="92" stroke="#6a9fcf" strokeWidth="0.8" opacity="0.5" />
+      </g>
+
+      {/* Downtown skyline */}
+      <g filter="url(#softShadow)">
+        {/* Tribune Tower */}
+        <rect x="100" y="58" width="18" height="102" rx="2" fill="url(#oaklandDark)" />
+        <rect x="103" y="62" width="5" height="6" rx="1" fill="#3a7ab5" opacity="0.4" />
+        <rect x="110" y="62" width="5" height="6" rx="1" fill="#3a7ab5" opacity="0.4" />
+        <rect x="103" y="72" width="5" height="6" rx="1" fill="#3a7ab5" opacity="0.3" />
+        <rect x="110" y="72" width="5" height="6" rx="1" fill="#3a7ab5" opacity="0.3" />
+        <rect x="103" y="82" width="5" height="6" rx="1" fill="#3a7ab5" opacity="0.2" />
+        <rect x="110" y="82" width="5" height="6" rx="1" fill="#3a7ab5" opacity="0.2" />
+        {/* Spire */}
+        <rect x="107" y="48" width="4" height="12" fill="#0a3161" />
+        <polygon points="109,42 112,48 106,48" fill="#164b7e" />
+      </g>
+
+      {/* Building 2 */}
+      <g filter="url(#softShadow)">
+        <rect x="122" y="75" width="22" height="85" rx="2" fill="#0a3161" />
+        <rect x="126" y="80" width="6" height="5" rx="1" fill="#006341" opacity="0.4" />
+        <rect x="134" y="80" width="6" height="5" rx="1" fill="#006341" opacity="0.4" />
+        <rect x="126" y="90" width="6" height="5" rx="1" fill="#006341" opacity="0.3" />
+        <rect x="134" y="90" width="6" height="5" rx="1" fill="#006341" opacity="0.3" />
+      </g>
+
+      {/* Building 3 (shorter) */}
+      <rect x="148" y="95" width="16" height="65" rx="2" fill="#001d3d" opacity="0.8" filter="url(#softShadow)" />
+
+      {/* Oak tree — symbol of Oakland */}
+      <g filter="url(#softShadow)">
+        {/* Trunk */}
+        <rect x="225" y="120" width="8" height="30" fill="#065f46" />
+        <path d="M225 130 L218 140" stroke="#065f46" strokeWidth="3" strokeLinecap="round" />
+        <path d="M233 128 L240 138" stroke="#065f46" strokeWidth="3" strokeLinecap="round" />
+        {/* Canopy */}
+        <circle cx="230" cy="100" r="26" fill="url(#oaklandGreen)" />
+        <circle cx="218" cy="110" r="16" fill="#006341" />
+        <circle cx="244" cy="108" r="14" fill="#059669" />
+        <circle cx="230" cy="88" r="14" fill="#00845a" opacity="0.8" />
+      </g>
+
+      {/* Small accent tree */}
+      <circle cx="268" cy="130" r="8" fill="#059669" opacity="0.6" />
+      <rect x="266" y="136" width="4" height="10" fill="#065f46" opacity="0.6" />
+
+      {/* Data visualization dots (referencing the simulation) */}
+      <g filter="url(#glow)">
+        <circle cx="85" cy="50" r="2.5" fill="#00845a" opacity="0.7" />
+        <circle cx="165" cy="45" r="2" fill="#006341" opacity="0.6" />
+        <circle cx="200" cy="55" r="1.5" fill="#059669" opacity="0.5" />
+      </g>
+
+      {/* Ground line */}
+      <rect x="0" y="158" width="280" height="22" fill="#006341" opacity="0.12" />
     </svg>
   );
 }

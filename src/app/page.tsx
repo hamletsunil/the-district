@@ -6,6 +6,16 @@ import { ArticleIllustration } from "@/components/home";
 
 const articles = [
   {
+    id: "oaklands-future",
+    topic: "City Deep Dive",
+    title: "Five Futures for Oakland",
+    description:
+      "$94K median incomes. A $360M deficit. 342 missing officers. An interactive simulation of the trade-offs Oakland faces over the next decade.",
+    meta: "10 min read · Interactive",
+    colorScheme: "oakland",
+    illustrationType: "oakland" as const,
+  },
+  {
     id: "data-center-gold-rush",
     topic: "Data Centers",
     title: "The Data Center Gold Rush",

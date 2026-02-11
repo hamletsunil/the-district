@@ -1,0 +1,730 @@
+/* ===========================
+   OAKLAND'S FUTURE
+   Warm-dark theme with teal accent
+   Mirrors Data Center article architecture
+   =========================== */
+
+.oakland-article {
+  /* City accent — sophisticated teal */
+  --city-accent: #10997F;
+  --city-accent-light: #14b89a;
+  --city-accent-glow: rgba(16, 153, 127, 0.12);
+
+  /* Dimension colors (used by simulation) */
+  --dim-education: #6366f1;
+  --dim-safety: #ef4444;
+  --dim-prosperity: #f59e0b;
+  --dim-affordability: #10b981;
+
+  /* Section backgrounds */
+  --bg-primary: #1a1714;
+  --bg-secondary: #221f1b;
+  --bg-accent: rgba(16, 153, 127, 0.08);
+  --bg-dark: #1a1714;
+  --text-primary: #f5f0e8;
+  --text-secondary: #a39e96;
+  --text-on-dark: #f5f0e8;
+  --border-light: rgba(255, 255, 255, 0.08);
+
+  /* Semantic colors */
+  --sentiment-negative: #ef4444;
+  --sentiment-neutral: #a39e96;
+  --sentiment-positive: #10997F;
+}
+
+/* ===========================
+   COLOR OVERRIDES FOR SHARED CLASSES
+   =========================== */
+
+.oakland-article .article-section-num {
+  color: #14b89a;
+}
+
+.oakland-article .article-body-prose {
+  color: #a39e96;
+}
+
+.oakland-article .article-body-prose strong {
+  color: #f5f0e8;
+  font-weight: 600;
+}
+
+.oakland-article .article-body-prose em {
+  color: #9be8d8;
+  font-style: italic;
+}
+
+.oakland-article .article-prose-header h2 {
+  color: var(--text-primary);
+}
+
+/* ===========================
+   EPIC HERO
+   Full-viewport, centered, animated
+   =========================== */
+
+.oak-hero-epic {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.oak-hero-bg-layers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.oak-hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(16, 153, 127, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 153, 127, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.oak-hero-bg-glow {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(ellipse at center, rgba(16, 153, 127, 0.15) 0%, transparent 60%);
+  transition: transform 0.1s ease-out;
+}
+
+.oak-hero-content-epic {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 2rem;
+  will-change: transform, opacity;
+}
+
+.oak-hero-badge-animated {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--city-accent-light);
+  padding: 0.625rem 1.25rem;
+  border: 1px solid rgba(16, 153, 127, 0.4);
+  border-radius: 100px;
+  margin-bottom: 2rem;
+  background: rgba(16, 153, 127, 0.1);
+  animation: oakBadgePulse 3s ease-in-out infinite;
+}
+
+.oak-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: oakDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes oakBadgePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 153, 127, 0.3); }
+  50% { box-shadow: 0 0 20px 5px rgba(16, 153, 127, 0.1); }
+}
+
+@keyframes oakDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.oak-hero-title-epic {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin: 0 0 1.5rem;
+}
+
+.oak-title-line {
+  display: block;
+}
+
+.oak-title-line-1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  color: white;
+  animation: oakSlideUp 1s ease-out 0.2s both;
+}
+
+.oak-title-line-2 {
+  font-size: clamp(3rem, 10vw, 6.5rem);
+  background: linear-gradient(135deg, #14b89a 0%, #10997F 50%, #0D6E5B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: oakSlideUp 1s ease-out 0.4s both;
+}
+
+@keyframes oakSlideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.oak-hero-subtitle-editorial {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-style: italic;
+  color: #a39e96;
+  max-width: 550px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  padding: 0 1rem;
+  animation: oakFadeIn 1s ease-out 0.8s both;
+}
+
+@media (min-width: 768px) {
+  .oak-hero-subtitle-editorial {
+    font-size: 1.1875rem;
+    padding: 0;
+  }
+}
+
+@keyframes oakFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.oak-hero-illustration {
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.oak-hero-illustration svg {
+  width: 100%;
+  height: auto;
+}
+
+.oak-scroll-prompt {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.oak-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--city-accent), transparent);
+  animation: oakScrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes oakScrollPulse {
+  0%, 100% { opacity: 0.3; height: 40px; }
+  50% { opacity: 1; height: 60px; }
+}
+
+/* ===========================
+   EDITORIAL SECTIONS
+   Consistent padding, border dividers
+   =========================== */
+
+.oak-editorial-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-bottom: 1px solid rgba(16, 153, 127, 0.08);
+}
+
+.oak-editorial-section:last-of-type {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .oak-editorial-section {
+    padding: 4rem 1.5rem;
+  }
+}
+
+/* ===========================
+   LEDE SECTION
+   Drop cap on first letter
+   =========================== */
+
+.oak-lede-section {
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .oak-lede-section {
+    padding-top: 5rem;
+  }
+}
+
+.oak-lede-section .article-body-prose p:first-child::first-letter {
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.85;
+  padding-right: 0.625rem;
+  padding-top: 0.125rem;
+  color: #14b89a;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .oak-lede-section .article-body-prose p:first-child::first-letter {
+    font-size: 4.5rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* ===========================
+   GRAPHICS CONTAINER
+   Centered, max-width, consistent margin
+   =========================== */
+
+.oak-graphic {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+  .oak-graphic {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ===========================
+   CARDS
+   Dark glass cards with hover lift
+   =========================== */
+
+.oak-card {
+  background: rgba(34, 31, 27, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.oak-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 153, 127, 0.3);
+}
+
+.oak-card-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.oak-card-value {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.oak-card-subtext {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ===========================
+   FINDING CARDS
+   Numbered findings with teal circles
+   =========================== */
+
+.oak-finding-card {
+  background: rgba(34, 31, 27, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.oak-finding-card:hover {
+  border-color: rgba(16, 153, 127, 0.3);
+}
+
+.oak-finding-number {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--city-accent);
+  color: white;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.oak-finding-title {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.oak-finding-body {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ===========================
+   FUND BALANCE CARDS
+   =========================== */
+
+.oak-fund-card {
+  background: rgba(34, 31, 27, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.oak-fund-card-negative {
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.oak-fund-card .oak-card-label {
+  font-size: 0.75rem;
+}
+
+.oak-fund-card .stat-number {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.oak-fund-change {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--sentiment-negative);
+  margin-top: 0.25rem;
+}
+
+/* ===========================
+   POLICY ISSUES LIST
+   =========================== */
+
+.oak-policy-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(34, 31, 27, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+.oak-policy-item:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.oak-policy-level {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+}
+
+.oak-policy-level-high { background: var(--sentiment-negative); }
+.oak-policy-level-medium { background: #f59e0b; }
+.oak-policy-level-low { background: var(--sentiment-neutral); }
+
+.oak-policy-name {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.oak-policy-freq {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ===========================
+   PULL QUOTE (dark mode)
+   =========================== */
+
+.oakland-article .oakland-pull-quote {
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .oakland-article .oakland-pull-quote {
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+  }
+}
+
+.oakland-article .oakland-pull-quote blockquote {
+  font-family: var(--font-body);
+  font-size: 1.375rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: #f5f0e8;
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .oakland-article .oakland-pull-quote blockquote {
+    font-size: 1.75rem;
+  }
+}
+
+.oakland-article .oakland-pull-quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--city-accent);
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .oakland-article .oakland-pull-quote blockquote::before {
+    font-size: 4rem;
+  }
+}
+
+.oakland-article .oakland-pull-quote cite {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: #a39e96;
+  letter-spacing: 0.05em;
+}
+
+/* ===========================
+   CONCLUSION SECTION
+   Gradient bg, big number, fade-in
+   =========================== */
+
+.oak-conclusion-section {
+  padding: 10rem 2rem;
+  background: linear-gradient(180deg, transparent, rgba(16, 153, 127, 0.1));
+}
+
+.oak-conclusion-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.oak-conclusion-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.oak-big-number {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 6rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.oak-big-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* ===========================
+   METHODOLOGY PREFIX CLASSES
+   Generated by MethodologySection prefix="oakland"
+   =========================== */
+
+.oakland-section.oakland-methodology {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.oakland-prose-header {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .oakland-prose-header {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.oakland-prose-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+  padding-bottom: 0.1em;
+}
+
+.oakland-section-number {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--type-section-num);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #14b89a;
+  margin-bottom: 0.75rem;
+}
+
+.oakland-prose {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: #a39e96;
+}
+
+@media (min-width: 768px) {
+  .oakland-prose {
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 0.9375rem;
+  }
+}
+
+.oakland-prose strong {
+  color: #f5f0e8;
+  font-weight: 600;
+}
+
+.oakland-prose p {
+  margin-bottom: 0.75rem;
+}
+
+.oakland-prose-small {
+  font-size: 0.875rem;
+}
+
+/* ===========================
+   MAPBOX OVERRIDES
+   =========================== */
+
+.oakland-article .mapboxgl-canvas { outline: none; }
+.oakland-article .mapboxgl-ctrl-group { display: none !important; }
+
+/* ===========================
+   YEAR SLIDER
+   =========================== */
+
+.oakland-article .year-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+  cursor: pointer;
+}
+
+.oakland-article .year-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--city-accent-light);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.oakland-article .year-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.oakland-article .year-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--city-accent-light);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.oakland-article .year-slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+}

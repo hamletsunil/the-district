@@ -1,0 +1,906 @@
+{
+  "06001405800": {
+    "name": "Fruitvale",
+    "education": 50.6,
+    "safety": 45.6,
+    "prosperity": 59.2,
+    "affordability": 48.0,
+    "composite": 50.9
+  },
+  "06001402900": {
+    "name": "Adams Point",
+    "education": 44.7,
+    "safety": 23.7,
+    "prosperity": 56.5,
+    "affordability": 46.1,
+    "composite": 42.8
+  },
+  "06001407300": {
+    "name": "Havenscourt",
+    "education": 54.2,
+    "safety": 54.2,
+    "prosperity": 64.2,
+    "affordability": 48.1,
+    "composite": 55.2
+  },
+  "06001404300": {
+    "name": "Rockridge",
+    "education": 63.7,
+    "safety": 48.5,
+    "prosperity": 63.4,
+    "affordability": 38.3,
+    "composite": 53.5
+  },
+  "06001405000": {
+    "name": "Glenview",
+    "education": 56.1,
+    "safety": 59.6,
+    "prosperity": 62.9,
+    "affordability": 41.5,
+    "composite": 55.0
+  },
+  "06001402200": {
+    "name": "Ralph Bunche",
+    "education": 42.8,
+    "safety": 22.4,
+    "prosperity": 48.9,
+    "affordability": 54.2,
+    "composite": 42.1
+  },
+  "06001408000": {
+    "name": "Piedmont Pines",
+    "education": 63.5,
+    "safety": 56.6,
+    "prosperity": 68.2,
+    "affordability": 40.0,
+    "composite": 57.1
+  },
+  "06001405200": {
+    "name": "Clinton",
+    "education": 53.4,
+    "safety": 35.4,
+    "prosperity": 61.1,
+    "affordability": 35.9,
+    "composite": 46.5
+  },
+  "06001404102": {
+    "name": "Glen Echo Creek",
+    "education": 43.1,
+    "safety": 37.2,
+    "prosperity": 59.0,
+    "affordability": 51.1,
+    "composite": 47.6
+  },
+  "06001403702": {
+    "name": "San Antonio",
+    "education": 51.3,
+    "safety": 31.4,
+    "prosperity": 61.2,
+    "affordability": 40.0,
+    "composite": 46.0
+  },
+  "06001403701": {
+    "name": "Eastlake",
+    "education": 47.0,
+    "safety": 34.4,
+    "prosperity": 57.1,
+    "affordability": 51.7,
+    "composite": 47.5
+  },
+  "06001403502": {
+    "name": "Grand Lake",
+    "education": 53.3,
+    "safety": 39.5,
+    "prosperity": 61.9,
+    "affordability": 49.5,
+    "composite": 51.0
+  },
+  "06001410300": {
+    "name": "South Stonehurst",
+    "education": 60.0,
+    "safety": 58.4,
+    "prosperity": 67.3,
+    "affordability": 38.9,
+    "composite": 56.1
+  },
+  "06001404501": {
+    "name": "Oakmore",
+    "education": 61.5,
+    "safety": 66.2,
+    "prosperity": 64.9,
+    "affordability": 35.3,
+    "composite": 57.0
+  },
+  "06001409400": {
+    "name": "Durant Manor",
+    "education": 64.5,
+    "safety": 68.3,
+    "prosperity": 70.1,
+    "affordability": 42.6,
+    "composite": 61.4
+  },
+  "06001405500": {
+    "name": "Fruitvale",
+    "education": 56.7,
+    "safety": 41.7,
+    "prosperity": 51.2,
+    "affordability": 41.8,
+    "composite": 47.9
+  },
+  "06001409000": {
+    "name": "Oakland Airport",
+    "education": 58.2,
+    "safety": 42.6,
+    "prosperity": 61.7,
+    "affordability": 43.9,
+    "composite": 51.6
+  },
+  "06001403501": {
+    "name": "Grand Lake",
+    "education": 48.9,
+    "safety": 40.9,
+    "prosperity": 61.8,
+    "affordability": 60.9,
+    "composite": 53.1
+  },
+  "06001981900": {
+    "name": "Port of Oakland",
+    "education": 39.1,
+    "safety": 27.3,
+    "prosperity": 44.2,
+    "affordability": 49.0,
+    "composite": 39.9
+  },
+  "06001403600": {
+    "name": "Cleveland Heights",
+    "education": 54.3,
+    "safety": 35.0,
+    "prosperity": 57.8,
+    "affordability": 50.7,
+    "composite": 49.5
+  },
+  "06001408400": {
+    "name": "Elmhurst",
+    "education": 58.7,
+    "safety": 59.9,
+    "prosperity": 59.7,
+    "affordability": 30.0,
+    "composite": 52.1
+  },
+  "06001403800": {
+    "name": "Trestle Glen",
+    "education": 49.4,
+    "safety": 45.6,
+    "prosperity": 66.4,
+    "affordability": 44.7,
+    "composite": 51.5
+  },
+  "06001408500": {
+    "name": "Brookfield Village",
+    "education": 62.3,
+    "safety": 61.1,
+    "prosperity": 73.2,
+    "affordability": 42.7,
+    "composite": 59.8
+  },
+  "06001409700": {
+    "name": "Toler Heights",
+    "education": 64.6,
+    "safety": 56.7,
+    "prosperity": 74.2,
+    "affordability": 38.2,
+    "composite": 58.4
+  },
+  "06001408100": {
+    "name": "Oakland Hills",
+    "education": 70.8,
+    "safety": 64.3,
+    "prosperity": 80.7,
+    "affordability": 32.7,
+    "composite": 62.1
+  },
+  "06001400500": {
+    "name": "Shafter",
+    "education": 63.7,
+    "safety": 41.8,
+    "prosperity": 60.5,
+    "affordability": 40.7,
+    "composite": 51.7
+  },
+  "06001408200": {
+    "name": "Sobrante Park",
+    "education": 60.7,
+    "safety": 69.3,
+    "prosperity": 72.3,
+    "affordability": 41.1,
+    "composite": 60.9
+  },
+  "06001408700": {
+    "name": "Foothill Square",
+    "education": 47.2,
+    "safety": 62.2,
+    "prosperity": 69.1,
+    "affordability": 35.3,
+    "composite": 53.5
+  },
+  "06001409100": {
+    "name": "Hegenberger",
+    "education": 57.0,
+    "safety": 59.1,
+    "prosperity": 75.7,
+    "affordability": 31.6,
+    "composite": 55.9
+  },
+  "06001407700": {
+    "name": "Eastmont Hills",
+    "education": 56.2,
+    "safety": 65.3,
+    "prosperity": 63.4,
+    "affordability": 36.9,
+    "composite": 55.5
+  },
+  "06001407400": {
+    "name": "Lockwood",
+    "education": 56.5,
+    "safety": 46.9,
+    "prosperity": 64.8,
+    "affordability": 33.4,
+    "composite": 50.4
+  },
+  "06001407800": {
+    "name": "Grass Valley",
+    "education": 64.0,
+    "safety": 58.5,
+    "prosperity": 78.0,
+    "affordability": 40.0,
+    "composite": 60.1
+  },
+  "06001403100": {
+    "name": "Civic Center",
+    "education": 50.7,
+    "safety": 23.6,
+    "prosperity": 52.9,
+    "affordability": 50.7,
+    "composite": 44.5
+  },
+  "06001410000": {
+    "name": "Bay Farm Island",
+    "education": 74.7,
+    "safety": 55.9,
+    "prosperity": 77.0,
+    "affordability": 37.5,
+    "composite": 61.3
+  },
+  "06001403300": {
+    "name": "Jack London Square",
+    "education": 53.1,
+    "safety": 38.6,
+    "prosperity": 55.2,
+    "affordability": 44.6,
+    "composite": 47.9
+  },
+  "06001406900": {
+    "name": "Sequoyah",
+    "education": 52.6,
+    "safety": 58.9,
+    "prosperity": 65.1,
+    "affordability": 50.9,
+    "composite": 56.9
+  },
+  "06001407900": {
+    "name": "Oak Knoll",
+    "education": 56.8,
+    "safety": 60.8,
+    "prosperity": 59.0,
+    "affordability": 35.7,
+    "composite": 53.1
+  },
+  "06001406800": {
+    "name": "Sequoyah",
+    "education": 59.4,
+    "safety": 61.7,
+    "prosperity": 72.6,
+    "affordability": 39.0,
+    "composite": 58.2
+  },
+  "06001407600": {
+    "name": "Frick",
+    "education": 51.0,
+    "safety": 57.8,
+    "prosperity": 66.8,
+    "affordability": 43.2,
+    "composite": 54.7
+  },
+  "06001407000": {
+    "name": "Maxwell Park",
+    "education": 53.2,
+    "safety": 62.0,
+    "prosperity": 64.7,
+    "affordability": 44.4,
+    "composite": 56.1
+  },
+  "06001406300": {
+    "name": "Redwood Heights",
+    "education": 59.1,
+    "safety": 53.7,
+    "prosperity": 62.4,
+    "affordability": 55.7,
+    "composite": 57.7
+  },
+  "06001410400": {
+    "name": "Cox",
+    "education": 65.1,
+    "safety": 61.7,
+    "prosperity": 70.8,
+    "affordability": 44.3,
+    "composite": 60.5
+  },
+  "06001410500": {
+    "name": "Clawson",
+    "education": 42.1,
+    "safety": 34.4,
+    "prosperity": 57.6,
+    "affordability": 47.3,
+    "composite": 45.3
+  },
+  "06001405902": {
+    "name": "Fruitvale",
+    "education": 41.3,
+    "safety": 45.5,
+    "prosperity": 59.8,
+    "affordability": 41.1,
+    "composite": 46.9
+  },
+  "06001983200": {
+    "name": "Jack London District",
+    "education": 47.9,
+    "safety": 35.8,
+    "prosperity": 48.3,
+    "affordability": 52.1,
+    "composite": 46.0
+  },
+  "06001982000": {
+    "name": "Howard Terminal",
+    "education": 39.5,
+    "safety": 22.6,
+    "prosperity": 53.0,
+    "affordability": 50.7,
+    "composite": 41.5
+  },
+  "06001406202": {
+    "name": "Laurel",
+    "education": 48.8,
+    "safety": 53.2,
+    "prosperity": 63.2,
+    "affordability": 39.5,
+    "composite": 51.2
+  },
+  "06001404800": {
+    "name": "Dimond",
+    "education": 56.8,
+    "safety": 59.1,
+    "prosperity": 59.1,
+    "affordability": 43.7,
+    "composite": 54.7
+  },
+  "06001406400": {
+    "name": "Redwood Heights",
+    "education": 53.4,
+    "safety": 64.6,
+    "prosperity": 52.1,
+    "affordability": 46.6,
+    "composite": 54.2
+  },
+  "06001405700": {
+    "name": "Fruitvale",
+    "education": 50.4,
+    "safety": 47.2,
+    "prosperity": 69.8,
+    "affordability": 43.3,
+    "composite": 52.7
+  },
+  "06001405600": {
+    "name": "Fruitvale",
+    "education": 61.8,
+    "safety": 42.0,
+    "prosperity": 60.9,
+    "affordability": 41.3,
+    "composite": 51.5
+  },
+  "06001402500": {
+    "name": "Oak Center",
+    "education": 38.8,
+    "safety": 31.6,
+    "prosperity": 50.8,
+    "affordability": 51.1,
+    "composite": 43.1
+  },
+  "06001401300": {
+    "name": "Pill Hill",
+    "education": 38.9,
+    "safety": 46.7,
+    "prosperity": 57.2,
+    "affordability": 58.2,
+    "composite": 50.2
+  },
+  "06001407500": {
+    "name": "Eastmont",
+    "education": 52.6,
+    "safety": 58.0,
+    "prosperity": 80.8,
+    "affordability": 34.4,
+    "composite": 56.4
+  },
+  "06001409900": {
+    "name": "Fairmont Terrace",
+    "education": 58.5,
+    "safety": 62.7,
+    "prosperity": 74.4,
+    "affordability": 38.2,
+    "composite": 58.5
+  },
+  "06001404700": {
+    "name": "Dimond",
+    "education": 64.1,
+    "safety": 52.7,
+    "prosperity": 56.9,
+    "affordability": 38.1,
+    "composite": 52.9
+  },
+  "06001404900": {
+    "name": "Sausal Creek",
+    "education": 59.6,
+    "safety": 53.8,
+    "prosperity": 51.7,
+    "affordability": 42.2,
+    "composite": 51.8
+  },
+  "06001402700": {
+    "name": "KONO",
+    "education": 50.8,
+    "safety": 44.4,
+    "prosperity": 56.3,
+    "affordability": 50.8,
+    "composite": 50.6
+  },
+  "06001410200": {
+    "name": "Woodland",
+    "education": 58.5,
+    "safety": 59.5,
+    "prosperity": 71.2,
+    "affordability": 37.9,
+    "composite": 56.8
+  },
+  "06001406201": {
+    "name": "Laurel",
+    "education": 54.7,
+    "safety": 45.3,
+    "prosperity": 54.4,
+    "affordability": 38.8,
+    "composite": 48.3
+  },
+  "06001408900": {
+    "name": "Coliseum",
+    "education": 53.4,
+    "safety": 61.9,
+    "prosperity": 54.7,
+    "affordability": 36.6,
+    "composite": 51.6
+  },
+  "06001404200": {
+    "name": "Upper Rockridge",
+    "education": 63.3,
+    "safety": 57.2,
+    "prosperity": 67.9,
+    "affordability": 49.9,
+    "composite": 59.6
+  },
+  "06001403900": {
+    "name": "Lakeshore",
+    "education": 50.2,
+    "safety": 36.1,
+    "prosperity": 57.0,
+    "affordability": 54.8,
+    "composite": 49.5
+  },
+  "06001403000": {
+    "name": "Chinatown",
+    "education": 49.7,
+    "safety": 35.0,
+    "prosperity": 70.9,
+    "affordability": 48.0,
+    "composite": 50.9
+  },
+  "06001406100": {
+    "name": "Seminary",
+    "education": 55.4,
+    "safety": 51.9,
+    "prosperity": 59.5,
+    "affordability": 57.0,
+    "composite": 56.0
+  },
+  "06001410100": {
+    "name": "Woodland",
+    "education": 72.9,
+    "safety": 56.9,
+    "prosperity": 69.5,
+    "affordability": 37.0,
+    "composite": 59.1
+  },
+  "06001403400": {
+    "name": "Lake Merritt",
+    "education": 50.2,
+    "safety": 26.6,
+    "prosperity": 44.3,
+    "affordability": 35.7,
+    "composite": 39.2
+  },
+  "06001400600": {
+    "name": "Longfellow",
+    "education": 55.4,
+    "safety": 39.2,
+    "prosperity": 64.8,
+    "affordability": 42.9,
+    "composite": 50.6
+  },
+  "06001401600": {
+    "name": "West Oakland",
+    "education": 40.4,
+    "safety": 20.2,
+    "prosperity": 57.3,
+    "affordability": 51.7,
+    "composite": 42.4
+  },
+  "06001402400": {
+    "name": "McClymonds",
+    "education": 48.6,
+    "safety": 36.3,
+    "prosperity": 52.4,
+    "affordability": 57.7,
+    "composite": 48.8
+  },
+  "06001402800": {
+    "name": "Downtown",
+    "education": 43.9,
+    "safety": 27.8,
+    "prosperity": 51.5,
+    "affordability": 44.8,
+    "composite": 42.0
+  },
+  "06001409600": {
+    "name": "Stonehurst",
+    "education": 51.2,
+    "safety": 62.3,
+    "prosperity": 69.9,
+    "affordability": 34.5,
+    "composite": 54.5
+  },
+  "06001401800": {
+    "name": "Prescott",
+    "education": 36.3,
+    "safety": 33.4,
+    "prosperity": 58.8,
+    "affordability": 51.7,
+    "composite": 45.0
+  },
+  "06001402600": {
+    "name": "Old Oakland",
+    "education": 40.5,
+    "safety": 27.7,
+    "prosperity": 52.5,
+    "affordability": 41.7,
+    "composite": 40.6
+  },
+  "06001400800": {
+    "name": "Golden Gate",
+    "education": 51.8,
+    "safety": 37.4,
+    "prosperity": 69.6,
+    "affordability": 55.4,
+    "composite": 53.5
+  },
+  "06001407102": {
+    "name": "Melrose",
+    "education": 60.5,
+    "safety": 49.3,
+    "prosperity": 66.5,
+    "affordability": 34.3,
+    "composite": 52.7
+  },
+  "06001407101": {
+    "name": "Allendale",
+    "education": 56.2,
+    "safety": 55.3,
+    "prosperity": 58.7,
+    "affordability": 53.6,
+    "composite": 55.9
+  },
+  "06001406602": {
+    "name": "Lincoln Highlands",
+    "education": 57.5,
+    "safety": 41.3,
+    "prosperity": 65.3,
+    "affordability": 39.1,
+    "composite": 50.8
+  },
+  "06001406601": {
+    "name": "Leona Heights",
+    "education": 55.8,
+    "safety": 56.9,
+    "prosperity": 65.4,
+    "affordability": 28.6,
+    "composite": 51.7
+  },
+  "06001405901": {
+    "name": "Peralta Hacienda",
+    "education": 45.1,
+    "safety": 50.6,
+    "prosperity": 65.9,
+    "affordability": 55.5,
+    "composite": 54.3
+  },
+  "06001405402": {
+    "name": "Jingletown",
+    "education": 58.1,
+    "safety": 29.2,
+    "prosperity": 61.7,
+    "affordability": 33.8,
+    "composite": 45.7
+  },
+  "06001404000": {
+    "name": "Rose Garden",
+    "education": 62.4,
+    "safety": 41.1,
+    "prosperity": 56.4,
+    "affordability": 58.3,
+    "composite": 54.5
+  },
+  "06001405100": {
+    "name": "Crocker Highlands",
+    "education": 55.4,
+    "safety": 35.4,
+    "prosperity": 62.0,
+    "affordability": 39.3,
+    "composite": 48.0
+  },
+  "06001400700": {
+    "name": "Santa Fe",
+    "education": 55.0,
+    "safety": 35.4,
+    "prosperity": 68.9,
+    "affordability": 39.9,
+    "composite": 49.8
+  },
+  "06001401500": {
+    "name": "West Oakland",
+    "education": 51.0,
+    "safety": 44.2,
+    "prosperity": 53.8,
+    "affordability": 50.6,
+    "composite": 49.9
+  },
+  "06001400200": {
+    "name": "Rockridge",
+    "education": 59.4,
+    "safety": 40.9,
+    "prosperity": 68.6,
+    "affordability": 46.3,
+    "composite": 53.8
+  },
+  "06001400300": {
+    "name": "Temescal",
+    "education": 52.9,
+    "safety": 52.8,
+    "prosperity": 68.6,
+    "affordability": 45.3,
+    "composite": 54.9
+  },
+  "06001404600": {
+    "name": "Joaquin Miller",
+    "education": 60.4,
+    "safety": 52.8,
+    "prosperity": 76.0,
+    "affordability": 38.0,
+    "composite": 56.8
+  },
+  "06001409800": {
+    "name": "Iveywood",
+    "education": 67.3,
+    "safety": 63.7,
+    "prosperity": 74.2,
+    "affordability": 34.0,
+    "composite": 59.8
+  },
+  "06001409500": {
+    "name": "Fitchburg",
+    "education": 63.9,
+    "safety": 57.9,
+    "prosperity": 71.2,
+    "affordability": 42.0,
+    "composite": 58.8
+  },
+  "06001405401": {
+    "name": "Jingletown",
+    "education": 47.9,
+    "safety": 34.8,
+    "prosperity": 52.7,
+    "affordability": 41.3,
+    "composite": 44.2
+  },
+  "06001405302": {
+    "name": "San Antonio",
+    "education": 42.7,
+    "safety": 43.1,
+    "prosperity": 56.4,
+    "affordability": 55.7,
+    "composite": 49.5
+  },
+  "06001405301": {
+    "name": "San Antonio",
+    "education": 59.5,
+    "safety": 39.1,
+    "prosperity": 49.4,
+    "affordability": 43.6,
+    "composite": 47.9
+  },
+  "06001404101": {
+    "name": "Piedmont Avenue",
+    "education": 58.0,
+    "safety": 33.0,
+    "prosperity": 64.1,
+    "affordability": 47.5,
+    "composite": 50.6
+  },
+  "06001407200": {
+    "name": "Melrose",
+    "education": 51.5,
+    "safety": 47.1,
+    "prosperity": 58.0,
+    "affordability": 52.9,
+    "composite": 52.4
+  },
+  "06001408800": {
+    "name": "Columbia Gardens",
+    "education": 56.9,
+    "safety": 51.4,
+    "prosperity": 63.2,
+    "affordability": 45.2,
+    "composite": 54.2
+  },
+  "06001401100": {
+    "name": "Mosswood",
+    "education": 52.5,
+    "safety": 40.7,
+    "prosperity": 66.9,
+    "affordability": 51.9,
+    "composite": 53.0
+  },
+  "06001401400": {
+    "name": "Uptown",
+    "education": 56.6,
+    "safety": 30.5,
+    "prosperity": 63.8,
+    "affordability": 43.8,
+    "composite": 48.7
+  },
+  "06001404502": {
+    "name": "Shepherd Canyon",
+    "education": 64.7,
+    "safety": 62.3,
+    "prosperity": 76.4,
+    "affordability": 40.2,
+    "composite": 60.9
+  },
+  "06001406000": {
+    "name": "Fruitvale Station",
+    "education": 43.1,
+    "safety": 45.5,
+    "prosperity": 54.7,
+    "affordability": 39.8,
+    "composite": 45.8
+  },
+  "06001401000": {
+    "name": "Hoover-Foster",
+    "education": 51.2,
+    "safety": 37.6,
+    "prosperity": 51.5,
+    "affordability": 50.5,
+    "composite": 47.7
+  },
+  "06001400900": {
+    "name": "South Prescott",
+    "education": 53.9,
+    "safety": 32.9,
+    "prosperity": 66.0,
+    "affordability": 53.0,
+    "composite": 51.5
+  },
+  "06001400100": {
+    "name": "Claremont Hills",
+    "education": 58.5,
+    "safety": 45.1,
+    "prosperity": 71.4,
+    "affordability": 34.5,
+    "composite": 52.4
+  },
+  "06001404400": {
+    "name": "Montclair",
+    "education": 62.9,
+    "safety": 48.8,
+    "prosperity": 70.8,
+    "affordability": 42.9,
+    "composite": 56.4
+  },
+  "06001400400": {
+    "name": "Bushrod",
+    "education": 57.2,
+    "safety": 49.7,
+    "prosperity": 65.3,
+    "affordability": 44.8,
+    "composite": 54.2
+  },
+  "06001401200": {
+    "name": "Piedmont Avenue",
+    "education": 50.9,
+    "safety": 43.8,
+    "prosperity": 66.8,
+    "affordability": 55.4,
+    "composite": 54.2
+  },
+  "06001409200": {
+    "name": "Hegenberger",
+    "education": 57.4,
+    "safety": 60.4,
+    "prosperity": 67.6,
+    "affordability": 36.7,
+    "composite": 55.5
+  },
+  "06001401700": {
+    "name": "West Oakland",
+    "education": 37.9,
+    "safety": 20.9,
+    "prosperity": 52.6,
+    "affordability": 57.8,
+    "composite": 42.3
+  },
+  "06001409300": {
+    "name": "Coliseum",
+    "education": 67.5,
+    "safety": 74.7,
+    "prosperity": 67.0,
+    "affordability": 36.5,
+    "composite": 61.4
+  },
+  "06001408300": {
+    "name": "Arroyo Viejo",
+    "education": 63.5,
+    "safety": 74.7,
+    "prosperity": 61.2,
+    "affordability": 38.6,
+    "composite": 59.5
+  },
+  "06001406700": {
+    "name": "Millsmont",
+    "education": 49.4,
+    "safety": 39.8,
+    "prosperity": 54.2,
+    "affordability": 31.9,
+    "composite": 43.8
+  },
+  "06001406500": {
+    "name": "Redwood Heights",
+    "education": 59.5,
+    "safety": 47.0,
+    "prosperity": 61.0,
+    "affordability": 34.9,
+    "composite": 50.6
+  },
+  "06001408600": {
+    "name": "Castlemont",
+    "education": 63.4,
+    "safety": 52.7,
+    "prosperity": 73.8,
+    "affordability": 31.8,
+    "composite": 55.4
+  }
+}

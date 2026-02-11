@@ -482,6 +482,12 @@
   --accent: var(--sage-600);
 }
 
+.card-oakland {
+  background: linear-gradient(135deg, #1a1714 0%, #221f1b 100%);
+  color: #f5f0e8;
+  --accent: #10997F;
+}
+
 /* ===========================
    CARD TYPOGRAPHY
    =========================== */
