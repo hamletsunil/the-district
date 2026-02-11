@@ -21,11 +21,11 @@ export function SourcesCitations({ sources, className }: SourcesCitationsProps) 
   return (
     <section className={`sources-citations ${className || ""}`}>
       <div className="sources-header">
-        <span className="sources-badge">Fact-Checked</span>
-        <h3>Sources & Verification</h3>
+        <span className="sources-badge">Primary Sources</span>
+        <h3>Sources & Data</h3>
         <p className="sources-note">
-          All major claims in this article have been validated against public records
-          and independent news sources.
+          All claims in this article are grounded in public records, government data,
+          and independent reporting.
         </p>
       </div>
 

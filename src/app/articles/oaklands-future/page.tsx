@@ -86,6 +86,36 @@ const SOURCES: Source[] = [
     outlet: "City of Oakland Treasury",
     url: "https://www.oaklandca.gov/",
   },
+  {
+    title: "Oakland Unified School District Ratings",
+    outlet: "GreatSchools.org",
+    url: "https://www.greatschools.org/california/oakland/",
+  },
+  {
+    title: "Oakland City Council Meeting Records (2019-2024)",
+    outlet: "Legistar / Granicus",
+    url: "https://oakland.legistar.com/",
+  },
+  {
+    title: "Local Area Unemployment Statistics — Alameda County",
+    outlet: "U.S. Bureau of Labor Statistics",
+    url: "https://www.bls.gov/lau/",
+  },
+  {
+    title: "Fair Market Rents & Housing Affordability Data",
+    outlet: "U.S. Department of Housing and Urban Development",
+    url: "https://www.huduser.gov/portal/datasets/fmr.html",
+  },
+  {
+    title: "EPA Environmental Justice Screening (EJScreen)",
+    outlet: "U.S. Environmental Protection Agency",
+    url: "https://www.epa.gov/ejscreen",
+  },
+  {
+    title: "National Risk Index — Alameda County",
+    outlet: "Federal Emergency Management Agency",
+    url: "https://hazards.fema.gov/nri/",
+  },
 ];
 
 // ============================================================================
@@ -111,10 +141,10 @@ export default function OaklandsFuture() {
       />
 
       <LedeSection />
+      <SimulationSection />
       <ParadoxSection />
       <BudgetSection />
       <GovernanceSection />
-      <SimulationSection />
       <FindingsSection />
       <ConclusionSection />
 
@@ -123,29 +153,44 @@ export default function OaklandsFuture() {
         title="How We Built This Analysis"
         items={[
           {
-            label: "Data Sources",
+            label: "Data Pipeline",
             content:
-              "10 federal and local sources: Census ACS, Oakland PD CrimeWatch (1.26M records), City Budget (FY2024-25), BLS, HUD, EPA, FEMA, Legistar, NLP transcript analysis (134 meetings), Census tract boundaries.",
+              "We assembled data from 11 federal and local sources: U.S. Census ACS 5-year estimates (tract-level demographics, income, housing), Oakland PD CrimeWatch via Socrata Open Data (1.26 million incident records, 2005–2024), City of Oakland FY2024-25 Adopted Budget, Bureau of Labor Statistics (Alameda County unemployment), HUD Fair Market Rents, EPA EJScreen environmental justice indicators, FEMA National Risk Index, GreatSchools school quality ratings (87 Oakland Unified schools), Legistar council meeting records (134 sessions, 2019–2024), and Census TIGER tract boundary files.",
           },
           {
-            label: "Simulation Model",
+            label: "Council Meeting Analysis",
             content:
-              "Discrete-time affine dynamical system with budget constraints, diminishing returns, governance friction, and 5 feedback loops. Reviewed by 4 independent domain perspectives (urban economics, public finance, statistical modeling). This is an educational illustration, not a forecasting model.",
+              "134 Oakland City Council meeting transcripts were processed through a natural language pipeline that scored each session for topic frequency, speaker sentiment, contentiousness, and policy outcomes. Topics were classified into 12 categories (housing, public safety, budget, environment, infrastructure, etc.). Contentiousness was measured by the ratio of opposing-sentiment speaker turns to total turns. Results were validated against meeting minutes and vote records published on Legistar.",
           },
           {
-            label: "Scoring",
+            label: "Quality-of-Life Indices",
             content:
-              "Four quality-of-life indices (0-100) from weighted sub-indicators. Education: 36.2 (low confidence — state-level proxies). Safety: 31.2 (high confidence — city-level crime data). Prosperity: 47.4 (moderate). Affordability: 54.1 (moderate).",
+              "Four composite indices (0–100) built from weighted sub-indicators. Education (36.2): GreatSchools ratings, pupil-teacher ratios, OUSD fiscal status — low confidence due to state-level proxies for some metrics. Safety (31.2): violent and property crime rates from CrimeWatch, officer staffing levels — high confidence with city-level data. Prosperity (47.4): median income, unemployment, business tax revenue, commercial vacancy — moderate confidence. Affordability (54.1): rent-to-income ratio, HUD fair market rents, home values — moderate confidence. Each source is weighted by authority tier: federal data (Tier 1, weight 1.0), state/county data (Tier 2, weight 0.85), local/computed (Tier 3, weight 0.7).",
+          },
+          {
+            label: "Simulation Engine",
+            content:
+              "A discrete-time affine dynamical system that models Oakland's 113 census tracts over a 10-year horizon. The engine applies budget allocation across four policy dimensions (education, safety, housing, economic development) with hard budget constraints — every dollar allocated to one dimension is subtracted from the others. Effects propagate through 5 feedback loops: crime suppresses commercial investment (crime→economy), prosperity raises land costs (prosperity→affordability), safety improves school outcomes (safety→education), economic growth reduces crime over time (economy→crime), and rising costs displace lower-income residents (displacement). Diminishing returns ensure no dimension can be driven to extreme values. Governance friction delays housing effects by 35% more than other dimensions, reflecting permitting and construction timelines.",
+          },
+          {
+            label: "Simulation Review",
+            content:
+              "The model was reviewed from four independent perspectives: urban economics (feedback loop structure and magnitude), public finance (budget constraint realism), statistical modeling (parameter sensitivity and edge cases), and civic governance (political feasibility of scenarios). The simulation is an educational illustration of policy trade-offs, not a quantitative forecast. It cannot predict council decisions, state intervention, private-sector relocation, or macroeconomic shifts.",
+          },
+          {
+            label: "Tract-Level Mapping",
+            content:
+              "The 3D cityscape map assigns each of Oakland's 113 census tracts a composite quality-of-life score based on weighted baseline indicators (income, crime density, housing cost burden, school proximity). Block height represents the composite score; color runs from red (struggling) to green (thriving). Tract geometries from Census TIGER/Line, neighborhood labels placed at approximate centroids of 8 key areas.",
           },
           {
             label: "Limitations",
             content:
-              "No migration dynamics, housing market models, or state/federal policy changes. Effect weights are literature-calibrated, not estimated from Oakland-specific data. Unemployment is county-level (Alameda), not city-level. Simulation magnitudes are directional illustrations, not quantitative predictions.",
+              "No migration dynamics, housing construction pipeline models, or state/federal policy changes. Effect weights are calibrated from urban economics literature, not estimated from Oakland-specific panel data. Unemployment uses county-level data (Alameda County via BLS), not city-level. GreatSchools ratings cover 87 of OUSD's schools but not charter or private institutions. Crime data completeness varies by year and precinct. Simulation magnitudes are directional illustrations — the model shows which trade-offs bind hardest, not precise outcome values.",
           },
           {
-            label: "Date Range",
+            label: "Date Ranges",
             content:
-              "Crime data: 2005–2024. Census: ACS 5-year (2022). Budget: FY2024-25 adopted. Council meetings: 2019–2024.",
+              "Crime: 2005–2024 (1.26M records). Census: ACS 5-year ending 2022. Budget: FY2024-25 adopted. BLS unemployment: 2023. HUD rents: FY2024. GreatSchools: 2024 ratings. Council meetings: 2019–2024 (134 sessions). EPA EJScreen: 2023. FEMA NRI: 2023.",
           },
         ]}
       />
@@ -499,11 +544,11 @@ function GovernanceSection() {
 
       <div className="article-body-prose">
         <p>
-          We processed transcripts of 134 Oakland City Council meetings
-          through an AI analysis pipeline, scoring each for topic frequency,
-          speaker sentiment, contentiousness, and policy outcomes. The
-          aggregate contentiousness score &mdash; 4.0 out of 10 &mdash;
-          masks significant variation. Meetings on housing and policing
+          We analyzed transcripts of 134 Oakland City Council meetings,
+          scoring each for topic frequency, speaker sentiment,
+          contentiousness, and policy outcomes. The aggregate
+          contentiousness score &mdash; 4.0 out of 10 &mdash; masks
+          significant variation. Meetings on housing and policing
           routinely spike above 6.0; meetings on infrastructure and
           administrative items sit below 2.0. The average is moderate. The
           distribution is bimodal.
@@ -571,6 +616,18 @@ function GovernanceSection() {
 // ============================================================================
 
 function SimulationSection() {
+  const handleShare = (platform: "twitter" | "linkedin" | "copy") => {
+    const url = "https://the-district.co/articles/oaklands-future";
+    const text = "Five policy paths. One city. A decade of trade-offs. Play Oakland\u2019s future:";
+    if (platform === "twitter") {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank");
+    } else if (platform === "linkedin") {
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, "_blank");
+    } else {
+      navigator.clipboard.writeText(url);
+    }
+  };
+
   return (
     <section className="oak-editorial-section">
       <div className="article-prose-header">
@@ -590,6 +647,36 @@ function SimulationSection() {
 
       <div className="oak-graphic" style={{ maxWidth: 1080 }}>
         <InteractiveSection />
+
+        {/* Share prompt */}
+        <div className="mt-6 flex items-center justify-between flex-wrap gap-3 px-1">
+          <span className="text-xs" style={{ fontFamily: "var(--font-sans)", color: "rgba(255,255,255,0.4)" }}>
+            Think your city should be next? Share this simulation.
+          </span>
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleShare("twitter")}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+              style={{ fontFamily: "var(--font-sans)", background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              Share on X
+            </button>
+            <button
+              onClick={() => handleShare("linkedin")}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+              style={{ fontFamily: "var(--font-sans)", background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              LinkedIn
+            </button>
+            <button
+              onClick={() => handleShare("copy")}
+              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+              style={{ fontFamily: "var(--font-sans)", background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.6)", border: "1px solid rgba(255,255,255,0.08)" }}
+            >
+              Copy Link
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

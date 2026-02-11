@@ -272,7 +272,7 @@ export function CityScapeMap() {
             bearing: -15,
           }}
           style={{ width: "100%", height: 550 }}
-          mapStyle="mapbox://styles/mapbox/light-v11"
+          mapStyle="mapbox://styles/mapbox/dark-v11"
           mapboxAccessToken={MAPBOX_TOKEN}
           onLoad={onMapLoad}
           onMouseMove={onHover}
