@@ -280,6 +280,28 @@ BEEHIIV_PUBLICATION_ID=
 
 ## Common Patterns
 
+### Hamlet Meeting Embed (use for source material)
+When an article references specific council meetings, embed the source video with key moments:
+```tsx
+import { HamletMeetingEmbed } from "@/components/article/HamletMeetingEmbed";
+
+<HamletMeetingEmbed
+  videoId="YOUTUBE_ID"
+  startTime={1809}
+  meetingTitle="Meeting Title"
+  meetingDate="May 20, 2024"
+  bodyName="City of Oakland"
+  location="Oakland, CA"
+  hamletMeetingUrl="https://www.myhamlet.com/meeting/MEETING_ID"
+  moments={[
+    { time: "30:09", seconds: 1809, quote: "relevant transcript excerpt" },
+  ]}
+  searchUrl="https://www.myhamlet.com/search?q=search+terms"
+  searchLabel="16 Oakland housing meetings"
+/>
+```
+Find the meeting on Hamlet Search, grab the YouTube ID from the meeting page, and pick 2-4 key transcript moments with timestamps.
+
 ### Scroll-Triggered Visibility (use the hook, not raw IntersectionObserver)
 ```tsx
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";

@@ -24,6 +24,7 @@ import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { SocialShare } from "@/components/article/SocialShare";
 import { PullQuote } from "@/components/article/PullQuote";
+import { HamletMeetingEmbed } from "@/components/article/HamletMeetingEmbed";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import { CrimeChart } from "@/components/viz/oakland/CrimeChart";
 import { BudgetBreakdown } from "@/components/viz/oakland/BudgetBreakdown";
@@ -564,6 +565,23 @@ function GovernanceSection() {
           because they are expensive and slow.
         </p>
       </div>
+
+      <HamletMeetingEmbed
+        videoId="G5P0Gow-0bU"
+        startTime={1809}
+        meetingTitle="HCD/BAHFA Bond Community Engagement"
+        meetingDate="May 20, 2024"
+        bodyName="City of Oakland"
+        location="Oakland, CA"
+        hamletMeetingUrl="https://www.myhamlet.com/meeting/cmkqel5ak0009kx61pp33mrsx"
+        moments={[
+          { time: "30:09", seconds: 1809, quote: "programs Oakland Housing and Community" },
+          { time: "14:28", seconds: 868, quote: "affordable housing for Oakland's as" },
+          { time: "27:28", seconds: 1648, quote: "the city of Oakland's Housing Community" },
+        ]}
+        searchUrl="https://www.myhamlet.com/search?q=oakland%20housing"
+        searchLabel="16 Oakland housing meetings"
+      />
 
       <div className="oak-graphic">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
