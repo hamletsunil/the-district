@@ -20,13 +20,17 @@ export const metadata: Metadata = {
   title: "The District",
   description:
     "Visual journalism about what happens in 3,000+ city halls across America. A publication by Hamlet.",
-  metadataBase: new URL("https://thedistrict.pub"),
+  metadataBase: new URL("https://district.myhamlet.com"),
+  alternates: {
+    canonical: "https://district.myhamlet.com",
+  },
   openGraph: {
     title: "The District",
     description:
       "Visual journalism about what happens in 3,000+ city halls across America.",
     type: "website",
     siteName: "The District",
+    url: "https://district.myhamlet.com",
   },
   twitter: {
     card: "summary_large_image",
