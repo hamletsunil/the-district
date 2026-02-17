@@ -23,13 +23,19 @@ interface CrimeYear {
 
 export function CrimeChart() {
   const [data, setData] = useState<CrimeYear[]>([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     fetch("/data/oakland-crime-annual.json")
-      .then((r) => r.json())
-      .then(setData);
+      .then((r) => {
+        if (!r.ok) throw new Error("fetch failed");
+        return r.json();
+      })
+      .then(setData)
+      .catch(() => setError(true));
   }, []);
 
+  if (error) return <ChartSkeleton label="Crime data unavailable. Try refreshing." />;
   if (!data.length) return <ChartSkeleton label="Loading crime data..." />;
 
   return (
@@ -62,18 +68,18 @@ export function CrimeChart() {
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.08)" />
             <XAxis
               dataKey="year"
-              tick={{ fontSize: 11, fontFamily: "var(--font-inter)", fill: "#a39e96" }}
+              tick={{ fontSize: 11, fontFamily: "var(--font-sans)", fill: "#a39e96" }}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 11, fontFamily: "var(--font-inter)", fill: "#a39e96" }}
+              tick={{ fontSize: 11, fontFamily: "var(--font-sans)", fill: "#a39e96" }}
               tickLine={false}
               axisLine={false}
               tickFormatter={(v: number) => v.toLocaleString()}
             />
             <Tooltip
               contentStyle={{
-                fontFamily: "var(--font-inter)",
+                fontFamily: "var(--font-sans)",
                 fontSize: 12,
                 background: "#221f1b",
                 border: "1px solid rgba(255,255,255,0.1)",
@@ -92,7 +98,7 @@ export function CrimeChart() {
               formatter={(value: string) =>
                 value === "violent_rate_per_100k" ? "Violent Crime" : "Property Crime"
               }
-              wrapperStyle={{ fontFamily: "var(--font-inter)", fontSize: 12 }}
+              wrapperStyle={{ fontFamily: "var(--font-sans)", fontSize: 12 }}
             />
             <Area
               type="monotone"

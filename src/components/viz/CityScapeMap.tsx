@@ -68,6 +68,8 @@ export function CityScapeMap() {
   const [baselines, setBaselines] = useState<Record<string, Record<string, number>> | null>(null);
   const [rawGeojson, setRawGeojson] = useState<GeoJSON.FeatureCollection | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [mapError, setMapError] = useState<string | null>(null);
+  const [dataError, setDataError] = useState(false);
   const layerAdded = useRef(false);
   const labelsAdded = useRef(false);
   const [tooltip, setTooltip] = useState<{
@@ -79,12 +81,21 @@ export function CityScapeMap() {
 
   // Load data
   useEffect(() => {
+    if (!MAPBOX_TOKEN) return;
     Promise.all([
-      fetch("/data/oakland-tracts.geojson").then((r) => r.json()),
-      fetch("/data/oakland-tract-baseline.json").then((r) => r.json()),
+      fetch("/data/oakland-tracts.geojson").then((r) => {
+        if (!r.ok) throw new Error("Failed to load tract boundaries");
+        return r.json();
+      }),
+      fetch("/data/oakland-tract-baseline.json").then((r) => {
+        if (!r.ok) throw new Error("Failed to load tract baselines");
+        return r.json();
+      }),
     ]).then(([geo, base]) => {
       setRawGeojson(geo);
       setBaselines(base);
+    }).catch(() => {
+      setDataError(true);
     });
   }, []);
 
@@ -259,6 +270,10 @@ export function CityScapeMap() {
     [tractScores, baselines]
   );
 
+  if (!MAPBOX_TOKEN || mapError || dataError) {
+    return <MapFallback reason={!MAPBOX_TOKEN ? "Map unavailable — configuration error." : mapError ?? "Failed to load map data. Try refreshing."} />;
+  }
+
   return (
     <div className="relative">
       <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
@@ -275,6 +290,7 @@ export function CityScapeMap() {
           mapStyle="mapbox://styles/mapbox/dark-v11"
           mapboxAccessToken={MAPBOX_TOKEN}
           onLoad={onMapLoad}
+          onError={(e) => setMapError(e?.error?.message ?? "Map failed to load.")}
           onMouseMove={onHover}
           onMouseLeave={() => setTooltip(null)}
           scrollZoom={false}
@@ -349,6 +365,34 @@ export function CityScapeMap() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+function MapFallback({ reason }: { reason: string }) {
+  return (
+    <div
+      className="rounded-2xl flex flex-col items-center justify-center gap-3"
+      style={{
+        height: "clamp(320px, 60vw, 550px)",
+        background: "#0c1621",
+        border: "1px solid rgba(255,255,255,0.1)",
+      }}
+    >
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5">
+        <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
+      <span
+        style={{
+          color: "rgba(255,255,255,0.35)",
+          fontFamily: "var(--font-sans)",
+          fontSize: 13,
+          textAlign: "center",
+          maxWidth: 280,
+        }}
+      >
+        {reason}
+      </span>
     </div>
   );
 }
