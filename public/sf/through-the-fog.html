@@ -73,6 +73,7 @@
   --type-tiny: 0.75rem;
   --leading-tight: 1.1;
   --leading-relaxed: 1.8;
+  --ease-elegant: cubic-bezier(0.21, 0.47, 0.32, 0.98);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -158,22 +159,33 @@ body {
   color: rgba(255,255,255,0.45); letter-spacing: 0.02em;
 }
 .masthead {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
-  padding: 1.5rem 2rem; display: flex; align-items: center; gap: 0.75rem;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+  background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06); transition: background 0.3s var(--ease-elegant);
 }
-.logo-mark {
-  width: 28px; height: 28px; background: rgba(255,255,255,0.9); border-radius: 4px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-sans); font-weight: 700; font-size: 16px; color: #2C3E50;
+@media (min-width: 768px) {
+  .masthead { padding: 2rem 3rem; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: none; }
 }
-.logo-text-group { display: flex; flex-direction: column; }
-.logo-title {
-  font-family: var(--font-sans); font-weight: 600; font-size: 1rem;
+.district-logo { display: flex; align-items: center; gap: 0.75rem; }
+.district-logo-mark { flex-shrink: 0; color: rgba(255,255,255,0.85); transition: color 0.2s ease; }
+.district-logo-mark:hover { color: #fff; }
+.district-logo-text { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+.district-logo-title {
+  font-family: var(--font-sans); font-weight: 700; font-size: 1.125rem;
   color: rgba(255,255,255,0.85); letter-spacing: -0.02em;
 }
-.logo-tagline {
-  font-family: var(--font-sans); font-weight: 400; font-size: 0.625rem;
-  color: rgba(255,255,255,0.4); letter-spacing: 0.05em;
+.district-logo-tagline {
+  font-family: var(--font-body); font-weight: 400; font-style: italic; font-size: 0.6875rem;
+  color: rgba(255,255,255,0.45); margin-top: 0.125rem;
+}
+.district-logo-attribution {
+  font-family: var(--font-sans); font-weight: 500; font-size: 0.5625rem;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3); margin-top: 0.5rem;
+}
+@media (max-width: 767px) {
+  .district-logo-tagline, .district-logo-attribution { display: none; }
 }
 .hero-to-article {
   height: 60px;
@@ -237,8 +249,8 @@ body {
   padding-top: 1rem;
 }
 .section-number {
-  font-family: var(--font-sans); font-weight: 700; font-size: 0.7rem;
-  text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-primary);
+  font-family: var(--font-sans); font-weight: 600; font-size: 0.8125rem;
+  text-transform: uppercase; letter-spacing: 0.2em; color: var(--accent-primary);
   display: block; margin-bottom: 0.5rem;
 }
 .subsection-title {
@@ -317,9 +329,9 @@ body {
 .score-card .sub-label {
   font-family: var(--font-sans); font-size: 0.65rem; color: #999;
 }
-.c-green { color: #2E7D32; }
+.c-green { color: #10b981; }
 .c-red { color: var(--accent-primary); }
-.c-amber { color: #E67E22; }
+.c-amber { color: #f59e0b; }
 .c-dark { color: var(--page-text); }
 
 /* ===== TOOLTIP ===== */
@@ -417,12 +429,24 @@ body {
 .methodology p { font-size: 13px !important; color: var(--page-text-muted) !important; }
 
 /* ===== FOOTER ===== */
-.article-footer {
-  max-width: 720px; margin: 4rem auto 2rem; padding: 2rem 1.5rem;
-  border-top: 2px solid var(--card-border); text-align: center;
-  font-family: var(--font-sans); font-size: 0.8rem; color: var(--page-text-muted);
+.footer-minimal {
+  padding: 3rem 2rem; text-align: center;
 }
-.article-footer a { color: var(--accent-primary); text-decoration: none; }
+.footer-attribution {
+  font-family: var(--font-body); font-size: 0.8125rem; color: var(--page-text-muted);
+}
+.footer-attribution a {
+  color: var(--page-text-muted); transition: color 0.2s ease; text-decoration: none;
+}
+.footer-attribution a:hover { color: var(--page-text); }
+.footer-colophon {
+  font-size: 0.6875rem; color: var(--page-text-muted); margin-top: 0.75rem;
+  opacity: 0.6;
+}
+.footer-colophon a {
+  color: var(--page-text-muted); transition: color 0.2s ease; text-decoration: none;
+}
+.footer-colophon a:hover { color: var(--page-text); }
 
 /* ===== D3 chart specifics ===== */
 .axis text { font-family: var(--font-sans); font-size: 11px; fill: #888; }
@@ -679,46 +703,71 @@ body {
   color: var(--accent-primary); border-color: var(--accent-primary);
 }
 
-/* ===== NEWSLETTER CTA ===== */
-.newsletter-cta {
-  max-width: 640px; margin: 3rem auto; padding: 2.5rem 2rem;
-  background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 12px; text-align: center;
+/* ===== ARTICLE END CTA ===== */
+.article-end-cta {
+  padding: 4rem 1.5rem;
+  border-top: 1px solid rgba(99, 102, 241, 0.15);
+  background: rgba(99, 102, 241, 0.05);
 }
-.newsletter-cta h3 {
-  font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
-  color: var(--page-text); margin: 0 0 0.5rem;
+.article-end-cta__container {
+  max-width: 520px; margin: 0 auto; text-align: center;
 }
-.newsletter-cta p {
-  font-family: var(--font-sans); font-size: 0.9rem; color: var(--page-text-muted);
-  margin: 0 0 1.5rem; line-height: 1.5; opacity: 1; transform: none;
+.article-end-cta__icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.article-end-cta__headline {
+  font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+  color: var(--page-text); margin-bottom: 0.5rem;
 }
-.newsletter-form {
-  display: flex; gap: 0.5rem; max-width: 420px; margin: 0 auto;
+.article-end-cta__subtext {
+  font-family: var(--font-body); font-size: 1rem;
+  color: var(--page-text-muted); line-height: 1.6; margin-bottom: 1.5rem;
 }
-.newsletter-form input[type="email"] {
-  flex: 1; padding: 0.7rem 1rem; border: 1px solid #ddd; border-radius: 8px;
-  font-family: var(--font-sans); font-size: 0.9rem; outline: none;
-  transition: border-color 0.2s;
+.article-end-cta__form { width: 100%; }
+.article-end-cta__input-wrapper {
+  display: flex; gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px; padding: 0.375rem;
 }
-.newsletter-form input[type="email"]:focus { border-color: var(--accent-primary); }
-.newsletter-form button {
-  padding: 0.7rem 1.5rem; background: var(--accent-primary); color: #fff;
-  border: none; border-radius: 8px; font-family: var(--font-sans); font-size: 0.9rem;
-  font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap;
+.article-end-cta__input {
+  flex: 1; background: transparent; border: none;
+  padding: 0.875rem 1rem; font-size: 0.9375rem;
+  color: var(--page-text); outline: none;
 }
-.newsletter-form button:hover { background: #a02e25; }
-.newsletter-note {
-  font-family: var(--font-sans); font-size: 0.7rem; color: #aaa;
-  margin-top: 0.75rem;
+.article-end-cta__input::placeholder { color: var(--page-text-muted); }
+.article-end-cta__button {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: white; border: none; border-radius: 8px;
+  padding: 0.875rem 1.75rem; font-family: var(--font-sans);
+  font-size: 0.875rem; font-weight: 600; cursor: pointer;
+  transition: all 0.2s var(--ease-elegant); white-space: nowrap;
+}
+.article-end-cta__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+.article-end-cta__button:disabled { opacity: 0.7; cursor: not-allowed; }
+.article-end-cta__success {
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  color: #10b981; font-family: var(--font-sans); font-size: 0.9375rem;
+}
+.article-end-cta__success-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 1.5rem; height: 1.5rem; border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15); font-size: 0.75rem;
+}
+.article-end-cta__error {
+  margin-top: 0.75rem; font-size: 0.75rem; color: #ef4444;
+}
+@media (max-width: 768px) {
+  .article-end-cta { padding: 3rem 1rem; }
+  .article-end-cta__input-wrapper { flex-direction: column; gap: 0.75rem; }
+  .article-end-cta__input { padding: 1rem; text-align: center; }
+  .article-end-cta__button { width: 100%; padding: 1rem; }
 }
 @media (max-width: 480px) {
-  .newsletter-form { flex-direction: column; }
-  .newsletter-form button { width: 100%; }
   .viz-share { justify-content: center; }
 }
 @media print {
-  .viz-share, .newsletter-cta, .sticky-share { display: none !important; }
+  .viz-share, .article-end-cta, .sticky-share { display: none !important; }
 }
 /* ===== STICKY SHARE BAR ===== */
 .sticky-share {
@@ -881,10 +930,19 @@ body {
   <div class="fog-wisp fog-wisp-4"></div>
   <div class="fog-wisp fog-wisp-5"></div>
   <div class="masthead">
-    <div class="logo-mark">H</div>
-    <div class="logo-text-group">
-      <div class="logo-title">The District</div>
-      <div class="logo-tagline">A series by Hamlet</div>
+    <div class="district-logo">
+      <a href="https://www.myhamlet.com" target="_blank" rel="noopener noreferrer" class="district-logo-mark" aria-label="Hamlet — parent site">
+        <svg viewBox="0 0 170 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 20px;">
+          <path d="M169.665 0H135.973V150H169.665V0Z" fill="currentColor"/>
+          <path d="M57.6378 0H23.9453V150H57.6378V0Z" fill="currentColor"/>
+          <path d="M0 96.7193L96.6264 52.3063L169.387 85.3426V118.889L96.6264 85.8526L0 130.266V96.7193Z" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="https://district.myhamlet.com" class="district-logo-text">
+        <span class="district-logo-title">The District</span>
+        <span class="district-logo-tagline">Stories from city halls</span>
+        <span class="district-logo-attribution">A Hamlet Publication</span>
+      </a>
     </div>
   </div>
   <div class="text-overlay">
@@ -1571,22 +1629,26 @@ body {
 </div>
 </div>
 
-<!-- ===== NEWSLETTER CTA ===== -->
-<div class="newsletter-cta">
-  <h3>The District</h3>
-  <p>Data-driven journalism on the cities that shape America. Get new investigations delivered to your inbox.</p>
-  <form class="newsletter-form" onsubmit="return handleSubscribe(event)">
-    <input type="email" placeholder="your@email.com" required aria-label="Email address">
-    <button type="submit">Subscribe</button>
-  </form>
-  <div class="newsletter-note">Free. No spam. Unsubscribe anytime.</div>
-</div>
+<!-- ===== ARTICLE END CTA ===== -->
+<section class="article-end-cta">
+  <div class="article-end-cta__container">
+    <div class="article-end-cta__icon">&#x1F4EC;</div>
+    <h3 class="article-end-cta__headline">Enjoying The District?</h3>
+    <p class="article-end-cta__subtext">Get data-driven local government stories in your inbox every week. Free, no spam.</p>
+    <form class="article-end-cta__form" onsubmit="return handleSubscribe(event)">
+      <div class="article-end-cta__input-wrapper">
+        <input type="email" placeholder="Enter your email" class="article-end-cta__input" required aria-label="Email address">
+        <button type="submit" class="article-end-cta__button">Subscribe Free</button>
+      </div>
+    </form>
+  </div>
+</section>
 
 <!-- ===== FOOTER ===== -->
-<div class="article-footer">
-  <p>Meeting analysis powered by <a href="https://myhamlet.com" target="_blank">Hamlet</a> (myhamlet.com). Data analysis performed February 2026.</p>
-  <p style="margin-top:0.5rem;">&copy; 2026 The District. All rights reserved.</p>
-</div>
+<footer class="footer-minimal">
+  <p class="footer-attribution">A <a href="https://www.myhamlet.com" target="_blank" rel="noopener noreferrer">Hamlet</a> Publication</p>
+  <p class="footer-colophon">&copy; 2026 The District. Data analysis performed February 2026.</p>
+</footer>
 
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
@@ -9048,22 +9110,49 @@ function handleSubscribe(e) {
   e.preventDefault();
   var form = e.target;
   var email = form.querySelector('input[type="email"]').value;
-  var btn = form.querySelector('button');
-  btn.textContent = 'Subscribed!';
-  btn.style.background = '#2d8a4e';
-  form.querySelector('input').disabled = true;
+  var btn = form.querySelector('.article-end-cta__button');
+  var wrapper = form.closest('.article-end-cta__container');
+  btn.textContent = 'Subscribing...';
   btn.disabled = true;
-  // TODO: Connect to actual email service (Buttondown, Substack, etc.)
-  console.log('Newsletter signup:', email);
+  // Call the District's subscribe API
+  fetch('/api/subscribe', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
+  }).then(function(resp) {
+    if (resp.ok || resp.status === 409) {
+      localStorage.setItem('district-subscribed', Date.now().toString());
+      var formEl = wrapper.querySelector('.article-end-cta__form');
+      formEl.innerHTML = '<div class="article-end-cta__success"><span class="article-end-cta__success-icon">&#x2713;</span><span>You\'re in! Check your inbox for a welcome email.</span></div>';
+    } else {
+      btn.textContent = 'Subscribe Free';
+      btn.disabled = false;
+      var errEl = document.createElement('p');
+      errEl.className = 'article-end-cta__error';
+      errEl.textContent = 'Something went wrong. Please try again.';
+      form.appendChild(errEl);
+    }
+  }).catch(function() {
+    btn.textContent = 'Subscribe Free';
+    btn.disabled = false;
+  });
   return false;
 }
+
+// Hide CTA if already subscribed
+(function() {
+  if (localStorage.getItem('district-subscribed')) {
+    var cta = document.querySelector('.article-end-cta');
+    if (cta) cta.style.display = 'none';
+  }
+})();
 
 // ===== STICKY SHARE BAR VISIBILITY =====
 (function() {
   var bar = document.getElementById('sticky-share');
   if (!bar) return;
   var hero = document.querySelector('.hero-container');
-  var footer = document.querySelector('.article-footer');
+  var footer = document.querySelector('.footer-minimal');
   var copyBtn = bar.querySelector('.share-copy-btn');
   if (copyBtn) {
     copyBtn.addEventListener('click', function() {
