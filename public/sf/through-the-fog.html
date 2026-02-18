@@ -467,6 +467,10 @@ body {
 @media (max-width: 768px) {
   .hero-container { height: 70vh; min-height: 500px; }
   .masthead { padding: 1rem 1.25rem; }
+  .text-overlay { padding: 0 1.25rem; }
+  .title-city { font-size: clamp(2.25rem, 9vw, 3rem); }
+  .title-main { font-size: clamp(1.35rem, 4vw, 2rem); }
+  .hero-subtitle { max-width: 500px; }
   .article-column { padding: 0 1rem; font-size: 1rem; }
   .viz-breakout { padding: 0 0.5rem; }
   .viz-card { padding: 1.25rem; }
@@ -475,10 +479,19 @@ body {
   .supe-card { min-width: 220px; max-width: 220px; }
 }
 @media (max-width: 480px) {
+  .text-overlay { padding: 0 1rem; }
+  .title-city { font-size: clamp(2rem, 11vw, 2.5rem); }
+  .title-main { font-size: clamp(1.15rem, 3.5vw, 1.5rem); }
+  .hero-subtitle { font-size: 0.9rem; padding: 0 0.5rem; max-width: 100%; }
+  .hero-badge { font-size: 0.625rem; padding: 0.4rem 1rem; margin-bottom: 1rem; }
   .scorecard-grid { grid-template-columns: repeat(2, 1fr); }
   .score-card .big-num { font-size: 1.4rem; }
-  .hero-subtitle { font-size: 0.9rem; padding: 0 0.5rem; }
   #budget-treemap { aspect-ratio: 4/3 !important; }
+}
+@media (max-width: 375px) {
+  .title-city { font-size: 2rem; }
+  .title-main { font-size: 1.1rem; }
+  .hero-subtitle { font-size: 0.85rem; }
 }
 
 /* ===== PRINT ===== */
