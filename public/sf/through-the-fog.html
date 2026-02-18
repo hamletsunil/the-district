@@ -468,6 +468,8 @@ body {
 @media (max-width: 768px) {
   .hero-container { height: 70vh; min-height: 500px; }
   .masthead { padding: 1rem 1.25rem; }
+  .text-overlay { padding: 0 1.5rem; }
+  .title-main { max-width: 90vw; }
   .article-column { padding: 0 1rem; font-size: 1rem; }
   .viz-breakout { padding: 0 0.5rem; }
   .viz-card { padding: 1.25rem; }
@@ -478,8 +480,16 @@ body {
 @media (max-width: 480px) {
   .scorecard-grid { grid-template-columns: repeat(2, 1fr); }
   .score-card .big-num { font-size: 1.4rem; }
+  .text-overlay { padding: 0 1rem; }
+  .title-main { font-size: clamp(1.4rem, 5vw, 2rem); }
+  .title-city { font-size: clamp(2.5rem, 9vw, 3.5rem); }
   .hero-subtitle { font-size: 0.9rem; padding: 0 0.5rem; }
   #budget-treemap { aspect-ratio: 4/3 !important; }
+}
+@media (max-width: 360px) {
+  .title-main { font-size: 1.25rem; }
+  .title-city { font-size: 2.25rem; }
+  .hero-badge { font-size: 0.6rem; padding: 0.4rem 0.9rem; }
 }
 
 /* ===== PRINT ===== */
@@ -8464,9 +8474,10 @@ try { (function() {
   const allMetrics = ["urgency","contentiousness","engagement","consensus","complexity"];
 
   const outerW = container.node().getBoundingClientRect().width || 880;
-  const panelGap = 24;
-  const panelW = Math.floor((outerW - panelGap * (panels.length - 1)) / panels.length);
-  const panelH = 200;
+  const isNarrowNLP = outerW < 500;
+  const panelGap = isNarrowNLP ? 0 : 24;
+  const panelW = isNarrowNLP ? outerW : Math.floor((outerW - panelGap * (panels.length - 1)) / panels.length);
+  const panelH = isNarrowNLP ? 160 : 200;
   const margin = {top: 8, right: 10, bottom: 25, left: 35};
   const w = panelW - margin.left - margin.right;
   const h = panelH - margin.top - margin.bottom;
@@ -8476,10 +8487,11 @@ try { (function() {
 
   panels.forEach((panel, pi) => {
     const wrapper = container.append("div")
-      .style("display", "inline-block")
+      .style("display", isNarrowNLP ? "block" : "inline-block")
       .style("width", panelW + "px")
       .style("vertical-align", "top")
-      .style("margin-right", pi < panels.length - 1 ? panelGap + "px" : "0");
+      .style("margin-right", (!isNarrowNLP && pi < panels.length - 1) ? panelGap + "px" : "0")
+      .style("margin-bottom", isNarrowNLP ? "0.75rem" : "0");
 
     wrapper.append("div")
       .style("font-family", "var(--font-sans)").style("font-weight", "700")
@@ -8587,8 +8599,9 @@ try { (function() {
   const container = d3.select("#viz-topics");
   if(container.empty()) return;
   const W = container.node().getBoundingClientRect().width || 880;
-  const H = 380;
-  const margin = {top:30, right:200, bottom:40, left:50};
+  const isNarrow = W < 600;
+  const H = isNarrow ? 340 : 380;
+  const margin = {top:30, right: isNarrow ? 80 : 200, bottom:40, left: isNarrow ? 35 : 50};
   const w = W - margin.left - margin.right, h = H - margin.top - margin.bottom;
 
   // Filter out "Procedural" — administrative noise that dominates rankings
@@ -8643,7 +8656,7 @@ try { (function() {
   }
 
   g.append("g").attr("transform",`translate(0,${h+5})`)
-    .call(d3.axisBottom(x).ticks(8).tickFormat(d3.timeFormat("%Y")));
+    .call(d3.axisBottom(x).ticks(isNarrow ? 4 : 8).tickFormat(d3.timeFormat(isNarrow ? "'%y" : "%Y")));
 
   const colors = d3.scaleOrdinal().domain(topTopics).range([
     "#C0362C","#4A90A4","#2E7D32","#E67E22","#7B68EE","#D4A017"
@@ -8658,6 +8671,15 @@ try { (function() {
     "Transportation & Infrastructure": "Transportation",
     "Government Operations & Ethics": "Gov Operations"
   };
+  const mobileNames = {
+    "Budget & Finance": "Budget",
+    "Housing & Land Use": "Housing",
+    "Public Safety & Policing": "Safety",
+    "Parks, Recreation & Culture": "Parks",
+    "Transportation & Infrastructure": "Transit",
+    "Government Operations & Ethics": "Gov Ops"
+  };
+  const nameMap = isNarrow ? mobileNames : shortNames;
 
   // Draw bump lines
   const endPositions = [];
@@ -8678,7 +8700,7 @@ try { (function() {
     g.selectAll(null).data(points).join("circle")
       .attr("cx", d => x(d.date)).attr("cy", d => y(d.rank))
       .attr("r", 4).attr("fill", colors(topic)).attr("stroke","#fff").attr("stroke-width",1.5)
-      .on("mouseover", (evt, d) => showTip(evt, `<strong>${shortNames[topic] || topic}</strong><br>${d.label}<br>Rank: #${d.rank} (${d.count} meetings)`))
+      .on("mouseover", (evt, d) => showTip(evt, `<strong>${nameMap[topic] || topic}</strong><br>${d.label}<br>Rank: #${d.rank} (${d.count} meetings)`))
       .on("mouseout", hideTip);
 
     // Track end position for label collision avoidance
@@ -8697,11 +8719,11 @@ try { (function() {
 
   // Draw end labels with adjusted positions
   endPositions.forEach(ep => {
-    const name = shortNames[ep.topic] || ep.topic;
+    const name = nameMap[ep.topic] || ep.topic;
     g.append("text")
       .attr("x", w + 10).attr("y", ep.yPos + 4)
       .attr("fill", colors(ep.topic)).attr("font-family","var(--font-sans)")
-      .attr("font-size","11px").attr("font-weight","700")
+      .attr("font-size", isNarrow ? "9px" : "11px").attr("font-weight","700")
       .text(name);
   });
 
@@ -8733,8 +8755,9 @@ try { (function() {
   const container = d3.select("#viz-survey");
   if(container.empty()) return;
   const W = container.node().getBoundingClientRect().width || 880;
-  const H = 320;
-  const margin = {top:20,right:100,bottom:40,left:50};
+  const isNarrowSurvey = W < 600;
+  const H = isNarrowSurvey ? 340 : 320;
+  const margin = {top:20,right: isNarrowSurvey ? 15 : 100, bottom: isNarrowSurvey ? 60 : 40, left: isNarrowSurvey ? 35 : 50};
   const w = W-margin.left-margin.right, h = H-margin.top-margin.bottom;
 
   const svg = container.append("svg").attr("viewBox",`0 0 ${W} ${H}`).attr("width","100%");
@@ -8750,7 +8773,7 @@ try { (function() {
     .selectAll("line").attr("stroke","#eee");
   g.selectAll(".grid .domain").remove();
 
-  g.append("g").attr("transform",`translate(0,${h})`).call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(10));
+  g.append("g").attr("transform",`translate(0,${h})`).call(d3.axisBottom(x).tickFormat(d3.format("d")).ticks(isNarrowSurvey ? 5 : 10));
   g.append("g").call(d3.axisLeft(y).ticks(4));
 
   const lines = [
@@ -8771,12 +8794,23 @@ try { (function() {
       .on("mouseover",(evt,d)=>showTip(evt,`<strong>${d.year}</strong><br>${l.label}: ${d[l.key].toFixed(2)}`))
       .on("mouseout",hideTip);
 
-    // End label
+    // End label — inline on desktop, legend below on mobile
     const last = parsed.filter(d=>d[l.key]!=null).pop();
-    if(last) g.append("text").attr("x",w+8).attr("y",y(last[l.key])+4)
-      .attr("fill",l.color).attr("font-family","var(--font-sans)").attr("font-size","10px").attr("font-weight","600")
-      .text(l.label);
+    if(last && !isNarrowSurvey) {
+      g.append("text").attr("x",w+8).attr("y",y(last[l.key])+4)
+        .attr("fill",l.color).attr("font-family","var(--font-sans)").attr("font-size","10px").attr("font-weight","600")
+        .text(l.label);
+    }
   });
+  // Mobile legend below chart
+  if (isNarrowSurvey) {
+    const legend = svg.append("g").attr("transform",`translate(${margin.left},${margin.top + h + 30})`);
+    lines.forEach((l, i) => {
+      const lx = i * Math.floor(w / lines.length);
+      legend.append("line").attr("x1",lx).attr("x2",lx+16).attr("y1",0).attr("y2",0).attr("stroke",l.color).attr("stroke-width",l.width);
+      legend.append("text").attr("x",lx+20).attr("y",4).attr("fill",l.color).attr("font-family","var(--font-sans)").attr("font-size","9px").attr("font-weight","600").text(l.label);
+    });
+  }
 
   // 2023 callout
   const low = parsed.find(d=>d.year===2023);
@@ -9477,7 +9511,8 @@ try { (function () {
       { key: "x", label: "Other", color: COLORS.other },
       { key: "b", label: "Benefits", color: COLORS.benefits }
     ];
-    const BAR_HEIGHT = 32, BAR_GAP = 4, LEFT_MARGIN = 220, RIGHT_MARGIN = 100, TOP_MARGIN = 8, MAX_ROWS = 15, TRANSITION_MS = 400, DEBOUNCE_MS = 300;
+    const isMobileSalary = window.innerWidth < 600;
+    const BAR_HEIGHT = 32, BAR_GAP = 4, LEFT_MARGIN = isMobileSalary ? 90 : 220, RIGHT_MARGIN = isMobileSalary ? 30 : 100, TOP_MARGIN = 8, MAX_ROWS = 15, TRANSITION_MS = 400, DEBOUNCE_MS = 300;
 
     let currentYear = 2025, currentSort = "total", currentSearch = "", expandedTitle = null, debounceTimer = null;
 
