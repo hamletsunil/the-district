@@ -6,6 +6,17 @@ import { ArticleIllustration } from "@/components/home";
 
 const articles = [
   {
+    id: "sf-through-the-fog",
+    topic: "City Deep Dive",
+    title: "Through the Fog",
+    description:
+      "33 datasets. 19.5 million rows. 1,310 meeting transcripts. A data-driven autopsy of San Francisco\u2019s pandemic crisis and the question everyone\u2019s asking: is the turnaround real?",
+    meta: "25 min read · 9 visualizations",
+    colorScheme: "crimson",
+    illustrationType: "san-francisco" as const,
+    href: "/sf/through-the-fog.html",
+  },
+  {
     id: "oaklands-future",
     topic: "City Deep Dive",
     title: "Five Futures for Oakland",
@@ -99,7 +110,7 @@ export default function Home() {
         {articles.map((article, index) => (
           <Link
             key={article.id}
-            href={`/articles/${article.id}`}
+            href={"href" in article && article.href ? article.href : `/articles/${article.id}`}
             className={`article-card-3d animate-on-scroll`}
             style={{ transitionDelay: `${index * 0.1}s` }}
           >

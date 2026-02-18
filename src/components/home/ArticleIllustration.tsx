@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -21,6 +21,7 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     zoning: <ZoningIllustration />,
     climate: <ClimateIllustration />,
     oakland: <OaklandIllustration />,
+    "san-francisco": <SanFranciscoIllustration />,
   };
 
   return (
@@ -592,6 +593,118 @@ function OaklandIllustration() {
 
       {/* Ground line */}
       <rect x="0" y="158" width="280" height="22" fill="#006341" opacity="0.12" />
+    </svg>
+  );
+}
+
+/**
+ * San Francisco: Golden Gate Bridge, fog, skyline, hills
+ */
+function SanFranciscoIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      {/* SF-specific gradients */}
+      <defs>
+        <linearGradient id="sfSkyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#2d1b2e" />
+          <stop offset="100%" stopColor="#4a2028" />
+        </linearGradient>
+        <linearGradient id="sfBridgeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#d4453a" />
+          <stop offset="100%" stopColor="#a62d24" />
+        </linearGradient>
+        <linearGradient id="sfFogGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#e8dfe0" stopOpacity="0" />
+          <stop offset="30%" stopColor="#e8dfe0" stopOpacity="0.4" />
+          <stop offset="70%" stopColor="#e8dfe0" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#e8dfe0" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="sfWaterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#1a3a5c" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#0d2137" stopOpacity="0.4" />
+        </linearGradient>
+      </defs>
+
+      {/* Bay water */}
+      <rect x="0" y="140" width="280" height="40" fill="url(#sfWaterGradient)" />
+      <ellipse cx="140" cy="165" rx="130" ry="20" fill="#1a3a5c" opacity="0.15" />
+
+      {/* Distant hills silhouette (Marin Headlands) */}
+      <path d="M0 120 Q40 85 80 100 Q110 80 150 95 Q190 75 230 90 Q260 80 280 95 L280 145 L0 145Z" fill="#1c1517" opacity="0.5" />
+
+      {/* Fog bank rolling in */}
+      <ellipse cx="60" cy="105" rx="55" ry="18" fill="#e8dfe0" opacity="0.15" />
+      <ellipse cx="180" cy="100" rx="70" ry="20" fill="#e8dfe0" opacity="0.12" />
+      <ellipse cx="120" cy="115" rx="90" ry="12" fill="#e8dfe0" opacity="0.1" />
+
+      {/* Golden Gate Bridge */}
+      <g filter="url(#softShadow)">
+        {/* Main cables (catenary) */}
+        <path d="M45 75 Q90 110 140 75" stroke="url(#sfBridgeGradient)" strokeWidth="2.5" fill="none" />
+        <path d="M140 75 Q190 110 235 75" stroke="url(#sfBridgeGradient)" strokeWidth="2.5" fill="none" />
+
+        {/* Vertical suspender cables */}
+        {[60, 75, 90, 105, 120].map((x, i) => (
+          <line key={`l${i}`} x1={x} y1={75 + Math.sin((x - 45) / 95 * Math.PI) * 35} x2={x} y2="135" stroke="#C0362C" strokeWidth="0.7" opacity="0.5" />
+        ))}
+        {[160, 175, 190, 205, 220].map((x, i) => (
+          <line key={`r${i}`} x1={x} y1={75 + Math.sin((x - 140) / 95 * Math.PI) * 35} x2={x} y2="135" stroke="#C0362C" strokeWidth="0.7" opacity="0.5" />
+        ))}
+
+        {/* Road deck */}
+        <rect x="40" y="132" width="200" height="6" rx="1" fill="#8b3a30" />
+        <rect x="40" y="134" width="200" height="2" fill="#6b2a22" opacity="0.5" />
+
+        {/* Tower 1 - South */}
+        <rect x="38" y="50" width="8" height="88" fill="url(#sfBridgeGradient)" />
+        <rect x="42" y="50" width="8" height="88" fill="url(#sfBridgeGradient)" />
+        {/* Cross braces */}
+        <rect x="38" y="68" width="12" height="3" fill="#d4453a" />
+        <rect x="38" y="90" width="12" height="3" fill="#d4453a" />
+        <rect x="38" y="112" width="12" height="3" fill="#d4453a" />
+        {/* Tower cap */}
+        <rect x="36" y="48" width="16" height="5" rx="1" fill="#C0362C" />
+
+        {/* Tower 2 - North */}
+        <rect x="133" y="50" width="8" height="88" fill="url(#sfBridgeGradient)" />
+        <rect x="137" y="50" width="8" height="88" fill="url(#sfBridgeGradient)" />
+        <rect x="133" y="68" width="12" height="3" fill="#d4453a" />
+        <rect x="133" y="90" width="12" height="3" fill="#d4453a" />
+        <rect x="133" y="112" width="12" height="3" fill="#d4453a" />
+        <rect x="131" y="48" width="16" height="5" rx="1" fill="#C0362C" />
+      </g>
+
+      {/* Downtown skyline (right side, behind bridge) */}
+      <g opacity="0.6">
+        {/* Transamerica-like spire */}
+        <polygon points="248,70 254,70 251,35" fill="#2d1b2e" />
+        {/* Salesforce-like tower */}
+        <rect x="258" y="55" width="14" height="85" rx="3" fill="#1c1517" />
+        <rect x="261" y="60" width="3" height="4" rx="0.5" fill="#C0362C" opacity="0.3" />
+        <rect x="266" y="60" width="3" height="4" rx="0.5" fill="#C0362C" opacity="0.3" />
+        <rect x="261" y="70" width="3" height="4" rx="0.5" fill="#C0362C" opacity="0.2" />
+        <rect x="266" y="70" width="3" height="4" rx="0.5" fill="#C0362C" opacity="0.2" />
+        {/* Shorter buildings */}
+        <rect x="240" y="80" width="10" height="60" rx="1" fill="#261a1d" />
+        <rect x="228" y="90" width="10" height="50" rx="1" fill="#1c1517" opacity="0.8" />
+      </g>
+
+      {/* Fog wisps over bridge */}
+      <rect x="0" y="95" width="280" height="25" fill="url(#sfFogGradient)" />
+
+      {/* Water reflections */}
+      <line x1="30" y1="150" x2="55" y2="150" stroke="#C0362C" strokeWidth="0.8" opacity="0.15" />
+      <line x1="120" y1="155" x2="160" y2="155" stroke="#C0362C" strokeWidth="0.8" opacity="0.12" />
+      <line x1="200" y1="148" x2="230" y2="148" stroke="#C0362C" strokeWidth="0.8" opacity="0.1" />
+
+      {/* Data particles */}
+      <g filter="url(#glow)">
+        <circle cx="20" cy="60" r="2" fill="#C0362C" opacity="0.6" />
+        <circle cx="270" cy="45" r="1.5" fill="#d4453a" opacity="0.5" />
+        <circle cx="100" cy="40" r="1.5" fill="#C0362C" opacity="0.4" />
+      </g>
     </svg>
   );
 }

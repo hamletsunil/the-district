@@ -488,6 +488,12 @@
   --accent: #10997F;
 }
 
+.card-crimson {
+  background: linear-gradient(135deg, #1c1517 0%, #261a1d 100%);
+  color: #f5f0e8;
+  --accent: #C0362C;
+}
+
 /* ===========================
    CARD TYPOGRAPHY
    =========================== */
