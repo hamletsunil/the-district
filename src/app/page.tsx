@@ -133,10 +133,10 @@ export default function Home() {
             </Link>
           ))}
         </section>
-      </main>
 
-      {/* District Newsletter CTA */}
-      <ArticleEndCTA />
+        {/* District Newsletter CTA */}
+        <ArticleEndCTA />
+      </main>
 
       {/* Reveal Footer - revealed when scrolling past main content */}
       <RevealFooter />
