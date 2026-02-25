@@ -244,8 +244,8 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.03) 100%);
+  border-top: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+  background: var(--page-bg, transparent);
 }
 
 .up-next-label {
@@ -254,18 +254,16 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--page-text-muted, rgba(255, 255, 255, 0.4));
 }
 
 .up-next-card {
-  max-width: 600px;
+  max-width: 780px;
   width: 100%;
-  opacity: 1 !important;
-  transform: none !important;
 }
 
 .up-next-card:hover {
-  transform: translateY(-4px) !important;
+  transform: translateX(8px) scale(1.02);
 }
 
 /* ===========================
