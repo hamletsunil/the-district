@@ -961,7 +961,7 @@ function RepublicSection() {
             climate hawks vs. neighborhood advocates, the mayor&rsquo;s
             organized coalition vs. a rotating cast of independents whose only
             common ground is skepticism of the mayor&rsquo;s organized
-            coalition. Ann Arbor&rsquo;s locals call it &ldquo;The People&rsquo;s
+            coalition. Locals call it &ldquo;The People&rsquo;s
             Republic,&rdquo; a nickname that dates to the 1960s, when Students
             for a Democratic Society was founded on campus and the University
             hosted the nation&rsquo;s first Vietnam War teach-in. The Human
@@ -981,7 +981,7 @@ function RepublicSection() {
           <p>
             Taylor was describing the 2018&ndash;2020 council. Seven members
             the{" "}
-            <a href="https://annarborobserver.com/articles/democratic_deadlock.html" target="_blank" rel="noopener noreferrer">Ann Arbor Observer labeled &ldquo;Protectors&rdquo;</a>{" "}
+            <a href="https://samfirke.com/2020/06/29/the-factions-of-ann-arbor-city-politics-and-why-theyre-a-problem/" target="_blank" rel="noopener noreferrer">local analyst Sam Firke labeled &ldquo;Protectors&rdquo;</a>{" "}
             held the majority. They wanted roads fixed, sewers maintained, police
             staffed, and neighborhoods left alone. The mayor&rsquo;s four-member
             minority, the &ldquo;Strivers,&rdquo; pushed for density, transit,
@@ -1224,7 +1224,7 @@ function FactionSection() {
             seat today, agreed on 32.4% of the 293 votes they shared. On a
             typical American city council, any two members agree above 95%. Hayner
             and Disch, both Democrats, occupying the same seat four years apart,
-            were closer to a coin flip.
+            were worse than a coin flip.
           </p>
           <p>
             Hayner was the council&rsquo;s most visible contrarian: an
@@ -1614,7 +1614,7 @@ function ClosestVotesSection() {
 
         <div className="aa-body-prose">
           <p>
-            The last entry is the one that makes Ann Arbor, Ann Arbor. In
+            The penultimate entry is the one that makes Ann Arbor, Ann Arbor. In
             September 2024, council split 5&ndash;5 on a leaf blower ban. The
             motion failed. A city that divides evenly on leaf blowers is a city
             that will divide on anything.

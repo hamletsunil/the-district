@@ -214,6 +214,61 @@
   text-decoration-color: var(--accent-primary);
 }
 
+/* ---------- PULL QUOTE ---------- */
+.aa-pull-quote {
+  width: 100%;
+  max-width: 800px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .aa-pull-quote {
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+  }
+}
+
+.aa-pull-quote blockquote {
+  font-family: var(--font-body);
+  font-size: 1.375rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--page-text);
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .aa-pull-quote blockquote {
+    font-size: 1.75rem;
+  }
+}
+
+.aa-pull-quote blockquote::before {
+  content: '\201C';
+  display: block;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .aa-pull-quote blockquote::before {
+    font-size: 4rem;
+  }
+}
+
+.aa-pull-quote cite {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+}
+
 /* ---------- BYLINE ---------- */
 .aa-hero-byline {
   font-family: var(--font-sans);
