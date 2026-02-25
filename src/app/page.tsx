@@ -106,18 +106,6 @@ export default function Home() {
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Side navigation dots */}
-        <nav className="side-nav hidden lg:flex">
-          {articles.map((_, i) => (
-            <button
-              type="button"
-              key={i}
-              className={`side-nav-dot ${i === 0 ? "active" : ""}`}
-              aria-label={`Go to article ${i + 1}`}
-            />
-          ))}
-        </nav>
-
         {/* 3D Article Stack */}
         <section ref={stackRef} className="article-stack">
           {articles.map((article, index) => (
