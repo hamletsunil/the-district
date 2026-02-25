@@ -172,6 +172,19 @@ body {
   --card-border: rgba(255, 255, 255, 0.08);
 }
 
+[data-theme="ann-arbor"] {
+  --page-bg: #0c1a2e;
+  --page-bg-alt: #112240;
+  --page-text: #f2ede4;
+  --page-text-muted: #8e99a8;
+  --accent-primary: #e8b931;
+  --accent-secondary: #d4a04a;
+  --accent-glow: rgba(232, 185, 49, 0.12);
+  --accent-dissent: #d4453a;
+  --card-bg: rgba(17, 34, 64, 0.8);
+  --card-border: rgba(232, 185, 49, 0.15);
+}
+
 @theme inline {
   --color-navy-950: var(--navy-950);
   --color-navy-900: var(--navy-900);

@@ -11,6 +11,13 @@ Publisher: Hamlet (https://www.myhamlet.com)
 
 ## Published Articles
 
+### The City That Won't Agree — Ann Arbor
+- URL: https://district.myhamlet.com/articles/ann-arbor-divided
+- Published: February 2026
+- Analysis of 8.1 million votes across 142 U.S. cities reveals Ann Arbor has the highest council dissent rate in America at 18.19% — 3x the next competitor, 300x Chicago's rate. Fifteen years of voting data and pairwise agreement analysis expose deep factional lines in an all-Democrat city.
+- Data: 53,207 Ann Arbor votes, 409 unique council members, 7,100+ agenda items, 17 years of records (2008-2024).
+- Sources: Legistar voting records, Michigan Daily, Ann Arbor Observer, WEMU, U.S. Census Bureau, Dave Askins factional analysis.
+
 ### Five Futures for Oakland
 - URL: https://district.myhamlet.com/articles/oaklands-future
 - Published: February 2026

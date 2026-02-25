@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -22,6 +22,7 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     climate: <ClimateIllustration />,
     oakland: <OaklandIllustration />,
     "san-francisco": <SanFranciscoIllustration />,
+    "ann-arbor": <AnnArborIllustration />,
   };
 
   return (
@@ -704,6 +705,88 @@ function SanFranciscoIllustration() {
         <circle cx="20" cy="60" r="2" fill="#C0362C" opacity="0.6" />
         <circle cx="270" cy="45" r="1.5" fill="#d4453a" opacity="0.5" />
         <circle cx="100" cy="40" r="1.5" fill="#C0362C" opacity="0.4" />
+      </g>
+    </svg>
+  );
+}
+
+/**
+ * Ann Arbor: Burton Tower, Michigan Stadium, maize/blue palette, data viz bars
+ */
+function AnnArborIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      <defs>
+        <linearGradient id="aaBldgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#e8b931" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#c49340" stopOpacity="0.5" />
+        </linearGradient>
+        <linearGradient id="aaSkyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#0c1a2e" />
+          <stop offset="100%" stopColor="#152a45" />
+        </linearGradient>
+        <linearGradient id="aaBarGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#e8b931" stopOpacity="0.05" />
+          <stop offset="100%" stopColor="#e8b931" stopOpacity="0.6" />
+        </linearGradient>
+        <linearGradient id="aaRedBarGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#d4453a" stopOpacity="0.05" />
+          <stop offset="100%" stopColor="#d4453a" stopOpacity="0.55" />
+        </linearGradient>
+      </defs>
+
+      {/* Ground plane */}
+      <ellipse cx="140" cy="165" rx="130" ry="20" fill="#e8b931" opacity="0.06" />
+
+      {/* Data viz bars (dissent chart) */}
+      <g filter="url(#softShadow)">
+        <rect x="20" y="110" width="7" height="45" fill="url(#aaBarGradient)" rx="1" />
+        <rect x="32" y="95"  width="7" height="60" fill="url(#aaBarGradient)" rx="1" />
+        <rect x="44" y="105" width="7" height="50" fill="url(#aaBarGradient)" rx="1" />
+        <rect x="56" y="75"  width="7" height="80" fill="url(#aaRedBarGradient)" rx="1" />
+        <rect x="68" y="100" width="7" height="55" fill="url(#aaBarGradient)" rx="1" />
+        <rect x="80" y="112" width="7" height="43" fill="url(#aaBarGradient)" rx="1" />
+      </g>
+
+      {/* Michigan Stadium (The Big House) */}
+      <g filter="url(#softShadow)">
+        <path d="M105 155 L112 115 Q120 100 140 92 Q160 100 168 115 L175 155Z" fill="url(#aaBldgGradient)" opacity="0.6" />
+        <line x1="118" y1="108" x2="115" y2="150" stroke="#e8b931" strokeWidth="0.7" opacity="0.3" />
+        <line x1="130" y1="97"  x2="128" y2="150" stroke="#e8b931" strokeWidth="0.7" opacity="0.3" />
+        <line x1="140" y1="92"  x2="140" y2="150" stroke="#e8b931" strokeWidth="0.7" opacity="0.3" />
+        <line x1="150" y1="97"  x2="152" y2="150" stroke="#e8b931" strokeWidth="0.7" opacity="0.3" />
+        <line x1="162" y1="108" x2="165" y2="150" stroke="#e8b931" strokeWidth="0.7" opacity="0.3" />
+      </g>
+
+      {/* Burton Memorial Tower */}
+      <g filter="url(#softShadow)">
+        <rect x="195" y="42" width="16" height="113" fill="url(#aaBldgGradient)" />
+        <rect x="192" y="38" width="22" height="6" rx="1" fill="#e8b931" opacity="0.8" />
+        <path d="M192 38 L203 25 L214 38Z" fill="#e8b931" opacity="0.7" />
+        {/* Clock face */}
+        <circle cx="203" cy="55" r="5" fill="#0c1a2e" opacity="0.5" stroke="#e8b931" strokeWidth="0.8" />
+        {/* Windows */}
+        <rect x="199" y="70" width="3" height="6" fill="#0c1a2e" opacity="0.3" rx="0.5" />
+        <rect x="204" y="70" width="3" height="6" fill="#0c1a2e" opacity="0.3" rx="0.5" />
+        <rect x="199" y="85" width="3" height="6" fill="#0c1a2e" opacity="0.3" rx="0.5" />
+        <rect x="204" y="85" width="3" height="6" fill="#0c1a2e" opacity="0.3" rx="0.5" />
+        <rect x="199" y="100" width="3" height="6" fill="#0c1a2e" opacity="0.3" rx="0.5" />
+        <rect x="204" y="100" width="3" height="6" fill="#0c1a2e" opacity="0.3" rx="0.5" />
+      </g>
+
+      {/* Downtown buildings (right) */}
+      <rect x="228" y="100" width="14" height="55" fill="url(#aaBldgGradient)" opacity="0.45" />
+      <rect x="246" y="115" width="12" height="40" fill="url(#aaBldgGradient)" opacity="0.35" />
+      <rect x="262" y="108" width="10" height="47" fill="url(#aaBldgGradient)" opacity="0.3" />
+
+      {/* Maize data particles */}
+      <g filter="url(#glow)">
+        <circle cx="15" cy="65" r="2" fill="#e8b931" opacity="0.6" />
+        <circle cx="265" cy="50" r="1.5" fill="#e8b931" opacity="0.5" />
+        <circle cx="95" cy="45" r="1.5" fill="#d4453a" opacity="0.4" />
+        <circle cx="180" cy="35" r="1" fill="#e8b931" opacity="0.3" />
       </g>
     </svg>
   );

@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
+      url: `${baseUrl}/articles/ann-arbor-divided`,
+      lastModified: new Date("2026-02-25"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/articles/oaklands-future`,
       lastModified: new Date("2026-02-10"),
       changeFrequency: "monthly",

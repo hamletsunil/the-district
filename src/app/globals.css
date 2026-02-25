@@ -15,6 +15,7 @@
 @import "../styles/articles/vote-tracker.css";
 @import "../styles/articles/temperature.css";
 @import "../styles/articles/oakland.css";
+@import "../styles/articles/ann-arbor.css";
 
 /* Responsive breakpoint fixes */
 @import "../styles/responsive.css";

@@ -494,6 +494,12 @@
   --accent: #C0362C;
 }
 
+.card-ann-arbor {
+  background: linear-gradient(135deg, #0c1a2e 0%, #152a45 100%);
+  color: #f5f0e8;
+  --accent: #e8b931;
+}
+
 /* ===========================
    CARD TYPOGRAPHY
    =========================== */

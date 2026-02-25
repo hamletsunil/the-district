@@ -6,6 +6,16 @@ import { ArticleIllustration } from "@/components/home";
 
 const articles = [
   {
+    id: "ann-arbor-divided",
+    topic: "City Deep Dive",
+    title: "The City That Won\u2019t Agree",
+    description:
+      "142 cities. 8.1 million votes. Ann Arbor\u2019s council has the highest dissent rate in America\u2014and it\u2019s been that way for seventeen years.",
+    meta: "12 min read \u00b7 Interactive",
+    colorScheme: "ann-arbor",
+    illustrationType: "ann-arbor" as const,
+  },
+  {
     id: "sf-through-the-fog",
     topic: "City Deep Dive",
     title: "Through the Fog",
