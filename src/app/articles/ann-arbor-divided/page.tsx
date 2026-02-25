@@ -7,7 +7,7 @@
  * 142 cities. 8.1 million votes. Seventeen years of data explain why.
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Fragment } from "react";
 import { AtAGlance } from "@/components/article/AtAGlance";
 import { MethodologySection } from "@/components/article/MethodologySection";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
@@ -181,6 +181,11 @@ const DATA = {
 // ============================================================================
 
 const SOURCES: Source[] = [
+  {
+    title: "Ann Arbor City Council Meeting Transcripts & Voting Records",
+    outlet: "Hamlet",
+    url: "https://myhamlet.com",
+  },
   {
     title: "Democratic Deadlock",
     outlet: "Ann Arbor Observer",
@@ -1362,9 +1367,8 @@ function AgreementHeatmap() {
 
         {/* Rows */}
         {members.map((rowMember, row) => (
-          <>
+          <Fragment key={`row-${rowMember}`}>
             <div
-              key={`row-${rowMember}`}
               className="aa-heatmap-labels-y"
               style={{ fontSize: "10px" }}
             >
@@ -1386,7 +1390,7 @@ function AgreementHeatmap() {
                 />
               );
             })}
-          </>
+          </Fragment>
         ))}
       </div>
 

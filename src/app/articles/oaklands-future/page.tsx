@@ -63,6 +63,11 @@ const DATA = {
 
 const SOURCES: Source[] = [
   {
+    title: "Oakland City Council Meeting Transcripts & Voting Records",
+    outlet: "Hamlet",
+    url: "https://myhamlet.com",
+  },
+  {
     title: "City of Oakland FY2024-25 Adopted Budget",
     outlet: "City of Oakland Finance Department",
     url: "https://www.oaklandca.gov/topics/city-budget",
