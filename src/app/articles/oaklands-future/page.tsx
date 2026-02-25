@@ -22,6 +22,7 @@ import { MethodologySection } from "@/components/article/MethodologySection";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { PullQuote } from "@/components/article/PullQuote";
 import { HamletMeetingEmbed } from "@/components/article/HamletMeetingEmbed";
@@ -204,6 +205,7 @@ export default function OaklandsFuture() {
       <SocialShare title="Five Futures for Oakland" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <UpNext slug="data-center-gold-rush" title="The Data Center Gold Rush" />
       <SubscribeBar />
     </main>
   );

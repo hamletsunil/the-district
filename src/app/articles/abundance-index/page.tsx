@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
 
@@ -123,6 +124,7 @@ export default function AbundanceIndexArticle() {
       <SocialShare title="The Abundance Index: America's most welcoming and resistant cities for development" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <UpNext slug="vote-tracker" title="The Vote Tracker" />
       <SubscribeBar />
     </main>
   );

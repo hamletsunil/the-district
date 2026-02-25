@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
 
@@ -121,6 +122,7 @@ export default function VoteTrackerArticle() {
       <SocialShare title="The Vote Tracker: Newark agrees on everything. Princeton fights about everything. Why?" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <UpNext slug="temperature-check" title="Temperature Check" />
       <SubscribeBar />
     </main>
   );

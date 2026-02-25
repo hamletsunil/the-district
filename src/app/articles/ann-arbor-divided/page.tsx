@@ -13,6 +13,7 @@ import { MethodologySection } from "@/components/article/MethodologySection";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { PullQuote } from "@/components/article/PullQuote";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -360,6 +361,7 @@ export default function AnnArborDivided() {
       </div>
 
       <SourcesCitations sources={SOURCES} />
+      <UpNext slug="oaklands-future" title="Five Futures for Oakland" />
       <SubscribeBar />
     </main>
   );

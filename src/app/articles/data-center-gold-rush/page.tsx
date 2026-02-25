@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react";
 import { SourcesCitations } from "@/components/article/SourcesCitations";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
+import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
 
@@ -132,6 +133,7 @@ export default function DataCenterArticle() {
       <SocialShare title="The Data Center Gold Rush: Inside the local battles for AI infrastructure" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
+      <UpNext slug="abundance-index" title="The Abundance Index" />
       <SubscribeBar />
     </main>
   );
