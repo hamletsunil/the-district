@@ -4,29 +4,21 @@
  * SubscribeBar Component
  *
  * Sticky footer bar that appears after user scrolls 60% of the article.
+ * Links to Hamlet for local government alerts.
  * Dismissable and remembers dismissal for 7 days via localStorage.
  */
 
 import { useEffect, useState } from "react";
 
-const DISMISSED_KEY = "district-subscribe-dismissed";
-const SUBSCRIBED_KEY = "district-subscribed";
+const DISMISSED_KEY = "district-alerts-dismissed";
 const DISMISS_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 export function SubscribeBar() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(true); // Start hidden
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   // Check localStorage on mount
   useEffect(() => {
-    const subscribedAt = localStorage.getItem(SUBSCRIBED_KEY);
-    if (subscribedAt) {
-      setDismissed(true);
-      return;
-    }
-
     const dismissedAt = localStorage.getItem(DISMISSED_KEY);
     if (dismissedAt) {
       const elapsed = Date.now() - parseInt(dismissedAt, 10);
@@ -48,7 +40,6 @@ export function SubscribeBar() {
       setVisible(scrollPercent > 0.6);
     };
 
-    // Check immediately in case page loads already scrolled
     handleScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -61,69 +52,25 @@ export function SubscribeBar() {
     localStorage.setItem(DISMISSED_KEY, Date.now().toString());
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || status === "loading") return;
-
-    setStatus("loading");
-
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      if (response.ok || response.status === 409) {
-        setStatus("success");
-        localStorage.setItem(SUBSCRIBED_KEY, Date.now().toString());
-        setTimeout(() => {
-          setVisible(false);
-          setDismissed(true);
-        }, 2000);
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  // Don't render at all if dismissed
   if (dismissed) return null;
 
-  // Always render, but use CSS class to animate visibility
   return (
     <div className={`subscribe-bar ${visible ? "subscribe-bar--visible" : ""}`}>
       <div className="subscribe-bar__content">
         <div className="subscribe-bar__text">
-          <span className="subscribe-bar__brand">The District</span>
-          <span className="subscribe-bar__tagline">Get weekly insights</span>
+          <span className="subscribe-bar__tagline">
+            Get alerts when your city council discusses issues you care about
+          </span>
         </div>
 
-        {status === "success" ? (
-          <div className="subscribe-bar__success">
-            <span>✓</span> You&apos;re subscribed!
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="subscribe-bar__form">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your email"
-              className="subscribe-bar__input"
-              required
-            />
-            <button
-              type="submit"
-              className="subscribe-bar__button"
-              disabled={status === "loading"}
-            >
-              {status === "loading" ? "..." : "Subscribe"}
-            </button>
-          </form>
-        )}
+        <a
+          href="https://app.myhamlet.com/signup"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="subscribe-bar__button"
+        >
+          Try Hamlet Free
+        </a>
 
         <button
           onClick={handleDismiss}
