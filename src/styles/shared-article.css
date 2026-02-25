@@ -338,7 +338,7 @@
 
 .article-card-3d {
   width: 100%;
-  max-width: 900px;
+  max-width: 780px;
   transition: transform 0.4s var(--ease-elegant), box-shadow 0.4s var(--ease-elegant);
 }
 
