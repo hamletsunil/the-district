@@ -393,7 +393,7 @@ function RevealFooter() {
           Meet the full team at Hamlet →
         </a>
 
-        {/* Attribution */}
+        {/* Attribution (matches global footer) */}
         <div className="reveal-footer-attribution">
           <p>
             A{" "}
@@ -405,6 +405,15 @@ function RevealFooter() {
               Hamlet
             </a>{" "}
             Publication
+          </p>
+          <p className="reveal-footer-about">
+            <a
+              href="https://www.myhamlet.com/about"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About
+            </a>
           </p>
         </div>
       </div>

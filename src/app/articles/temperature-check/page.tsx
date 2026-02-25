@@ -57,11 +57,6 @@ const DATA = {
 // Note: Friction scores are derived from NLP analysis of Hamlet transcript data
 const SOURCES = [
   {
-    title: "City Council Meeting Transcripts & Civic Friction Analysis",
-    outlet: "Hamlet",
-    url: "https://myhamlet.com",
-  },
-  {
     title: "Supreme Court issues decision in Oregon homelessness case, siding with Grants Pass",
     outlet: "KGW",
     url: "https://www.kgw.com/article/news/local/homeless/us-supreme-court-ruling-grants-pass-homeless-camping-ban/283-cf6e28ac-929b-4700-bd49-8f9dc8278fd3"
@@ -80,7 +75,12 @@ const SOURCES = [
     title: "Dalton, Georgia city data - U.S. Census Bureau",
     outlet: "Census.gov",
     url: "https://www.census.gov/quickfacts/daltoncitygeorgia"
-  }
+  },
+  {
+    title: "Hamlet",
+    outlet: "Civic Intelligence Platform",
+    url: "https://app.myhamlet.com/indices",
+  },
 ];
 
 export default function TemperatureCheckArticle() {

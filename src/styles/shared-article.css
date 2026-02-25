@@ -628,6 +628,11 @@
   color: white;
 }
 
+/* Hide global footer on homepage (RevealFooter serves as footer there) */
+body:has(.reveal-footer) .footer-minimal {
+  display: none;
+}
+
 /* ===========================
    COLOPHON PAGE
    =========================== */

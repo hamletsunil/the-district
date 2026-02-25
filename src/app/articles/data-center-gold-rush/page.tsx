@@ -80,11 +80,6 @@ const DATA = {
 // Validated sources for fact-checking
 const SOURCES = [
   {
-    title: "City Council Meeting Transcripts & Data Center Discussions",
-    outlet: "Hamlet",
-    url: "https://myhamlet.com",
-  },
-  {
     title: "Arizona city unanimously rejects AI data center after residents' outcry",
     outlet: "Fox Business",
     url: "https://www.foxbusiness.com/politics/arizona-city-unanimously-rejects-ai-data-center-after-residents-outcry"
@@ -103,7 +98,12 @@ const SOURCES = [
     title: "Lawmakers seek ways to prevent data centers from straining Illinois' power grids",
     outlet: "Capitol News Illinois",
     url: "https://capitolnewsillinois.com/news/lawmakers-seek-ways-to-prevent-data-centers-from-straining-illinois-power-grids/"
-  }
+  },
+  {
+    title: "Hamlet",
+    outlet: "Civic Intelligence Platform",
+    url: "https://app.myhamlet.com/indices",
+  },
 ];
 
 export default function DataCenterArticle() {

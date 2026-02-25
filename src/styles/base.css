@@ -547,6 +547,22 @@ body {
   color: var(--indigo-300);
 }
 
+.reveal-footer-about {
+  margin-top: 0.5rem;
+  font-size: 0.6875rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.reveal-footer-about a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
+.reveal-footer-about a:hover {
+  color: white;
+}
+
 /* How It's Made Section */
 .reveal-footer-how {
   margin-bottom: 2.5rem;

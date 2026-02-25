@@ -182,11 +182,6 @@ const DATA = {
 
 const SOURCES: Source[] = [
   {
-    title: "Ann Arbor City Council Meeting Transcripts & Voting Records",
-    outlet: "Hamlet",
-    url: "https://myhamlet.com",
-  },
-  {
     title: "Democratic Deadlock",
     outlet: "Ann Arbor Observer",
     url: "https://annarborobserver.com/articles/democratic_deadlock.html",
@@ -255,6 +250,11 @@ const SOURCES: Source[] = [
     title: "Ann Arbor voters reject major overhaul of election system",
     outlet: "Michigan Public",
     url: "https://www.michiganpublic.org/politics-government/2024-11-06/ann-arbor-voters-reject-major-reform-of-election-system-say-yes-to-renewable-energy-utility",
+  },
+  {
+    title: "Hamlet",
+    outlet: "Civic Intelligence Platform",
+    url: "https://app.myhamlet.com/indices/city/ann-arbor-mi",
   },
 ];
 

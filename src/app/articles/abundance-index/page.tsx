@@ -74,11 +74,6 @@ const DATA = {
 // Note: Abundance Index scores derived from Hamlet's NLP analysis of meeting transcripts
 const SOURCES = [
   {
-    title: "City Council Meeting Transcripts & Voting Records",
-    outlet: "Hamlet",
-    url: "https://myhamlet.com",
-  },
-  {
     title: "Temple population growth 'astronomical' as city hits 102,000 residents",
     outlet: "Temple Daily Telegram",
     url: "https://www.tdtnews.com/news/central_texas_news/article_a50bafc6-0c5d-4229-b68d-445588413256.html"
@@ -97,7 +92,12 @@ const SOURCES = [
     title: "Fairfax, Virginia city data - U.S. Census Bureau",
     outlet: "Census.gov",
     url: "https://www.census.gov/quickfacts/fairfaxcityvirginia"
-  }
+  },
+  {
+    title: "Hamlet",
+    outlet: "Civic Intelligence Platform",
+    url: "https://app.myhamlet.com/indices",
+  },
 ];
 
 export default function AbundanceIndexArticle() {

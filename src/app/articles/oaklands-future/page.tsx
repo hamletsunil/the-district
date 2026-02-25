@@ -63,11 +63,6 @@ const DATA = {
 
 const SOURCES: Source[] = [
   {
-    title: "Oakland City Council Meeting Transcripts & Voting Records",
-    outlet: "Hamlet",
-    url: "https://myhamlet.com",
-  },
-  {
     title: "City of Oakland FY2024-25 Adopted Budget",
     outlet: "City of Oakland Finance Department",
     url: "https://www.oaklandca.gov/topics/city-budget",
@@ -121,6 +116,11 @@ const SOURCES: Source[] = [
     title: "National Risk Index — Alameda County",
     outlet: "Federal Emergency Management Agency",
     url: "https://hazards.fema.gov/nri/",
+  },
+  {
+    title: "Hamlet",
+    outlet: "Civic Intelligence Platform",
+    url: "https://app.myhamlet.com/indices/city/oakland-ca",
   },
 ];
 

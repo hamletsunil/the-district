@@ -74,11 +74,6 @@ const DATA = {
 // Validated sources for fact-checking
 const SOURCES = [
   {
-    title: "City Council Meeting Transcripts & Voting Records",
-    outlet: "Hamlet",
-    url: "https://myhamlet.com",
-  },
-  {
     title: "Princeton advances affordable housing plan for one of its wealthiest neighborhoods",
     outlet: "Gothamist",
     url: "https://gothamist.com/news/princeton-nj-advances-affordable-housing-plan-for-one-of-its-wealthiest-neighborhoods"
@@ -97,7 +92,12 @@ const SOURCES = [
     title: "City Council Voting Records - UIC Political Science",
     outlet: "University of Illinois Chicago",
     url: "https://pols.uic.edu/chicago-politics/city-council-voting-records/"
-  }
+  },
+  {
+    title: "Hamlet",
+    outlet: "Civic Intelligence Platform",
+    url: "https://app.myhamlet.com/indices",
+  },
 ];
 
 export default function VoteTrackerArticle() {
