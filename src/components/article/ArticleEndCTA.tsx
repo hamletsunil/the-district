@@ -7,21 +7,11 @@
  * Matches article section styling for visual consistency.
  */
 
-import { useState, useEffect } from "react";
-
-const SUBSCRIBED_KEY = "district-subscribed";
+import { useState } from "react";
 
 export function ArticleEndCTA() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
-
-  useEffect(() => {
-    const subscribed = localStorage.getItem(SUBSCRIBED_KEY);
-    if (subscribed) {
-      setAlreadySubscribed(true);
-    }
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +28,6 @@ export function ArticleEndCTA() {
 
       if (response.ok || response.status === 409) {
         setStatus("success");
-        localStorage.setItem(SUBSCRIBED_KEY, Date.now().toString());
       } else {
         setStatus("error");
       }
@@ -46,9 +35,6 @@ export function ArticleEndCTA() {
       setStatus("error");
     }
   };
-
-  // Don't show if already subscribed
-  if (alreadySubscribed) return null;
 
   return (
     <section className="article-end-cta">
