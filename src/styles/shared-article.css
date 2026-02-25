@@ -351,6 +351,9 @@
 .article-card-3d:nth-child(2) { --card-tilt: 10deg; margin-left: 3rem; }
 .article-card-3d:nth-child(3) { --card-tilt: 8deg; margin-left: 6rem; }
 .article-card-3d:nth-child(4) { --card-tilt: 6deg; margin-left: 9rem; }
+.article-card-3d:nth-child(5) { --card-tilt: 4deg; margin-left: 6rem; }
+.article-card-3d:nth-child(6) { --card-tilt: 6deg; margin-left: 3rem; }
+.article-card-3d:nth-child(7) { --card-tilt: 8deg; }
 
 @media (max-width: 768px) {
   .article-card-3d:nth-child(n) {
