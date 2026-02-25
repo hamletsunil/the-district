@@ -74,6 +74,11 @@ const DATA = {
 // Validated sources for fact-checking
 const SOURCES = [
   {
+    title: "City Council Meeting Transcripts & Voting Records",
+    outlet: "Hamlet",
+    url: "https://myhamlet.com",
+  },
+  {
     title: "Princeton advances affordable housing plan for one of its wealthiest neighborhoods",
     outlet: "Gothamist",
     url: "https://gothamist.com/news/princeton-nj-advances-affordable-housing-plan-for-one-of-its-wealthiest-neighborhoods"

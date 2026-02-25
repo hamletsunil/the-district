@@ -100,48 +100,55 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
-      {/* Hero Section */}
-      <HeroSection />
+    <>
+      {/* Main content */}
+      <main className="main-content-layer">
+        {/* Hero Section */}
+        <HeroSection />
 
-      {/* Side navigation dots */}
-      <nav className="side-nav hidden lg:flex">
-        {articles.map((_, i) => (
-          <button
-            key={i}
-            className={`side-nav-dot ${i === 0 ? "active" : ""}`}
-            aria-label={`Go to article ${i + 1}`}
-          />
-        ))}
-      </nav>
+        {/* Side navigation dots */}
+        <nav className="side-nav hidden lg:flex">
+          {articles.map((_, i) => (
+            <button
+              type="button"
+              key={i}
+              className={`side-nav-dot ${i === 0 ? "active" : ""}`}
+              aria-label={`Go to article ${i + 1}`}
+            />
+          ))}
+        </nav>
 
-      {/* 3D Article Stack */}
-      <section ref={stackRef} className="article-stack">
-        {articles.map((article, index) => (
-          <Link
-            key={article.id}
-            href={"href" in article && article.href ? article.href : `/articles/${article.id}`}
-            className={`article-card-3d animate-on-scroll`}
-            style={{ transitionDelay: `${index * 0.1}s` }}
-          >
-            <div className={`card-inner card-${article.colorScheme}`}>
-              <div className="card-spine" />
-              <div className="card-layout">
-                <div className="card-illustration">
-                  <ArticleIllustration type={article.illustrationType} />
-                </div>
-                <div className="card-content">
-                  <span className="card-topic">{article.topic}</span>
-                  <h2 className="card-title">{article.title}</h2>
-                  <p className="card-description">{article.description}</p>
-                  <span className="card-meta">{article.meta}</span>
+        {/* 3D Article Stack */}
+        <section ref={stackRef} className="article-stack">
+          {articles.map((article, index) => (
+            <Link
+              key={article.id}
+              href={"href" in article && article.href ? article.href : `/articles/${article.id}`}
+              className={`article-card-3d animate-on-scroll`}
+              style={{ transitionDelay: `${index * 0.1}s` }}
+            >
+              <div className={`card-inner card-${article.colorScheme}`}>
+                <div className="card-spine" />
+                <div className="card-layout">
+                  <div className="card-illustration">
+                    <ArticleIllustration type={article.illustrationType} />
+                  </div>
+                  <div className="card-content">
+                    <span className="card-topic">{article.topic}</span>
+                    <h2 className="card-title">{article.title}</h2>
+                    <p className="card-description">{article.description}</p>
+                    <span className="card-meta">{article.meta}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Link>
-        ))}
-      </section>
-    </main>
+            </Link>
+          ))}
+        </section>
+      </main>
+
+      {/* Reveal Footer - revealed when scrolling past main content */}
+      <RevealFooter />
+    </>
   );
 }
 
@@ -263,5 +270,144 @@ function HeroSection() {
         <span>Explore stories</span>
       </div>
     </section>
+  );
+}
+
+// ============================================================================
+// REVEAL FOOTER - About section that reveals as you scroll past content
+// ============================================================================
+function RevealFooter() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setMessage(data.message || "Welcome to The District!");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong.");
+      }
+    } catch {
+      setStatus("error");
+      setMessage("Network error. Please try again.");
+    }
+  };
+
+  return (
+    <footer className="reveal-footer">
+      <div className="reveal-footer-content">
+        {/* Logo & Tagline */}
+        <div className="reveal-footer-header">
+          <h2 className="reveal-footer-title">The District</h2>
+          <p className="reveal-footer-tagline">Stories from city halls</p>
+        </div>
+
+        {/* Mission */}
+        <p className="reveal-footer-mission">
+          We analyze transcripts, votes, and public records from more than
+          3,000 city halls across America to uncover what&rsquo;s really
+          happening in local democracy.
+        </p>
+
+        {/* How It's Made */}
+        <section className="reveal-footer-how">
+          <h3 className="reveal-footer-section-title">How It&rsquo;s Made</h3>
+          <p className="reveal-footer-prose">
+            Every story in The District starts with data. Hamlet&rsquo;s platform
+            processes transcripts, agendas, and voting records from city
+            council meetings across the country. Our journalism team uses
+            this data to find patterns, anomalies, and stories that would
+            be impossible to uncover by hand.
+          </p>
+        </section>
+
+        {/* Author */}
+        <div className="reveal-footer-authors">
+          <div className="reveal-footer-author">
+            <img
+              src="https://www.myhamlet.com/team/sunil-rajaraman.jpg"
+              alt="Sunil Rajaraman"
+              width={48}
+              height={48}
+              className="reveal-footer-avatar"
+            />
+            <div>
+              <p className="reveal-footer-author-name">Sunil Rajaraman</p>
+              <p className="reveal-footer-author-role">Founder &amp; CEO</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Newsletter */}
+        <div className="reveal-footer-newsletter">
+          <h3 className="reveal-footer-newsletter-title">Stay informed</h3>
+          {status === "success" ? (
+            <p className="reveal-footer-newsletter-success">{message}</p>
+          ) : (
+            <form onSubmit={handleSubmit} className="reveal-footer-form">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                disabled={status === "loading"}
+                className="reveal-footer-input"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="reveal-footer-button"
+              >
+                {status === "loading" ? "..." : "Subscribe"}
+              </button>
+            </form>
+          )}
+          {status === "error" && (
+            <p className="reveal-footer-error">{message}</p>
+          )}
+        </div>
+
+        {/* Team Link */}
+        <a
+          href="https://www.myhamlet.com/about"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="reveal-footer-team-link"
+        >
+          Meet the full team at Hamlet →
+        </a>
+
+        {/* Attribution */}
+        <div className="reveal-footer-attribution">
+          <p>
+            A{" "}
+            <a
+              href="https://myhamlet.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Hamlet
+            </a>{" "}
+            Publication
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
