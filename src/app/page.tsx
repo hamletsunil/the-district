@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArticleIllustration } from "@/components/home";
+import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 
 const articles = [
   {
@@ -133,6 +134,9 @@ export default function Home() {
           ))}
         </section>
       </main>
+
+      {/* District Newsletter CTA */}
+      <ArticleEndCTA />
 
       {/* Reveal Footer - revealed when scrolling past main content */}
       <RevealFooter />
