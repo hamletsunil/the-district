@@ -6,6 +6,37 @@ import { ArticleIllustration } from "@/components/home";
 
 const articles = [
   {
+    id: "ann-arbor-divided",
+    topic: "City Deep Dive",
+    title: "The City That Won\u2019t Agree",
+    description:
+      "142 cities. 8.1 million votes. Ann Arbor\u2019s council has the highest dissent rate in America\u2014and it\u2019s been that way for seventeen years.",
+    meta: "12 min read \u00b7 Interactive",
+    colorScheme: "ann-arbor",
+    illustrationType: "ann-arbor" as const,
+  },
+  {
+    id: "sf-through-the-fog",
+    topic: "City Deep Dive",
+    title: "Through the Fog",
+    description:
+      "33 datasets. 19.5 million rows. 1,310 meeting transcripts. A data-driven autopsy of San Francisco\u2019s pandemic crisis and the question everyone\u2019s asking: is the turnaround real?",
+    meta: "25 min read · 9 visualizations",
+    colorScheme: "crimson",
+    illustrationType: "san-francisco" as const,
+    href: "/sf/through-the-fog.html",
+  },
+  {
+    id: "oaklands-future",
+    topic: "City Deep Dive",
+    title: "Five Futures for Oakland",
+    description:
+      "$94K median incomes. A $360M deficit. 342 missing officers. An interactive simulation of the trade-offs Oakland faces over the next decade.",
+    meta: "10 min read · Interactive",
+    colorScheme: "oakland",
+    illustrationType: "oakland" as const,
+  },
+  {
     id: "data-center-gold-rush",
     topic: "Data Centers",
     title: "The Data Center Gold Rush",
@@ -92,7 +123,7 @@ export default function Home() {
           {articles.map((article, index) => (
             <Link
               key={article.id}
-              href={`/articles/${article.id}`}
+              href={"href" in article && article.href ? article.href : `/articles/${article.id}`}
               className={`article-card-3d animate-on-scroll`}
               style={{ transitionDelay: `${index * 0.1}s` }}
             >

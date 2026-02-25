@@ -1,0 +1,76 @@
+import type { Metadata } from "next";
+
+const BASE_URL = "https://district.myhamlet.com";
+const SLUG = "[SLUG]"; // e.g. "oaklands-future"
+const URL = `${BASE_URL}/articles/${SLUG}`;
+
+export const metadata: Metadata = {
+  title: "[ARTICLE TITLE] — The District",
+  description:
+    "[1-2 sentence description with key data points. Include numbers.]",
+  keywords: [
+    "[keyword1]",
+    "[keyword2]",
+    "local government",
+    "The District",
+    "Hamlet",
+  ],
+  alternates: {
+    canonical: URL,
+  },
+  openGraph: {
+    title: "[ARTICLE TITLE]",
+    description: "[OG description — slightly shorter, punchy]",
+    type: "article",
+    publishedTime: "[ISO date, e.g. 2026-02-10T00:00:00.000Z]",
+    modifiedTime: "[ISO date]",
+    authors: ["The District"],
+    siteName: "The District",
+    url: URL,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "[ARTICLE TITLE]",
+    description: "[Twitter description — under 200 chars]",
+  },
+};
+
+export default function ArticleLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            headline: "[ARTICLE TITLE]",
+            description: "[description]",
+            datePublished: "[ISO date]",
+            dateModified: "[ISO date]",
+            author: {
+              "@type": "Organization",
+              name: "The District",
+              url: BASE_URL,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Hamlet",
+              url: "https://www.myhamlet.com",
+            },
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": URL,
+            },
+            image: `${URL}/opengraph-image`,
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
+}

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Literata } from "next/font/google";
 import { Header, Footer } from "@/components/layout";
 import "./globals.css";
@@ -20,13 +21,17 @@ export const metadata: Metadata = {
   title: "The District",
   description:
     "Visual journalism about what happens in 3,000+ city halls across America. A publication by Hamlet.",
-  metadataBase: new URL("https://thedistrict.pub"),
+  metadataBase: new URL("https://district.myhamlet.com"),
+  alternates: {
+    canonical: "https://district.myhamlet.com",
+  },
   openGraph: {
     title: "The District",
     description:
       "Visual journalism about what happens in 3,000+ city halls across America.",
     type: "website",
     siteName: "The District",
+    url: "https://district.myhamlet.com",
   },
   twitter: {
     card: "summary_large_image",
@@ -48,6 +53,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-V9X4VT80MK"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-V9X4VT80MK');
+          `}
+        </Script>
+      </head>
       <body className={`${inter.variable} ${literata.variable}`}>
         <Header />
         {children}

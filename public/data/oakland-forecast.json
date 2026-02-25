@@ -1,0 +1,85 @@
+{
+  "city": "Oakland",
+  "state": "CA",
+  "generated_at": "2026-02-09T20:36:28.581919",
+  "peer_group": {
+    "cluster_id": 3,
+    "cluster_label": "High-cost mid-size affluent",
+    "n_peer_cities": 4
+  },
+  "current_indices": {
+    "education": {
+      "score": 36.22,
+      "confidence": "low",
+      "coverage": 0.4778
+    },
+    "safety": {
+      "score": 31.22,
+      "confidence": "high",
+      "coverage": 0.7778
+    },
+    "prosperity": {
+      "score": 47.37,
+      "confidence": "moderate",
+      "coverage": 0.6444
+    },
+    "affordability": {
+      "score": 54.14,
+      "confidence": "moderate",
+      "coverage": 0.5
+    }
+  },
+  "projections_3yr": {
+    "unemployment": {
+      "target_year": 2027,
+      "baseline": 4.36,
+      "ci_90": [-2.28, 11.0],
+      "last_observed": { "year": 2024, "value": 4.46 }
+    },
+    "violent_crime": {
+      "target_year": 2028,
+      "baseline": 3064.81,
+      "ci_90": [2391.89, 3737.73],
+      "last_observed": { "year": 2025, "value": 3272.77 }
+    },
+    "air_quality_pm25": {
+      "target_year": 2026,
+      "baseline": 6.65,
+      "ci_90": [5.64, 7.67],
+      "last_observed": { "year": 2023, "value": 7.92 }
+    }
+  },
+  "scenarios_3yr": {
+    "unemployment": {
+      "target_year": 2027,
+      "baseline": 4.36,
+      "optimistic": 7.68,
+      "pessimistic": 1.04,
+      "ci_90": [-2.28, 11.0]
+    },
+    "violent_crime": {
+      "target_year": 2028,
+      "baseline": 3064.81,
+      "optimistic": 3401.27,
+      "pessimistic": 2728.35,
+      "ci_90": [2391.89, 3737.73]
+    }
+  },
+  "transcript_signals": {
+    "n_transcripts": 15,
+    "education_policy_direction": 0.52,
+    "safety_policy_direction": 0.541,
+    "economy_policy_direction": 0.543,
+    "affordability_policy_direction": 0.556,
+    "governance_policy_direction": 0.572,
+    "implementation_ratio": 0.5,
+    "contentiousness": 0.3
+  },
+  "limitations": [
+    "Unemployment data is county-level (Alameda County), not city-level Oakland",
+    "Education metrics (pupil_teacher_ratio, title1_pct, charter_pct) are state-level California",
+    "Violent crime data from Socrata is city-level but may differ from FBI UCR methodology",
+    "Transcript signals use keyword-stub method (not LLM) - labeled contextual_only",
+    "All projections are conditional - they assume structural relationships remain stable"
+  ]
+}

@@ -238,17 +238,35 @@ Set via `data-theme` attribute:
 ## Creating a New Article
 
 1. Copy `src/app/articles/_template/page.tsx.example` to a new folder, rename to `page.tsx`
-2. Choose or create a `data-theme` and class prefix (e.g., `myarticle-`)
-3. If creating a new theme, add it to `src/styles/tokens.css` and update `VALID_THEMES` in `src/__tests__/articles.test.ts`
-4. Create `src/styles/articles/[name].css` for article-specific styles, add `@import` to `globals.css`
-5. Write the `DATA` object and `SOURCES` array first
-6. Use shared components — **do not redefine** `AtAGlance`, `MethodologySection`, etc. locally
-7. Use `useIntersectionObserver` hook for scroll-triggered animations instead of raw IntersectionObserver
-8. Custom visualizations go in article-local functions — shared components handle structure, articles handle unique content
-9. Add sources (minimum 3, Tier 1-2 only)
-10. Run `npm run test:run` — the article structure tests catch missing imports, invalid themes, and structural issues
-11. Run `npm run build` — catches CSS import errors and SSR issues
-12. Run validation checklist from EDITORIAL_GUIDELINES.md
+2. **Copy `src/app/articles/_template/layout.tsx.example`** to the same folder, rename to `layout.tsx` — fill in title, description, keywords, dates, and JSON-LD
+3. **Create `opengraph-image.tsx`** (1200x630) and **`twitter-image.tsx`** (1200x600) using the article's theme colors (copy from an existing article and adapt)
+4. Choose or create a `data-theme` and class prefix (e.g., `myarticle-`)
+5. If creating a new theme, add it to `src/styles/tokens.css` and update `VALID_THEMES` in `src/__tests__/articles.test.ts`
+6. Create `src/styles/articles/[name].css` for article-specific styles, add `@import` to `globals.css`
+7. Write the `DATA` object and `SOURCES` array first
+8. Use shared components — **do not redefine** `AtAGlance`, `MethodologySection`, etc. locally
+9. Use `useIntersectionObserver` hook for scroll-triggered animations instead of raw IntersectionObserver
+10. Custom visualizations go in article-local functions — shared components handle structure, articles handle unique content
+11. Add sources (minimum 3, Tier 1-2 only)
+12. **Add the article to `src/app/sitemap.ts`** and **`public/llms.txt`**
+13. Run `npm run test:run` — the article structure tests catch missing imports, invalid themes, and structural issues
+14. Run `npm run build` — catches CSS import errors and SSR issues
+15. Run validation checklist from EDITORIAL_GUIDELINES.md
+
+## SEO Requirements (Every Article)
+
+Every article directory **must** contain these files:
+
+| File | Purpose |
+|------|---------|
+| `page.tsx` | Article content (client component) |
+| `layout.tsx` | Metadata: title, description, keywords, canonical, OG, Twitter, JSON-LD |
+| `opengraph-image.tsx` | Social preview image (1200x630, edge runtime, theme colors) |
+| `twitter-image.tsx` | Twitter preview image (1200x600, edge runtime, theme colors) |
+
+When publishing, also update:
+- `src/app/sitemap.ts` — add the new article URL
+- `public/llms.txt` — add article summary for AI crawlers
 
 ## Newsletter Integration
 
@@ -261,6 +279,28 @@ BEEHIIV_PUBLICATION_ID=
 ```
 
 ## Common Patterns
+
+### Hamlet Meeting Embed (use for source material)
+When an article references specific council meetings, embed the source video with key moments:
+```tsx
+import { HamletMeetingEmbed } from "@/components/article/HamletMeetingEmbed";
+
+<HamletMeetingEmbed
+  videoId="YOUTUBE_ID"
+  startTime={1809}
+  meetingTitle="Meeting Title"
+  meetingDate="May 20, 2024"
+  bodyName="City of Oakland"
+  location="Oakland, CA"
+  hamletMeetingUrl="https://www.myhamlet.com/meeting/MEETING_ID"
+  moments={[
+    { time: "30:09", seconds: 1809, quote: "relevant transcript excerpt" },
+  ]}
+  searchUrl="https://www.myhamlet.com/search?q=search+terms"
+  searchLabel="16 Oakland housing meetings"
+/>
+```
+Find the meeting on Hamlet Search, grab the YouTube ID from the meeting page, and pick 2-4 key transcript moments with timestamps.
 
 ### Scroll-Triggered Visibility (use the hook, not raw IntersectionObserver)
 ```tsx

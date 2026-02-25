@@ -1,0 +1,48 @@
+{
+  "fiscalYear": "2024-2025",
+  "totalBudget": 2200000000,
+  "generalFund": 820000000,
+  "generalFundBalance": {
+    "2019": 186800000,
+    "2021": 504600000,
+    "2022": 652100000,
+    "2023": 707900000,
+    "2024": 22800000,
+    "2025_projected": 75000000
+  },
+  "structuralDeficit": 360000000,
+  "revenue": {
+    "propertyTax": 308900000,
+    "salesTax": 63730000,
+    "realEstateTransferTax": 85000000,
+    "transientOccupancyTax": 25000000,
+    "businessLicenseTax": 90000000,
+    "otherRevenue": 247370000
+  },
+  "expenditure": {
+    "policeDepartment": 364000000,
+    "fireDepartment": 220000000,
+    "publicWorks": 180000000,
+    "housingCommunityDev": 150000000,
+    "parksRecreation": 85000000,
+    "administration": 120000000,
+    "debtService": 81000000,
+    "other": 1000000000
+  },
+  "policeStaffing": {
+    "current": 535,
+    "authorized": 665,
+    "recommended": 877,
+    "monthlyAttrition": 5
+  },
+  "bonds": {
+    "measureU2022": 350000000,
+    "goRefunding2025": 335000000
+  },
+  "sources": [
+    "City of Oakland FY2024-25 Adopted Budget",
+    "City of Oakland Annual Comprehensive Financial Report (ACFR) 2024",
+    "City of Oakland Five-Year Financial Forecast FY2024-28",
+    "Moody's Credit Analysis 2024"
+  ]
+}

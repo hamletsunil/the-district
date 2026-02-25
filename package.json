@@ -11,10 +11,16 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@types/mapbox-gl": "^3.4.1",
+    "framer-motion": "^12.34.0",
+    "mapbox-gl": "^3.18.1",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "scrollama": "^3.2.0"
+    "react-map-gl": "^8.1.0",
+    "recharts": "^3.7.0",
+    "scrollama": "^3.2.0",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@prisma/client": "^5.22.0",

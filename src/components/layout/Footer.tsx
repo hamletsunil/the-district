@@ -4,7 +4,7 @@ export function Footer() {
       <p className="footer-attribution">
         A{" "}
         <a
-          href="https://myhamlet.com"
+          href="https://www.myhamlet.com"
           target="_blank"
           rel="noopener noreferrer"
         >

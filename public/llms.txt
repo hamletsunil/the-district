@@ -1,0 +1,68 @@
+# The District
+
+> Visual journalism about what happens in 3,000+ city halls across America. A publication by Hamlet.
+
+## About
+
+The District analyzes transcripts, votes, and public records from more than 3,000 city halls across America to uncover patterns in local democracy. Every story starts with data — NLP analysis of meeting transcripts, voting records, and government documents — then layers in investigative reporting, external sources, and interactive visualizations.
+
+Website: https://district.myhamlet.com
+Publisher: Hamlet (https://www.myhamlet.com)
+
+## Published Articles
+
+### The City That Won't Agree — Ann Arbor
+- URL: https://district.myhamlet.com/articles/ann-arbor-divided
+- Published: February 2026
+- Analysis of 8.1 million votes across 142 U.S. cities reveals Ann Arbor has the highest council dissent rate in America at 18.19% — 3x the next competitor, 300x Chicago's rate. Fifteen years of voting data and pairwise agreement analysis expose deep factional lines in an all-Democrat city.
+- Data: 53,207 Ann Arbor votes, 409 unique council members, 7,100+ agenda items, 17 years of records (2008-2024).
+- Sources: Legistar voting records, Michigan Daily, Ann Arbor Observer, WEMU, U.S. Census Bureau, Dave Askins factional analysis.
+
+### Five Futures for Oakland
+- URL: https://district.myhamlet.com/articles/oaklands-future
+- Published: February 2026
+- An interactive simulation of Oakland's fiscal crisis with five policy paths across 113 census tracts.
+- Data: 437,825 population, $360M structural deficit, 134 council meetings analyzed, 1.26M crime records, $94K median income, $884K median home value.
+- Sources: City of Oakland budget, Oakland CrimeWatch (Socrata), U.S. Census ACS, Oakland Housing Element, GreatSchools, BLS, HUD, EPA EJScreen, FEMA.
+
+### The Data Center Gold Rush
+- URL: https://district.myhamlet.com/articles/data-center-gold-rush
+- Published: January 2026
+- NLP analysis of 156 cities' meeting transcripts for data center sentiment from 5,007 mentions across 2,847 meetings.
+- Key finding: Average sentiment is 49.9/100 (nearly split). Power consumption (87 mentions) and water usage (78 mentions) are top concerns. 38 cities skeptical, 40 welcoming, 78 neutral.
+- Sources: Fox Business, Data Center Watch, EESI, Capitol News Illinois.
+
+### The Abundance Index
+- URL: https://district.myhamlet.com/articles/abundance-index
+- Published: January 2026
+- 84 cities ranked by openness to development on a YIMBY-to-NIMBY scale.
+- Key finding: Average abundance index is 57.7. Temple, TX is most YIMBY (80.0 index, 100% positive ratio). Fairfax, VA is most NIMBY (12.0 index, 0% positive ratio). 68-point spread between most and least welcoming.
+- Sources: Temple Daily Telegram, KXXV, KCEN-TV, Census.gov.
+
+### The Temperature Check
+- URL: https://district.myhamlet.com/articles/temperature-check
+- Published: January 2026
+- 438 cities measured for civic friction on a 0-100 scale using NLP analysis of public comments.
+- Key finding: Average friction score is 85.3/100. Southern states average 97%+ contention rates — over 20 points higher than the Pacific Northwest. Hottest: Sparks NV, Tiffin OH, High Point NC (all score 100). Calmest: Grants Pass OR (38.2).
+- Sources: KGW, Supreme Court (Grants Pass v. Johnson), Census.gov.
+
+### The Vote Tracker
+- URL: https://district.myhamlet.com/articles/vote-tracker
+- Published: January 2026
+- Analysis of 25,219 votes across 1,524 local officials from multiple cities.
+- Key finding: Average approval rate is 96.5%. Newark officials vote yes 100% of the time. Princeton is the most divided, with environmental votes (75% approval) being the most contested category.
+- Sources: Gothamist, The Daily Princetonian, Chicago Sun-Times, UIC Political Science.
+
+## Data Sources
+
+The District draws from:
+- Legistar meeting transcripts (3,000+ cities)
+- Socrata open data portals
+- U.S. Census Bureau (ACS 5-year estimates)
+- Local government budget documents
+- FBI/BLS/EPA/HUD/FEMA federal datasets
+- Local news reporting and academic research
+
+## Contact
+
+For corrections, data requests, or press inquiries: https://www.myhamlet.com
