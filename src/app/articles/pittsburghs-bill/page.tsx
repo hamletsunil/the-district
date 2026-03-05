@@ -373,9 +373,9 @@ function HeroSection({ scrollY }: { scrollY: number }) {
               <stop offset="100%" stopColor="#FFB81C" stopOpacity="0.65" />
             </linearGradient>
             <linearGradient id="pgh-dataRed" x1="0" y1="1" x2="0" y2="0">
-              <stop offset="0%" stopColor="#d4453a" stopOpacity="0.03" />
-              <stop offset="50%" stopColor="#d4453a" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#d4453a" stopOpacity="0.6" />
+              <stop offset="0%" stopColor="#d95148" stopOpacity="0.03" />
+              <stop offset="50%" stopColor="#d95148" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#d95148" stopOpacity="0.6" />
             </linearGradient>
             <radialGradient id="pgh-fountain" cx="50%" cy="100%" r="80%">
               <stop offset="0%" stopColor="#FFB81C" stopOpacity="0.2" />
@@ -608,8 +608,8 @@ function HeroSection({ scrollY }: { scrollY: number }) {
           </g>
 
           {/* ===== LAYER 13: Data trend line ===== */}
-          <path d="M200,555 Q350,540 500,548 Q650,555 800,550 Q950,540 1080,535 Q1200,545 1350,540 Q1500,548 1650,542 Q1750,538 1850,544" stroke="#d4453a" strokeWidth="2" fill="none" opacity="0.3" strokeLinecap="round" />
-          <circle cx="1080" cy="535" r="3.5" fill="#d4453a" opacity="0.45" />
+          <path d="M200,555 Q350,540 500,548 Q650,555 800,550 Q950,540 1080,535 Q1200,545 1350,540 Q1500,548 1650,542 Q1750,538 1850,544" stroke="#d95148" strokeWidth="2" fill="none" opacity="0.3" strokeLinecap="round" />
+          <circle cx="1080" cy="535" r="3.5" fill="#d95148" opacity="0.45" />
 
           {/* Ground plane */}
           <rect x="0" y="595" width="1920" height="3" fill="#FFB81C" opacity="0.1" />
@@ -828,7 +828,7 @@ function DissentTimeline() {
             strokeLinecap="round"
             strokeLinejoin="round"
             style={{
-              strokeDasharray: hasAnimated ? "none" : "2000",
+              strokeDasharray: "2000",
               strokeDashoffset: hasAnimated ? 0 : 2000,
               transition: "stroke-dashoffset 2s var(--ease-elegant)",
             }}
@@ -841,7 +841,7 @@ function DissentTimeline() {
               cx={xScale(i)}
               cy={yScale(d.rate)}
               r={d.year === 2010 || d.year === 2023 || d.year === 2024 ? 5 : 3}
-              fill={d.rate > 5 ? "#d4453a" : "#FFB81C"}
+              fill={d.rate > 5 ? "#d95148" : "#FFB81C"}
               className="pgh-timeline-dot"
               style={{
                 opacity: hasAnimated ? 1 : 0,
@@ -853,7 +853,7 @@ function DissentTimeline() {
           {/* Annotations */}
           {hasAnimated && (
             <>
-              <text x={xScale(0)} y={yScale(9.91) - 12} textAnchor="middle" fill="#d4453a" fontSize="10" fontFamily="var(--font-sans)" fontWeight="600">
+              <text x={xScale(0)} y={yScale(9.91) - 12} textAnchor="middle" fill="#d95148" fontSize="10" fontFamily="var(--font-sans)" fontWeight="600">
                 9.91%
               </text>
               <text x={xScale(0)} y={yScale(9.91) - 22} textAnchor="middle" fill="#8a8a8a" fontSize="9" fontFamily="var(--font-sans)">
@@ -865,7 +865,7 @@ function DissentTimeline() {
               <text x={xScale(13)} y={yScale(0.79) + 28} textAnchor="middle" fill="#8a8a8a" fontSize="9" fontFamily="var(--font-sans)">
                 Historic low
               </text>
-              <text x={xScale(14)} y={yScale(2.81) - 12} textAnchor="middle" fill="#d4453a" fontSize="10" fontFamily="var(--font-sans)" fontWeight="600">
+              <text x={xScale(14)} y={yScale(2.81) - 12} textAnchor="middle" fill="#d95148" fontSize="10" fontFamily="var(--font-sans)" fontWeight="600">
                 2.81%
               </text>
               <text x={xScale(14)} y={yScale(2.81) - 22} textAnchor="middle" fill="#8a8a8a" fontSize="9" fontFamily="var(--font-sans)">

@@ -466,7 +466,7 @@
 
 .pgh-disagree-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #d4453a, #ef6b5e);
+  background: linear-gradient(90deg, #d95148, #ef6b5e);
   border-radius: 3px;
 }
 
@@ -474,7 +474,7 @@
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
-  color: #d4453a;
+  color: #d95148;
   width: 40px;
   text-align: right;
   flex-shrink: 0;
