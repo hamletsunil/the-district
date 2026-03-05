@@ -293,7 +293,7 @@ export default function PittsburghsBill() {
           {
             label: "Limitations",
             content:
-              "Consent-agenda bundling practices changed over the 25-year period, making year-over-year dissent comparisons imprecise. Pairwise agreement rates above 96% reflect a low-conflict baseline \u2014 small absolute differences can indicate significant political divergence in context. Matter-type classifications come from Legistar metadata, not independent coding. The overall 1.76% dissent rate covers all 108,394 votes from 2001\u20132026, including the lower-dissent years before 2010 not shown on the timeline chart; the vote-weighted dissent rate for the charted years (2010\u20132025) is 2.50%. The $4.3 billion tax-exempt property figure comes from a 2021 joint controller report and may have changed since.",
+              "Consent-agenda bundling practices changed over the 25-year period, making year-over-year dissent comparisons imprecise. Pairwise agreement rates above 96% reflect a low-conflict baseline \u2014 small absolute differences can indicate significant political divergence in context. Matter-type classifications come from Legistar metadata, not independent coding. The overall 1.76% dissent rate covers all 108,394 votes from 2001\u20132026, including the lower-dissent years before 2010 not shown on the timeline chart; the vote-weighted dissent rate for the charted years (2010\u20132025) is roughly 2.5%. The $4.3 billion tax-exempt property figure comes from a 2021 joint controller report and may have changed since.",
           },
           {
             label: "Transcript Analysis",
@@ -950,6 +950,7 @@ function InclusionarySeesawSection() {
 
         <PullQuote
           text="My organization needs jobs. &hellip; We all want affordable housing, but we want it done right."
+          attribution="Steve Mazza, Carpenters Local 432"
           city="Pittsburgh"
           state="PA"
           className="pgh-pull-quote"
@@ -1063,18 +1064,19 @@ function PairwiseSection() {
           <p>
             The chart below flips the consensus story on its head:
             instead of measuring how much members agree, it shows where
-            they disagree. Two loose coalitions emerge. Lavelle, Mosley,
-            Warwick, Strassburger, and Wilson form the densest
-            cluster&mdash;agreeing upward of 99% of the time and voting
-            as a bloc on nearly every housing and zoning reform. On the
-            other side of the fault line, Kail-Smith, Coghill, and Gross
-            dissent more often, particularly on property tax increases and
-            inclusionary mandates they view as burdens on homeowners and
-            small builders. The widest gap&mdash;Kail-Smith and Warwick
-            at 3.9%&mdash;may sound trivial across 4,000 shared votes,
-            but it concentrates entirely on property taxes, zoning, and
-            who gets to live in neighborhoods like Lawrenceville,
-            Manchester, and the Hill District.
+            they disagree. The alliances are fluid. On overall voting,
+            Lavelle, Strassburger, and Wilson agree on more than 99% of
+            everything&mdash;but Wilson broke ranks to vote against the
+            tax hike alongside Kail-Smith, and Strassburger authored the
+            amendments that weakened mandatory inclusionary zoning. Gross
+            votes with Warwick, Lavelle, and Mosley on housing mandates,
+            then sides with Kail-Smith on fiscal restraint. No stable
+            two-bloc split explains Pittsburgh&rsquo;s council. Instead,
+            the same nine members reshuffle depending on whether the
+            question is taxes, housing, or zoning. The widest
+            gap&mdash;Kail-Smith and Warwick at 3.9%&mdash;may sound
+            trivial across 4,000 shared votes, but it concentrates on
+            exactly those issues.
           </p>
         </div>
       </div>
@@ -1313,19 +1315,15 @@ function ConclusionSection() {
       >
         <p className="pgh-conclusion-text">
           Drive from Shadyside to Homewood and you cross maybe
-          two miles. You also cross a life-expectancy gap that
-          public health researchers measure in decades.
-          The cranes visible from the North Shore&mdash;the hospital
-          expansions, the tech campuses, the luxury riverfront
-          condos&mdash;have not reached the East End blocks where vacancy
-          rates are climbing. Pittsburgh&rsquo;s fiscal crisis is not
-          abstract. It is the fire station running on
-          overtime, the bus route under review, the property tax bill that
-          just went up 20% on homeowners who watched their neighbors get
-          priced out. The council members who agreed on 97% of everything
-          for two decades are now splitting 5&ndash;4 on the handful of
-          votes that will determine what kind of city Pittsburgh becomes
-          next&mdash;and who can afford to stay.
+          two miles&mdash;and an economic divide that maps onto every
+          vote in this article. The cranes visible from the North
+          Shore have not reached the East End blocks where storefronts
+          sit empty. For two decades the council could defer
+          the hardest questions because growth papered over the gaps.
+          Now the money has run out, and the nine members who agreed
+          on nearly everything are splitting 5&ndash;4 on the votes
+          that remain: who pays the bill, who gets the housing, and
+          whose neighborhood changes next.
         </p>
       </div>
     </section>
