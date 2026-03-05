@@ -17,16 +17,6 @@ const articles = [
     illustrationType: "pittsburgh" as const,
   },
   {
-    id: "austin-boom",
-    topic: "City Deep Dive",
-    title: "The Boom That Broke",
-    description:
-      "315,322 permits. 9,455 government meetings. Austin bet everything on growth\u2014and the cranes are coming down.",
-    meta: "15 min read \u00b7 Interactive",
-    colorScheme: "austin",
-    illustrationType: "austin" as const,
-  },
-  {
     id: "ann-arbor-divided",
     topic: "City Deep Dive",
     title: "The City That Won\u2019t Agree",
