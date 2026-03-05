@@ -11,6 +11,20 @@ Publisher: Hamlet (https://www.myhamlet.com)
 
 ## Published Articles
 
+### The Bill Comes Due — Pittsburgh
+- URL: https://district.myhamlet.com/articles/pittsburghs-bill
+- Published: March 2026
+- Analysis of 108,394 votes across 25 years of Pittsburgh City Council records reveals a legislature that agrees on 97.3% of everything — then fractures on property taxes, inclusionary housing, and zoning reform. Inclusionary housing passed unanimously six times from 2018–2022 before erupting into a persistent 5–4 seesaw in late 2024. The 2026 property tax rate failed 4–5 before a revised version passed the same night.
+- Data: 30,996 matters, 108,394 votes, 43 council members, 1,092 split-vote items, 25 years of records (2001–2026).
+- Sources: Legistar voting records, PublicSource, WESA, Pittsburgh Post-Gazette, TribLive, U.S. Census Bureau.
+
+### The Boom That Broke — Austin
+- URL: https://district.myhamlet.com/articles/austin-boom
+- Published: March 2026
+- Analysis of 315,322 construction permits from Austin's open data portal reveals a city whose building boom peaked at 71,105 permits in 2021 and has since contracted 23%. New single-family home permits crashed 55%. Cleaned construction values fell 71% from their 2022 peak. Meanwhile, 84 government bodies generated 9,455 recorded meetings over 36 years.
+- Data: 315,322 permits (2021-2026), 66,156 building permits, $143.2B total construction value, 9,455 Swagit meeting videos, 84 government bodies.
+- Sources: City of Austin Open Data Portal (Socrata), U.S. Census Bureau ACS, Austin Swagit meeting archives, Austin American-Statesman, Texas Tribune.
+
 ### The City That Won't Agree — Ann Arbor
 - URL: https://district.myhamlet.com/articles/ann-arbor-divided
 - Published: February 2026

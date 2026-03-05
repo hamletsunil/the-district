@@ -185,6 +185,32 @@ body {
   --card-border: rgba(232, 185, 49, 0.15);
 }
 
+[data-theme="pittsburgh"] {
+  --page-bg: #0a0a0a;
+  --page-bg-alt: #141414;
+  --page-text: #f2ede4;
+  --page-text-muted: #8a8a8a;
+  --accent-primary: #FFB81C;
+  --accent-secondary: #C4960F;
+  --accent-glow: rgba(255, 184, 28, 0.12);
+  --accent-dissent: #d4453a;
+  --card-bg: rgba(20, 20, 20, 0.85);
+  --card-border: rgba(255, 184, 28, 0.15);
+}
+
+[data-theme="austin-boom"] {
+  --page-bg: #1c1712;
+  --page-bg-alt: #252019;
+  --page-text: #f5efe6;
+  --page-text-muted: #a89e92;
+  --accent-primary: #BF5700;
+  --accent-secondary: #e87040;
+  --accent-glow: rgba(191, 87, 0, 0.12);
+  --accent-decline: #ef4444;
+  --card-bg: rgba(37, 32, 25, 0.8);
+  --card-border: rgba(191, 87, 0, 0.15);
+}
+
 @theme inline {
   --color-navy-950: var(--navy-950);
   --color-navy-900: var(--navy-900);

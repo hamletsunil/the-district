@@ -7,6 +7,26 @@ import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 
 const articles = [
   {
+    id: "pittsburghs-bill",
+    topic: "City Deep Dive",
+    title: "The Bill Comes Due",
+    description:
+      "108,394 votes. 25 years. Pittsburgh\u2019s council agreed on 97% of everything\u2014then fractured over property taxes, housing, and who pays for a city that deferred hard choices for two decades.",
+    meta: "12 min read \u00b7 Interactive",
+    colorScheme: "pittsburgh",
+    illustrationType: "pittsburgh" as const,
+  },
+  {
+    id: "austin-boom",
+    topic: "City Deep Dive",
+    title: "The Boom That Broke",
+    description:
+      "315,322 permits. 9,455 government meetings. Austin bet everything on growth\u2014and the cranes are coming down.",
+    meta: "15 min read \u00b7 Interactive",
+    colorScheme: "austin",
+    illustrationType: "austin" as const,
+  },
+  {
     id: "ann-arbor-divided",
     topic: "City Deep Dive",
     title: "The City That Won\u2019t Agree",

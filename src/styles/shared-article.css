@@ -486,6 +486,18 @@
   --accent: #e8b931;
 }
 
+.card-pittsburgh {
+  background: linear-gradient(135deg, #141414 0%, #0a0a0a 100%);
+  color: #f2ede4;
+  --accent: #FFB81C;
+}
+
+.card-austin {
+  background: linear-gradient(135deg, #3d2a1a 0%, #2a1c12 100%);
+  color: #f5efe6;
+  --accent: #BF5700;
+}
+
 /* ===========================
    CARD TYPOGRAPHY
    =========================== */

@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -23,6 +23,8 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     oakland: <OaklandIllustration />,
     "san-francisco": <SanFranciscoIllustration />,
     "ann-arbor": <AnnArborIllustration />,
+    austin: <AustinIllustration />,
+    pittsburgh: <PittsburghIllustration />,
   };
 
   return (
@@ -788,6 +790,270 @@ function AnnArborIllustration() {
         <circle cx="95" cy="45" r="1.5" fill="#d4453a" opacity="0.4" />
         <circle cx="180" cy="35" r="1" fill="#e8b931" opacity="0.3" />
       </g>
+    </svg>
+  );
+}
+
+/**
+ * Austin: Capitol dome, Jenga tower, Frost Bank, Congress Bridge, construction cranes
+ */
+function AustinIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      <defs>
+        <linearGradient id="austinWarmGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#e87040" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#c4522e" stopOpacity="0.5" />
+        </linearGradient>
+        <linearGradient id="austinDarkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#252019" />
+          <stop offset="100%" stopColor="#1c1712" />
+        </linearGradient>
+        <linearGradient id="austinBarGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#e87040" stopOpacity="0.05" />
+          <stop offset="100%" stopColor="#e87040" stopOpacity="0.6" />
+        </linearGradient>
+        <linearGradient id="austinRedBarGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stopColor="#ef4444" stopOpacity="0.05" />
+          <stop offset="100%" stopColor="#ef4444" stopOpacity="0.55" />
+        </linearGradient>
+        <linearGradient id="austinWaterGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#1a3a5c" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#0d2137" stopOpacity="0.2" />
+        </linearGradient>
+      </defs>
+
+      {/* Ground glow */}
+      <ellipse cx="140" cy="165" rx="130" ry="20" fill="#e87040" opacity="0.06" />
+
+      {/* Lady Bird Lake */}
+      <ellipse cx="140" cy="158" rx="120" ry="12" fill="url(#austinWaterGradient)" />
+
+      {/* Permit decline bars (background) */}
+      <g opacity="0.7">
+        <rect x="10" y="105" width="7" height="50" fill="url(#austinBarGradient)" rx="1" />
+        <rect x="22" y="85" width="7" height="70" fill="url(#austinBarGradient)" rx="1" />
+        <rect x="34" y="75" width="7" height="80" fill="url(#austinBarGradient)" rx="1" />
+        <rect x="46" y="95" width="7" height="60" fill="url(#austinRedBarGradient)" rx="1" />
+        <rect x="58" y="100" width="7" height="55" fill="url(#austinRedBarGradient)" rx="1" />
+      </g>
+
+      {/* Texas State Capitol dome */}
+      <g filter="url(#softShadow)">
+        <rect x="80" y="72" width="42" height="85" rx="3" fill="url(#austinDarkGradient)" />
+        <ellipse cx="101" cy="72" rx="24" ry="14" fill="#e87040" opacity="0.7" />
+        <ellipse cx="101" cy="70" rx="16" ry="9" fill="#f0944a" opacity="0.4" />
+        {/* Dome spire */}
+        <rect x="99" y="48" width="4" height="18" fill="#e87040" opacity="0.8" />
+        <circle cx="101" cy="46" r="3" fill="#f0944a" />
+        {/* Windows */}
+        <rect x="87" y="82" width="6" height="8" rx="1" fill="#e87040" opacity="0.2" />
+        <rect x="99" y="82" width="6" height="8" rx="1" fill="#e87040" opacity="0.2" />
+        <rect x="111" y="82" width="6" height="8" rx="1" fill="#e87040" opacity="0.2" />
+        <rect x="87" y="96" width="6" height="8" rx="1" fill="#e87040" opacity="0.15" />
+        <rect x="99" y="96" width="6" height="8" rx="1" fill="#e87040" opacity="0.15" />
+        <rect x="111" y="96" width="6" height="8" rx="1" fill="#e87040" opacity="0.15" />
+        {/* Steps */}
+        <rect x="75" y="155" width="52" height="5" rx="1" fill="#e87040" opacity="0.2" />
+      </g>
+
+      {/* The Independent (Jenga Tower) */}
+      <g filter="url(#softShadow)">
+        <rect x="132" y="35" width="18" height="122" rx="2" fill="url(#austinDarkGradient)" />
+        {/* Stacked offset sections (Jenga look) */}
+        <rect x="130" y="35" width="22" height="15" rx="1" fill="#252019" />
+        <rect x="133" y="50" width="22" height="15" rx="1" fill="#252019" />
+        <rect x="129" y="65" width="22" height="15" rx="1" fill="#252019" />
+        <rect x="132" y="80" width="22" height="15" rx="1" fill="#252019" />
+        <rect x="130" y="95" width="22" height="15" rx="1" fill="#252019" />
+        {/* Window lights */}
+        <rect x="136" y="40" width="3" height="4" rx="0.5" fill="#e87040" opacity="0.3" />
+        <rect x="142" y="40" width="3" height="4" rx="0.5" fill="#e87040" opacity="0.25" />
+        <rect x="137" y="55" width="3" height="4" rx="0.5" fill="#e87040" opacity="0.2" />
+        <rect x="143" y="55" width="3" height="4" rx="0.5" fill="#e87040" opacity="0.3" />
+      </g>
+
+      {/* Frost Bank Tower (owlish top) */}
+      <g filter="url(#softShadow)">
+        <rect x="160" y="60" width="16" height="97" rx="2" fill="url(#austinDarkGradient)" />
+        {/* Crown shape */}
+        <polygon points="160,60 168,45 176,60" fill="#e87040" opacity="0.6" />
+        <polygon points="162,58 168,48 174,58" fill="#f0944a" opacity="0.3" />
+        {/* Windows */}
+        <rect x="163" y="68" width="4" height="5" rx="0.5" fill="#e87040" opacity="0.2" />
+        <rect x="169" y="68" width="4" height="5" rx="0.5" fill="#e87040" opacity="0.2" />
+        <rect x="163" y="80" width="4" height="5" rx="0.5" fill="#e87040" opacity="0.15" />
+        <rect x="169" y="80" width="4" height="5" rx="0.5" fill="#e87040" opacity="0.15" />
+      </g>
+
+      {/* Construction crane (the boom) */}
+      <g filter="url(#softShadow)" opacity="0.8">
+        <rect x="190" y="50" width="4" height="107" fill="#e87040" opacity="0.5" />
+        <line x1="192" y1="50" x2="230" y2="42" stroke="#f0944a" strokeWidth="2.5" />
+        <line x1="192" y1="50" x2="182" y2="62" stroke="#f0944a" strokeWidth="1.5" />
+        {/* Cable */}
+        <line x1="215" y1="45" x2="215" y2="75" stroke="#e87040" strokeWidth="0.8" opacity="0.5" />
+      </g>
+
+      {/* Shorter buildings (right) */}
+      <rect x="210" y="95" width="14" height="62" rx="2" fill="url(#austinDarkGradient)" opacity="0.6" />
+      <rect x="228" y="110" width="12" height="47" rx="2" fill="url(#austinDarkGradient)" opacity="0.4" />
+      <rect x="244" y="105" width="10" height="52" rx="2" fill="url(#austinDarkGradient)" opacity="0.35" />
+
+      {/* Congress Avenue Bridge (simplified) */}
+      <g opacity="0.4">
+        <rect x="70" y="150" width="140" height="4" rx="1" fill="#e87040" />
+        {[85, 110, 135, 160, 185].map((x, i) => (
+          <rect key={i} x={x} y="146" width="3" height="8" rx="0.5" fill="#e87040" opacity="0.6" />
+        ))}
+      </g>
+
+      {/* Data particles */}
+      <g filter="url(#glow)">
+        <circle cx="70" cy="40" r="2" fill="#e87040" opacity="0.6" />
+        <circle cx="260" cy="55" r="1.5" fill="#f0944a" opacity="0.5" />
+        <circle cx="200" cy="30" r="1.5" fill="#ef4444" opacity="0.4" />
+        <circle cx="15" cy="70" r="1" fill="#e87040" opacity="0.3" />
+      </g>
+
+      {/* Ground */}
+      <rect x="0" y="158" width="280" height="22" fill="#e87040" opacity="0.08" />
+    </svg>
+  );
+}
+
+/**
+ * Pittsburgh — Three Rivers, bridges, Cathedral of Learning, steel beams
+ * Black-and-gold Steelers palette
+ */
+function PittsburghIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      <defs>
+        <linearGradient id="pghSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0a0a0a" />
+          <stop offset="100%" stopColor="#1a1510" />
+        </linearGradient>
+        <linearGradient id="pghGold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFB81C" />
+          <stop offset="100%" stopColor="#C4960F" />
+        </linearGradient>
+        <linearGradient id="pghWater" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stopColor="#1a2a3a" />
+          <stop offset="100%" stopColor="#0d1a28" />
+        </linearGradient>
+        <linearGradient id="pghSteel" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4a4a4a" />
+          <stop offset="100%" stopColor="#2a2a2a" />
+        </linearGradient>
+      </defs>
+
+      {/* Sky */}
+      <rect width="280" height="180" fill="url(#pghSky)" />
+
+      {/* Rivers — Three Rivers converge at the Point */}
+      <g opacity="0.5">
+        {/* Allegheny from upper right */}
+        <path d="M280,115 Q220,118 180,120 Q160,121 140,122" stroke="#1a3050" strokeWidth="18" fill="none" />
+        {/* Monongahela from lower right */}
+        <path d="M280,145 Q220,140 180,138 Q160,136 140,134" stroke="#1a3050" strokeWidth="16" fill="none" />
+        {/* Ohio exits left */}
+        <path d="M140,128 Q100,130 60,132 Q30,134 0,133" stroke="#1a3050" strokeWidth="22" fill="none" />
+      </g>
+
+      {/* Point State Park fountain */}
+      <g filter="url(#glow)">
+        <line x1="140" y1="128" x2="140" y2="90" stroke="#FFB81C" strokeWidth="1" opacity="0.6" />
+        <line x1="140" y1="128" x2="133" y2="95" stroke="#FFB81C" strokeWidth="0.5" opacity="0.3" />
+        <line x1="140" y1="128" x2="147" y2="95" stroke="#FFB81C" strokeWidth="0.5" opacity="0.3" />
+        <circle cx="140" cy="88" r="3" fill="#FFB81C" opacity="0.15" />
+      </g>
+
+      {/* Steel beams — industrial heritage, background */}
+      <g opacity="0.15">
+        <line x1="20" y1="160" x2="50" y2="80" stroke="#8a8a8a" strokeWidth="3" />
+        <line x1="50" y1="80" x2="80" y2="160" stroke="#8a8a8a" strokeWidth="3" />
+        <line x1="30" y1="120" x2="70" y2="120" stroke="#8a8a8a" strokeWidth="2" />
+      </g>
+
+      {/* Buildings — left bank (North Shore) */}
+      <g filter="url(#softShadow)">
+        {/* PNC Park silhouette */}
+        <path d="M30,130 L30,115 Q45,108 60,115 L60,130" fill="url(#pghSteel)" opacity="0.7" />
+        <rect x="33" y="117" width="3" height="3" fill="#FFB81C" opacity="0.3" />
+        <rect x="42" y="117" width="3" height="3" fill="#FFB81C" opacity="0.2" />
+        <rect x="51" y="117" width="3" height="3" fill="#FFB81C" opacity="0.3" />
+      </g>
+
+      {/* Buildings — right bank (Downtown/Oakland) */}
+      <g filter="url(#softShadow)">
+        {/* PPG Place — angular glass towers */}
+        <polygon points="175,130 175,85 180,80 185,85 185,130" fill="url(#pghSteel)" opacity="0.8" />
+        <polygon points="187,130 187,95 191,91 195,95 195,130" fill="#3a3a3a" opacity="0.7" />
+        {/* Glass reflections */}
+        <line x1="178" y1="90" x2="178" y2="125" stroke="#FFB81C" strokeWidth="0.5" opacity="0.15" />
+        <line x1="182" y1="85" x2="182" y2="125" stroke="#FFB81C" strokeWidth="0.5" opacity="0.1" />
+
+        {/* Generic downtown towers */}
+        <rect x="200" y="100" width="12" height="30" fill="url(#pghSteel)" opacity="0.6" />
+        <rect x="215" y="108" width="10" height="22" fill="#3a3a3a" opacity="0.5" />
+        {/* Window lights */}
+        <rect x="202" y="104" width="2" height="2" fill="#FFB81C" opacity="0.4" />
+        <rect x="206" y="108" width="2" height="2" fill="#FFB81C" opacity="0.3" />
+        <rect x="202" y="112" width="2" height="2" fill="#FFB81C" opacity="0.2" />
+        <rect x="217" y="112" width="2" height="2" fill="#FFB81C" opacity="0.3" />
+      </g>
+
+      {/* Cathedral of Learning — tallest element */}
+      <g filter="url(#softShadow)">
+        <rect x="243" y="60" width="8" height="70" fill="url(#pghSteel)" opacity="0.9" />
+        <polygon points="243,60 247,48 251,60" fill="#4a4a4a" opacity="0.9" />
+        {/* Gothic window details */}
+        <rect x="245" y="65" width="4" height="5" rx="2" fill="#FFB81C" opacity="0.25" />
+        <rect x="245" y="75" width="4" height="5" rx="2" fill="#FFB81C" opacity="0.2" />
+        <rect x="245" y="85" width="4" height="5" rx="2" fill="#FFB81C" opacity="0.15" />
+        <rect x="245" y="95" width="4" height="4" fill="#FFB81C" opacity="0.1" />
+      </g>
+
+      {/* Yellow bridge — connecting the banks */}
+      <g>
+        <path d="M90,128 Q110,115 130,128" stroke="url(#pghGold)" strokeWidth="2.5" fill="none" opacity="0.8" />
+        <line x1="100" y1="128" x2="100" y2="120" stroke="#FFB81C" strokeWidth="0.7" opacity="0.5" />
+        <line x1="110" y1="128" x2="110" y2="116" stroke="#FFB81C" strokeWidth="0.7" opacity="0.5" />
+        <line x1="120" y1="128" x2="120" y2="120" stroke="#FFB81C" strokeWidth="0.7" opacity="0.5" />
+      </g>
+
+      {/* Duquesne Incline — right side slope */}
+      <g opacity="0.5">
+        <line x1="260" y1="130" x2="270" y2="105" stroke="#8a8a8a" strokeWidth="1.5" />
+        <line x1="262" y1="130" x2="272" y2="105" stroke="#8a8a8a" strokeWidth="1.5" />
+        <rect x="264" y="115" width="5" height="4" fill="#FFB81C" opacity="0.5" transform="rotate(-25 266 117)" />
+      </g>
+
+      {/* Data micro-bars — dissent rate visualization */}
+      <g opacity="0.4">
+        <rect x="12" y="40" width="2" height="12" fill="#FFB81C" rx="1" />
+        <rect x="16" y="44" width="2" height="8" fill="#FFB81C" rx="1" />
+        <rect x="20" y="46" width="2" height="6" fill="#FFB81C" rx="1" />
+        <rect x="24" y="47" width="2" height="5" fill="#FFB81C" rx="1" />
+        <rect x="28" y="48" width="2" height="4" fill="#C4960F" rx="1" />
+        <rect x="32" y="49" width="2" height="3" fill="#C4960F" rx="1" />
+        <rect x="36" y="44" width="2" height="8" fill="#d4453a" rx="1" />
+      </g>
+
+      {/* Ambient glow particles */}
+      <g filter="url(#glow)">
+        <circle cx="140" cy="85" r="2" fill="#FFB81C" opacity="0.4" />
+        <circle cx="80" cy="60" r="1.5" fill="#C4960F" opacity="0.3" />
+        <circle cx="230" cy="45" r="1" fill="#FFB81C" opacity="0.2" />
+      </g>
+
+      {/* Ground */}
+      <rect x="0" y="158" width="280" height="22" fill="#FFB81C" opacity="0.06" />
     </svg>
   );
 }

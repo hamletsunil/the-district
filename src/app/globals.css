@@ -16,6 +16,8 @@
 @import "../styles/articles/temperature.css";
 @import "../styles/articles/oakland.css";
 @import "../styles/articles/ann-arbor.css";
+@import "../styles/articles/austin-boom.css";
+@import "../styles/articles/pittsburgh.css";
 
 /* Responsive breakpoint fixes */
 @import "../styles/responsive.css";
