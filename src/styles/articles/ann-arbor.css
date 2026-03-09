@@ -771,3 +771,15 @@
     width: auto;
   }
 }
+
+/* Update note */
+.aa-update-note {
+  max-width: 740px;
+  margin: 1.5rem auto;
+  padding: 1rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--page-text-muted, #8e99a8);
+  border-left: 2px solid rgba(232, 185, 49, 0.3);
+}

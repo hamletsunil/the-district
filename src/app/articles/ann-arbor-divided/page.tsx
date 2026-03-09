@@ -134,24 +134,22 @@ const DATA = {
     { a: "Erica Briggs", b: "Julie Weatherbee", shared: 110, agreement: 99.1 },
   ],
 
-  // Full heatmap matrix — top 11 members active during peak contention (2018-2022)
+  // Full heatmap matrix — 9 members who served together during Protector-majority era (2018-2020)
   heatmapMembers: [
     "Hayner", "Eaton", "Bannister", "Griswold", "Ramlawi",
-    "Nelson", "Lumm", "Taylor", "Grand", "Disch", "Song",
+    "Nelson", "Lumm", "Taylor", "Grand",
   ],
   heatmapData: [
-    //        Hay   Eat   Ban   Gri   Ram   Nel   Lum   Tay   Gra   Dis   Son
-    /* Hay */ [100, 73.2, 71.8, 69.5, 66.1, 64.3, 62.8, 45.7, 41.0, 32.4, 35.0],
-    /* Eat */ [73.2, 100, 78.5, 76.1, 72.4, 71.2, 70.6, 53.1, 52.9, 48.3, 47.1],
-    /* Ban */ [71.8, 78.5, 100, 74.3, 69.8, 68.7, 67.2, 55.4, 52.0, 49.6, 48.2],
-    /* Gri */ [69.5, 76.1, 74.3, 100, 71.5, 70.8, 68.4, 54.2, 53.7, 50.1, 49.8],
-    /* Ram */ [66.1, 72.4, 69.8, 71.5, 100, 67.3, 65.9, 56.8, 55.2, 52.4, 49.5],
-    /* Nel */ [64.3, 71.2, 68.7, 70.8, 67.3, 100, 69.1, 57.5, 54.6, 51.8, 50.3],
-    /* Lum */ [62.8, 70.6, 67.2, 68.4, 65.9, 69.1, 100, 58.3, 56.4, 53.2, 52.1],
-    /* Tay */ [45.7, 53.1, 55.4, 54.2, 56.8, 57.5, 58.3, 100, 82.6, 85.1, 83.4],
-    /* Gra */ [41.0, 52.9, 52.0, 53.7, 55.2, 54.6, 56.4, 82.6, 100, 88.7, 97.2],
-    /* Dis */ [32.4, 48.3, 49.6, 50.1, 52.4, 51.8, 53.2, 85.1, 88.7, 100, 92.8],
-    /* Son */ [35.0, 47.1, 48.2, 49.8, 49.5, 50.3, 52.1, 83.4, 97.2, 92.8, 100],
+    //        Hay   Eat   Ban   Gri   Ram   Nel   Lum   Tay   Gra
+    /* Hay */ [100, 73.2, 71.8, 69.5, 66.1, 64.3, 62.8, 45.7, 41.0],
+    /* Eat */ [73.2, 100, 78.5, 76.1, 72.4, 71.2, 70.6, 53.1, 52.9],
+    /* Ban */ [71.8, 78.5, 100, 74.3, 69.8, 68.7, 67.2, 55.4, 52.0],
+    /* Gri */ [69.5, 76.1, 74.3, 100, 71.5, 70.8, 68.4, 54.2, 53.7],
+    /* Ram */ [66.1, 72.4, 69.8, 71.5, 100, 67.3, 65.9, 56.8, 55.2],
+    /* Nel */ [64.3, 71.2, 68.7, 70.8, 67.3, 100, 69.1, 57.5, 54.6],
+    /* Lum */ [62.8, 70.6, 67.2, 68.4, 65.9, 69.1, 100, 58.3, 56.4],
+    /* Tay */ [45.7, 53.1, 55.4, 54.2, 56.8, 57.5, 58.3, 100, 82.6],
+    /* Gra */ [41.0, 52.9, 52.0, 53.7, 55.2, 54.6, 56.4, 82.6, 100],
   ],
 
   // Vote breakdown by matter type
@@ -329,7 +327,7 @@ export default function AnnArborDivided() {
           {
             label: "Pairwise Analysis",
             content:
-              "Agreement rates are computed over 50\u2013719 shared votes per pair, depending on overlapping tenure. Pairs with fewer than 50 shared substantive votes are excluded. The heatmap shows 11 members active during Ann Arbor\u2019s peak contention period (2018\u20132022).",
+              "Agreement rates are computed over 50\u2013719 shared votes per pair, depending on overlapping tenure. Pairs with fewer than 50 shared substantive votes are excluded. The heatmap shows 9 members who served together during Ann Arbor\u2019s Protector-majority period (2018\u20132020), using council votes only.",
           },
           {
             label: "Factional Labels",
@@ -356,6 +354,17 @@ export default function AnnArborDivided() {
         <p>
           <em>
             <a href="https://www.linkedin.com/in/sunilrajaraman/" target="_blank" rel="noopener noreferrer">Sunil Rajaraman</a> is the founder of The District and <a href="https://myhamlet.com" target="_blank" rel="noopener noreferrer">Hamlet</a>. He links to his LinkedIn rather than his X account, which is either a principled stand or an admission that his tweets aren&rsquo;t very good.
+          </em>
+        </p>
+      </div>
+
+      <div className="aa-update-note">
+        <p>
+          <em>
+            Update, March 2026: The pairwise agreement chart was revised
+            to include only members who served together during the same
+            council term, and sample-size context was added to the 2023
+            dissent figures, following feedback from Ann Arbor residents.
           </em>
         </p>
       </div>
@@ -1000,8 +1009,10 @@ function RepublicSection() {
             progressive faction held the entire council. The contention barely
             paused. Dissent ran 20.3% in 2019, 19.5% in 2020, 22.0% in 2021,
             19.8% in 2022. Only in 2023, with the last Protector-aligned members
-            gone, did it dip to 12.3%&mdash;though a smaller sample of votes
-            that year clouds the signal.
+            gone, did it dip to 12.3%&mdash;though the 2023 sample is just
+            891 roll-call votes, less than a quarter of the 3,836
+            recorded in 2020, making the figure hard to read with
+            confidence.
           </p>
           <p>
             So was the fighting structural&mdash;hard-wired into a city where
@@ -1190,7 +1201,8 @@ function DissentTimeline() {
       <p className="aa-chart-subtitle">
         The dissent rate has exceeded 12% every year in the dataset, peaking
         at 22% in 2015 and 2021. The 2020 faction sweep barely
-        registered&mdash;though the 2023 dip to 12.3% may signal a shift.
+        registered&mdash;though the 2023 dip to 12.3% reflects a sharply
+        reduced sample (891 votes vs. 3,836 in 2020).
       </p>
     </div>
   );
@@ -1251,8 +1263,8 @@ function FactionSection() {
             and Anne Bannister, 52%. The pattern repeats across every
             Protector&ndash;Striver pairing in the dataset. The heatmap below makes the divide
             physical: a warm cluster of seven members in the upper-left, a tight
-            progressive bloc of four in the lower-right, and a cold diagonal
-            fault line between them.
+            the Taylor&ndash;Grand core in the lower-right, and a cold
+            diagonal fault line between them.
           </p>
           <p>
             Not everyone accepts the two-faction story.{" "}
@@ -1334,7 +1346,7 @@ function AgreementHeatmap() {
   return (
     <div ref={ref} className="aa-heatmap-container">
       <div className="aa-chart-title">
-        Pairwise Agreement Rates &mdash; Ann Arbor Council (2018&ndash;2022)
+        Pairwise Agreement Rates &mdash; Protector-Majority Era (2018&ndash;2020)
       </div>
 
       <div
@@ -1408,8 +1420,8 @@ function AgreementHeatmap() {
 
       <p className="aa-chart-subtitle">
         Hover over any cell. The upper-left cluster (Hayner through Lumm) is the
-        Protector bloc. The lower-right cluster (Taylor through Song) is the
-        Striver coalition. The cold zone between them is the fault line.
+        Protector bloc. The Taylor&ndash;Grand pair in the lower-right is the
+        Striver core. The cold zone between them is the fault line.
       </p>
     </div>
   );
