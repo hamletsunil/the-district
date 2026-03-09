@@ -74,6 +74,11 @@ const SOURCES: Source[] = [
     url: "https://data.oaklandca.gov/Public-Safety/CrimeWatch/ppgh-7dqv",
   },
   {
+    title: "Crime dropped in Oakland in 2024",
+    outlet: "The Oaklandside",
+    url: "https://oaklandside.org/2025/01/14/oakland-police-end-of-year-crime-report-2024/",
+  },
+  {
     title: "American Community Survey 5-Year Estimates",
     outlet: "U.S. Census Bureau",
     url: "https://data.census.gov/",

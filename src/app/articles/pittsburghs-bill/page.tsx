@@ -70,7 +70,7 @@ const DATA = {
     { name: "Bobby Wilson", votes: 4156, nay: 15, rate: 0.36 },
   ],
 
-  // Current 9 members
+  // 9 members who served together (2020-2025)
   heatmapMembers: [
     "Kail-Smith", "Charland", "Gross", "Coghill",
     "Lavelle", "Mosley", "Warwick", "Strassburger", "Wilson",
@@ -278,7 +278,7 @@ export default function PittsburghsBill() {
           {
             label: "Sample",
             content:
-              "30,996 matters generating 108,394 individual vote records from 43 unique council members across 25 years. Pairwise agreement analysis covers the 9 current members with a minimum of 2,000 shared votes per pair.",
+              "30,996 matters generating 108,394 individual vote records from 43 unique council members across 25 years. Pairwise agreement analysis covers 9 members who served together during the most recent full council term, with a minimum of 2,000 shared votes per pair.",
           },
           {
             label: "Definitions",
