@@ -4,6 +4,11 @@
    CSS prefix: au-
    =========================== */
 
+/* Article wrapper */
+.au-article {
+  overflow-x: hidden;
+}
+
 /* Hero */
 .au-hero {
   position: relative;
@@ -175,7 +180,7 @@
 }
 
 .au-wide-section {
-  max-width: 1100px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 6rem 1.5rem;
 }
@@ -663,10 +668,19 @@
   z-index: 94;
 }
 
-/* Desktop: sidebar overlay (not push) */
+/* Desktop: sidebar push model */
 @media (min-width: 1280px) {
   .au-article {
     padding-left: 240px;
+  }
+
+  .au-hero {
+    margin-left: -240px;
+    width: 100vw;
+  }
+
+  .au-progress-bar {
+    left: 240px;
   }
 
   .au-toc-toggle {
