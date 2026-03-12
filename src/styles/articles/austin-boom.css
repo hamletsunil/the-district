@@ -1,5 +1,5 @@
 /* ===========================
-   AUSTIN BOOM — "47 Million Words"
+   AUSTIN BOOM — "Five Thousand Hours"
    Warm brown + burnt orange
    CSS prefix: au-
    =========================== */
@@ -171,13 +171,13 @@
 .au-editorial-section {
   max-width: 720px;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem;
 }
 
 .au-wide-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 1.5rem;
+  padding: 6rem 1.5rem;
 }
 
 /* Section headers */
@@ -493,10 +493,43 @@
 /* ===== PULL QUOTE OVERRIDE ===== */
 
 .au-pull-quote {
-  max-width: 720px;
-  margin: 2.5rem auto;
-  padding: 1.5rem 2rem;
-  border-left: 3px solid var(--accent-primary);
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem 1.5rem;
+  border-left: none;
+  text-align: center;
+}
+
+.au-pull-quote blockquote {
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  font-style: italic;
+  color: var(--page-text);
+  margin-bottom: 1.25rem;
+}
+
+.au-pull-quote blockquote::before {
+  content: "\201C";
+  display: block;
+  font-size: 4rem;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  font-family: Georgia, serif;
+}
+
+.au-pull-quote cite {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: var(--page-text-muted);
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 768px) {
+  .au-pull-quote {
+    margin: 4rem auto;
+    padding: 3rem 2rem;
+  }
 }
 
 /* ===== TABLE OF CONTENTS OVERRIDES ===== */
@@ -632,6 +665,10 @@
 
 /* Desktop: sidebar overlay (not push) */
 @media (min-width: 1280px) {
+  .au-article {
+    padding-left: 240px;
+  }
+
   .au-toc-toggle {
     display: none;
   }
@@ -649,6 +686,60 @@
   }
 }
 
+/* ===== METHODOLOGY SECTION ===== */
+
+.au-section.au-methodology {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+.au-prose-header {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.au-section-number {
+  font-family: var(--font-sans);
+  font-size: var(--type-section-num, 0.75rem);
+  font-weight: 600;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.au-prose {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--page-text-muted);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.au-prose-small {
+  font-size: 0.875rem;
+}
+
+.au-prose dt {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--page-text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1.5rem;
+}
+
+.au-prose dd {
+  margin: 0.5rem 0 0;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
@@ -658,11 +749,15 @@
   }
 
   .au-editorial-section {
-    padding: 3rem 1rem;
+    padding: 4rem 1rem;
   }
 
   .au-wide-section {
-    padding: 3rem 1rem;
+    padding: 4rem 1rem;
+  }
+
+  .au-section.au-methodology {
+    padding: 3rem 1.25rem;
   }
 
   .au-mentions-grid {

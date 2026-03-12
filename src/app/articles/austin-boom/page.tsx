@@ -628,20 +628,7 @@ function MachineSection() {
   const { ref: calRef, isVisible: calVisible } = useIntersectionObserver({ threshold: 0.15 });
   const { ref: topicRef, isVisible: topicVisible } = useIntersectionObserver({ threshold: 0.15 });
 
-  const treemapLayout = useMemo(() => {
-    const topics = DATA.topicShares;
-    const totalW = 800;
-    const totalH = 300;
-    const rects: { x: number; y: number; w: number; h: number; topic: string; pct: number; color: string }[] = [];
-    const colors = ["#BF5700", "#c4522e", "#f0944a", "#a89e92", "#8a7e72", "#6b5e52", "#e87040", "#d4714a"];
-    let x = 0;
-    topics.forEach((t, i) => {
-      const w = (t.pct / 100) * totalW;
-      rects.push({ x, y: 0, w, h: totalH, topic: t.topic, pct: t.pct, color: colors[i] || "#6b5e52" });
-      x += w;
-    });
-    return rects;
-  }, []);
+  const topicColors = ["#BF5700", "#c4522e", "#f0944a", "#a89e92", "#8a7e72", "#6b5e52", "#e87040", "#d4714a"];
 
   return (
     <section ref={ref} id="the-machine" className="au-wide-section au-section-border">
@@ -702,7 +689,7 @@ function MachineSection() {
 
       <div ref={calRef} className="au-chart-wrap" style={{ marginTop: "2rem" }}>
         <div className="au-chart-title">Meetings by Day of Week</div>
-        <svg viewBox="0 0 700 200" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 750 200" preserveAspectRatio="xMidYMid meet">
           {DATA.dayDistribution.map((d, i) => {
             const maxCount = Math.max(...DATA.dayDistribution.map(x => x.count));
             const barWidth = (d.count / maxCount) * 400;
@@ -710,13 +697,13 @@ function MachineSection() {
             const isWed = d.day === "Wed";
             return (
               <g key={d.day}>
-                <text x="60" y={y + 16} textAnchor="end" fontSize="12"
+                <text x="90" y={y + 16} textAnchor="end" fontSize="12"
                   fill={isWed ? "#BF5700" : "#a89e92"} fontWeight={isWed ? 600 : 400}
                   fontFamily="var(--font-sans)">
                   {d.full}
                 </text>
                 <rect
-                  x={70} y={y + 2}
+                  x={100} y={y + 2}
                   width={calVisible ? barWidth : 0} height={18}
                   rx={3}
                   fill={isWed ? "#BF5700" : "#8a7e72"}
@@ -724,7 +711,7 @@ function MachineSection() {
                   style={{ transition: `width 0.8s var(--ease-elegant) ${i * 80}ms` }}
                 />
                 {calVisible && (
-                  <text x={70 + barWidth + 8} y={y + 16} fontSize="11"
+                  <text x={100 + barWidth + 8} y={y + 16} fontSize="11"
                     fontWeight="600" fill={isWed ? "#BF5700" : "#a89e92"}
                     fontFamily="var(--font-sans)">
                     {d.count} ({d.pct}%)
@@ -761,47 +748,37 @@ function MachineSection() {
 
       <div ref={topicRef} className="au-chart-wrap">
         <div className="au-chart-title">Share of Deliberation by Topic</div>
-        <svg viewBox="0 0 800 340" preserveAspectRatio="xMidYMid meet">
-          {treemapLayout.map((r, i) => (
-            <g key={r.topic}>
-              <rect
-                x={r.x} y={r.y}
-                width={topicVisible ? r.w : 0} height={r.h}
-                fill={r.color}
-                opacity={0.65}
-                rx={4}
-                style={{ transition: `width 0.8s var(--ease-elegant) ${i * 60}ms` }}
-              />
-              {topicVisible && r.w > 50 && (
-                <>
-                  <text
-                    x={r.x + r.w / 2} y={r.y + r.h / 2 - 8}
-                    textAnchor="middle" fontSize={r.w > 100 ? "12" : "9"}
-                    fontWeight="600" fill="#fff" fontFamily="var(--font-sans)"
-                    opacity="0.9"
-                  >
-                    {r.topic.split(" & ")[0]}
+        <svg viewBox="0 0 750 280" preserveAspectRatio="xMidYMid meet">
+          {DATA.topicShares.map((t, i) => {
+            const maxPct = DATA.topicShares[0].pct;
+            const barWidth = (t.pct / maxPct) * 380;
+            const y = i * 32 + 10;
+            const isTop3 = i < 3;
+            return (
+              <g key={t.topic}>
+                <text x="200" y={y + 17} textAnchor="end" fontSize="11"
+                  fill={isTop3 ? "#f5efe6" : "#a89e92"} fontWeight={isTop3 ? 600 : 400}
+                  fontFamily="var(--font-sans)">
+                  {t.topic}
+                </text>
+                <rect
+                  x={210} y={y + 2}
+                  width={topicVisible ? barWidth : 0} height={20}
+                  rx={3}
+                  fill={topicColors[i] || "#6b5e52"}
+                  opacity={isTop3 ? 0.8 : 0.5}
+                  style={{ transition: `width 0.8s var(--ease-elegant) ${i * 60}ms` }}
+                />
+                {topicVisible && (
+                  <text x={210 + barWidth + 8} y={y + 17} fontSize="11"
+                    fontWeight="700" fill={topicColors[i] || "#6b5e52"}
+                    fontFamily="var(--font-sans)">
+                    {t.pct}%
                   </text>
-                  <text
-                    x={r.x + r.w / 2} y={r.y + r.h / 2 + 10}
-                    textAnchor="middle" fontSize={r.w > 100 ? "18" : "13"}
-                    fontWeight="700" fill="#fff" fontFamily="var(--font-sans)"
-                  >
-                    {r.pct}%
-                  </text>
-                </>
-              )}
-            </g>
-          ))}
-          {treemapLayout.map((r, i) => (
-            <text key={`label-${i}`}
-              x={r.x + r.w / 2} y={320}
-              textAnchor="middle" fontSize="9" fill="#a89e92"
-              fontFamily="var(--font-sans)"
-            >
-              {r.w > 40 ? r.topic.replace(" & ", "\n& ").split("\n")[0] : ""}
-            </text>
-          ))}
+                )}
+              </g>
+            );
+          })}
         </svg>
         <div className="au-chart-subtitle">
           Percentage of {DATA.meetings.totalChunks.toLocaleString()} classified
@@ -899,7 +876,7 @@ function MicrophoneSection() {
       </FadeIn>
 
       <PullQuote
-        text="I wrote a speech a while ago to set fire to the unruffled stoicism of this establishment, but I\u2019m all outta fire."
+        text={"I wrote a speech a while ago to set fire to the unruffled stoicism of this establishment, but I\u2019m all outta fire."}
         city="Austin"
         state="TX"
         className="au-pull-quote"
@@ -981,7 +958,7 @@ function FlowSection() {
 
       <div ref={ref} className="au-chart-wrap">
         <div className="au-chart-title">Issues Across the System</div>
-        <svg viewBox="0 0 700 220" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 750 220" preserveAspectRatio="xMidYMid meet">
           {flows.map((f, i) => {
             const meetingBarW = (f.meetings / maxMeetings) * 450;
             const y = i * 65 + 15;
@@ -1212,10 +1189,10 @@ function ParadoxSection() {
 
       <div ref={ref} className="au-chart-wrap">
         <div className="au-chart-title">Most Contentious Meetings</div>
-        <svg viewBox="0 0 700 280" preserveAspectRatio="xMidYMid meet">
+        <svg viewBox="0 0 700 300" preserveAspectRatio="xMidYMid meet">
           {DATA.hotMeetings.map((m, i) => {
             const barWidth = (m.cont / 5) * 500;
-            const y = i * 60 + 20;
+            const y = i * 68 + 20;
             return (
               <g key={m.videoId}>
                 <text x="5" y={y + 14} fontSize="11" fontWeight="600"
@@ -1251,7 +1228,7 @@ function ParadoxSection() {
       </div>
 
       <PullQuote
-        text="My people, my people in Austin are hurt."
+        text={"My people, my people in Austin are hurt."}
         city="Austin"
         state="TX"
         className="au-pull-quote"
@@ -1484,15 +1461,15 @@ function BodyBubbleChart({ isVisible }: { isVisible: boolean }) {
   const bubbles = useMemo(() => {
     return DATA.topBodies.map((b, i) => ({
       name: b.name,
-      r: Math.max(8, Math.sqrt(b.meetings) * 3.8),
+      r: Math.max(10, Math.sqrt(b.meetings) * 3.8),
       meetings: b.meetings,
-      cx: 80 + (i % 4) * 200,
-      cy: 60 + Math.floor(i / 4) * 120,
+      cx: 140 + (i % 3) * 260,
+      cy: 70 + Math.floor(i / 3) * 110,
     }));
   }, []);
 
   return (
-    <svg viewBox="0 0 860 400" className="au-bubble-chart" preserveAspectRatio="xMidYMid meet">
+    <svg viewBox="0 0 880 480" className="au-bubble-chart" preserveAspectRatio="xMidYMid meet">
       {bubbles.map((b, i) => (
         <g key={i}>
           <circle
