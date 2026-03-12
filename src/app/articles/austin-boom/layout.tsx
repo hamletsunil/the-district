@@ -5,38 +5,39 @@ const SLUG = "austin-boom";
 const URL = `${BASE_URL}/articles/${SLUG}`;
 
 export const metadata: Metadata = {
-  title: "The Boom That Broke: Austin\u2019s Construction Story in 315,322 Permits \u2014 The District",
+  title: "47 Million Words: Inside Austin\u2019s 2,588 Government Meetings \u2014 The District",
   description:
-    "315,322 permits. 71,105 in one year. Then a 23% crash. Austin\u2019s construction data tells a story the city\u2019s boosters would rather you didn\u2019t see.",
+    "We transcribed 2,588 Austin government meetings and classified 47.5 million words with AI. The largest structured analysis of American municipal discourse ever published.",
   keywords: [
     "Austin",
-    "Austin construction",
-    "building permits",
-    "Austin growth",
-    "Texas economy",
+    "Austin government",
+    "municipal meetings",
+    "city council",
+    "AI analysis",
+    "public testimony",
     "Austin housing",
-    "construction boom",
-    "permit data",
+    "zoning",
+    "NLP",
     "The District",
     "Hamlet",
   ],
   alternates: { canonical: URL },
   openGraph: {
-    title: "The Boom That Broke",
+    title: "47 Million Words",
     description:
-      "315,322 permits. 9,455 government meetings. Austin bet everything on growth.",
+      "2,588 meetings. 267 government bodies. 5,108 hours. The largest structured analysis of American municipal discourse ever published.",
     type: "article",
-    publishedTime: "2026-03-03T12:00:00.000Z",
-    modifiedTime: "2026-03-03T12:00:00.000Z",
+    publishedTime: "2026-03-11T12:00:00.000Z",
+    modifiedTime: "2026-03-11T12:00:00.000Z",
     authors: ["The District"],
     siteName: "The District",
     url: URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Boom That Broke",
+    title: "47 Million Words",
     description:
-      "315,322 permits. 71,105 in one year. Then a 23% crash. Austin\u2019s permit data tells a different story.",
+      "We AI-analyzed 2,588 Austin government meetings. The loudest debates produce the most lopsided votes.",
   },
 };
 
@@ -54,11 +55,11 @@ export default function AustinBoomLayout({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
             headline:
-              "The Boom That Broke: Austin\u2019s Construction Story in 315,322 Permits",
+              "47 Million Words: Inside Austin\u2019s 2,588 Government Meetings",
             description:
-              "315,322 permits. 71,105 in one year. Then a 23% crash. Austin\u2019s construction data tells a story the city\u2019s boosters would rather you didn\u2019t see.",
-            datePublished: "2026-03-03T12:00:00.000Z",
-            dateModified: "2026-03-03T12:00:00.000Z",
+              "We transcribed 2,588 Austin government meetings and classified 47.5 million words with AI. The largest structured analysis of American municipal discourse ever published.",
+            datePublished: "2026-03-11T12:00:00.000Z",
+            dateModified: "2026-03-11T12:00:00.000Z",
             author: {
               "@type": "Person",
               name: "Sunil Rajaraman",
