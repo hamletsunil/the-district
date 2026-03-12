@@ -176,13 +176,13 @@
 .au-editorial-section {
   max-width: 720px;
   margin: 0 auto;
-  padding: 6rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 .au-wide-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 6rem 1.5rem;
+  padding: 3rem 1.5rem;
 }
 
 /* Section headers */
@@ -491,16 +491,15 @@
 
 .au-section-border {
   border-top: 1px solid rgba(191, 87, 0, 0.12);
-  padding-top: 5rem;
-  padding-bottom: 2rem;
+  padding-top: 3rem;
 }
 
 /* ===== PULL QUOTE OVERRIDE ===== */
 
 .au-pull-quote {
   max-width: 800px;
-  margin: 3rem auto;
-  padding: 2rem 1.5rem;
+  margin: 2rem auto;
+  padding: 1.5rem 1.5rem;
   border-left: none;
   text-align: center;
 }
@@ -532,8 +531,8 @@
 
 @media (min-width: 768px) {
   .au-pull-quote {
-    margin: 4rem auto;
-    padding: 3rem 2rem;
+    margin: 2.5rem auto;
+    padding: 2rem;
   }
 }
 
@@ -751,11 +750,11 @@
   }
 
   .au-editorial-section {
-    padding: 4rem 1rem;
+    padding: 2.5rem 1rem;
   }
 
   .au-wide-section {
-    padding: 4rem 1rem;
+    padding: 2.5rem 1rem;
   }
 
   .au-section.au-methodology {

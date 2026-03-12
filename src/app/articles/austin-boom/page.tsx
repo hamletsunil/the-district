@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { AtAGlance } from "@/components/article/AtAGlance";
 import { MethodologySection } from "@/components/article/MethodologySection";
 import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
@@ -10,7 +10,6 @@ import { SocialShare } from "@/components/article/SocialShare";
 import { PullQuote } from "@/components/article/PullQuote";
 import { TableOfContents } from "@/components/article/TableOfContents";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import { ScrollySection, StepContent } from "@/components/viz/ScrollySection";
 import type { Source } from "@/types/article";
 
 // ============================================================================
@@ -368,11 +367,9 @@ const SOURCES: Source[] = [
 
 // Table of contents
 const TOC_SECTIONS = [
-  { id: "the-machine", label: "The Machine", number: "01" },
+  { id: "the-paradox", label: "The Paradox", number: "01" },
   { id: "at-the-microphone", label: "At the Microphone", number: "02" },
-  { id: "the-flow", label: "The Flow", number: "03" },
-  { id: "the-paradox", label: "The Paradox", number: "04" },
-  { id: "the-arc", label: "The Arc", number: "05" },
+  { id: "the-temperature", label: "The Temperature", number: "03" },
   { id: "voices", label: "Voices", number: "\u2014" },
 ];
 
@@ -476,11 +473,9 @@ export default function AustinBoom() {
       />
 
       <LedeSection />
-      <MachineSection />
-      <MicrophoneSection />
-      <FlowSection />
       <ParadoxSection />
-      <ArcSection />
+      <MicrophoneSection />
+      <TemperatureSection />
       <VoicesSection />
       <CloseSection />
 
@@ -566,227 +561,42 @@ function HeroSection({ scrollY }: { scrollY: number }) {
 }
 
 // ============================================================================
-// LEDE — Scale, methodology, foreshadow the paradox
+// LEDE — Lead with the paradox, then establish scale
 // ============================================================================
 function LedeSection() {
   return (
     <FadeIn className="au-editorial-section">
       <div className="au-body-prose">
         <p>
-          On a Wednesday evening in December 2023, Monica Guzman stepped
-          to the microphone at Austin City Hall for the hundred and second
-          time. She was not the most frequent speaker in our dataset. That
-          distinction belongs to another resident who has appeared at{" "}
-          {DATA.regulars[0].meetings} meetings across{" "}
-          {DATA.regulars[0].bodies} different government bodies. But
-          Guzman&rsquo;s persistence illustrates something the numbers
-          cannot: what it means to keep showing up.
-        </p>
-        <p>
-          We know the count because we transcribed every public meeting
-          Austin held between December 2020 and February 2026&mdash;
+          We transcribed every public meeting Austin held between
+          December 2020 and February 2026&mdash;
           {DATA.meetings.totalMeetings.toLocaleString()} meetings,{" "}
-          {(DATA.meetings.totalWords / 1e6).toFixed(1)} million words, recorded
-          by the city&rsquo;s{" "}
-          <a href="https://austintx.new.swagit.com/" target="_blank" rel="noopener noreferrer">
-          Swagit video archive</a> across{" "}
-          {DATA.meetings.swagitBodies} government bodies spanning{" "}
-          {DATA.meetings.swagitYearSpan} years. We split the transcripts into{" "}
-          {DATA.meetings.totalChunks.toLocaleString()} chunks, classified each
-          one by topic, urgency, contentiousness, and personal testimony using
-          AI, then extracted the most significant quotes, speakers, and context
-          in a second pass.
+          {(DATA.meetings.totalWords / 1e6).toFixed(1)} million words,{" "}
+          {DATA.meetings.totalHours.toLocaleString()} hours of deliberation
+          across{" "}
+          {DATA.meetings.swagitBodies} government bodies. We classified
+          every passage for topic, urgency, and contentiousness using AI,
+          then extracted the most significant quotes and speakers.
         </p>
         <p>
-          Austin officially maintains{" "}
-          {DATA.meetings.officialBodies} boards, commissions, and task
-          forces&mdash;more than most American cities of comparable size,
-          according to a{" "}
-          <a href="https://www.austintexas.gov/page/boards-and-commissions" target="_blank" rel="noopener noreferrer">
-          2023 City Auditor special report</a>. Our archive captured
-          proceedings from {DATA.meetings.swagitBodies} of them. The
-          result&mdash;{(DATA.meetings.totalWords / 1e6).toFixed(1)} million
-          words of public record, analyzed and structured&mdash;is the largest
-          analysis of American municipal discourse we are aware of.
+          We found something counterintuitive. The meetings with the highest
+          contentiousness scores&mdash;the ones where residents line up to
+          testify for hours, where people cry and accuse their
+          representatives of betrayal&mdash;consistently end in the most
+          lopsided votes. The February 2023 police contract hearing scored
+          {" "}{DATA.hotMeetings[0].cont} on our five-point scale, the
+          highest of any meeting in the dataset. It passed overwhelmingly.
+          The HOME zoning reform scored {DATA.hotMeetings[3].cont} after
+          thirteen hours of testimony. It passed 9-2.
         </p>
         <p>
-          We found something counterintuitive buried in the data. The most
-          passionate meetings&mdash;the ones where residents testify for hours,
-          where people cry and accuse their representatives of
-          betrayal&mdash;consistently end in the most lopsided votes.
+          More heat, less uncertainty. More passion, more consensus. That
+          paradox&mdash;and what it means for the hundreds of residents who
+          keep showing up anyway&mdash;is the story of Austin&rsquo;s
+          democratic practice.
         </p>
       </div>
     </FadeIn>
-  );
-}
-
-// ============================================================================
-// 01 — THE MACHINE: 93 bodies, Wednesday rhythm, topics, volume vs. heat
-// ============================================================================
-function MachineSection() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
-  const { ref: calRef, isVisible: calVisible } = useIntersectionObserver({ threshold: 0.15 });
-  const { ref: topicRef, isVisible: topicVisible } = useIntersectionObserver({ threshold: 0.15 });
-
-  const topicColors = ["#BF5700", "#c4522e", "#f0944a", "#a89e92", "#8a7e72", "#6b5e52", "#e87040", "#d4714a"];
-
-  return (
-    <section ref={ref} id="the-machine" className="au-wide-section au-section-border">
-      <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">01</span>
-        <h2 className="au-section-title">The Machine</h2>
-      </div>
-
-      <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
-        <div className="au-body-prose">
-          <p>
-            Austin officially maintains{" "}
-            {DATA.meetings.officialBodies} boards, commissions, and task
-            forces&mdash;55 established in the City Code, the rest created by
-            council resolution. Not departments. Deliberative bodies, each with
-            its own dais, agenda, and sign-up sheet for public comment. Of these,{" "}
-            {DATA.meetings.activeInData} held 20 or more meetings during our
-            analysis period: permanent institutions that meet month after month,
-            accumulating institutional memory and procedural efficiency.
-          </p>
-          <p>
-            City Council meetings generate the most words per session, averaging{" "}
-            {DATA.topBodies[2].avgWords.toLocaleString()}&mdash;the equivalent
-            of a short novel every time the full council convenes. Planning
-            Commission runs close behind at{" "}
-            {DATA.topBodies[0].avgWords.toLocaleString()}. The Housing Finance
-            Corporation, by contrast, averages just{" "}
-            {DATA.juxtaposition.light.avgWords.toLocaleString()} words per
-            meeting&mdash;roughly eight minutes of speech. Both deal with
-            housing policy. The difference is preparation: AHFC&rsquo;s staff
-            vets proposals in committee, addresses objections in advance, and
-            presents a recommendation to the board. Functional government is
-            boring.
-          </p>
-          <p>
-            Wednesday is the day Austin governs:{" "}
-            {DATA.dayDistribution[2].count} of{" "}
-            {DATA.meetings.totalMeetings.toLocaleString()} meetings&mdash;
-            {DATA.dayDistribution[2].pct}%&mdash;fall midweek. Saturday
-            accounts for {DATA.dayDistribution[5].count}. Sunday,{" "}
-            {DATA.dayDistribution[6].count}. By Friday the city has
-            largely stopped deliberating.
-          </p>
-        </div>
-      </FadeIn>
-
-      <div className="au-chart-wrap">
-        <div className="au-chart-title">
-          Top {DATA.topBodies.length} Government Bodies by Meeting Frequency
-        </div>
-        <BodyBubbleChart isVisible={isVisible} />
-        <div className="au-chart-subtitle">
-          Showing the {DATA.topBodies.length} most active of{" "}
-          {DATA.meetings.activeInData} bodies with 20+ meetings.
-          Size = number of meetings. Source: Austin TX Swagit.
-        </div>
-      </div>
-
-      <div ref={calRef} className="au-chart-wrap" style={{ marginTop: "2rem" }}>
-        <div className="au-chart-title">Meetings by Day of Week</div>
-        <svg viewBox="0 0 750 200" preserveAspectRatio="xMidYMid meet">
-          {DATA.dayDistribution.map((d, i) => {
-            const maxCount = Math.max(...DATA.dayDistribution.map(x => x.count));
-            const barWidth = (d.count / maxCount) * 400;
-            const y = i * 26 + 10;
-            const isWed = d.day === "Wed";
-            return (
-              <g key={d.day}>
-                <text x="90" y={y + 16} textAnchor="end" fontSize="12"
-                  fill={isWed ? "#BF5700" : "#a89e92"} fontWeight={isWed ? 600 : 400}
-                  fontFamily="var(--font-sans)">
-                  {d.full}
-                </text>
-                <rect
-                  x={100} y={y + 2}
-                  width={calVisible ? barWidth : 0} height={18}
-                  rx={3}
-                  fill={isWed ? "#BF5700" : "#8a7e72"}
-                  opacity={isWed ? 0.8 : 0.4}
-                  style={{ transition: `width 0.8s var(--ease-elegant) ${i * 80}ms` }}
-                />
-                {calVisible && (
-                  <text x={100 + barWidth + 8} y={y + 16} fontSize="11"
-                    fontWeight="600" fill={isWed ? "#BF5700" : "#a89e92"}
-                    fontFamily="var(--font-sans)">
-                    {d.count} ({d.pct}%)
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-
-      <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
-        <div className="au-body-prose">
-          <p>
-            Budget and finance dominates Austin&rsquo;s deliberative bandwidth,
-            consuming {DATA.topicShares[0].pct}% of all classified discourse.
-            Land use and zoning takes {DATA.topicShares[1].pct}%, housing and
-            affordability {DATA.topicShares[2].pct}%. Together, those three
-            topics account for more than 57% of everything Austin&rsquo;s
-            government talks about.
-          </p>
-          <p>
-            The gap between volume and heat tells the real story. Budget
-            hearings are longer and more frequent, but their tone is
-            procedural&mdash;line items, departmental presentations, actuarial
-            projections. Housing debates generate the highest contentiousness
-            scores. People cry at these meetings. They describe being priced
-            out of the city their families built. Austin talks about money more
-            than anything else but fights about housing harder than anything
-            else.
-          </p>
-        </div>
-      </FadeIn>
-
-      <div ref={topicRef} className="au-chart-wrap">
-        <div className="au-chart-title">Share of Deliberation by Topic</div>
-        <svg viewBox="0 0 750 280" preserveAspectRatio="xMidYMid meet">
-          {DATA.topicShares.map((t, i) => {
-            const maxPct = DATA.topicShares[0].pct;
-            const barWidth = (t.pct / maxPct) * 380;
-            const y = i * 32 + 10;
-            const isTop3 = i < 3;
-            return (
-              <g key={t.topic}>
-                <text x="200" y={y + 17} textAnchor="end" fontSize="11"
-                  fill={isTop3 ? "#f5efe6" : "#a89e92"} fontWeight={isTop3 ? 600 : 400}
-                  fontFamily="var(--font-sans)">
-                  {t.topic}
-                </text>
-                <rect
-                  x={210} y={y + 2}
-                  width={topicVisible ? barWidth : 0} height={20}
-                  rx={3}
-                  fill={topicColors[i] || "#6b5e52"}
-                  opacity={isTop3 ? 0.8 : 0.5}
-                  style={{ transition: `width 0.8s var(--ease-elegant) ${i * 60}ms` }}
-                />
-                {topicVisible && (
-                  <text x={210 + barWidth + 8} y={y + 17} fontSize="11"
-                    fontWeight="700" fill={topicColors[i] || "#6b5e52"}
-                    fontFamily="var(--font-sans)">
-                    {t.pct}%
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-        <div className="au-chart-subtitle">
-          Percentage of {DATA.meetings.totalChunks.toLocaleString()} classified
-          text chunks mentioning each topic. A single chunk can mention multiple
-          topics, so shares sum to &gt;100%.
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -886,303 +696,50 @@ function MicrophoneSection() {
 }
 
 // ============================================================================
-// 03 — THE FLOW: How issues move through the system
-// ============================================================================
-function FlowSection() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
-  const flows = [DATA.crossBodyFlows.home, DATA.crossBodyFlows.policeReform, DATA.crossBodyFlows.winterStorm];
-  const maxMeetings = DATA.crossBodyFlows.home.meetings;
-
-  return (
-    <section id="the-flow" className="au-wide-section au-section-border">
-      <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">03</span>
-        <h2 className="au-section-title">The Flow</h2>
-      </div>
-
-      <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
-        <div className="au-body-prose">
-          <p>
-            Austin&rsquo;s governance is not a single body making decisions.
-            It is a system of {DATA.meetings.officialBodies} bodies processing
-            issues in parallel, with contested policies escalating through
-            increasingly authoritative chambers.
-          </p>
-          <p>
-            The HOME Initiative illustrates the pattern. Before the final
-            council vote in December 2023, HOME appeared in{" "}
-            {DATA.crossBodyFlows.home.meetings} meetings across{" "}
-            {DATA.crossBodyFlows.home.bodies} different bodies&mdash;planning
-            commissions, neighborhood advisory groups, housing committees, zoning
-            boards, community development commissions. Each body added testimony,
-            complexity, and political weight. By the time the full council voted,
-            the policy had been argued, amended, and argued again across the
-            entire deliberative apparatus.
-          </p>
-          <p>
-            The Joint Council and Planning Commission&mdash;a body convened when
-            both institutions need to deliberate together&mdash;met only four
-            times in our dataset. All four meetings ranked among the most intense
-            of any body, a function of their purpose: they assemble only when a
-            policy has escalated beyond the capacity of either body alone.
-          </p>
-          <p>
-            Police reform traced a different path. The Reimagining Public Safety
-            Task Force was created in June 2020 and dissolved{" "}
-            {DATA.ephemeralHighlights[0].days} days later, after recommending
-            $210 million in budget reallocation. The task force was ephemeral by
-            design&mdash;a pressure valve. But the resulting debate consumed{" "}
-            {DATA.crossBodyFlows.policeReform.meetings} meetings across{" "}
-            {DATA.crossBodyFlows.policeReform.bodies} bodies over the next two
-            years, from Public Safety Commission hearings to council budget work
-            sessions.
-          </p>
-          <p>
-            Winter Storm Uri, which struck Austin in February 2021, touched{" "}
-            {DATA.crossBodyFlows.winterStorm.bodies} bodies in{" "}
-            {DATA.crossBodyFlows.winterStorm.meetings} meetings&mdash;water and
-            wastewater commission reviews, emergency management briefings,
-            infrastructure oversight, budget amendments. A natural disaster
-            became a governance exercise distributed across nearly a fifth of
-            the city&rsquo;s official bodies.
-          </p>
-          <p>
-            The pattern is consistent: contested issues escalate through
-            Austin&rsquo;s system, each body adding its own hearings, its own
-            testimony, its own institutional perspective. The system&rsquo;s
-            complexity is not bureaucratic waste. It is distributed
-            deliberation.
-          </p>
-        </div>
-      </FadeIn>
-
-      <div ref={ref} className="au-chart-wrap">
-        <div className="au-chart-title">Issues Across the System</div>
-        <svg viewBox="0 0 750 220" preserveAspectRatio="xMidYMid meet">
-          {flows.map((f, i) => {
-            const meetingBarW = (f.meetings / maxMeetings) * 450;
-            const y = i * 65 + 15;
-            return (
-              <g key={f.label}>
-                <text x="5" y={y + 14} fontSize="12" fontWeight="600"
-                  fill="#BF5700" fontFamily="var(--font-sans)">{f.label}</text>
-                <rect
-                  x={0} y={y + 20}
-                  width={isVisible ? meetingBarW : 0} height={22}
-                  rx={3}
-                  fill="#BF5700"
-                  opacity={0.7 - i * 0.15}
-                  style={{ transition: `width 0.8s var(--ease-elegant) ${i * 120}ms` }}
-                />
-                {isVisible && (
-                  <text x={meetingBarW + 8} y={y + 36} fontSize="11"
-                    fontWeight="600" fill="#a89e92" fontFamily="var(--font-sans)">
-                    {f.meetings} meetings &middot; {f.bodies} bodies
-                  </text>
-                )}
-              </g>
-            );
-          })}
-        </svg>
-        <div className="au-chart-subtitle">
-          Number of meetings and distinct government bodies where each issue appeared.
-          Source: AI classification of {DATA.meetings.totalMeetings.toLocaleString()} transcripts.
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// 04 — THE PARADOX: Passionate meetings → lopsided votes + meeting anatomy
+// 01 — THE PARADOX: Passionate meetings → lopsided votes + meeting anatomy
 // ============================================================================
 function ParadoxSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
-
-  const steps = [
-    {
-      id: "opening",
-      content: (
-        <StepContent title="Opening" highlight="0\u201310% of meeting">
-          <p>
-            The room fills. Consent items get read into the record. Residents
-            who signed up to speak start arriving. Contentiousness is
-            low&mdash;{DATA.contentiousnessArc[0].cont} out of
-            5&mdash;because the meeting hasn&rsquo;t started its real work.
-            Personal testimony is at its peak ({DATA.contentiousnessArc[0].testimony}):
-            the people who showed up early get their chance first.
-          </p>
-        </StepContent>
-      ),
-    },
-    {
-      id: "ramp",
-      content: (
-        <StepContent title="The Ramp" highlight="20\u201350% of meeting">
-          <p>
-            The contested items hit the agenda. Staff presentations pile up.
-            The audience leans forward. By the halfway mark, contentiousness
-            peaks at {DATA.contentiousnessArc[4].cont} and technical complexity
-            hits {DATA.contentiousnessArc[4].complexity}&mdash;the densest, most
-            argumentative stretch of the entire meeting.
-          </p>
-        </StepContent>
-      ),
-    },
-    {
-      id: "peak",
-      content: (
-        <StepContent title="The Plateau" highlight="50\u201380% of meeting">
-          <p>
-            The speakers who came to tell their stories have finished. Personal
-            testimony drops to {DATA.contentiousnessArc[7].testimony}. What
-            remains is parliamentary maneuvering&mdash;amendments, motions,
-            procedural back-and-forth. The room is still tense but the human
-            element has drained out of it.
-          </p>
-        </StepContent>
-      ),
-    },
-    {
-      id: "collapse",
-      content: (
-        <StepContent title="The Collapse" highlight="80\u2013100% of meeting">
-          <p>
-            The audience has thinned. Contentiousness drops
-            to {DATA.contentiousnessArc[9].cont}. Council members read remaining
-            items into the record. Complexity falls
-            to {DATA.contentiousnessArc[9].complexity}. The meeting ends not
-            with a vote but with a motion to adjourn.
-          </p>
-        </StepContent>
-      ),
-    },
-  ];
-
-  const renderViz = useCallback((stepIndex: number) => {
-    const arc = DATA.contentiousnessArc;
-    const w = 600;
-    const h = 360;
-    const padX = 60;
-    const padY = 40;
-    const plotW = w - padX * 2;
-    const plotH = h - padY * 2;
-    const zones = [
-      { start: 0, end: 1 },
-      { start: 2, end: 4 },
-      { start: 5, end: 7 },
-      { start: 8, end: 9 },
-    ];
-    const zone = zones[stepIndex] || zones[0];
-    const scaleX = (i: number) => padX + (i / 9) * plotW;
-    const scaleY = (v: number) => padY + plotH - ((v - 1.5) / 1.8) * plotH;
-    const contPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.cont)}`).join(" ");
-    const testPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.testimony)}`).join(" ");
-    const compPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.complexity)}`).join(" ");
-
-    return (
-      <svg viewBox={`0 0 ${w} ${h}`} className="au-anatomy-chart" style={{ maxWidth: 600 }} preserveAspectRatio="xMidYMid meet">
-        {[1.5, 2.0, 2.5, 3.0].map(v => (
-          <g key={v}>
-            <line x1={padX} y1={scaleY(v)} x2={w - padX} y2={scaleY(v)}
-              stroke="#a89e92" strokeWidth="0.5" opacity="0.2" />
-            <text x={padX - 8} y={scaleY(v) + 4} textAnchor="end" fontSize="10"
-              fill="#a89e92" fontFamily="var(--font-sans)">{v.toFixed(1)}</text>
-          </g>
-        ))}
-        <rect
-          x={scaleX(zone.start) - 5}
-          y={padY}
-          width={scaleX(zone.end) - scaleX(zone.start) + 10}
-          height={plotH}
-          fill="#BF5700"
-          opacity="0.08"
-          rx={4}
-        />
-        <path d={compPath} fill="none" stroke="#6b5e52" strokeWidth="2" opacity="0.5" />
-        <path d={testPath} fill="none" stroke="#10b981" strokeWidth="2" opacity="0.7" />
-        <path d={contPath} fill="none" stroke="#BF5700" strokeWidth="2.5" opacity="0.9" />
-        {arc.map((p, i) => {
-          const isActive = i >= zone.start && i <= zone.end;
-          return (
-            <g key={i}>
-              {isActive && (
-                <>
-                  <circle cx={scaleX(i)} cy={scaleY(p.cont)} r="4" fill="#BF5700" />
-                  <circle cx={scaleX(i)} cy={scaleY(p.testimony)} r="3" fill="#10b981" />
-                </>
-              )}
-            </g>
-          );
-        })}
-        {["Start", "25%", "50%", "75%", "End"].map((label, i) => (
-          <text key={label} x={padX + (i / 4) * plotW} y={h - 8}
-            textAnchor="middle" fontSize="10" fill="#a89e92" fontFamily="var(--font-sans)">
-            {label}
-          </text>
-        ))}
-        <g transform={`translate(${padX}, 16)`}>
-          <line x1="0" y1="0" x2="16" y2="0" stroke="#BF5700" strokeWidth="2.5" />
-          <text x="20" y="4" fontSize="10" fill="#BF5700" fontFamily="var(--font-sans)">Contentiousness</text>
-          <line x1="130" y1="0" x2="146" y2="0" stroke="#10b981" strokeWidth="2" />
-          <text x="150" y="4" fontSize="10" fill="#10b981" fontFamily="var(--font-sans)">Personal Testimony</text>
-          <line x1="280" y1="0" x2="296" y2="0" stroke="#6b5e52" strokeWidth="2" />
-          <text x="300" y="4" fontSize="10" fill="#6b5e52" fontFamily="var(--font-sans)">Complexity</text>
-        </g>
-      </svg>
-    );
-  }, []);
+  const { ref: arcRef, isVisible: arcVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
     <section id="the-paradox" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">04</span>
+        <span className="au-section-num">01</span>
         <h2 className="au-section-title">The Paradox</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
         <div className="au-body-prose">
           <p>
-            The central finding of this analysis is counterintuitive. The
-            meetings with the highest contentiousness scores&mdash;the ones
-            where residents line up to testify for hours, where people cry and
-            tell the council they are not being heard&mdash;consistently end
-            in lopsided votes.
-          </p>
-          <p>
-            The February 2023 police contract session scored{" "}
-            {DATA.hotMeetings[0].cont} and passed overwhelmingly. HOME Phase 1
-            scored {DATA.hotMeetings[3].cont} and passed 9-2. The pattern holds
-            across the most contentious meetings in our dataset: more heat,
-            less uncertainty in the outcome.
+            The meetings with the highest contentiousness scores&mdash;the
+            ones where residents line up to testify for hours, where people
+            cry and tell the council they are not being heard&mdash;consistently
+            end in lopsided votes. The February 2023 police contract session
+            scored {DATA.hotMeetings[0].cont} on our five-point scale, the
+            highest of any meeting in the dataset. It passed overwhelmingly.
+            HOME Phase 1 scored {DATA.hotMeetings[3].cont} after thirteen hours
+            of testimony. It passed 9-2.
           </p>
           <p>
             The simplest explanation is cynical: the decisions are pre-made
             and the hearings are theater. Chicago&rsquo;s city council operated
             this way for decades under the Daleys and Rahm Emanuel; University
-            of Illinois researchers documented the pattern.
-          </p>
-          <p>
-            Austin&rsquo;s data supports a more generous reading. The
-            city&rsquo;s most divisive issues generated months and sometimes
-            years of public testimony before the climactic vote&mdash;HOME
-            appeared in {DATA.crossBodyFlows.home.meetings} meetings across{" "}
-            {DATA.crossBodyFlows.home.bodies} bodies before the final hearing.
-            Council members heard from the same advocates dozens of times. The
-            testimony did not change the vote on the night of the final hearing.
-            It shaped the policy over the preceding months of committee hearings
-            and work sessions. By the time the final meeting arrived, the
-            council had already processed the argument. The lopsided vote may be
-            the end of a longer democratic process, not evidence that testimony
-            was ignored.
+            of Illinois researchers documented the pattern. But Austin&rsquo;s
+            data supports a more generous reading. HOME appeared
+            in {DATA.crossBodyFlows.home.meetings} meetings across{" "}
+            {DATA.crossBodyFlows.home.bodies} bodies before the final council
+            vote&mdash;planning commissions, neighborhood advisory groups,
+            housing committees, zoning boards. Council members heard from the
+            same advocates dozens of times. The testimony did not change the
+            vote on the night of the final hearing. It shaped the policy over
+            the preceding months. The lopsided vote may be the end of a longer
+            democratic process, not evidence that testimony was ignored.
           </p>
           <p>
             Neither reading is complete. Linda Nuno clearly did not feel heard.
             Neither did the man escorted out of the HOME hearing
-            shouting &ldquo;My people, my people in Austin are hurt.&rdquo; The
-            gap between what residents bring to the microphone and what they
-            receive back remains the central tension of Austin&rsquo;s
-            democratic practice.
+            shouting &ldquo;My people, my people in Austin are hurt.&rdquo;
           </p>
         </div>
       </FadeIn>
@@ -1237,40 +794,42 @@ function ParadoxSection() {
       <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
         <div className="au-body-prose">
           <p>
-            Every one of these {DATA.meetings.totalMeetings.toLocaleString()} meetings
-            follows the same arc. We averaged the contentiousness, personal
-            testimony, and technical complexity across all{" "}
-            {DATA.meetings.totalChunks.toLocaleString()} classified chunks,
-            grouped by position within the meeting. The pattern is strikingly
-            consistent: a slow ramp, a mid-meeting peak, and a sharp collapse
-            in the final quarter.
+            The arc of a single meeting tells the same story in miniature.
+            We averaged contentiousness, personal testimony, and technical
+            complexity across all {DATA.meetings.totalChunks.toLocaleString()} classified
+            chunks, grouped by position within the meeting. The pattern
+            is strikingly consistent: testimony peaks early, contentiousness
+            crests at midpoint ({DATA.contentiousnessArc[4].cont} out of 5),
+            and both collapse in the final quarter as the room empties and
+            the remaining business turns procedural. The people who showed up
+            to be heard have gone home. The vote happens anyway.
           </p>
         </div>
       </FadeIn>
 
-      <ScrollySection
-        steps={steps}
-        renderVisualization={renderViz}
-        offset={0.5}
-        trackProgress={false}
-        textPosition="left"
-        className="au-scrolly-section"
-      />
+      <div ref={arcRef} className="au-chart-wrap">
+        <div className="au-chart-title">Anatomy of a Meeting</div>
+        <AnatomyChart isVisible={arcVisible} />
+        <div className="au-chart-subtitle">
+          Average scores across {DATA.meetings.totalMeetings.toLocaleString()} meetings,
+          grouped by position (0% = start, 100% = end).
+        </div>
+      </div>
     </section>
   );
 }
 
 // ============================================================================
-// 05 — THE ARC: Cooling trend + institutional resilience
+// 03 — THE TEMPERATURE: Cooling trend + institutional resilience
 // ============================================================================
-function ArcSection() {
+function TemperatureSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section ref={ref} id="the-arc" className="au-wide-section au-section-border">
+    <section ref={ref} id="the-temperature" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">05</span>
-        <h2 className="au-section-title">The Arc</h2>
+        <span className="au-section-num">03</span>
+        <h2 className="au-section-title">The Temperature</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1456,60 +1015,59 @@ function CloseSection() {
 // CHARTS
 // ============================================================================
 
-/** Bubble chart showing top government bodies by meeting frequency */
-function BodyBubbleChart({ isVisible }: { isVisible: boolean }) {
-  const bubbles = useMemo(() => {
-    return DATA.topBodies.map((b, i) => ({
-      name: b.name,
-      r: Math.max(10, Math.sqrt(b.meetings) * 3.8),
-      meetings: b.meetings,
-      cx: 140 + (i % 3) * 260,
-      cy: 70 + Math.floor(i / 3) * 110,
-    }));
-  }, []);
+/** Static anatomy chart — contentiousness/testimony/complexity arc across a meeting */
+function AnatomyChart({ isVisible }: { isVisible: boolean }) {
+  const arc = DATA.contentiousnessArc;
+  const w = 650;
+  const h = 320;
+  const padX = 60;
+  const padY = 40;
+  const plotW = w - padX * 2;
+  const plotH = h - padY * 2;
+
+  const scaleX = (i: number) => padX + (i / 9) * plotW;
+  const scaleY = (v: number) => padY + plotH - ((v - 1.5) / 1.8) * plotH;
+  const contPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.cont)}`).join(" ");
+  const testPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.testimony)}`).join(" ");
+  const compPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.complexity)}`).join(" ");
 
   return (
-    <svg viewBox="0 0 880 480" className="au-bubble-chart" preserveAspectRatio="xMidYMid meet">
-      {bubbles.map((b, i) => (
-        <g key={i}>
-          <circle
-            cx={b.cx}
-            cy={b.cy}
-            r={isVisible ? b.r : 0}
-            fill="#BF5700"
-            opacity={0.6}
-            style={{
-              transition: `r 0.6s var(--ease-elegant) ${i * 40}ms`,
-            }}
-          />
-          {isVisible && (
-            <>
-              <text
-                x={b.cx}
-                y={b.cy + b.r + 14}
-                textAnchor="middle"
-                fontSize="9"
-                fill="#a89e92"
-                fontFamily="var(--font-sans)"
-              >
-                {b.name}
-              </text>
-              <text
-                x={b.cx}
-                y={b.cy + 4}
-                textAnchor="middle"
-                fontSize="11"
-                fontWeight="700"
-                fill="#fff"
-                fontFamily="var(--font-sans)"
-                opacity="0.9"
-              >
-                {b.meetings}
-              </text>
-            </>
-          )}
+    <svg viewBox={`0 0 ${w} ${h}`} className="au-anatomy-chart" preserveAspectRatio="xMidYMid meet">
+      {[1.5, 2.0, 2.5, 3.0].map(v => (
+        <g key={v}>
+          <line x1={padX} y1={scaleY(v)} x2={w - padX} y2={scaleY(v)}
+            stroke="#a89e92" strokeWidth="0.5" opacity="0.2" />
+          <text x={padX - 8} y={scaleY(v) + 4} textAnchor="end" fontSize="10"
+            fill="#a89e92" fontFamily="var(--font-sans)">{v.toFixed(1)}</text>
         </g>
       ))}
+      {isVisible && (
+        <>
+          <path d={compPath} fill="none" stroke="#6b5e52" strokeWidth="2" opacity="0.5" />
+          <path d={testPath} fill="none" stroke="#10b981" strokeWidth="2" opacity="0.7" />
+          <path d={contPath} fill="none" stroke="#BF5700" strokeWidth="2.5" opacity="0.9" />
+          {arc.map((p, i) => (
+            <g key={i}>
+              <circle cx={scaleX(i)} cy={scaleY(p.cont)} r="4" fill="#BF5700" />
+              <circle cx={scaleX(i)} cy={scaleY(p.testimony)} r="3" fill="#10b981" />
+            </g>
+          ))}
+        </>
+      )}
+      {["Start", "25%", "50%", "75%", "End"].map((label, i) => (
+        <text key={label} x={padX + (i / 4) * plotW} y={h - 8}
+          textAnchor="middle" fontSize="10" fill="#a89e92" fontFamily="var(--font-sans)">
+          {label}
+        </text>
+      ))}
+      <g transform={`translate(${padX}, 16)`}>
+        <line x1="0" y1="0" x2="16" y2="0" stroke="#BF5700" strokeWidth="2.5" />
+        <text x="20" y="4" fontSize="10" fill="#BF5700" fontFamily="var(--font-sans)">Contentiousness</text>
+        <line x1="130" y1="0" x2="146" y2="0" stroke="#10b981" strokeWidth="2" />
+        <text x="150" y="4" fontSize="10" fill="#10b981" fontFamily="var(--font-sans)">Personal Testimony</text>
+        <line x1="280" y1="0" x2="296" y2="0" stroke="#6b5e52" strokeWidth="2" />
+        <text x="300" y="4" fontSize="10" fill="#6b5e52" fontFamily="var(--font-sans)">Complexity</text>
+      </g>
     </svg>
   );
 }
