@@ -103,7 +103,7 @@ const DATA = {
 
   // Ephemeral bodies of note
   ephemeralHighlights: [
-    { name: "Reimagining Public Safety Task Force", days: 8 },
+    { name: "Reimagining Public Safety Task Force", days: 304 },  // June 2020 to April 2021
     { name: "Winter Storm Review Task Force", days: 98 },
     { name: "Redistricting Commission", days: 188 },
   ],
@@ -368,8 +368,10 @@ const SOURCES: Source[] = [
 // Table of contents
 const TOC_SECTIONS = [
   { id: "the-paradox", label: "The Paradox", number: "01" },
-  { id: "at-the-microphone", label: "At the Microphone", number: "02" },
-  { id: "the-temperature", label: "The Temperature", number: "03" },
+  { id: "the-system", label: "The System", number: "02" },
+  { id: "at-the-microphone", label: "At the Microphone", number: "03" },
+  { id: "the-temperature", label: "The Temperature", number: "04" },
+  { id: "the-regulars", label: "The Regulars", number: "05" },
   { id: "voices", label: "Voices", number: "\u2014" },
 ];
 
@@ -469,13 +471,15 @@ export default function AustinBoom() {
           { value: DATA.meetings.officialBodies.toString(), label: "Official Bodies" },
           { value: DATA.meetings.totalHours.toLocaleString(), label: "Hours of Deliberation" },
         ]}
-        finding="We transcribed 2,588 Austin government meetings and classified 47.5 million words with AI. The most passionate meetings end in the most lopsided votes."
+        finding="Austin's government debated its hardest questions — housing, policing, displacement — across 93 bodies for five years. The most passionate hearings consistently ended in the most decisive votes. The city argued exhaustively, decided, and kept arguing."
       />
 
       <LedeSection />
       <ParadoxSection />
+      <SystemSection />
       <MicrophoneSection />
       <TemperatureSection />
+      <RegularsSection />
       <VoicesSection />
       <CloseSection />
 
@@ -497,7 +501,7 @@ export default function AustinBoom() {
           },
           {
             label: "Limitations",
-            content: "AI classification is probabilistic, not deterministic. Contentiousness scores reflect language patterns in transcripts, not observer assessments. Speaker identification depends on transcription accuracy. Cross-body tracking may undercount issues discussed under different terminology.",
+            content: "AI classification is probabilistic, not deterministic. Contentiousness scores reflect language patterns in transcripts, not observer assessments. Quotes were extracted by AI and cross-referenced against Swagit video metadata; transcription relies on AssemblyAI and some passages may contain minor errors. Speaker identification depends on transcription accuracy. Cross-body tracking uses keyword matching and may undercount issues discussed under different terminology.",
           },
         ]}
       />
@@ -585,7 +589,7 @@ function LedeSection() {
           representatives of betrayal&mdash;consistently end in the most
           lopsided votes. The February 2023 police contract hearing scored
           {" "}{DATA.hotMeetings[0].cont} on our five-point scale, the
-          highest of any meeting in the dataset. It passed overwhelmingly.
+          highest of any meeting in the dataset. Council voted 9-2 to advance the contract.
           The HOME zoning reform scored {DATA.hotMeetings[3].cont} after
           thirteen hours of testimony. It passed 9-2.
         </p>
@@ -601,13 +605,119 @@ function LedeSection() {
 }
 
 // ============================================================================
-// 02 — AT THE MICROPHONE: What people bring, stated factually
+// 02 — THE SYSTEM: How Austin's 93-body apparatus processes contested issues
+// ============================================================================
+function SystemSection() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+  const flows = [DATA.crossBodyFlows.home, DATA.crossBodyFlows.policeReform, DATA.crossBodyFlows.winterStorm];
+  const maxMeetings = DATA.crossBodyFlows.home.meetings;
+
+  return (
+    <section id="the-system" className="au-wide-section au-section-border">
+      <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
+        <span className="au-section-num">02</span>
+        <h2 className="au-section-title">The System</h2>
+      </div>
+
+      <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
+        <div className="au-body-prose">
+          <p>
+            Austin officially maintains{" "}
+            {DATA.meetings.officialBodies} boards, commissions, and task
+            forces&mdash;55 established in the City Code, the rest created by
+            council resolution. Not departments. Deliberative bodies, each with
+            its own dais, agenda, and sign-up sheet for public comment. Of these,{" "}
+            {DATA.meetings.activeInData} held 20 or more meetings during our
+            analysis period.
+          </p>
+          <p>
+            The gap between Austin&rsquo;s heaviest and lightest bodies reveals
+            what these institutions actually do. Planning Commission meetings
+            average {DATA.juxtaposition.heavy.avgWords.toLocaleString()} words
+            per session&mdash;the equivalent of a short novel every time the
+            commission convenes. The Housing Finance Corporation, which also
+            deals with housing policy, averages just{" "}
+            {DATA.juxtaposition.light.avgWords.toLocaleString()} words per
+            meeting&mdash;roughly eight minutes of speech. The difference is
+            preparation: AHFC&rsquo;s staff vets proposals in committee,
+            addresses objections in advance, and presents a recommendation to
+            the board. Functional government is boring by design.
+          </p>
+          <p>
+            Contested issues are different. They escalate through the system,
+            each body adding its own hearings, its own testimony, its own
+            institutional perspective. The HOME Initiative appeared
+            in {DATA.crossBodyFlows.home.meetings} meetings across{" "}
+            {DATA.crossBodyFlows.home.bodies} bodies before the final
+            council vote in December 2023&mdash;planning commissions,
+            neighborhood advisory groups, housing committees, zoning boards,
+            community development commissions. Police reform consumed{" "}
+            {DATA.crossBodyFlows.policeReform.meetings} meetings across{" "}
+            {DATA.crossBodyFlows.policeReform.bodies} bodies. Winter Storm Uri
+            touched {DATA.crossBodyFlows.winterStorm.bodies} bodies in{" "}
+            {DATA.crossBodyFlows.winterStorm.meetings} meetings&mdash;water
+            and wastewater commission reviews, emergency management briefings,
+            infrastructure oversight, budget amendments.
+          </p>
+          <p>
+            Some of these bodies are ephemeral. The Reimagining Public Safety
+            Task Force was created in June 2020 and presented its final
+            recommendations ten months later, after advocating $150 million
+            or more in budget reallocation. The task force dissolved. The
+            debate it catalyzed did not&mdash;police reform consumed dozens
+            of meetings across a dozen bodies for years afterward, from
+            Public Safety Commission hearings to council budget work sessions.
+            The system&rsquo;s complexity is not bureaucratic waste. It is
+            distributed deliberation.
+          </p>
+        </div>
+      </FadeIn>
+
+      <div ref={ref} className="au-chart-wrap">
+        <div className="au-chart-title">Issues Across the System</div>
+        <svg viewBox="0 0 750 220" preserveAspectRatio="xMidYMid meet">
+          {flows.map((f, i) => {
+            const meetingBarW = (f.meetings / maxMeetings) * 450;
+            const y = i * 65 + 15;
+            return (
+              <g key={f.label}>
+                <text x="5" y={y + 14} fontSize="12" fontWeight="600"
+                  fill="#BF5700" fontFamily="var(--font-sans)">{f.label}</text>
+                <rect
+                  x={0} y={y + 20}
+                  width={isVisible ? meetingBarW : 0} height={22}
+                  rx={3}
+                  fill="#BF5700"
+                  opacity={0.7 - i * 0.15}
+                  style={{ transition: `width 0.8s var(--ease-elegant) ${i * 120}ms` }}
+                />
+                {isVisible && (
+                  <text x={meetingBarW + 8} y={y + 36} fontSize="11"
+                    fontWeight="600" fill="#a89e92" fontFamily="var(--font-sans)">
+                    {f.meetings} meetings &middot; {f.bodies} bodies
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+        <div className="au-chart-subtitle">
+          Number of meetings and distinct government bodies where each issue appeared.
+          Source: AI classification of {DATA.meetings.totalMeetings.toLocaleString()} transcripts.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// 03 — AT THE MICROPHONE: What people bring, stated factually
 // ============================================================================
 function MicrophoneSection() {
   return (
     <section id="at-the-microphone" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">02</span>
+        <span className="au-section-num">03</span>
         <h2 className="au-section-title">At the Microphone</h2>
       </div>
 
@@ -653,7 +763,7 @@ function MicrophoneSection() {
             scale&mdash;the highest of any meeting in the dataset. Linda Nuno
             told the council: &ldquo;It doesn&rsquo;t matter if I am speaking
             Swahili, French or Japanese. You&rsquo;re still not hearing the
-            voice of the people.&rdquo; The contract passed over vehement
+            voice of the people.&rdquo; Council voted 9-2 to advance the contract over vehement
             objection.
           </p>
           <p>
@@ -669,7 +779,7 @@ function MicrophoneSection() {
           </p>
           <p>
             The Candlewood Suites dispute&mdash;converting a hotel to housing
-            for the unhoused&mdash;bounced through 7 bodies over 2 years.
+            for the unhoused&mdash;bounced through 7 bodies over three years.
             Henry Morghan, a formerly unhoused resident, spoke at a{" "}
             <a href="https://austintx.new.swagit.com/videos/112547" target="_blank" rel="noopener noreferrer">
             February 2021 council meeting</a>: &ldquo;We&rsquo;re people too.
@@ -717,7 +827,7 @@ function ParadoxSection() {
             cry and tell the council they are not being heard&mdash;consistently
             end in lopsided votes. The February 2023 police contract session
             scored {DATA.hotMeetings[0].cont} on our five-point scale, the
-            highest of any meeting in the dataset. It passed overwhelmingly.
+            highest of any meeting in the dataset. Council voted 9-2 to advance the contract.
             HOME Phase 1 scored {DATA.hotMeetings[3].cont} after thirteen hours
             of testimony. It passed 9-2.
           </p>
@@ -828,7 +938,7 @@ function TemperatureSection() {
   return (
     <section ref={ref} id="the-temperature" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">03</span>
+        <span className="au-section-num">04</span>
         <h2 className="au-section-title">The Temperature</h2>
       </div>
 
@@ -878,6 +988,59 @@ function TemperatureSection() {
           Contentiousness declining; complexity stable.
         </div>
       </div>
+    </section>
+  );
+}
+
+// ============================================================================
+// THE REGULARS — Who keeps showing up (prose bridge to Voices)
+// ============================================================================
+function RegularsSection() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+
+  return (
+    <section id="the-regulars" className="au-wide-section au-section-border">
+      <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
+        <span className="au-section-num">05</span>
+        <h2 className="au-section-title">The Regulars</h2>
+      </div>
+
+      <FadeIn className="au-editorial-section">
+        <div className="au-body-prose" ref={ref}>
+          <p>
+            Most residents attend a city meeting once, maybe twice&mdash;a
+            zoning fight near their block, a noise complaint that got personal.
+            Then there are the regulars.
+          </p>
+          <p>
+            Zenobia Joseph has appeared at {DATA.regulars[0].meetings} meetings
+            across {DATA.regulars[0].bodies} different city bodies. She is not a
+            lobbyist. She holds no title. She simply keeps showing up&mdash;to
+            planning commissions, budget hearings, audit committees, utility
+            oversight boards&mdash;armed with printouts and an unyielding
+            conviction that the process owes her an answer. Monica Guzman, Policy
+            Director at Go Austin/Vamos Austin, has attended{" "}
+            {DATA.regulars[1].meetings} meetings across{" "}
+            {DATA.regulars[1].bodies} bodies, translating displacement data into
+            testimony that council members have heard so often they can nearly
+            recite it themselves.
+          </p>
+          <p>
+            These are not outliers. Austin&rsquo;s transcript archive surfaces
+            dozens of names that recur across years and bodies&mdash;residents
+            who treat public comment the way others treat a morning commute. Sam
+            Kirsch testified eleven times across four years about homelessness
+            policy, losing an eye in the interval between his first and last
+            appearance. He kept coming back.
+          </p>
+          <p>
+            The regulars are the connective tissue of local democracy&mdash;the
+            people who remember what was promised in 2021 and show up in 2024 to
+            ask what happened. They are, in the most literal sense, the public
+            record&rsquo;s memory.
+          </p>
+        </div>
+      </FadeIn>
     </section>
   );
 }
