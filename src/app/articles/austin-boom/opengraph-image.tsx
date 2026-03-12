@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 export const alt =
-  "The Boom That Broke: Austin's Construction Story in 315,322 Permits";
+  "Five Thousand Hours: What Austin says when it thinks nobody is listening";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -91,7 +91,7 @@ export default async function Image() {
               letterSpacing: "-0.01em",
             }}
           >
-            The Boom
+            Five Thousand
           </span>
           <span
             style={{
@@ -103,7 +103,7 @@ export default async function Image() {
               color: "transparent",
             }}
           >
-            That Broke
+            Hours
           </span>
         </div>
 
@@ -118,7 +118,7 @@ export default async function Image() {
             marginTop: 16,
           }}
         >
-          Austin&rsquo;s construction story in 315,322 permits
+          What a city says when it thinks nobody is listening
         </p>
 
         {/* Stat bar */}
@@ -134,16 +134,16 @@ export default async function Image() {
           }}
         >
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <span style={{ fontSize: 24, fontWeight: 700, color: "#BF5700" }}>315,322</span>
-            <span style={{ fontSize: 11, color: "#a89e92", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>Permits</span>
+            <span style={{ fontSize: 24, fontWeight: 700, color: "#BF5700" }}>47.5M</span>
+            <span style={{ fontSize: 11, color: "#a89e92", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>Words</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <span style={{ fontSize: 24, fontWeight: 700, color: "#ef4444" }}>23%</span>
-            <span style={{ fontSize: 11, color: "#a89e92", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>Decline</span>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <span style={{ fontSize: 24, fontWeight: 700, color: "#BF5700" }}>9,455</span>
+            <span style={{ fontSize: 24, fontWeight: 700, color: "#BF5700" }}>2,588</span>
             <span style={{ fontSize: 11, color: "#a89e92", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>Meetings</span>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <span style={{ fontSize: 24, fontWeight: 700, color: "#BF5700" }}>93</span>
+            <span style={{ fontSize: 11, color: "#a89e92", textTransform: "uppercase" as const, letterSpacing: "0.1em" }}>Bodies</span>
           </div>
         </div>
 

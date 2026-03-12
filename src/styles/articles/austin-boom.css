@@ -482,12 +482,21 @@
   opacity: 0.7;
 }
 
+/* ===== SECTION BORDERS ===== */
+
+.au-section-border {
+  border-top: 1px solid rgba(191, 87, 0, 0.12);
+  padding-top: 5rem;
+  padding-bottom: 2rem;
+}
+
 /* ===== PULL QUOTE OVERRIDE ===== */
 
 .au-pull-quote {
   max-width: 720px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
+  margin: 2.5rem auto;
+  padding: 1.5rem 2rem;
+  border-left: 3px solid var(--accent-primary);
 }
 
 /* ===== TABLE OF CONTENTS OVERRIDES ===== */
@@ -621,7 +630,7 @@
   z-index: 94;
 }
 
-/* Desktop: sidebar always visible */
+/* Desktop: sidebar overlay (not push) */
 @media (min-width: 1280px) {
   .au-toc-toggle {
     display: none;
@@ -632,14 +641,11 @@
     width: 240px;
     padding-top: 7rem;
     border-right-color: rgba(191, 87, 0, 0.1);
+    z-index: 95;
   }
 
   .au-toc-overlay {
     display: none;
-  }
-
-  .au-article {
-    margin-left: 240px;
   }
 }
 
@@ -678,11 +684,16 @@
 }
 
 @media (max-width: 480px) {
+  .au-hero {
+    min-height: 85vh;
+  }
+
   .au-hero-title {
     font-size: clamp(2rem, 8vw, 3rem);
   }
 
   .au-mentions-grid {
+    grid-template-columns: minmax(280px, 1fr);
     padding: 0 0.5rem;
   }
 

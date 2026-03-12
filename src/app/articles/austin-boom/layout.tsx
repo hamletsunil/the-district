@@ -5,9 +5,9 @@ const SLUG = "austin-boom";
 const URL = `${BASE_URL}/articles/${SLUG}`;
 
 export const metadata: Metadata = {
-  title: "47 Million Words: Inside Austin\u2019s 2,588 Government Meetings \u2014 The District",
+  title: "Five Thousand Hours: Inside Austin\u2019s 2,588 Government Meetings \u2014 The District",
   description:
-    "We transcribed 2,588 Austin government meetings and classified 47.5 million words with AI. The largest structured analysis of American municipal discourse ever published.",
+    "We transcribed 2,588 Austin government meetings \u2014 47.5 million words across 93 official bodies. The most passionate meetings end in the most lopsided votes.",
   keywords: [
     "Austin",
     "Austin government",
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: URL },
   openGraph: {
-    title: "47 Million Words",
+    title: "Five Thousand Hours",
     description:
-      "2,588 meetings. 267 government bodies. 5,108 hours. The largest structured analysis of American municipal discourse ever published.",
+      "2,588 meetings. 93 government bodies. 5,108 hours. The most passionate meetings end in the most lopsided votes.",
     type: "article",
     publishedTime: "2026-03-11T12:00:00.000Z",
     modifiedTime: "2026-03-11T12:00:00.000Z",
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "47 Million Words",
+    title: "Five Thousand Hours",
     description:
-      "We AI-analyzed 2,588 Austin government meetings. The loudest debates produce the most lopsided votes.",
+      "We transcribed 2,588 Austin government meetings. The loudest debates produce the most lopsided votes.",
   },
 };
 
@@ -55,9 +55,9 @@ export default function AustinBoomLayout({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
             headline:
-              "47 Million Words: Inside Austin\u2019s 2,588 Government Meetings",
+              "Five Thousand Hours: Inside Austin\u2019s 2,588 Government Meetings",
             description:
-              "We transcribed 2,588 Austin government meetings and classified 47.5 million words with AI. The largest structured analysis of American municipal discourse ever published.",
+              "We transcribed 2,588 Austin government meetings \u2014 47.5 million words across 93 official bodies. The most passionate meetings end in the most lopsided votes.",
             datePublished: "2026-03-11T12:00:00.000Z",
             dateModified: "2026-03-11T12:00:00.000Z",
             author: {
