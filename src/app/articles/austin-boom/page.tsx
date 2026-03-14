@@ -41,7 +41,7 @@ const DATA = {
     { name: "Council Work Session", meetings: 90, avgWords: 27453, cont: 2.26 },
     { name: "Housing Finance Corp", meetings: 80, avgWords: 1161, cont: 1.97 },
     { name: "Historic Landmark", meetings: 58, avgWords: 29399, cont: 2.36 },
-    { name: "Cap Metro", meetings: 58, avgWords: 18216, cont: 1.68 },
+    { name: "Cap Metro (transit authority)", meetings: 58, avgWords: 18216, cont: 1.68 },
     { name: "Public Safety Commission", meetings: 57, avgWords: 17836, cont: 1.98 },
     { name: "Water & Wastewater", meetings: 56, avgWords: 9868, cont: 1.36 },
     { name: "Community Development", meetings: 55, avgWords: 21261, cont: 1.85 },
@@ -421,22 +421,11 @@ function FadeIn({ children, className = "", delay = 0, style }: {
   );
 }
 
-function SentimentBadge({ sentiment }: { sentiment: string }) {
-  const color = sentiment === "positive" ? "#10b981" : sentiment === "negative" ? "#ef4444" : "#6b7280";
-  return (
-    <span className="au-sentiment-badge">
-      <span className="au-sentiment-dot" style={{ background: color }} />
-      {sentiment}
-    </span>
-  );
-}
-
 function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
   const initials = quote.speaker.split(" ").map(w => w[0]).join("").slice(0, 2);
-  const borderColor = quote.sentiment === "positive" ? "#10b981" : "#ef4444";
 
   return (
-    <div className="au-mention-card" style={{ borderLeftColor: borderColor }}>
+    <div className="au-mention-card" style={{ borderLeftColor: "rgba(191, 87, 0, 0.4)" }}>
       <div className="au-mention-header">
         <div className="au-mention-avatar">{initials}</div>
         <div className="au-mention-meta">
@@ -444,7 +433,6 @@ function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
           <div className="au-mention-role">{quote.role}</div>
           <div className="au-mention-meeting">{quote.meeting} &middot; {quote.date}</div>
         </div>
-        <SentimentBadge sentiment={quote.sentiment} />
       </div>
       <blockquote className="au-mention-text">&ldquo;{quote.text}&rdquo;</blockquote>
       <a
@@ -490,7 +478,7 @@ export default function AustinBoom() {
           { value: DATA.meetings.officialBodies.toString(), label: "Official Bodies" },
           { value: DATA.meetings.totalHours.toLocaleString(), label: "Hours of Deliberation" },
         ]}
-        finding="Austin's government debated its hardest questions — housing, policing, displacement — across 93 bodies for five years. The most passionate hearings consistently ended in the most decisive votes. The city argued exhaustively, decided, and kept arguing."
+        finding="The meetings with the most testimony produce the most lopsided votes. Five years. Ninety-three bodies. 47.5 million words. The question is whether anyone was listening."
       />
 
       <LedeSection />
@@ -499,6 +487,15 @@ export default function AustinBoom() {
       <AgendaSection />
       <MicrophoneSection />
       <TemperatureSection />
+
+      {/* Breathing moment — cognitive rest between charts and the human finale */}
+      <FadeIn className="au-breathing-moment">
+        <div className="au-breathing-number">{DATA.regulars[0].meetings}</div>
+        <div className="au-breathing-caption">
+          meetings attended by one resident across {DATA.regulars[0].bodies} city bodies
+        </div>
+      </FadeIn>
+
       <RegularsSection />
       <VoicesSection />
       <CloseSection />
@@ -521,7 +518,7 @@ export default function AustinBoom() {
           },
           {
             label: "Limitations",
-            content: "AI classification is probabilistic, not deterministic. Contentiousness scores reflect language patterns in transcripts, not observer assessments. Quotes were extracted by AI and cross-referenced against Swagit video metadata; transcription relies on AssemblyAI and some passages may contain minor errors. Speaker identification depends on transcription accuracy. Cross-body tracking uses keyword matching and may undercount issues discussed under different terminology.",
+            content: "AI classification is probabilistic, not deterministic. Contentiousness reflects language patterns associated with disagreement, accusation, and emotional intensity in transcript text. The scale was not calibrated against human coders and should be interpreted as a relative measure, not an absolute one; scores below 2.0 indicate largely procedural discussion, scores above 3.0 indicate significant rhetorical conflict. Quotes were extracted by AI and cross-referenced against Swagit video metadata; transcription relies on AssemblyAI and some passages may contain minor errors. Speaker identification depends on transcription accuracy. Cross-body tracking uses keyword matching and may undercount issues discussed under different terminology. The analysis window begins mid-pandemic; virtual meeting formats may affect participation patterns in the earlier data. Capital Metropolitan Transportation Authority (Cap Metro) meetings are included in the Swagit archive but Cap Metro is a separate governmental entity, not a City of Austin body.",
           },
         ]}
       />
@@ -585,7 +582,7 @@ function HeroSection({ scrollY }: { scrollY: number }) {
 }
 
 // ============================================================================
-// LEDE — Lead with the paradox, then establish scale
+// LEDE — Establish scale and context
 // ============================================================================
 function LedeSection() {
   return (
@@ -603,21 +600,18 @@ function LedeSection() {
           then extracted the most significant quotes and speakers.
         </p>
         <p>
-          We found something counterintuitive. The meetings with the highest
-          contentiousness scores&mdash;the ones where residents line up to
-          testify for hours, where people cry and accuse their
-          representatives of betrayal&mdash;consistently end in the most
-          lopsided votes. The February 2023 police contract hearing scored
-          {" "}{DATA.hotMeetings[0].cont} on our five-point scale, the
-          highest of any meeting in the dataset. Council voted 9-2 to advance the contract.
-          The HOME zoning reform scored {DATA.hotMeetings[3].cont} after
-          thirteen hours of testimony. It passed 9-2.
-        </p>
-        <p>
-          More heat, less uncertainty. More passion, more consensus. That
-          paradox&mdash;and what it means for the hundreds of residents who
-          keep showing up anyway&mdash;is the story of Austin&rsquo;s
-          democratic practice.
+          The window captures Austin at its most volatile. The Austin metro
+          area grew 33% between 2010 and 2020, the fastest rate of any
+          major American metro. Median home prices doubled, briefly touching
+          $550,000 before the market reversed. A failed five-year attempt
+          to rewrite the land development code (CodeNEXT, $8.2 million spent,
+          abandoned in 2018) left the zoning debate unfinished. The pandemic
+          pushed many early meetings onto Zoom. Voters approved a $7.1 billion
+          transit expansion (Project Connect) in November 2020. And then the
+          city tried to
+          process all of it&mdash;housing, policing, displacement,
+          growth&mdash;through 93 deliberative bodies, in public, on the
+          record.
         </p>
       </div>
     </FadeIn>
@@ -665,11 +659,9 @@ function SystemSection() {
             Council meetings, by contrast,
             average {DATA.topBodies[2].avgWords.toLocaleString()} words per
             session&mdash;the most of any body&mdash;with a contentiousness
-            score of {DATA.topBodies[2].cont}, also the highest. The busiest
-            body is Planning
-            Commission ({DATA.topBodies[0].meetings} meetings); the most
-            contentious is City Council. Democratic engagement and democratic
-            conflict are different phenomena.
+            score of {DATA.topBodies[2].cont}, also the highest. Planning
+            Commission meets more often ({DATA.topBodies[0].meetings} sessions);
+            City Council produces the most heat per meeting.
           </p>
           <p>
             Contested issues are different. They escalate through the system,
@@ -689,14 +681,16 @@ function SystemSection() {
           </p>
           <p>
             Some of these bodies are ephemeral. The Reimagining Public Safety
-            Task Force was created in June 2020 and presented its final
-            recommendations ten months later, after advocating $150 million
-            or more in budget reallocation. The task force dissolved. The
+            Task Force was created in the summer of 2020 and presented its
+            final recommendations nine months later, calling for $150 million
+            or more to be shifted from the police department to other city
+            services. The task force dissolved. The
             debate it catalyzed did not&mdash;police reform consumed dozens
             of meetings across a dozen bodies for years afterward, from
             Public Safety Commission hearings to council budget work sessions.
-            The system&rsquo;s complexity is not bureaucratic waste. It is
-            distributed deliberation.
+            The complexity serves a purpose&mdash;the same objections get
+            aired in different rooms, by different officials, before reaching
+            the final vote.
           </p>
         </div>
       </FadeIn>
@@ -762,8 +756,10 @@ function AgendaSection() {
           </p>
           <p>
             Public Safety spiked to 34.7% of all classified passages
-            in 2021&mdash;its highest point in the dataset. The Proposition B
-            camping ban passed that May. Safety discourse then collapsed to
+            in 2021&mdash;its highest point in the dataset. Prop B, a
+            citizen-driven ballot initiative overriding the council&rsquo;s
+            2019 repeal of the camping ban, passed that May. Safety discourse
+            then collapsed to
             24.6% by 2024; the issue had been legislatively resolved, even if
             the underlying problem had not. Housing &amp; Affordability
             dominated 2021 and 2022 at 38&ndash;41% of all passages, the
@@ -791,10 +787,6 @@ function AgendaSection() {
             a binary choice (HOME), or a fiscal crisis that narrows the options
             to cut or borrow. The environment has the chatter but lacks the
             crisis moment that collapses deliberation into a single vote.
-          </p>
-          <p>
-            Meeting agendas, read backward, are a forecast. The microphone is a
-            leading indicator.
           </p>
         </div>
       </FadeIn>
@@ -828,15 +820,7 @@ function TopicTrendChart({ isVisible }: { isVisible: boolean }) {
   const makePath = (key: TopicKey) =>
     data.map((d, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(d[key])}`).join(" ");
 
-  // Background topics (thin, faded)
-  const bgTopics: { key: TopicKey; color: string }[] = [
-    { key: "landUse", color: "#a89e92" },
-    { key: "transport", color: "#a89e92" },
-    { key: "infra", color: "#a89e92" },
-    { key: "econDev", color: "#a89e92" },
-  ];
-
-  // Foreground topics (prominent)
+  // Topic lines
   const fgTopics: { key: TopicKey; color: string; label: string; dash?: string }[] = [
     { key: "budget", color: "#BF5700", label: "Budget & Finance" },
     { key: "housing", color: "#10b981", label: "Housing" },
@@ -869,12 +853,7 @@ function TopicTrendChart({ isVisible }: { isVisible: boolean }) {
       ))}
       {isVisible && (
         <>
-          {/* Background topic lines */}
-          {bgTopics.map(t => (
-            <path key={t.key} d={makePath(t.key)} fill="none"
-              stroke={t.color} strokeWidth="1" opacity="0.2" />
-          ))}
-          {/* Foreground topic lines */}
+          {/* Topic lines */}
           {fgTopics.map(t => (
             <g key={t.key}>
               <path d={makePath(t.key)} fill="none"
@@ -947,10 +926,9 @@ function MicrophoneSection() {
             December 2023 HOME hearing</a> that she was &ldquo;nowhere closer
             to home ownership.&rdquo; Julie Damian testified before the{" "}
             <a href={`https://austintx.new.swagit.com/videos/${DATA.testimonyQuotes[3].videoId}`} target="_blank" rel="noopener noreferrer">
-            Planning Commission in May 2023</a> about her son Cade, whose head
-            became trapped in a fence outside their home. She was advocating for
-            fence safety standards. She came back two months later to testify
-            again.
+            Planning Commission in May 2023</a> about the death of her son Cade,
+            advocating for fence safety standards. She came back two months later
+            to testify again.
           </p>
           <p>
             Housing generated the most testimony in our dataset. The HOME Phase 1
@@ -960,10 +938,11 @@ function MicrophoneSection() {
             &ldquo;A duplex is a home. A triplex is a home. An apartment is a
             home. A home is a home is a home,&rdquo; said Lan Ani, the son of
             refugees. Alexandria Anderson, chair of the Martin Luther King
-            Neighborhood Association, delivered the statistic that hung over the
-            entire debate: &ldquo;In 10 years, the Black population has decreased
-            by 66%. The Latino population has decreased by 33%. And the white
-            population has increased by 442%.&rdquo;
+            Neighborhood Association in District 1, delivered the number that
+            hung over the entire debate&mdash;the demographic transformation of
+            her east Austin neighborhood: &ldquo;In 10 years, the Black
+            population has decreased by 66%. The Latino population has decreased
+            by 33%. And the white population has increased by 442%.&rdquo;
           </p>
           <p>
             The{" "}
@@ -973,12 +952,13 @@ function MicrophoneSection() {
             scale&mdash;the highest of any meeting in the dataset. Linda Nuno
             told the council: &ldquo;It doesn&rsquo;t matter if I am speaking
             Swahili, French or Japanese. You&rsquo;re still not hearing the
-            voice of the people.&rdquo; Council voted 9-2 to advance the contract over vehement
+            voice of the people.&rdquo; Council voted 9-2 to direct negotiators toward a one-year contract over vehement
             objection.
           </p>
           <p>
-            Sam Kirsch, shot in the head with a less-lethal round by Austin
-            police in May 2020, testified{" "}
+            Sam Kirsch, who told the council he was shot in the head with
+            a less-lethal round by Austin police during the May 2020 protests,
+            testified{" "}
             <a href="https://austintx.new.swagit.com/videos/116828" target="_blank" rel="noopener noreferrer">
             for the first time in March 2021</a>. He came back 11 times across
             four years. In{" "}
@@ -989,7 +969,7 @@ function MicrophoneSection() {
           </p>
           <p>
             The Candlewood Suites dispute&mdash;converting a hotel to housing
-            for the unhoused&mdash;bounced through 7 bodies over three years.
+            for the unhoused&mdash;bounced through multiple bodies over three years.
             Henry Morghan, a formerly unhoused resident, spoke at a{" "}
             <a href="https://austintx.new.swagit.com/videos/112547" target="_blank" rel="noopener noreferrer">
             February 2021 council meeting</a>: &ldquo;We&rsquo;re people too.
@@ -998,17 +978,17 @@ function MicrophoneSection() {
             community and we do vote.&rdquo;
           </p>
           <p>
-            Some residents appeared at more than 100 meetings across 20 or more
-            bodies. The public record does not explain their motives. It records
-            their persistence.
+            Some residents appeared at more than 100 meetings across 20 or
+            more bodies. The transcripts do not say why they kept coming back.
+            They only show that they did.
           </p>
         </div>
       </FadeIn>
 
       <PullQuote
         text={"I wrote a speech a while ago to set fire to the unruffled stoicism of this establishment, but I\u2019m all outta fire."}
-        city="Austin"
-        state="TX"
+        city="Christina Pollard"
+        state="teacher and waitress"
         className="au-pull-quote"
       />
     </section>
@@ -1037,7 +1017,7 @@ function ParadoxSection() {
             cry and tell the council they are not being heard&mdash;consistently
             end in lopsided votes. The February 2023 police contract session
             scored {DATA.hotMeetings[0].cont} on our five-point scale, the
-            highest of any meeting in the dataset. Council voted 9-2 to advance the contract.
+            highest of any meeting in the dataset. Council voted 9-2 to direct negotiators toward a one-year contract.
             HOME Phase 1 scored {DATA.hotMeetings[3].cont} after thirteen hours
             of testimony. It passed 9-2.
           </p>
@@ -1051,13 +1031,18 @@ function ParadoxSection() {
             {DATA.crossBodyFlows.home.bodies} bodies before the final council
             vote&mdash;planning commissions, neighborhood advisory groups,
             housing committees, zoning boards. Council members heard from the
-            same advocates dozens of times. The testimony did not change the
-            vote on the night of the final hearing. It shaped the policy over
-            the preceding months. The lopsided vote may be the end of a longer
-            democratic process, not evidence that testimony was ignored.
+            same advocates dozens of times. Several HOME provisions were
+            revised through multiple rounds before the final vote;
+            the city&rsquo;s own{" "}
+            <a href="https://www.austintexas.gov/page/home-amendments" target="_blank" rel="noopener noreferrer">
+            HOME amendments page</a> documents the changes. The testimony did
+            not change the vote on the night of the final hearing. It shaped
+            the policy over the preceding months. The lopsided vote may be the
+            end of a longer democratic process, not evidence that testimony
+            was ignored.
           </p>
           <p>
-            Neither reading is complete. Linda Nuno clearly did not feel heard.
+            Linda Nuno clearly did not feel heard.
             Neither did the man escorted out of the HOME hearing
             shouting &ldquo;My people, my people in Austin are hurt.&rdquo;
           </p>
@@ -1106,19 +1091,18 @@ function ParadoxSection() {
 
       <PullQuote
         text={"My people, my people in Austin are hurt."}
-        city="Austin"
-        state="TX"
+        city="Audience member"
+        state="escorted out after speaking"
         className="au-pull-quote"
       />
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
         <div className="au-body-prose">
           <p>
-            The arc of a single meeting tells the same story in miniature.
             We averaged contentiousness, personal testimony, and technical
             complexity across all {DATA.meetings.totalChunks.toLocaleString()} classified
             chunks, grouped by position within the meeting. The pattern
-            is strikingly consistent: testimony peaks early, contentiousness
+            is consistent: testimony peaks early, contentiousness
             crests at midpoint ({DATA.contentiousnessArc[4].cont} out of 5),
             and both collapse in the final quarter as the room empties and
             the remaining business turns procedural. The people who showed up
@@ -1168,10 +1152,10 @@ function TemperatureSection() {
             The HOME Initiative passed; the housing debate moved from argument
             to implementation.{" "}
             <a href="https://www.texastribune.org/2024/05/17/austin-lot-size-housing-affordability/" target="_blank" rel="noopener noreferrer">
-            Applications in newly eligible zones jumped 86% in the first
-            year.</a> The police reckoning of 2020&ndash;2023&mdash;the protests,
-            the beanbag rounds, the contract fights&mdash;evolved into oversight
-            and reform. The housing market itself cooled:{" "}
+            Single-family building permits jumped 86% in the first
+            year</a>, according to the Texas Tribune. The police controversy
+            of 2020&ndash;2023&mdash;the protests, the beanbag rounds, the
+            contract fights&mdash;evolved into oversight and reform. The housing market itself cooled:{" "}
             <a href="https://www.wsj.com/real-estate/austin-texas-housing-market-cooldown-f0388afb" target="_blank" rel="noopener noreferrer">
             the Wall Street Journal called Austin&rsquo;s price reversal</a> the
             most dramatic in the country, easing the existential pressure that
@@ -1180,21 +1164,21 @@ function TemperatureSection() {
           <p>
             Austin processed its hardest questions&mdash;about race,
             displacement, policing, and growth&mdash;and came out with lower
-            temperatures and intact democratic institutions. Displacement
+            temperatures and intact institutions. Displacement
             continues. Affordability remains desperate for many. The water
             system faces infrastructure challenges that the next decade will
-            amplify. This is not a happy ending. It is an institutional
-            resilience story: a city that argued exhaustively, decided, and
-            kept arguing.
+            amplify. The problems remain. But the 93 bodies that argue over
+            them are still meeting, still recording, still accepting public
+            comment.
           </p>
         </div>
       </FadeIn>
 
       <div className="au-chart-wrap">
-        <div className="au-chart-title">Rhetoric Trends, 2021&ndash;2025</div>
-        <TrendChart isVisible={isVisible} />
+        <div className="au-chart-title">How the Rhetoric Shifted</div>
+        <SlopeChart isVisible={isVisible} />
         <div className="au-chart-subtitle">
-          Average scores across all classified chunks per year.
+          Change in average scores from 2021 to 2025.
           Contentiousness declining; complexity stable.
         </div>
       </div>
@@ -1219,9 +1203,8 @@ function TemperatureSection() {
             continued declining. This is the HOME effect. The two HOME hearings
             generated enormous testimony volume&mdash;768 and 927 extracted
             quotes respectively&mdash;at relatively controlled contentiousness.
-            The city had learned to channel emotion through procedure. Whether
-            that represents democratic maturity or democratic containment depends
-            on which side of the microphone you stand on.
+            The city channeled enormous emotion through procedure. The people
+            who testified might call that something less flattering.
           </p>
         </div>
       </FadeIn>
@@ -1261,15 +1244,15 @@ function RegularsSection() {
           <p>
             Zenobia Joseph has appeared at {DATA.regulars[0].meetings} meetings
             across {DATA.regulars[0].bodies} different city bodies. She is not a
-            lobbyist. She holds no title. She simply keeps showing up&mdash;to
+            lobbyist. She holds no title. She keeps showing up&mdash;to
             planning commissions, budget hearings, audit committees, utility
-            oversight boards&mdash;armed with printouts and an unyielding
-            conviction that the process owes her an answer. Monica Guzman, Policy
+            oversight boards&mdash;armed with printouts and a conviction that
+            the process should provide an answer. Monica Guzman, Policy
             Director at Go Austin/Vamos Austin, has attended{" "}
             {DATA.regulars[1].meetings} meetings across{" "}
             {DATA.regulars[1].bodies} bodies, translating displacement data into
-            testimony that council members have heard so often they can nearly
-            recite it themselves.
+            testimony that has become a fixture of Austin&rsquo;s housing
+            policy discussions.
           </p>
           <p>
             These are not outliers. Austin&rsquo;s transcript archive surfaces
@@ -1280,10 +1263,9 @@ function RegularsSection() {
             appearance. He kept coming back.
           </p>
           <p>
-            The regulars are the connective tissue of local democracy&mdash;the
-            people who remember what was promised in 2021 and show up in 2024 to
-            ask what happened. They are, in the most literal sense, the public
-            record&rsquo;s memory.
+            The regulars carry the institutional memory that city hall
+            itself often lacks&mdash;the people who remember what was promised
+            in 2021 and show up in 2024 to ask what happened.
           </p>
         </div>
       </FadeIn>
@@ -1305,9 +1287,7 @@ function VoicesSection() {
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
         <div className="au-body-prose">
           <p>
-            The numbers describe patterns. These voices describe what people
-            bring to a government microphone when it is the only power they
-            have. All quotes are from the public record. Each links to the
+            All quotes below are from the public record. Each links to the
             source video in Austin&rsquo;s Swagit archive.
           </p>
         </div>
@@ -1400,23 +1380,22 @@ function CloseSection() {
           Forty-seven and a half million words. Eighty-one percent of all
           meetings fall Monday through Wednesday&mdash;a schedule that
           self-selects for retirees, activists, and anyone whose employer
-          tolerates a midday absence. The 0.7% of meetings held on weekends is
-          not a scheduling detail. It is a barrier. Yet people showed up
-          because they believed it mattered.
+          tolerates a midday absence. The 0.7% of meetings held on weekends
+          is not a scheduling detail. It is a barrier. The analysis window
+          begins in December 2020, which means some of these meetings were
+          held on Zoom during the pandemic&mdash;expanding access for some
+          residents and narrowing it for others.
         </p>
         <p>
-          Monica Guzman has attended {DATA.regulars[1].meetings} meetings.
-          Zenobia Joseph, {DATA.regulars[0].meetings}. Sam Kirsch testified 11
-          times across four years, losing an eye in the interval. Joe Dubose
-          came to a budget hearing to talk about his wife&rsquo;s Bible. Katie
-          McNiff came to explain that she cannot afford groceries.
+          Linda Nuno told the council it did not matter what language she
+          spoke&mdash;they were not hearing her. The council voted 9-2.
+          Zenobia Joseph has attended {DATA.regulars[0].meetings} meetings.
+          The council has heard her testimony so many times that several
+          members could nearly recite it. None of this has stopped her.
         </p>
         <p>
-          No algorithm can measure what it costs to testify. But the{" "}
-          {DATA.meetings.totalMeetings.toLocaleString()} meetings in this
-          dataset are proof that a city of a million people still governs itself
-          in the oldest way there is: by showing up, speaking up, and trusting
-          that someone is listening.
+          The data cannot tell us why people keep testifying after the votes
+          are counted. It can only confirm that they do.
         </p>
       </div>
     </FadeIn>
@@ -1560,60 +1539,62 @@ function CompositionChart({ isVisible }: { isVisible: boolean }) {
   );
 }
 
-function TrendChart({ isVisible }: { isVisible: boolean }) {
-  const data = DATA.rhetoricByYear;
-  const w = 650;
+/** Slope chart: 2021 → 2025 for four rhetoric dimensions */
+function SlopeChart({ isVisible }: { isVisible: boolean }) {
+  const first = DATA.rhetoricByYear[0]; // 2021
+  const last = DATA.rhetoricByYear[DATA.rhetoricByYear.length - 1]; // 2025
+  const w = 500;
   const h = 280;
-  const padX = 60;
-  const padY = 40;
-  const plotW = w - padX * 2;
-  const plotH = h - padY * 2;
+  const leftX = 120;
+  const rightX = 380;
+  const topY = 50;
+  const botY = 250;
 
-  const scaleX = (i: number) => padX + (i / (data.length - 1)) * plotW;
-  const scaleY = (v: number) => padY + plotH - ((v - 1.8) / 1.3) * plotH;
+  const scaleY = (v: number) => topY + (botY - topY) - ((v - 1.9) / 1.0) * (botY - topY);
 
-  const makePath = (accessor: (d: typeof data[number]) => number) =>
-    data.map((d, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(accessor(d))}`).join(" ");
+  const lines: { label: string; color: string; startVal: number; endVal: number }[] = [
+    { label: "Contentiousness", color: "#BF5700", startVal: first.cont, endVal: last.cont },
+    { label: "Testimony", color: "#10b981", startVal: first.testimony, endVal: last.testimony },
+    { label: "Urgency", color: "#f0944a", startVal: first.urgency, endVal: last.urgency },
+    { label: "Complexity", color: "#6b5e52", startVal: first.complexity, endVal: last.complexity },
+  ];
 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="au-trend-chart" preserveAspectRatio="xMidYMid meet">
-      {[1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0].map(v => (
-        <g key={v}>
-          <line x1={padX} y1={scaleY(v)} x2={w - padX} y2={scaleY(v)}
-            stroke="#a89e92" strokeWidth="0.5" opacity="0.15" />
-          <text x={padX - 8} y={scaleY(v) + 4} textAnchor="end" fontSize="10"
-            fill="#a89e92" fontFamily="var(--font-sans)">{v.toFixed(1)}</text>
-        </g>
-      ))}
-      {data.map((d, i) => (
-        <text key={d.year} x={scaleX(i)} y={h - 8} textAnchor="middle"
-          fontSize="11" fill="#a89e92" fontFamily="var(--font-sans)">{d.year}</text>
-      ))}
-      {isVisible && (
-        <>
-          <path d={makePath(d => d.complexity)} fill="none" stroke="#6b5e52" strokeWidth="2" opacity="0.5" strokeDasharray="5 4" />
-          <path d={makePath(d => d.urgency)} fill="none" stroke="#f0944a" strokeWidth="2" opacity="0.6" />
-          <path d={makePath(d => d.testimony)} fill="none" stroke="#10b981" strokeWidth="2" opacity="0.7" />
-          <path d={makePath(d => d.cont)} fill="none" stroke="#BF5700" strokeWidth="2.5" />
-          {data.map((d, i) => (
-            <g key={d.year}>
-              <circle cx={scaleX(i)} cy={scaleY(d.cont)} r="4" fill="#BF5700" />
-              <circle cx={scaleX(i)} cy={scaleY(d.testimony)} r="3" fill="#10b981" />
-              <circle cx={scaleX(i)} cy={scaleY(d.urgency)} r="3" fill="#f0944a" />
-            </g>
-          ))}
-        </>
-      )}
-      <g transform={`translate(${padX}, 16)`}>
-        <line x1="0" y1="0" x2="16" y2="0" stroke="#BF5700" strokeWidth="2.5" />
-        <text x="20" y="4" fontSize="10" fill="#BF5700" fontFamily="var(--font-sans)">Contentiousness</text>
-        <line x1="130" y1="0" x2="146" y2="0" stroke="#10b981" strokeWidth="2" />
-        <text x="150" y="4" fontSize="10" fill="#10b981" fontFamily="var(--font-sans)">Testimony</text>
-        <line x1="230" y1="0" x2="246" y2="0" stroke="#f0944a" strokeWidth="2" />
-        <text x="250" y="4" fontSize="10" fill="#f0944a" fontFamily="var(--font-sans)">Urgency</text>
-        <line x1="310" y1="0" x2="326" y2="0" stroke="#6b5e52" strokeWidth="2" strokeDasharray="5 4" />
-        <text x="330" y="4" fontSize="10" fill="#6b5e52" fontFamily="var(--font-sans)">Complexity</text>
-      </g>
+      {/* Year labels */}
+      <text x={leftX} y={35} textAnchor="middle" fontSize="13" fontWeight="700"
+        fill="#a89e92" fontFamily="var(--font-sans)">2021</text>
+      <text x={rightX} y={35} textAnchor="middle" fontSize="13" fontWeight="700"
+        fill="#a89e92" fontFamily="var(--font-sans)">2025</text>
+      {/* Vertical axes */}
+      <line x1={leftX} y1={topY} x2={leftX} y2={botY} stroke="#a89e92" strokeWidth="0.5" opacity="0.25" />
+      <line x1={rightX} y1={topY} x2={rightX} y2={botY} stroke="#a89e92" strokeWidth="0.5" opacity="0.25" />
+      {isVisible && lines.map(l => {
+        const y1 = scaleY(l.startVal);
+        const y2 = scaleY(l.endVal);
+        return (
+          <g key={l.label}>
+            <line x1={leftX} y1={y1} x2={rightX} y2={y2}
+              stroke={l.color} strokeWidth="2.5" opacity="0.85" />
+            <circle cx={leftX} cy={y1} r="4.5" fill={l.color} />
+            <circle cx={rightX} cy={y2} r="4.5" fill={l.color} />
+            {/* Left label */}
+            <text x={leftX - 10} y={y1 + 4} textAnchor="end" fontSize="10"
+              fill={l.color} fontFamily="var(--font-sans)" fontWeight="600">
+              {l.startVal.toFixed(2)}
+            </text>
+            <text x={leftX - 10} y={y1 + 16} textAnchor="end" fontSize="9"
+              fill={l.color} fontFamily="var(--font-sans)" opacity="0.7">
+              {l.label}
+            </text>
+            {/* Right value */}
+            <text x={rightX + 10} y={y2 + 4} textAnchor="start" fontSize="10"
+              fill={l.color} fontFamily="var(--font-sans)" fontWeight="600">
+              {l.endVal.toFixed(2)}
+            </text>
+          </g>
+        );
+      })}
     </svg>
   );
 }

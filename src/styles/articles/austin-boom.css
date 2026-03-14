@@ -741,6 +741,35 @@
   margin: 0.5rem 0 0;
 }
 
+/* ===== BREATHING MOMENT ===== */
+
+.au-breathing-moment {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(37, 32, 25, 0.5);
+  border-radius: 12px;
+}
+
+.au-breathing-number {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 7rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+}
+
+.au-breathing-caption {
+  font-family: var(--font-body);
+  font-size: var(--type-lead);
+  line-height: var(--leading-normal);
+  color: var(--page-text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
