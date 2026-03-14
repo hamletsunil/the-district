@@ -385,12 +385,12 @@ const SOURCES: Source[] = [
 
 // Table of contents
 const TOC_SECTIONS = [
-  { id: "the-paradox", label: "The Paradox", number: "01" },
-  { id: "the-system", label: "The System", number: "02" },
-  { id: "the-agenda", label: "The Agenda", number: "03" },
-  { id: "at-the-microphone", label: "At the Microphone", number: "04" },
-  { id: "the-temperature", label: "The Temperature", number: "05" },
-  { id: "the-regulars", label: "The Regulars", number: "06" },
+  { id: "nine-to-two", label: "Nine to Two", number: "01" },
+  { id: "ninety-three-rooms", label: "Ninety-Three Rooms", number: "02" },
+  { id: "what-the-meetings-knew", label: "What the Meetings Knew", number: "03" },
+  { id: "what-they-carried", label: "What They Carried", number: "04" },
+  { id: "after-the-fever", label: "After the Fever", number: "05" },
+  { id: "the-ones-who-stayed", label: "The Ones Who Stayed", number: "06" },
   { id: "voices", label: "Voices", number: "\u2014" },
 ];
 
@@ -627,10 +627,10 @@ function SystemSection() {
   const maxMeetings = DATA.crossBodyFlows.home.meetings;
 
   return (
-    <section id="the-system" className="au-wide-section au-section-border">
+    <section id="ninety-three-rooms" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">02</span>
-        <h2 className="au-section-title">The System</h2>
+        <h2 className="au-section-title">Ninety-Three Rooms</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -739,10 +739,10 @@ function AgendaSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="the-agenda" className="au-wide-section au-section-border">
+    <section id="what-the-meetings-knew" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">03</span>
-        <h2 className="au-section-title">The Agenda</h2>
+        <h2 className="au-section-title">What the Meetings Knew</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -793,108 +793,101 @@ function AgendaSection() {
 
       <div ref={ref} className="au-chart-wrap">
         <div className="au-chart-title">What Austin Talked About</div>
-        <TopicTrendChart isVisible={isVisible} />
+        <TopicHeatmap isVisible={isVisible} />
         <div className="au-chart-subtitle">
-          Share of classified passages mentioning each topic (%). Topics overlap;
-          a single passage can touch multiple topics. Policy milestones annotated.
+          Share of classified passages mentioning each topic (%). Color intensity
+          reflects variation within each topic. Topics overlap across passages.
         </div>
       </div>
     </section>
   );
 }
 
-/** Multi-line topic prevalence chart with policy milestone annotations */
-function TopicTrendChart({ isVisible }: { isVisible: boolean }) {
+/** Heatmap grid: 4 topic rows × 5 year columns */
+function TopicHeatmap({ isVisible }: { isVisible: boolean }) {
   const data = DATA.topicsByYear;
-  const w = 700;
-  const h = 340;
-  const padX = 55;
-  const padY = 45;
-  const plotW = w - padX * 2;
-  const plotH = h - padY * 2;
+  const w = 650;
+  const h = 280;
+  const labelW = 130;
+  const cellW = 90;
+  const cellH = 42;
+  const gapX = 6;
+  const gapY = 6;
+  const gridStartX = labelW + 10;
+  const gridStartY = 50;
 
-  const scaleX = (i: number) => padX + (i / (data.length - 1)) * plotW;
-  const scaleY = (v: number) => padY + plotH - ((v - 18) / 48) * plotH; // range 18-66%
-
-  type TopicKey = "budget" | "housing" | "safety" | "environment" | "landUse" | "transport" | "infra" | "econDev";
-  const makePath = (key: TopicKey) =>
-    data.map((d, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(d[key])}`).join(" ");
-
-  // Topic lines
-  const fgTopics: { key: TopicKey; color: string; label: string; dash?: string }[] = [
-    { key: "budget", color: "#BF5700", label: "Budget & Finance" },
-    { key: "housing", color: "#10b981", label: "Housing" },
-    { key: "safety", color: "#ef4444", label: "Public Safety" },
-    { key: "environment", color: "#f59e0b", label: "Environment", dash: "6 4" },
+  type TopicKey = "budget" | "housing" | "safety" | "environment";
+  const rows: { key: TopicKey; label: string; color: string }[] = [
+    { key: "budget", label: "Budget & Finance", color: "#BF5700" },
+    { key: "housing", label: "Housing", color: "#10b981" },
+    { key: "safety", label: "Public Safety", color: "#ef4444" },
+    { key: "environment", label: "Environment", color: "#f59e0b" },
   ];
 
-  // Policy milestone annotation positions
-  const milestoneX = (year: number, month: number) => {
-    const fractionalYear = year + (month - 1) / 12;
-    const idx = (fractionalYear - 2021) / (2025 - 2021) * (data.length - 1);
-    return padX + (idx / (data.length - 1)) * plotW;
+  // Normalize opacity per-row (min→0.25, max→0.90)
+  const getOpacity = (key: TopicKey, val: number) => {
+    const vals = data.map(d => d[key]);
+    const min = Math.min(...vals);
+    const max = Math.max(...vals);
+    if (max === min) return 0.6;
+    return 0.25 + 0.65 * (val - min) / (max - min);
   };
 
+  // Milestone annotations mapped to column positions
+  const milestones: { col: number; label: string; offset?: number }[] = [
+    { col: 0, label: "Prop B" },
+    { col: 2, label: "HOME 1", offset: 18 },
+    { col: 3, label: "HOME 2", offset: 18 },
+  ];
+
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="xMidYMid meet">
-      {/* Grid lines */}
-      {[20, 30, 40, 50, 60].map(v => (
-        <g key={v}>
-          <line x1={padX} y1={scaleY(v)} x2={w - padX} y2={scaleY(v)}
-            stroke="#a89e92" strokeWidth="0.5" opacity="0.15" />
-          <text x={padX - 8} y={scaleY(v) + 4} textAnchor="end" fontSize="10"
-            fill="#a89e92" fontFamily="var(--font-sans)">{v}%</text>
-        </g>
+    <svg viewBox={`0 0 ${w} ${h}`} className="au-heatmap-chart" preserveAspectRatio="xMidYMid meet">
+      {/* Year headers */}
+      {data.map((d, ci) => (
+        <text key={d.year} x={gridStartX + ci * (cellW + gapX) + cellW / 2} y={28}
+          textAnchor="middle" fontSize="12" fontWeight="700"
+          fill="#a89e92" fontFamily="var(--font-sans)">{d.year}</text>
       ))}
-      {/* Year labels */}
-      {data.map((d, i) => (
-        <text key={d.year} x={scaleX(i)} y={h - 8} textAnchor="middle"
-          fontSize="11" fill="#a89e92" fontFamily="var(--font-sans)">{d.year}</text>
+      {/* Milestone annotations */}
+      {milestones.map(m => (
+        <text key={m.label} x={gridStartX + m.col * (cellW + gapX) + cellW / 2}
+          y={40} textAnchor="middle" fontSize="8" fill="#a89e92"
+          fontFamily="var(--font-sans)" opacity="0.5">{m.label}</text>
       ))}
-      {isVisible && (
-        <>
-          {/* Topic lines */}
-          {fgTopics.map(t => (
-            <g key={t.key}>
-              <path d={makePath(t.key)} fill="none"
-                stroke={t.color} strokeWidth="2.5"
-                strokeDasharray={t.dash || "none"} />
-              {data.map((d, i) => (
-                <circle key={i} cx={scaleX(i)} cy={scaleY(d[t.key])} r="3.5"
-                  fill={t.color} />
-              ))}
-            </g>
-          ))}
-          {/* Policy milestone annotations */}
-          {DATA.policyMilestones.map((m) => {
-            const mx = milestoneX(m.year, m.month);
-            return (
-              <g key={m.label}>
-                <line x1={mx} y1={padY} x2={mx} y2={padY + plotH}
-                  stroke="#a89e92" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
-                <text x={mx} y={padY - 6} textAnchor="middle" fontSize="9"
-                  fill="#a89e92" fontFamily="var(--font-sans)" fontWeight="600">
-                  {m.label}
-                </text>
-              </g>
-            );
-          })}
-        </>
-      )}
-      {/* Legend */}
-      <g transform={`translate(${padX}, 16)`}>
-        {fgTopics.map((t, i) => {
-          const lx = i * 140;
-          return (
-            <g key={t.key}>
-              <line x1={lx} y1="0" x2={lx + 16} y2="0"
-                stroke={t.color} strokeWidth="2.5" strokeDasharray={t.dash || "none"} />
-              <text x={lx + 20} y="4" fontSize="10" fill={t.color}
-                fontFamily="var(--font-sans)">{t.label}</text>
-            </g>
-          );
-        })}
-      </g>
+      {/* Grid */}
+      {rows.map((row, ri) => {
+        const y = gridStartY + ri * (cellH + gapY);
+        return (
+          <g key={row.key}>
+            {/* Row label */}
+            <text x={labelW} y={y + cellH / 2 + 4} textAnchor="end"
+              fontSize="11" fontWeight="600" fill={row.color}
+              fontFamily="var(--font-sans)">{row.label}</text>
+            {/* Cells */}
+            {data.map((d, ci) => {
+              const x = gridStartX + ci * (cellW + gapX);
+              const val = d[row.key];
+              const op = getOpacity(row.key, val);
+              const delay = (ri * data.length + ci) * 60;
+              return (
+                <g key={ci}>
+                  <rect x={x} y={y} width={cellW} height={cellH} rx={6}
+                    fill={row.color}
+                    opacity={isVisible ? op : 0.08}
+                    style={{ transition: `opacity 0.6s var(--ease-elegant) ${delay}ms` }} />
+                  <text x={x + cellW / 2} y={y + cellH / 2 + 5}
+                    textAnchor="middle" fontSize="12" fontWeight="600"
+                    fill="#f5efe6" fontFamily="var(--font-sans)"
+                    opacity={isVisible ? 1 : 0}
+                    style={{ transition: `opacity 0.5s var(--ease-elegant) ${delay + 200}ms` }}>
+                    {val.toFixed(1)}%
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+        );
+      })}
     </svg>
   );
 }
@@ -904,10 +897,10 @@ function TopicTrendChart({ isVisible }: { isVisible: boolean }) {
 // ============================================================================
 function MicrophoneSection() {
   return (
-    <section id="at-the-microphone" className="au-wide-section au-section-border">
+    <section id="what-they-carried" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">04</span>
-        <h2 className="au-section-title">At the Microphone</h2>
+        <h2 className="au-section-title">What They Carried</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1003,10 +996,10 @@ function ParadoxSection() {
   const { ref: arcRef, isVisible: arcVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="the-paradox" className="au-wide-section au-section-border">
+    <section id="nine-to-two" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">01</span>
-        <h2 className="au-section-title">The Paradox</h2>
+        <h2 className="au-section-title">Nine to Two</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1113,10 +1106,10 @@ function ParadoxSection() {
 
       <div ref={arcRef} className="au-chart-wrap">
         <div className="au-chart-title">Anatomy of a Meeting</div>
-        <AnatomyChart isVisible={arcVisible} />
+        <MeetingThermometer isVisible={arcVisible} />
         <div className="au-chart-subtitle">
-          Average scores across {DATA.meetings.totalMeetings.toLocaleString()} meetings,
-          grouped by position (0% = start, 100% = end).
+          Contentiousness across {DATA.meetings.totalMeetings.toLocaleString()} meetings,
+          grouped by position. Hotter = more conflict in the transcript.
         </div>
       </div>
     </section>
@@ -1130,10 +1123,10 @@ function TemperatureSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section ref={ref} id="the-temperature" className="au-wide-section au-section-border">
+    <section ref={ref} id="after-the-fever" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">05</span>
-        <h2 className="au-section-title">The Temperature</h2>
+        <h2 className="au-section-title">After the Fever</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1208,15 +1201,6 @@ function TemperatureSection() {
           </p>
         </div>
       </FadeIn>
-
-      <div className="au-chart-wrap">
-        <div className="au-chart-title">The Composition of Cooling</div>
-        <CompositionChart isVisible={isVisible} />
-        <div className="au-chart-subtitle">
-          Topic prevalence (colored) vs. contentiousness (dashed) over time.
-          As hot topics fell and cool topics rose, the overall temperature dropped.
-        </div>
-      </div>
     </section>
   );
 }
@@ -1228,10 +1212,10 @@ function RegularsSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="the-regulars" className="au-wide-section au-section-border">
+    <section id="the-ones-who-stayed" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">06</span>
-        <h2 className="au-section-title">The Regulars</h2>
+        <h2 className="au-section-title">The Ones Who Stayed</h2>
       </div>
 
       <FadeIn className="au-editorial-section">
@@ -1406,140 +1390,82 @@ function CloseSection() {
 // CHARTS
 // ============================================================================
 
-/** Static anatomy chart — contentiousness/testimony/complexity arc across a meeting */
-function AnatomyChart({ isVisible }: { isVisible: boolean }) {
+/** Gradient thermometer — contentiousness arc across a meeting's duration */
+function MeetingThermometer({ isVisible }: { isVisible: boolean }) {
   const arc = DATA.contentiousnessArc;
   const w = 650;
-  const h = 320;
-  const padX = 60;
-  const padY = 40;
-  const plotW = w - padX * 2;
-  const plotH = h - padY * 2;
+  const h = 150;
+  const segW = 54;
+  const segH = 48;
+  const gap = 4;
+  const totalW = arc.length * segW + (arc.length - 1) * gap;
+  const startX = (w - totalW) / 2;
 
-  const scaleX = (i: number) => padX + (i / 9) * plotW;
-  const scaleY = (v: number) => padY + plotH - ((v - 1.5) / 1.8) * plotH;
-  const contPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.cont)}`).join(" ");
-  const testPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.testimony)}`).join(" ");
-  const compPath = arc.map((p, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(p.complexity)}`).join(" ");
+  // Interpolate between cool brown and hot burnt orange
+  const coolR = 107, coolG = 94, coolB = 82;   // #6b5e52
+  const hotR = 191, hotG = 87, hotB = 0;       // #BF5700
+  const contMin = 1.75;
+  const contMax = 2.20;
+
+  const getColor = (v: number) => {
+    const t = Math.max(0, Math.min(1, (v - contMin) / (contMax - contMin)));
+    const r = Math.round(coolR + t * (hotR - coolR));
+    const g = Math.round(coolG + t * (hotG - coolG));
+    const b = Math.round(coolB + t * (hotB - coolB));
+    return `rgb(${r},${g},${b})`;
+  };
 
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="au-anatomy-chart" preserveAspectRatio="xMidYMid meet">
-      {[1.5, 2.0, 2.5, 3.0].map(v => (
-        <g key={v}>
-          <line x1={padX} y1={scaleY(v)} x2={w - padX} y2={scaleY(v)}
-            stroke="#a89e92" strokeWidth="0.5" opacity="0.2" />
-          <text x={padX - 8} y={scaleY(v) + 4} textAnchor="end" fontSize="10"
-            fill="#a89e92" fontFamily="var(--font-sans)">{v.toFixed(1)}</text>
-        </g>
-      ))}
-      {isVisible && (
-        <>
-          <path d={compPath} fill="none" stroke="#6b5e52" strokeWidth="2" opacity="0.5" />
-          <path d={testPath} fill="none" stroke="#10b981" strokeWidth="2" opacity="0.7" />
-          <path d={contPath} fill="none" stroke="#BF5700" strokeWidth="2.5" opacity="0.9" />
-          {arc.map((p, i) => (
-            <g key={i}>
-              <circle cx={scaleX(i)} cy={scaleY(p.cont)} r="4" fill="#BF5700" />
-              <circle cx={scaleX(i)} cy={scaleY(p.testimony)} r="3" fill="#10b981" />
-            </g>
-          ))}
-        </>
-      )}
-      {["Start", "25%", "50%", "75%", "End"].map((label, i) => (
-        <text key={label} x={padX + (i / 4) * plotW} y={h - 8}
-          textAnchor="middle" fontSize="10" fill="#a89e92" fontFamily="var(--font-sans)">
-          {label}
-        </text>
-      ))}
-      <g transform={`translate(${padX}, 16)`}>
-        <line x1="0" y1="0" x2="16" y2="0" stroke="#BF5700" strokeWidth="2.5" />
-        <text x="20" y="4" fontSize="10" fill="#BF5700" fontFamily="var(--font-sans)">Contentiousness</text>
-        <line x1="130" y1="0" x2="146" y2="0" stroke="#10b981" strokeWidth="2" />
-        <text x="150" y="4" fontSize="10" fill="#10b981" fontFamily="var(--font-sans)">Personal Testimony</text>
-        <line x1="280" y1="0" x2="296" y2="0" stroke="#6b5e52" strokeWidth="2" />
-        <text x="300" y="4" fontSize="10" fill="#6b5e52" fontFamily="var(--font-sans)">Complexity</text>
-      </g>
+    <svg viewBox={`0 0 ${w} ${h}`} className="au-thermometer-chart" preserveAspectRatio="xMidYMid meet">
+      {/* Legend */}
+      <text x={startX} y={16} fontSize="9" fill="#6b5e52"
+        fontFamily="var(--font-sans)" opacity="0.7">&larr; cooler</text>
+      <text x={startX + totalW} y={16} textAnchor="end" fontSize="9" fill="#BF5700"
+        fontFamily="var(--font-sans)" opacity="0.7">hotter &rarr;</text>
+
+      {arc.map((seg, i) => {
+        const x = startX + i * (segW + gap);
+        const color = getColor(seg.cont);
+        return (
+          <g key={i}>
+            {/* Segment */}
+            <rect
+              x={x} y={40}
+              width={segW} height={segH}
+              rx={4}
+              fill={color}
+              opacity={isVisible ? 0.85 : 0.15}
+              style={{ transition: `opacity 0.5s var(--ease-elegant) ${i * 80}ms` }}
+            />
+            {/* Value above */}
+            <text x={x + segW / 2} y={34} textAnchor="middle"
+              fontSize="9" fontWeight="600" fill={color}
+              fontFamily="var(--font-sans)"
+              opacity={isVisible ? 0.8 : 0}
+              style={{ transition: `opacity 0.4s var(--ease-elegant) ${i * 80 + 200}ms` }}>
+              {seg.cont.toFixed(2)}
+            </text>
+            {/* Time label below */}
+            <text x={x + segW / 2} y={104} textAnchor="middle"
+              fontSize="8" fill="#a89e92" fontFamily="var(--font-sans)" opacity="0.6">
+              {seg.label}
+            </text>
+          </g>
+        );
+      })}
+
+      {/* Anchor labels */}
+      <text x={startX} y={128} fontSize="10" fill="#a89e92"
+        fontFamily="var(--font-sans)">Start</text>
+      <text x={startX + totalW / 2} y={128} textAnchor="middle" fontSize="10"
+        fill="#a89e92" fontFamily="var(--font-sans)">Midpoint</text>
+      <text x={startX + totalW} y={128} textAnchor="end" fontSize="10"
+        fill="#a89e92" fontFamily="var(--font-sans)">End</text>
     </svg>
   );
 }
 
-/** Multi-line trend chart */
-/** Small-multiples: 3 topic lines vs contentiousness overlay */
-function CompositionChart({ isVisible }: { isVisible: boolean }) {
-  const topics = DATA.topicsByYear;
-  const rhetoric = DATA.rhetoricByYear;
-  const w = 650;
-  const miniH = 100;
-  const padX = 55;
-  const padY = 20;
-  const plotW = w - padX * 2;
-  const plotH = miniH - padY * 2;
-
-  const scaleX = (i: number) => padX + (i / (topics.length - 1)) * plotW;
-
-  const panels: { key: "budget" | "housing" | "safety"; label: string; color: string; yMin: number; yMax: number }[] = [
-    { key: "budget", label: "Budget & Finance", color: "#BF5700", yMin: 50, yMax: 65 },
-    { key: "housing", label: "Housing & Affordability", color: "#10b981", yMin: 30, yMax: 50 },
-    { key: "safety", label: "Public Safety", color: "#ef4444", yMin: 20, yMax: 40 },
-  ];
-
-  // Contentiousness range for overlay (mapped to each panel's Y range)
-  const contMin = 1.9;
-  const contMax = 2.2;
-
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-      {panels.map(panel => {
-        const scaleYTopic = (v: number) => padY + plotH - ((v - panel.yMin) / (panel.yMax - panel.yMin)) * plotH;
-        const scaleYCont = (v: number) => padY + plotH - ((v - contMin) / (contMax - contMin)) * plotH;
-
-        const topicPath = topics.map((d, i) =>
-          `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleYTopic(d[panel.key])}`
-        ).join(" ");
-
-        const contPath = rhetoric.map((d, i) =>
-          `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleYCont(d.cont)}`
-        ).join(" ");
-
-        return (
-          <svg key={panel.key} viewBox={`0 0 ${w} ${miniH}`} preserveAspectRatio="xMidYMid meet">
-            {/* Panel label */}
-            <text x={padX} y={14} fontSize="10" fontWeight="600"
-              fill={panel.color} fontFamily="var(--font-sans)">{panel.label}</text>
-            {/* Contentiousness label */}
-            <text x={w - padX} y={14} textAnchor="end" fontSize="9"
-              fill="#a89e92" fontFamily="var(--font-sans)" opacity="0.6">Contentiousness ↓</text>
-            {/* Light grid */}
-            <line x1={padX} y1={padY} x2={w - padX} y2={padY}
-              stroke="#a89e92" strokeWidth="0.3" opacity="0.15" />
-            <line x1={padX} y1={padY + plotH} x2={w - padX} y2={padY + plotH}
-              stroke="#a89e92" strokeWidth="0.3" opacity="0.15" />
-            {/* Year labels */}
-            {topics.map((d, i) => (
-              <text key={d.year} x={scaleX(i)} y={miniH - 2} textAnchor="middle"
-                fontSize="9" fill="#a89e92" fontFamily="var(--font-sans)">{d.year}</text>
-            ))}
-            {isVisible && (
-              <>
-                {/* Contentiousness overlay (dashed) */}
-                <path d={contPath} fill="none" stroke="#a89e92" strokeWidth="1.5"
-                  strokeDasharray="4 3" opacity="0.5" />
-                {/* Topic line */}
-                <path d={topicPath} fill="none" stroke={panel.color} strokeWidth="2.5" />
-                {topics.map((d, i) => (
-                  <circle key={i} cx={scaleX(i)} cy={scaleYTopic(d[panel.key])} r="3"
-                    fill={panel.color} />
-                ))}
-              </>
-            )}
-          </svg>
-        );
-      })}
-    </div>
-  );
-}
-
-/** Slope chart: 2021 → 2025 for four rhetoric dimensions */
+/** Slope chart: 2021 → 2025 for four rhetoric dimensions (with label collision resolution) */
 function SlopeChart({ isVisible }: { isVisible: boolean }) {
   const first = DATA.rhetoricByYear[0]; // 2021
   const last = DATA.rhetoricByYear[DATA.rhetoricByYear.length - 1]; // 2025
@@ -1559,6 +1485,21 @@ function SlopeChart({ isVisible }: { isVisible: boolean }) {
     { label: "Complexity", color: "#6b5e52", startVal: first.complexity, endVal: last.complexity },
   ];
 
+  // Resolve label collisions: push overlapping labels apart (min 28px gap)
+  const MIN_GAP = 28;
+  const resolveCollisions = (positions: { label: string; y: number }[]) => {
+    const sorted = [...positions].sort((a, b) => a.y - b.y);
+    for (let i = 1; i < sorted.length; i++) {
+      if (sorted[i].y - sorted[i - 1].y < MIN_GAP) {
+        sorted[i].y = sorted[i - 1].y + MIN_GAP;
+      }
+    }
+    return Object.fromEntries(sorted.map(s => [s.label, s.y]));
+  };
+
+  const leftYMap = resolveCollisions(lines.map(l => ({ label: l.label, y: scaleY(l.startVal) })));
+  const rightYMap = resolveCollisions(lines.map(l => ({ label: l.label, y: scaleY(l.endVal) })));
+
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="au-trend-chart" preserveAspectRatio="xMidYMid meet">
       {/* Year labels */}
@@ -1570,27 +1511,33 @@ function SlopeChart({ isVisible }: { isVisible: boolean }) {
       <line x1={leftX} y1={topY} x2={leftX} y2={botY} stroke="#a89e92" strokeWidth="0.5" opacity="0.25" />
       <line x1={rightX} y1={topY} x2={rightX} y2={botY} stroke="#a89e92" strokeWidth="0.5" opacity="0.25" />
       {isVisible && lines.map(l => {
-        const y1 = scaleY(l.startVal);
-        const y2 = scaleY(l.endVal);
+        const dataY1 = scaleY(l.startVal);
+        const dataY2 = scaleY(l.endVal);
+        const labelY1 = leftYMap[l.label];
+        const labelY2 = rightYMap[l.label];
         return (
           <g key={l.label}>
-            <line x1={leftX} y1={y1} x2={rightX} y2={y2}
+            <line x1={leftX} y1={dataY1} x2={rightX} y2={dataY2}
               stroke={l.color} strokeWidth="2.5" opacity="0.85" />
-            <circle cx={leftX} cy={y1} r="4.5" fill={l.color} />
-            <circle cx={rightX} cy={y2} r="4.5" fill={l.color} />
-            {/* Left label */}
-            <text x={leftX - 10} y={y1 + 4} textAnchor="end" fontSize="10"
+            <circle cx={leftX} cy={dataY1} r="4.5" fill={l.color} />
+            <circle cx={rightX} cy={dataY2} r="4.5" fill={l.color} />
+            {/* Left label (collision-resolved position) */}
+            <text x={leftX - 10} y={labelY1 + 4} textAnchor="end" fontSize="10"
               fill={l.color} fontFamily="var(--font-sans)" fontWeight="600">
               {l.startVal.toFixed(2)}
             </text>
-            <text x={leftX - 10} y={y1 + 16} textAnchor="end" fontSize="9"
+            <text x={leftX - 10} y={labelY1 + 16} textAnchor="end" fontSize="9"
               fill={l.color} fontFamily="var(--font-sans)" opacity="0.7">
               {l.label}
             </text>
-            {/* Right value */}
-            <text x={rightX + 10} y={y2 + 4} textAnchor="start" fontSize="10"
+            {/* Right label (collision-resolved position) */}
+            <text x={rightX + 10} y={labelY2 + 4} textAnchor="start" fontSize="10"
               fill={l.color} fontFamily="var(--font-sans)" fontWeight="600">
               {l.endVal.toFixed(2)}
+            </text>
+            <text x={rightX + 10} y={labelY2 + 16} textAnchor="start" fontSize="9"
+              fill={l.color} fontFamily="var(--font-sans)" opacity="0.7">
+              {l.label}
             </text>
           </g>
         );

@@ -283,8 +283,14 @@
   height: auto;
 }
 
-/* Anatomy scrolly chart */
-.au-anatomy-chart {
+/* Heatmap chart */
+.au-heatmap-chart {
+  width: 100%;
+  height: auto;
+}
+
+/* Thermometer chart */
+.au-thermometer-chart {
   width: 100%;
   height: auto;
 }
