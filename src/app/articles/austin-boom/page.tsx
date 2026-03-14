@@ -699,14 +699,15 @@ function SystemSection() {
         <div className="au-chart-title">Issues Across the System</div>
         <svg viewBox="0 0 750 220" preserveAspectRatio="xMidYMid meet">
           {flows.map((f, i) => {
-            const meetingBarW = (f.meetings / maxMeetings) * 450;
+            const meetingBarW = (f.meetings / maxMeetings) * 400;
             const y = i * 65 + 15;
+            const ox = 100;
             return (
               <g key={f.label}>
-                <text x="5" y={y + 14} fontSize="12" fontWeight="600"
+                <text x={ox + 5} y={y + 14} fontSize="12" fontWeight="600"
                   fill="#BF5700" fontFamily="var(--font-sans)">{f.label}</text>
                 <rect
-                  x={0} y={y + 20}
+                  x={ox} y={y + 20}
                   width={isVisible ? meetingBarW : 0} height={22}
                   rx={3}
                   fill="#BF5700"
@@ -714,7 +715,7 @@ function SystemSection() {
                   style={{ transition: `width 0.8s var(--ease-elegant) ${i * 120}ms` }}
                 />
                 {isVisible && (
-                  <text x={meetingBarW + 8} y={y + 36} fontSize="11"
+                  <text x={ox + meetingBarW + 8} y={y + 36} fontSize="11"
                     fontWeight="600" fill="#a89e92" fontFamily="var(--font-sans)">
                     {f.meetings} meetings &middot; {f.bodies} bodies
                   </text>
@@ -813,7 +814,10 @@ function TopicHeatmap({ isVisible }: { isVisible: boolean }) {
   const cellH = 42;
   const gapX = 6;
   const gapY = 6;
-  const gridStartX = labelW + 10;
+  // Center the grid: total width = labelW + 10 + 5*(cellW+gapX) - gapX
+  const totalGridW = labelW + 10 + data.length * (cellW + gapX) - gapX;
+  const offsetX = Math.max(0, (w - totalGridW) / 2);
+  const gridStartX = offsetX + labelW + 10;
   const gridStartY = 50;
 
   type TopicKey = "budget" | "housing" | "safety" | "environment";
@@ -860,7 +864,7 @@ function TopicHeatmap({ isVisible }: { isVisible: boolean }) {
         return (
           <g key={row.key}>
             {/* Row label */}
-            <text x={labelW} y={y + cellH / 2 + 4} textAnchor="end"
+            <text x={offsetX + labelW} y={y + cellH / 2 + 4} textAnchor="end"
               fontSize="11" fontWeight="600" fill={row.color}
               fontFamily="var(--font-sans)">{row.label}</text>
             {/* Cells */}
@@ -1046,20 +1050,21 @@ function ParadoxSection() {
         <div className="au-chart-title">Most Contentious Meetings</div>
         <svg viewBox="0 0 700 300" preserveAspectRatio="xMidYMid meet">
           {DATA.hotMeetings.map((m, i) => {
-            const barWidth = (m.cont / 5) * 500;
+            const barWidth = (m.cont / 5) * 450;
             const y = i * 68 + 20;
+            const ox = 75;
             return (
               <g key={m.videoId}>
-                <text x="5" y={y + 14} fontSize="11" fontWeight="600"
+                <text x={ox + 5} y={y + 14} fontSize="11" fontWeight="600"
                   fill="#BF5700" fontFamily="var(--font-sans)">
                   {m.title}
                 </text>
-                <text x="5" y={y + 28} fontSize="9"
+                <text x={ox + 5} y={y + 28} fontSize="9"
                   fill="#a89e92" fontFamily="var(--font-sans)">
                   {m.date} &middot; {m.topics.join(", ")}
                 </text>
                 <rect
-                  x={0} y={y + 34}
+                  x={ox} y={y + 34}
                   width={isVisible ? barWidth : 0} height={16}
                   rx={3}
                   fill="#BF5700"
@@ -1067,7 +1072,7 @@ function ParadoxSection() {
                   style={{ transition: `width 0.8s var(--ease-elegant) ${i * 100}ms` }}
                 />
                 {isVisible && (
-                  <text x={barWidth + 8} y={y + 47} fontSize="12"
+                  <text x={ox + barWidth + 8} y={y + 47} fontSize="12"
                     fontWeight="700" fill="#BF5700" fontFamily="var(--font-sans)">
                     {m.cont.toFixed(2)}
                   </text>
@@ -1282,7 +1287,7 @@ function VoicesSection() {
         <div className="au-video-embed">
           <div className="au-video-embed-frame">
             <iframe
-              src="https://austintx.new.swagit.com/videos/283723/embed"
+              src="https://austintx.new.swagit.com/videos/283723/embed?start=3600"
               title="Dec 7, 2023 \u2014 Special City Council: HOME Phase 1"
               allow="autoplay; encrypted-media"
               allowFullScreen
@@ -1323,7 +1328,7 @@ function VoicesSection() {
         <div className="au-video-embed">
           <div className="au-video-embed-frame">
             <iframe
-              src="https://austintx.new.swagit.com/videos/208390/embed"
+              src="https://austintx.new.swagit.com/videos/208390/embed?start=5400"
               title="Feb 15, 2023 \u2014 Special City Council: Police Contract"
               allow="autoplay; encrypted-media"
               allowFullScreen
