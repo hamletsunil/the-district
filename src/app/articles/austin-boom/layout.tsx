@@ -5,7 +5,7 @@ const SLUG = "austin-boom";
 const URL = `${BASE_URL}/articles/${SLUG}`;
 
 export const metadata: Metadata = {
-  title: "Five Thousand Hours: Inside Austin\u2019s 2,588 Government Meetings \u2014 The District",
+  title: "Forty-Seven Million Words: Inside Austin\u2019s 2,588 Government Meetings \u2014 The District",
   description:
     "We transcribed 2,588 Austin government meetings \u2014 47.5 million words across 93 official bodies. The most passionate meetings end in the most lopsided votes.",
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: URL },
   openGraph: {
-    title: "Five Thousand Hours",
+    title: "Forty-Seven Million Words",
     description:
       "2,588 meetings. 93 government bodies. 5,108 hours. The most passionate meetings end in the most lopsided votes.",
     type: "article",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Five Thousand Hours",
+    title: "Forty-Seven Million Words",
     description:
       "We transcribed 2,588 Austin government meetings. The loudest debates produce the most lopsided votes.",
   },
@@ -55,7 +55,7 @@ export default function AustinBoomLayout({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
             headline:
-              "Five Thousand Hours: Inside Austin\u2019s 2,588 Government Meetings",
+              "Forty-Seven Million Words: Inside Austin\u2019s 2,588 Government Meetings",
             description:
               "We transcribed 2,588 Austin government meetings \u2014 47.5 million words across 93 official bodies. The most passionate meetings end in the most lopsided votes.",
             datePublished: "2026-03-11T12:00:00.000Z",

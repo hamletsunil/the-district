@@ -385,13 +385,13 @@ const SOURCES: Source[] = [
 
 // Table of contents
 const TOC_SECTIONS = [
-  { id: "nine-to-two", label: "Nine to Two", number: "01" },
-  { id: "ninety-three-rooms", label: "Ninety-Three Rooms", number: "02" },
-  { id: "what-the-meetings-knew", label: "What the Meetings Knew", number: "03" },
-  { id: "what-they-carried", label: "What They Carried", number: "04" },
-  { id: "after-the-fever", label: "After the Fever", number: "05" },
-  { id: "the-ones-who-stayed", label: "The Ones Who Stayed", number: "06" },
-  { id: "voices", label: "Voices", number: "\u2014" },
+  { id: "the-vote", label: "The Vote Was Always 9-2", number: "01" },
+  { id: "ninety-three-rooms", label: "Ninety-Three Rooms, One City", number: "02" },
+  { id: "the-agenda", label: "The Agenda Knew First", number: "03" },
+  { id: "three-minutes", label: "Three Minutes at the Microphone", number: "04" },
+  { id: "the-fever", label: "The Fever Broke", number: "05" },
+  { id: "she-came-back", label: "She Came Back 122 Times", number: "06" },
+  { id: "voices", label: "In Their Own Words", number: "\u2014" },
 ];
 
 // ============================================================================
@@ -478,7 +478,7 @@ export default function AustinBoom() {
           { value: DATA.meetings.officialBodies.toString(), label: "Official Bodies" },
           { value: DATA.meetings.totalHours.toLocaleString(), label: "Hours of Deliberation" },
         ]}
-        finding="The meetings with the most testimony produce the most lopsided votes. Five years. Ninety-three bodies. 47.5 million words. The question is whether anyone was listening."
+        finding="The meetings with the most testimony produce the most lopsided votes—five years of deliberation across ninety-three bodies, 47.5 million words, and the question of whether any of it changed the outcome."
       />
 
       <LedeSection />
@@ -523,7 +523,7 @@ export default function AustinBoom() {
         ]}
       />
 
-      <SocialShare title="Five Thousand Hours" />
+      <SocialShare title="Forty-Seven Million Words" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />
@@ -559,13 +559,13 @@ function HeroSection({ scrollY }: { scrollY: number }) {
         </div>
 
         <h1 className="au-hero-title">
-          <span className="au-hero-title-accent">Five Thousand</span>
+          <span className="au-hero-title-accent">Forty-Seven Million</span>
           <br />
-          <span>Hours</span>
+          <span>Words</span>
         </h1>
 
         <p className="au-hero-subtitle">
-          What a city says when it thinks nobody is listening
+          Austin talked for five thousand hours. We read the transcript.
         </p>
 
         <p className="au-hero-byline">
@@ -630,7 +630,7 @@ function SystemSection() {
     <section id="ninety-three-rooms" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">02</span>
-        <h2 className="au-section-title">Ninety-Three Rooms</h2>
+        <h2 className="au-section-title">Ninety-Three Rooms, One City</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -740,10 +740,10 @@ function AgendaSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="what-the-meetings-knew" className="au-wide-section au-section-border">
+    <section id="the-agenda" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">03</span>
-        <h2 className="au-section-title">What the Meetings Knew</h2>
+        <h2 className="au-section-title">The Agenda Knew First</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -782,7 +782,7 @@ function AgendaSection() {
             Sustainability climbed steadily from 30.6% to 41.8% between 2021
             and 2024&mdash;Austin Energy rate debates, I-35 expansion reviews,
             water supply concerns during drought years&mdash;yet produced no
-            signature legislation. Chatter alone does not make law. What
+            signature legislation. Talk, by itself, has not produced a vote. What
             converts meeting volume into votes is a forcing mechanism: a ballot
             initiative (Prop B), a thirteen-hour hearing that backs council into
             a binary choice (HOME), or a fiscal crisis that narrows the options
@@ -901,10 +901,10 @@ function TopicHeatmap({ isVisible }: { isVisible: boolean }) {
 // ============================================================================
 function MicrophoneSection() {
   return (
-    <section id="what-they-carried" className="au-wide-section au-section-border">
+    <section id="three-minutes" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">04</span>
-        <h2 className="au-section-title">What They Carried</h2>
+        <h2 className="au-section-title">Three Minutes at the Microphone</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1000,10 +1000,10 @@ function ParadoxSection() {
   const { ref: arcRef, isVisible: arcVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="nine-to-two" className="au-wide-section au-section-border">
+    <section id="the-vote" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">01</span>
-        <h2 className="au-section-title">Nine to Two</h2>
+        <h2 className="au-section-title">The Vote Was Always 9-2</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1128,10 +1128,10 @@ function TemperatureSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section ref={ref} id="after-the-fever" className="au-wide-section au-section-border">
+    <section ref={ref} id="the-fever" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">05</span>
-        <h2 className="au-section-title">After the Fever</h2>
+        <h2 className="au-section-title">The Fever Broke</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
@@ -1217,10 +1217,10 @@ function RegularsSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
 
   return (
-    <section id="the-ones-who-stayed" className="au-wide-section au-section-border">
+    <section id="she-came-back" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">06</span>
-        <h2 className="au-section-title">The Ones Who Stayed</h2>
+        <h2 className="au-section-title">She Came Back 122 Times</h2>
       </div>
 
       <FadeIn className="au-editorial-section">
@@ -1232,11 +1232,11 @@ function RegularsSection() {
           </p>
           <p>
             Zenobia Joseph has appeared at {DATA.regulars[0].meetings} meetings
-            across {DATA.regulars[0].bodies} different city bodies. She is not a
-            lobbyist. She holds no title. She keeps showing up&mdash;to
-            planning commissions, budget hearings, audit committees, utility
-            oversight boards&mdash;armed with printouts and a conviction that
-            the process should provide an answer. Monica Guzman, Policy
+            across {DATA.regulars[0].bodies} different city bodies&mdash;planning
+            commissions, budget hearings, audit committees, utility oversight
+            boards. She brings printouts. She asks questions that officials
+            cannot or will not answer. She comes back the next month and
+            asks again. Monica Guzman, Policy
             Director at Go Austin/Vamos Austin, has attended{" "}
             {DATA.regulars[1].meetings} meetings across{" "}
             {DATA.regulars[1].bodies} bodies, translating displacement data into
@@ -1245,8 +1245,8 @@ function RegularsSection() {
           </p>
           <p>
             These are not outliers. Austin&rsquo;s transcript archive surfaces
-            dozens of names that recur across years and bodies&mdash;residents
-            who treat public comment the way others treat a morning commute. Sam
+            dozens of names that recur across years and bodies&mdash;residents for whom Wednesday night public comment has become
+            as routine as Wednesday itself. Sam
             Kirsch testified eleven times across four years about homelessness
             policy, losing an eye in the interval between his first and last
             appearance. He kept coming back.
@@ -1270,7 +1270,7 @@ function VoicesSection() {
     <section id="voices" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
         <span className="au-section-num">&mdash;</span>
-        <h2 className="au-section-title">Voices</h2>
+        <h2 className="au-section-title">In Their Own Words</h2>
       </div>
 
       <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>

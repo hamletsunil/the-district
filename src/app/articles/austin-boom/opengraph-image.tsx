@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 export const alt =
-  "Five Thousand Hours: What Austin says when it thinks nobody is listening";
+  "Forty-Seven Million Words: Austin talked for five thousand hours. We read the transcript.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -91,7 +91,7 @@ export default async function Image() {
               letterSpacing: "-0.01em",
             }}
           >
-            Five Thousand
+            Forty-Seven Million
           </span>
           <span
             style={{
@@ -103,7 +103,7 @@ export default async function Image() {
               color: "transparent",
             }}
           >
-            Hours
+            Words
           </span>
         </div>
 
@@ -118,7 +118,7 @@ export default async function Image() {
             marginTop: 16,
           }}
         >
-          What a city says when it thinks nobody is listening
+          Austin talked for five thousand hours. We read the transcript.
         </p>
 
         {/* Stat bar */}
