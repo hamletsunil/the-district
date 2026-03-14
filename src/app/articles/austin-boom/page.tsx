@@ -149,6 +149,24 @@ const DATA = {
     ratio: 25,
   },
 
+  // Topic prevalence by year (% of chunks where topic appeared)
+  // Source: analysis_results.json → topics_by_year (verified against austin-meetings.json)
+  // Excluding 2020 (only 5 meetings) and 2026 (incomplete year)
+  topicsByYear: [
+    { year: 2021, budget: 55.0, housing: 38.2, safety: 34.7, environment: 30.6, landUse: 37.0, transport: 22.6, infra: 26.9, econDev: 23.2 },
+    { year: 2022, budget: 55.5, housing: 41.2, safety: 26.6, environment: 35.5, landUse: 42.9, transport: 26.7, infra: 31.2, econDev: 28.2 },
+    { year: 2023, budget: 52.2, housing: 38.5, safety: 28.0, environment: 38.6, landUse: 42.6, transport: 30.0, infra: 30.3, econDev: 25.5 },
+    { year: 2024, budget: 57.4, housing: 40.7, safety: 24.6, environment: 41.8, landUse: 40.1, transport: 25.7, infra: 32.6, econDev: 25.2 },
+    { year: 2025, budget: 60.9, housing: 36.0, safety: 31.5, environment: 36.9, landUse: 32.5, transport: 26.5, infra: 32.0, econDev: 28.0 },
+  ],
+
+  // Policy milestones for chart annotations
+  policyMilestones: [
+    { year: 2021, month: 5, label: "Prop B", topic: "safety" },
+    { year: 2023, month: 12, label: "HOME Phase 1", topic: "housing" },
+    { year: 2024, month: 5, label: "HOME Phase 2", topic: "housing" },
+  ],
+
   // Testimony quotes used in narrative (verified video_ids from pass2 extractions)
   testimonyQuotes: [
     {
@@ -369,9 +387,10 @@ const SOURCES: Source[] = [
 const TOC_SECTIONS = [
   { id: "the-paradox", label: "The Paradox", number: "01" },
   { id: "the-system", label: "The System", number: "02" },
-  { id: "at-the-microphone", label: "At the Microphone", number: "03" },
-  { id: "the-temperature", label: "The Temperature", number: "04" },
-  { id: "the-regulars", label: "The Regulars", number: "05" },
+  { id: "the-agenda", label: "The Agenda", number: "03" },
+  { id: "at-the-microphone", label: "At the Microphone", number: "04" },
+  { id: "the-temperature", label: "The Temperature", number: "05" },
+  { id: "the-regulars", label: "The Regulars", number: "06" },
   { id: "voices", label: "Voices", number: "\u2014" },
 ];
 
@@ -477,6 +496,7 @@ export default function AustinBoom() {
       <LedeSection />
       <ParadoxSection />
       <SystemSection />
+      <AgendaSection />
       <MicrophoneSection />
       <TemperatureSection />
       <RegularsSection />
@@ -641,7 +661,15 @@ function SystemSection() {
             meeting&mdash;roughly eight minutes of speech. The difference is
             preparation: AHFC&rsquo;s staff vets proposals in committee,
             addresses objections in advance, and presents a recommendation to
-            the board. Functional government is boring by design.
+            the board. Functional government is boring by design. City
+            Council meetings, by contrast,
+            average {DATA.topBodies[2].avgWords.toLocaleString()} words per
+            session&mdash;the most of any body&mdash;with a contentiousness
+            score of {DATA.topBodies[2].cont}, also the highest. The busiest
+            body is Planning
+            Commission ({DATA.topBodies[0].meetings} meetings); the most
+            contentious is City Council. Democratic engagement and democratic
+            conflict are different phenomena.
           </p>
           <p>
             Contested issues are different. They escalate through the system,
@@ -711,13 +739,195 @@ function SystemSection() {
 }
 
 // ============================================================================
-// 03 — AT THE MICROPHONE: What people bring, stated factually
+// 03 — THE AGENDA: Does meeting chatter predict policy?
+// ============================================================================
+function AgendaSection() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+
+  return (
+    <section id="the-agenda" className="au-wide-section au-section-border">
+      <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
+        <span className="au-section-num">03</span>
+        <h2 className="au-section-title">The Agenda</h2>
+      </div>
+
+      <FadeIn className="au-editorial-section" style={{ paddingTop: "1rem" }}>
+        <div className="au-body-prose">
+          <p>
+            Austin&rsquo;s government published 2,588 meeting agendas over five
+            years. Read backward, they are a forecast. The topics that consumed
+            the most airtime consistently predicted the legislation that
+            followed&mdash;not immediately, but within twelve to twenty-four
+            months.
+          </p>
+          <p>
+            Public Safety spiked to 34.7% of all classified passages
+            in 2021&mdash;its highest point in the dataset. The Proposition B
+            camping ban passed that May. Safety discourse then collapsed to
+            24.6% by 2024; the issue had been legislatively resolved, even if
+            the underlying problem had not. Housing &amp; Affordability
+            dominated 2021 and 2022 at 38&ndash;41% of all passages, the
+            long tail of the CodeNEXT failure and a city watching its median
+            home price approach $550,000. HOME Phase 1 passed in December 2023,
+            Phase 2 the following May. Housing&rsquo;s share of meeting
+            discourse has since fallen to 36.0% by 2025&mdash;the argument moved from
+            &ldquo;whether&rdquo; to &ldquo;implementation.&rdquo;
+          </p>
+          <p>
+            Budget &amp; Finance, meanwhile, has risen every year without
+            exception: 55.0% of passages in 2021, 60.9% in 2025. The city
+            shifted from &ldquo;how do we house everyone&rdquo; to &ldquo;how
+            do we pay for what we promised.&rdquo; Fiscal austerity measures
+            are arriving now.
+          </p>
+          <p>
+            The pattern has one notable exception. Environment &amp;
+            Sustainability climbed steadily from 30.6% to 41.8% between 2021
+            and 2024&mdash;Austin Energy rate debates, I-35 expansion reviews,
+            water supply concerns during drought years&mdash;yet produced no
+            signature legislation. Chatter alone does not make law. What
+            converts meeting volume into votes is a forcing mechanism: a ballot
+            initiative (Prop B), a thirteen-hour hearing that backs council into
+            a binary choice (HOME), or a fiscal crisis that narrows the options
+            to cut or borrow. The environment has the chatter but lacks the
+            crisis moment that collapses deliberation into a single vote.
+          </p>
+          <p>
+            Meeting agendas, read backward, are a forecast. The microphone is a
+            leading indicator.
+          </p>
+        </div>
+      </FadeIn>
+
+      <div ref={ref} className="au-chart-wrap">
+        <div className="au-chart-title">What Austin Talked About</div>
+        <TopicTrendChart isVisible={isVisible} />
+        <div className="au-chart-subtitle">
+          Share of classified passages mentioning each topic (%). Topics overlap;
+          a single passage can touch multiple topics. Policy milestones annotated.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Multi-line topic prevalence chart with policy milestone annotations */
+function TopicTrendChart({ isVisible }: { isVisible: boolean }) {
+  const data = DATA.topicsByYear;
+  const w = 700;
+  const h = 340;
+  const padX = 55;
+  const padY = 45;
+  const plotW = w - padX * 2;
+  const plotH = h - padY * 2;
+
+  const scaleX = (i: number) => padX + (i / (data.length - 1)) * plotW;
+  const scaleY = (v: number) => padY + plotH - ((v - 18) / 48) * plotH; // range 18-66%
+
+  type TopicKey = "budget" | "housing" | "safety" | "environment" | "landUse" | "transport" | "infra" | "econDev";
+  const makePath = (key: TopicKey) =>
+    data.map((d, i) => `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleY(d[key])}`).join(" ");
+
+  // Background topics (thin, faded)
+  const bgTopics: { key: TopicKey; color: string }[] = [
+    { key: "landUse", color: "#a89e92" },
+    { key: "transport", color: "#a89e92" },
+    { key: "infra", color: "#a89e92" },
+    { key: "econDev", color: "#a89e92" },
+  ];
+
+  // Foreground topics (prominent)
+  const fgTopics: { key: TopicKey; color: string; label: string; dash?: string }[] = [
+    { key: "budget", color: "#BF5700", label: "Budget & Finance" },
+    { key: "housing", color: "#10b981", label: "Housing" },
+    { key: "safety", color: "#ef4444", label: "Public Safety" },
+    { key: "environment", color: "#f59e0b", label: "Environment", dash: "6 4" },
+  ];
+
+  // Policy milestone annotation positions
+  const milestoneX = (year: number, month: number) => {
+    const fractionalYear = year + (month - 1) / 12;
+    const idx = (fractionalYear - 2021) / (2025 - 2021) * (data.length - 1);
+    return padX + (idx / (data.length - 1)) * plotW;
+  };
+
+  return (
+    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="xMidYMid meet">
+      {/* Grid lines */}
+      {[20, 30, 40, 50, 60].map(v => (
+        <g key={v}>
+          <line x1={padX} y1={scaleY(v)} x2={w - padX} y2={scaleY(v)}
+            stroke="#a89e92" strokeWidth="0.5" opacity="0.15" />
+          <text x={padX - 8} y={scaleY(v) + 4} textAnchor="end" fontSize="10"
+            fill="#a89e92" fontFamily="var(--font-sans)">{v}%</text>
+        </g>
+      ))}
+      {/* Year labels */}
+      {data.map((d, i) => (
+        <text key={d.year} x={scaleX(i)} y={h - 8} textAnchor="middle"
+          fontSize="11" fill="#a89e92" fontFamily="var(--font-sans)">{d.year}</text>
+      ))}
+      {isVisible && (
+        <>
+          {/* Background topic lines */}
+          {bgTopics.map(t => (
+            <path key={t.key} d={makePath(t.key)} fill="none"
+              stroke={t.color} strokeWidth="1" opacity="0.2" />
+          ))}
+          {/* Foreground topic lines */}
+          {fgTopics.map(t => (
+            <g key={t.key}>
+              <path d={makePath(t.key)} fill="none"
+                stroke={t.color} strokeWidth="2.5"
+                strokeDasharray={t.dash || "none"} />
+              {data.map((d, i) => (
+                <circle key={i} cx={scaleX(i)} cy={scaleY(d[t.key])} r="3.5"
+                  fill={t.color} />
+              ))}
+            </g>
+          ))}
+          {/* Policy milestone annotations */}
+          {DATA.policyMilestones.map((m) => {
+            const mx = milestoneX(m.year, m.month);
+            return (
+              <g key={m.label}>
+                <line x1={mx} y1={padY} x2={mx} y2={padY + plotH}
+                  stroke="#a89e92" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
+                <text x={mx} y={padY - 6} textAnchor="middle" fontSize="9"
+                  fill="#a89e92" fontFamily="var(--font-sans)" fontWeight="600">
+                  {m.label}
+                </text>
+              </g>
+            );
+          })}
+        </>
+      )}
+      {/* Legend */}
+      <g transform={`translate(${padX}, 16)`}>
+        {fgTopics.map((t, i) => {
+          const lx = i * 140;
+          return (
+            <g key={t.key}>
+              <line x1={lx} y1="0" x2={lx + 16} y2="0"
+                stroke={t.color} strokeWidth="2.5" strokeDasharray={t.dash || "none"} />
+              <text x={lx + 20} y="4" fontSize="10" fill={t.color}
+                fontFamily="var(--font-sans)">{t.label}</text>
+            </g>
+          );
+        })}
+      </g>
+    </svg>
+  );
+}
+
+// ============================================================================
+// 04 — AT THE MICROPHONE: What people bring, stated factually
 // ============================================================================
 function MicrophoneSection() {
   return (
     <section id="at-the-microphone" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">03</span>
+        <span className="au-section-num">04</span>
         <h2 className="au-section-title">At the Microphone</h2>
       </div>
 
@@ -930,7 +1140,7 @@ function ParadoxSection() {
 }
 
 // ============================================================================
-// 03 — THE TEMPERATURE: Cooling trend + institutional resilience
+// 05 — THE TEMPERATURE: Cooling trend + institutional resilience
 // ============================================================================
 function TemperatureSection() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
@@ -938,7 +1148,7 @@ function TemperatureSection() {
   return (
     <section ref={ref} id="the-temperature" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">04</span>
+        <span className="au-section-num">05</span>
         <h2 className="au-section-title">The Temperature</h2>
       </div>
 
@@ -988,6 +1198,42 @@ function TemperatureSection() {
           Contentiousness declining; complexity stable.
         </div>
       </div>
+
+      <FadeIn className="au-editorial-section" style={{ paddingTop: "1.5rem" }}>
+        <div className="au-body-prose">
+          <p>
+            The cooling was not uniform. Housing &amp; Affordability&mdash;the
+            topic most associated with emotional testimony&mdash;fell from
+            41.2% to 36.0% of meeting discourse between 2022 and 2025. Public
+            Safety dropped from 26.6% in 2022 to 24.6% by 2024 before
+            rebounding. What rose steadily was Budget &amp; Finance:
+            55.5% to 60.9%. Budget discussions are inherently less contentious,
+            conducted in spreadsheet language rather than testimony language. The
+            temperature dropped partly because the topic mix itself shifted
+            toward procedural fiscal management and away from identity-laden
+            debates about where people live and how they are policed.
+          </p>
+          <p>
+            The exception is personal testimony, which ticked upward in
+            2023&ndash;2024 (from 2.04 in 2022 to 2.18 in 2023) even as contentiousness
+            continued declining. This is the HOME effect. The two HOME hearings
+            generated enormous testimony volume&mdash;768 and 927 extracted
+            quotes respectively&mdash;at relatively controlled contentiousness.
+            The city had learned to channel emotion through procedure. Whether
+            that represents democratic maturity or democratic containment depends
+            on which side of the microphone you stand on.
+          </p>
+        </div>
+      </FadeIn>
+
+      <div className="au-chart-wrap">
+        <div className="au-chart-title">The Composition of Cooling</div>
+        <CompositionChart isVisible={isVisible} />
+        <div className="au-chart-subtitle">
+          Topic prevalence (colored) vs. contentiousness (dashed) over time.
+          As hot topics fell and cool topics rose, the overall temperature dropped.
+        </div>
+      </div>
     </section>
   );
 }
@@ -1001,7 +1247,7 @@ function RegularsSection() {
   return (
     <section id="the-regulars" className="au-wide-section au-section-border">
       <div className="au-section-header" style={{ maxWidth: 720, margin: "0 auto", padding: "0 1.5rem" }}>
-        <span className="au-section-num">05</span>
+        <span className="au-section-num">06</span>
         <h2 className="au-section-title">The Regulars</h2>
       </div>
 
@@ -1151,9 +1397,12 @@ function CloseSection() {
     <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
       <div className="au-body-prose">
         <p>
-          Forty-seven and a half million words, most of them spoken on Wednesday
-          nights, most of them by people who showed up because they believed
-          it mattered.
+          Forty-seven and a half million words. Eighty-one percent of all
+          meetings fall Monday through Wednesday&mdash;a schedule that
+          self-selects for retirees, activists, and anyone whose employer
+          tolerates a midday absence. The 0.7% of meetings held on weekends is
+          not a scheduling detail. It is a barrier. Yet people showed up
+          because they believed it mattered.
         </p>
         <p>
           Monica Guzman has attended {DATA.regulars[1].meetings} meetings.
@@ -1236,6 +1485,81 @@ function AnatomyChart({ isVisible }: { isVisible: boolean }) {
 }
 
 /** Multi-line trend chart */
+/** Small-multiples: 3 topic lines vs contentiousness overlay */
+function CompositionChart({ isVisible }: { isVisible: boolean }) {
+  const topics = DATA.topicsByYear;
+  const rhetoric = DATA.rhetoricByYear;
+  const w = 650;
+  const miniH = 100;
+  const padX = 55;
+  const padY = 20;
+  const plotW = w - padX * 2;
+  const plotH = miniH - padY * 2;
+
+  const scaleX = (i: number) => padX + (i / (topics.length - 1)) * plotW;
+
+  const panels: { key: "budget" | "housing" | "safety"; label: string; color: string; yMin: number; yMax: number }[] = [
+    { key: "budget", label: "Budget & Finance", color: "#BF5700", yMin: 50, yMax: 65 },
+    { key: "housing", label: "Housing & Affordability", color: "#10b981", yMin: 30, yMax: 50 },
+    { key: "safety", label: "Public Safety", color: "#ef4444", yMin: 20, yMax: 40 },
+  ];
+
+  // Contentiousness range for overlay (mapped to each panel's Y range)
+  const contMin = 1.9;
+  const contMax = 2.2;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {panels.map(panel => {
+        const scaleYTopic = (v: number) => padY + plotH - ((v - panel.yMin) / (panel.yMax - panel.yMin)) * plotH;
+        const scaleYCont = (v: number) => padY + plotH - ((v - contMin) / (contMax - contMin)) * plotH;
+
+        const topicPath = topics.map((d, i) =>
+          `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleYTopic(d[panel.key])}`
+        ).join(" ");
+
+        const contPath = rhetoric.map((d, i) =>
+          `${i === 0 ? "M" : "L"}${scaleX(i)},${scaleYCont(d.cont)}`
+        ).join(" ");
+
+        return (
+          <svg key={panel.key} viewBox={`0 0 ${w} ${miniH}`} preserveAspectRatio="xMidYMid meet">
+            {/* Panel label */}
+            <text x={padX} y={14} fontSize="10" fontWeight="600"
+              fill={panel.color} fontFamily="var(--font-sans)">{panel.label}</text>
+            {/* Contentiousness label */}
+            <text x={w - padX} y={14} textAnchor="end" fontSize="9"
+              fill="#a89e92" fontFamily="var(--font-sans)" opacity="0.6">Contentiousness ↓</text>
+            {/* Light grid */}
+            <line x1={padX} y1={padY} x2={w - padX} y2={padY}
+              stroke="#a89e92" strokeWidth="0.3" opacity="0.15" />
+            <line x1={padX} y1={padY + plotH} x2={w - padX} y2={padY + plotH}
+              stroke="#a89e92" strokeWidth="0.3" opacity="0.15" />
+            {/* Year labels */}
+            {topics.map((d, i) => (
+              <text key={d.year} x={scaleX(i)} y={miniH - 2} textAnchor="middle"
+                fontSize="9" fill="#a89e92" fontFamily="var(--font-sans)">{d.year}</text>
+            ))}
+            {isVisible && (
+              <>
+                {/* Contentiousness overlay (dashed) */}
+                <path d={contPath} fill="none" stroke="#a89e92" strokeWidth="1.5"
+                  strokeDasharray="4 3" opacity="0.5" />
+                {/* Topic line */}
+                <path d={topicPath} fill="none" stroke={panel.color} strokeWidth="2.5" />
+                {topics.map((d, i) => (
+                  <circle key={i} cx={scaleX(i)} cy={scaleYTopic(d[panel.key])} r="3"
+                    fill={panel.color} />
+                ))}
+              </>
+            )}
+          </svg>
+        );
+      })}
+    </div>
+  );
+}
+
 function TrendChart({ isVisible }: { isVisible: boolean }) {
   const data = DATA.rhetoricByYear;
   const w = 650;
