@@ -541,7 +541,7 @@ function TriCityBarChart() {
 // ============================================================================
 // VIZ 7: MAPBOX MAP — Lamorinda Cities
 // ============================================================================
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string;
 
 const CITY_MARKERS = [
   { name: "Lafayette", lat: 37.8858, lng: -122.1178, color: "#5B9BD5" },
@@ -572,7 +572,7 @@ function LamorindaMap() {
         initialViewState={{
           longitude: -122.155,
           latitude: 37.862,
-          zoom: 12.2,
+          zoom: 11.8,
         }}
         style={{ width: "100%", height: "100%" }}
         mapStyle="mapbox://styles/mapbox/dark-v11"
@@ -803,7 +803,7 @@ function FiscalBarChart() {
       moraga: DATA.budgets.moraga.totalBudget / 1e6,
     },
     {
-      label: "GF Spending",
+      label: "General Fund",
       lafayette: DATA.budgets.lafayette.gfExpenditure / 1e6,
       orinda: DATA.budgets.orinda.gfExpenditure / 1e6,
       moraga: DATA.budgets.moraga.gfExpenditure / 1e6,
@@ -1396,9 +1396,9 @@ export default function LamorindaTrianglePage() {
             important enough to suggest a change in our landscaping,&rdquo;
             Winoker told the room. He was speaking to elected officials from
             both cities, but the remark landed differently on each side of
-            the hills. Brandon Iverson, an Orinda council member who opened by
-            admitting his spouse had begged him not to be &ldquo;yet another
-            overzealous over-regulating&rdquo; official, publicly reversed his
+            the hills. Brandyn Iverson, an Orinda council member who opened by
+            admitting her spouse had begged her not to be &ldquo;yet another
+            overzealous over-regulating&rdquo; official, publicly reversed her
             position during the meeting. &ldquo;Seven years of asking people
             to do the right thing and educating and all of our measure dollars
             pounding people over the head with information doesn&rsquo;t
