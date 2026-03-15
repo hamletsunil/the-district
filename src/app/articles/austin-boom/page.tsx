@@ -764,14 +764,14 @@ function AgendaSection() {
             months.
           </p>
           <p>
-            Public Safety spiked to 34.7% of all classified passages
+            Public Safety spiked to 34.7% of all meeting discussion
             in 2021&mdash;its highest point in the dataset. Prop B, a
             citizen-driven ballot initiative overriding the council&rsquo;s
             2019 repeal of the camping ban, passed that May. Safety discourse
             then collapsed to
             24.6% by 2024; the issue had been legislatively resolved, even if
             the underlying problem had not. Housing &amp; Affordability
-            dominated 2021 and 2022 at 38&ndash;41% of all passages, the
+            dominated 2021 and 2022 at 38&ndash;41% of meeting discussion, the
             long tail of the CodeNEXT failure and a city watching its median
             home price approach $550,000. HOME Phase 1 passed in December 2023,
             Phase 2 the following May. Housing&rsquo;s share of meeting
@@ -780,7 +780,7 @@ function AgendaSection() {
           </p>
           <p>
             Budget &amp; Finance, meanwhile, has risen every year without
-            exception: 55.0% of passages in 2021, 60.9% in 2025. The city
+            exception: 55.0% of meeting discussion in 2021, 60.9% in 2025. The city
             shifted from &ldquo;how do we house everyone&rdquo; to &ldquo;how
             do we pay for what we promised.&rdquo; Fiscal austerity measures
             are arriving now.
@@ -804,8 +804,9 @@ function AgendaSection() {
         <div className="au-chart-title">What Austin Talked About</div>
         <TopicHeatmap isVisible={isVisible} />
         <div className="au-chart-subtitle">
-          Share of classified passages mentioning each topic (%). Color intensity
-          reflects variation within each topic. Topics overlap across passages.
+          How often each topic came up in Austin&rsquo;s meetings, year by year.
+          Darker = that topic dominated more of the discussion. A single meeting can
+          cover multiple topics, so columns may add up to more than 100%.
         </div>
       </div>
     </section>
@@ -1090,8 +1091,8 @@ function ParadoxSection() {
           })}
         </svg>
         <div className="au-chart-subtitle">
-          Contentiousness scores (1&ndash;5 scale) computed from AI classification.
-          The most heated meetings consistently produce lopsided votes.
+          How heated each meeting got, on a 1&ndash;5 scale (higher = more intense conflict).
+          The most heated meetings all ended the same way: lopsided votes.
         </div>
       </div>
 
@@ -1105,10 +1106,10 @@ function ParadoxSection() {
       <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
         <div className="au-body-prose">
           <p>
-            We averaged contentiousness, personal testimony, and technical
-            complexity across all {DATA.meetings.totalChunks.toLocaleString()} classified
-            chunks, grouped by position within the meeting. The pattern
-            is consistent: testimony peaks early, contentiousness
+            We measured how heated, personal, and technical every
+            segment of every meeting was, then averaged across
+            all {DATA.meetings.totalMeetings.toLocaleString()} meetings by position. The pattern
+            is consistent: personal testimony peaks early, conflict
             crests at midpoint ({DATA.contentiousnessArc[4].cont} out of 5),
             and both collapse in the final quarter as the room empties and
             the remaining business turns procedural. The people who showed up
@@ -1121,8 +1122,8 @@ function ParadoxSection() {
         <div className="au-chart-title">Anatomy of a Meeting</div>
         <MeetingThermometer isVisible={arcVisible} />
         <div className="au-chart-subtitle">
-          Contentiousness across {DATA.meetings.totalMeetings.toLocaleString()} meetings,
-          grouped by position. Hotter = more conflict in the transcript.
+          Each segment is a 10% slice of the meeting, from opening (left) to adjournment (right).
+          Hotter color = more conflict. Averaged across {DATA.meetings.totalMeetings.toLocaleString()} meetings.
         </div>
       </div>
     </section>
@@ -1184,8 +1185,8 @@ function TemperatureSection() {
         <div className="au-chart-title">How the Rhetoric Shifted</div>
         <SlopeChart isVisible={isVisible} />
         <div className="au-chart-subtitle">
-          Change in average scores from 2021 to 2025.
-          Contentiousness declining; complexity stable.
+          How the tone of Austin&rsquo;s meetings changed from 2021 to 2025.
+          Conflict is cooling. Technical depth held steady.
         </div>
       </div>
 
