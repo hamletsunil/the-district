@@ -1,0 +1,591 @@
+/* ===========================
+   LAMORINDA TRIANGLE
+   Three Cities, One Fire Zone
+
+   Palette: Teal/Mint on deep navy-slate
+   Accent: #4ECDC4 (fresh teal)
+   Secondary: #6EE7B7 (mint)
+   Dark bg: deep navy #0f1923
+   =========================== */
+
+[data-theme="lamorinda"] {
+  --page-bg: #0f1923;
+  --page-bg-alt: #162030;
+  --page-text: #e8ecf0;
+  --page-text-muted: #8b99a8;
+  --accent-primary: #4ECDC4;
+  --accent-secondary: #6EE7B7;
+  --card-bg: #1a2636;
+  --card-border: rgba(78, 205, 196, 0.15);
+
+  /* City-specific accent colors */
+  --lafayette-color: #5B9BD5;
+  --orinda-color: #E67E54;
+  --moraga-color: #7B9E6B;
+
+  /* Topic colors */
+  --topic-housing: #5B9BD5;
+  --topic-fire: #E67E54;
+  --topic-schools: #9B7ED8;
+  --topic-retail: #4ECDC4;
+  --topic-safety: #E05555;
+
+  background-color: var(--page-bg);
+  color: var(--page-text);
+}
+
+/* ---- Hero ---- */
+.lam-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--page-bg);
+}
+
+.lam-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    rgba(78, 205, 196, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.lam-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.lam-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(78, 205, 196, 0.4);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 2rem;
+}
+
+.lam-hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: lam-pulse 2s ease-in-out infinite;
+}
+
+@keyframes lam-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.lam-hero-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.lam-hero-title-line1 {
+  display: block;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--page-text);
+}
+
+.lam-hero-title-line2 {
+  display: block;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lam-hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--page-text-muted);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.lam-hero-scroll {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--page-text-muted);
+}
+
+.lam-hero-scroll-line {
+  width: 1px;
+  height: 60px;
+  margin: 0.75rem auto 0;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-primary),
+    transparent
+  );
+  animation: lam-scroll-line 2s ease-in-out infinite;
+}
+
+@keyframes lam-scroll-line {
+  0% { opacity: 0.8; transform: scaleY(1); }
+  50% { opacity: 0.3; transform: scaleY(0.6); }
+  100% { opacity: 0.8; transform: scaleY(1); }
+}
+
+/* ---- Editorial sections ---- */
+.lam-editorial-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.lam-graphic {
+  max-width: 1080px;
+  margin: 3rem auto;
+}
+
+/* ---- Cards ---- */
+.lam-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s var(--ease-elegant), border-color 0.3s var(--ease-elegant);
+}
+
+.lam-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+}
+
+/* ---- City comparison cards ---- */
+.lam-city-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .lam-city-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lam-city-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-top: 3px solid var(--city-color, var(--accent-primary));
+}
+
+.lam-city-card--lafayette { --city-color: var(--lafayette-color); }
+.lam-city-card--orinda { --city-color: var(--orinda-color); }
+.lam-city-card--moraga { --city-color: var(--moraga-color); }
+
+.lam-city-name {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--city-color, var(--accent-primary));
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Topic bar chart ---- */
+.lam-topic-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.lam-topic-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--page-text-muted);
+  min-width: 140px;
+  text-align: right;
+}
+
+.lam-topic-bar-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.lam-topic-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s var(--ease-elegant);
+}
+
+.lam-topic-pct {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--page-text-muted);
+  min-width: 35px;
+}
+
+/* ---- Map section ---- */
+.lam-map-container {
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+@media (max-width: 768px) {
+  .lam-map-container {
+    height: 350px;
+  }
+}
+
+/* ---- Stats grid ---- */
+.lam-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.lam-stat {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.lam-stat-value {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.lam-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--page-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ---- Contentiousness meter ---- */
+.lam-meter {
+  display: flex;
+  gap: 2px;
+  margin: 0.5rem 0;
+}
+
+.lam-meter-segment {
+  height: 6px;
+  flex: 1;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.lam-meter-segment--active {
+  background: var(--accent-primary);
+}
+
+/* ---- Conclusion ---- */
+.lam-conclusion {
+  padding: 10rem 2rem;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(78, 205, 196, 0.05) 0%,
+    rgba(78, 205, 196, 0.12) 100%
+  );
+}
+
+.lam-conclusion-number {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.lam-conclusion-label {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  color: var(--page-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ---- Table of Contents (Kings-style sticky sidebar) ---- */
+.lam-toc {
+  position: fixed;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  z-index: 100;
+  max-width: 200px;
+}
+
+.lam-toc-header {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  color: var(--accent-primary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.lam-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lam-toc-item {
+  margin-bottom: 0.125rem;
+}
+
+.lam-toc-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s var(--ease-elegant);
+}
+
+.lam-toc-link:hover {
+  background: rgba(78, 205, 196, 0.08);
+}
+
+.lam-toc-link--active {
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.lam-toc-number {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  color: var(--page-text-muted);
+  min-width: 1.25rem;
+  opacity: 0.5;
+}
+
+.lam-toc-link--active .lam-toc-number {
+  color: var(--accent-primary);
+  opacity: 1;
+}
+
+.lam-toc-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: var(--page-text-muted);
+  line-height: 1.3;
+}
+
+.lam-toc-link--active .lam-toc-label {
+  color: var(--page-text);
+}
+
+.lam-toc-toggle {
+  display: none;
+}
+
+.lam-toc-overlay {
+  display: none;
+}
+
+/* ---- TOC Mobile (< 1280px) ---- */
+@media (max-width: 1280px) {
+  .lam-toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    max-width: 280px;
+    width: 280px;
+    background: var(--page-bg);
+    border-right: 1px solid var(--card-border);
+    padding: 4rem 1rem 2rem;
+    transition: transform 0.3s var(--ease-elegant);
+    z-index: 200;
+  }
+
+  .lam-toc--open {
+    transform: translateX(0);
+  }
+
+  .lam-toc-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 150;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--page-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s var(--ease-elegant);
+  }
+
+  .lam-toc-toggle:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .lam-toc-toggle-icon {
+    font-size: 0.875rem;
+  }
+
+  .lam-toc-toggle-label {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .lam-toc-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* ---- Side-by-side City Comparison Table ---- */
+.lam-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  margin: 2rem 0;
+}
+
+.lam-comparison-table th {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--card-border);
+  text-align: right;
+}
+
+.lam-comparison-table th:first-child {
+  text-align: left;
+  color: var(--page-text-muted);
+}
+
+.lam-comparison-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  text-align: right;
+  color: var(--page-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lam-comparison-table td:first-child {
+  text-align: left;
+  color: var(--page-text-muted);
+  font-size: 0.75rem;
+}
+
+.lam-comparison-table tr:hover td {
+  background: rgba(78, 205, 196, 0.04);
+}
+
+/* ---- Dot Plot with CI Whiskers ---- */
+.lam-dot-plot {
+  margin: 2rem 0;
+}
+
+.lam-dot-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.6rem 0;
+  position: relative;
+}
+
+.lam-dot-topic {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--page-text-muted);
+  min-width: 160px;
+  text-align: right;
+}
+
+.lam-dot-track {
+  flex: 1;
+  height: 30px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.lam-dot-whisker {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+.lam-dot-point {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Institutional Web Diagram ---- */
+.lam-web-diagram {
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+/* ---- Radar Chart ---- */
+.lam-radar-container {
+  max-width: 500px;
+  margin: 2rem auto;
+}
