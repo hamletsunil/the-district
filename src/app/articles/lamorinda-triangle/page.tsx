@@ -18,6 +18,8 @@ import { PullQuote } from "@/components/article/PullQuote";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import type { Source } from "@/types/article";
 import { LamorindaSkylineSVG } from "./skyline-svg";
+import Map, { Marker } from "react-map-gl/mapbox";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 // ============================================================================
 // DATA — Every statistic traces to this object.
@@ -373,6 +375,753 @@ function TopicComparisonBar({
 }
 
 // ============================================================================
+// VIZ 1: TRI-CITY HORIZONTAL BAR CHART (Ann Arbor dissent bar style)
+// ============================================================================
+function TriCityBarChart() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !hasAnimated) setHasAnimated(true);
+  }, [isVisible, hasAnimated]);
+
+  const metrics = [
+    {
+      label: "Population",
+      lafayette: DATA.cities.lafayette.population,
+      orinda: DATA.cities.orinda.population,
+      moraga: DATA.cities.moraga.population,
+      format: (v: number) => v.toLocaleString(),
+    },
+    {
+      label: "Median Income",
+      lafayette: DATA.cities.lafayette.medianIncome,
+      orinda: DATA.cities.orinda.medianIncome,
+      moraga: DATA.cities.moraga.medianIncome,
+      format: (v: number) => `$${Math.round(v / 1000)}K`,
+    },
+    {
+      label: "Median Home Value",
+      lafayette: DATA.cities.lafayette.medianHomeValue,
+      orinda: DATA.cities.orinda.medianHomeValue,
+      moraga: DATA.cities.moraga.medianHomeValue,
+      format: (v: number) => v >= 2000000 ? "$2M+" : `$${(v / 1000000).toFixed(1)}M`,
+    },
+  ];
+
+  const colors = ["#5B9BD5", "#E67E54", "#7B9E6B"];
+  const cityNames = ["Lafayette", "Orinda", "Moraga"];
+
+  const chartW = 720;
+  const labelW = 130;
+  const valueW = 70;
+  const barAreaW = chartW - labelW - valueW;
+  const rowGroupH = 80;
+  const barH = 16;
+  const barGap = 4;
+  const groupGap = 14;
+  const topPad = 30;
+  const svgH = topPad + metrics.length * (rowGroupH + groupGap);
+
+  const globalMax = Math.max(
+    ...metrics.flatMap((m) => [m.lafayette, m.orinda, m.moraga])
+  );
+
+  return (
+    <div ref={ref} className="lam-graphic" style={{ maxWidth: "760px", margin: "3rem auto", padding: "0 1rem" }}>
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        color: "var(--page-text)",
+        textAlign: "center",
+        marginBottom: "0.75rem",
+        letterSpacing: "0.02em",
+      }}>
+        Three Cities at a Glance
+      </div>
+      <svg viewBox={`0 0 ${chartW} ${svgH}`} style={{ width: "100%", height: "auto" }}>
+        {/* Legend */}
+        {cityNames.map((name, i) => (
+          <g key={name} transform={`translate(${labelW + i * 120}, 8)`}>
+            <rect x={0} y={0} width={10} height={10} rx={2} fill={colors[i]} opacity={0.85} />
+            <text x={15} y={9} fill={colors[i]} fontSize="10" fontFamily="var(--font-sans)" fontWeight={500}>{name}</text>
+          </g>
+        ))}
+
+        {metrics.map((metric, mi) => {
+          const groupY = topPad + mi * (rowGroupH + groupGap);
+          const maxVal = Math.max(metric.lafayette, metric.orinda, metric.moraga);
+          const vals = [metric.lafayette, metric.orinda, metric.moraga];
+
+          return (
+            <g key={metric.label}>
+              {/* Metric label */}
+              <text
+                x={labelW - 12}
+                y={groupY + rowGroupH / 2 + 3}
+                textAnchor="end"
+                fill="var(--page-text)"
+                fontSize="11"
+                fontFamily="var(--font-sans)"
+                fontWeight={500}
+              >
+                {metric.label}
+              </text>
+
+              {/* Separator line */}
+              {mi > 0 && (
+                <line
+                  x1={labelW}
+                  y1={groupY - groupGap / 2}
+                  x2={chartW - 10}
+                  y2={groupY - groupGap / 2}
+                  stroke="rgba(255,255,255,0.06)"
+                  strokeWidth={1}
+                />
+              )}
+
+              {/* Bars for each city */}
+              {vals.map((val, ci) => {
+                const barY = groupY + ci * (barH + barGap) + 6;
+                const barW = hasAnimated
+                  ? (val / maxVal) * (barAreaW - 20)
+                  : 0;
+
+                return (
+                  <g key={ci}>
+                    <rect
+                      x={labelW}
+                      y={barY}
+                      width={barW}
+                      height={barH}
+                      rx={3}
+                      fill={colors[ci]}
+                      opacity={0.8}
+                      style={{
+                        transition: `width 1s var(--ease-elegant) ${mi * 0.15 + ci * 0.06}s`,
+                      }}
+                    />
+                    {hasAnimated && (
+                      <text
+                        x={labelW + barW + 8}
+                        y={barY + barH / 2 + 4}
+                        fill={colors[ci]}
+                        fontSize="10"
+                        fontFamily="var(--font-sans)"
+                        fontWeight={600}
+                        style={{
+                          opacity: hasAnimated ? 1 : 0,
+                          transition: `opacity 0.5s ease ${0.8 + mi * 0.15}s`,
+                        }}
+                      >
+                        {metric.format(val)}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+            </g>
+          );
+        })}
+      </svg>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.6rem",
+        color: "var(--page-text-muted)",
+        textAlign: "center",
+        marginTop: "0.5rem",
+      }}>
+        Source: U.S. Census Bureau, American Community Survey 5-Year Estimates (2023)
+      </p>
+    </div>
+  );
+}
+
+// ============================================================================
+// VIZ 7: MAPBOX MAP — Lamorinda Cities
+// ============================================================================
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || "";
+
+const CITY_MARKERS = [
+  { name: "Lafayette", lat: 37.8858, lng: -122.1178, color: "#5B9BD5" },
+  { name: "Orinda", lat: 37.8771, lng: -122.1797, color: "#E67E54" },
+  { name: "Moraga", lat: 37.8349, lng: -122.1297, color: "#7B9E6B" },
+];
+
+function LamorindaMap() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
+
+  return (
+    <div
+      ref={ref}
+      className="lam-graphic"
+      style={{
+        maxWidth: "760px",
+        margin: "2rem auto 3rem",
+        borderRadius: "12px",
+        overflow: "hidden",
+        border: "1px solid var(--card-border)",
+        height: "340px",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        transition: "all 0.8s var(--ease-elegant)",
+      }}
+    >
+      <Map
+        initialViewState={{
+          longitude: -122.155,
+          latitude: 37.862,
+          zoom: 12.2,
+        }}
+        style={{ width: "100%", height: "100%" }}
+        mapStyle="mapbox://styles/mapbox/dark-v11"
+        mapboxAccessToken={MAPBOX_TOKEN}
+        interactive={false}
+        attributionControl={false}
+      >
+        {CITY_MARKERS.map((city) => (
+          <Marker key={city.name} longitude={city.lng} latitude={city.lat} anchor="bottom">
+            <div style={{ textAlign: "center" }}>
+              <div style={{
+                width: "12px",
+                height: "12px",
+                borderRadius: "50%",
+                background: city.color,
+                border: "2px solid rgba(255,255,255,0.6)",
+                margin: "0 auto 4px",
+                boxShadow: `0 0 12px ${city.color}66`,
+              }} />
+              <div style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "11px",
+                fontWeight: 600,
+                color: city.color,
+                textShadow: "0 1px 4px rgba(0,0,0,0.8)",
+                whiteSpace: "nowrap",
+              }}>
+                {city.name}
+              </div>
+            </div>
+          </Marker>
+        ))}
+      </Map>
+    </div>
+  );
+}
+
+// ============================================================================
+// VIZ 2: MEETING MOOD DOTS (Pittsburgh vote-dots style)
+// ============================================================================
+function MeetingMoodDots() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !hasAnimated) setHasAnimated(true);
+  }, [isVisible, hasAnimated]);
+
+  // Generate dots from mood percentages
+  // Use council stratum sample sizes: lafayette=85, orinda=62, moraga=64
+  const cityMoods = [
+    {
+      name: "Lafayette",
+      color: "#5B9BD5",
+      n: 85,
+      contentious: DATA.mood.lafayette.contentious,
+      engaged: DATA.mood.lafayette.engaged,
+      routine: DATA.mood.lafayette.routine,
+    },
+    {
+      name: "Orinda",
+      color: "#E67E54",
+      n: 62,
+      contentious: DATA.mood.orinda.contentious,
+      engaged: DATA.mood.orinda.engaged,
+      routine: DATA.mood.orinda.routine,
+    },
+    {
+      name: "Moraga",
+      color: "#7B9E6B",
+      n: 64,
+      contentious: DATA.mood.moraga.contentious,
+      engaged: DATA.mood.moraga.engaged,
+      routine: DATA.mood.moraga.routine,
+    },
+  ];
+
+  const dotR = 5;
+  const dotGap = 3;
+  const dotStride = dotR * 2 + dotGap;
+  const labelW = 110;
+  const countW = 50;
+  const chartW = 720;
+  const rowH = 50;
+  const topPad = 30;
+  const svgH = topPad + cityMoods.length * rowH + 30;
+
+  // Colors
+  const moodColors = {
+    contentious: "#E05555",
+    engaged: "#4ECDC4",
+    routine: "#6b7280",
+  };
+
+  return (
+    <div ref={ref} className="lam-graphic" style={{ maxWidth: "760px", margin: "3rem auto", padding: "0 1rem" }}>
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        color: "var(--page-text)",
+        textAlign: "center",
+        marginBottom: "0.75rem",
+        letterSpacing: "0.02em",
+      }}>
+        Meeting Mood by City &mdash; Council Stratum, 2023+
+      </div>
+      <svg viewBox={`0 0 ${chartW} ${svgH}`} style={{ width: "100%", height: "auto" }}>
+        {/* Legend */}
+        {[
+          { label: "Contentious", color: moodColors.contentious },
+          { label: "Engaged", color: moodColors.engaged },
+          { label: "Routine", color: moodColors.routine },
+        ].map((item, i) => (
+          <g key={item.label} transform={`translate(${labelW + i * 120}, 6)`}>
+            <circle cx={5} cy={5} r={5} fill={item.color} opacity={0.85} />
+            <text x={16} y={9} fill={item.color} fontSize="10" fontFamily="var(--font-sans)" fontWeight={500}>{item.label}</text>
+          </g>
+        ))}
+
+        {cityMoods.map((city, ci) => {
+          const rowY = topPad + ci * rowH;
+          // Generate dots sorted by mood: contentious first, then routine, then engaged
+          const nContentious = Math.round((city.contentious / 100) * city.n);
+          const nRoutine = Math.round((city.routine / 100) * city.n);
+          const nEngaged = city.n - nContentious - nRoutine;
+
+          type DotEntry = { mood: "contentious" | "engaged" | "routine"; idx: number };
+          const dots: DotEntry[] = [
+            ...Array.from({ length: nContentious }, (_, i) => ({ mood: "contentious" as const, idx: i })),
+            ...Array.from({ length: nRoutine }, (_, i) => ({ mood: "routine" as const, idx: i })),
+            ...Array.from({ length: nEngaged }, (_, i) => ({ mood: "engaged" as const, idx: i })),
+          ];
+
+          return (
+            <g key={city.name}>
+              {/* City name */}
+              <text
+                x={labelW - 12}
+                y={rowY + rowH / 2 + 4}
+                textAnchor="end"
+                fill={city.color}
+                fontSize="11"
+                fontFamily="var(--font-sans)"
+                fontWeight={600}
+              >
+                {city.name}
+              </text>
+
+              {/* Dots */}
+              {dots.map((dot, di) => {
+                const dotX = labelW + 8 + di * dotStride;
+                return (
+                  <circle
+                    key={di}
+                    cx={dotX}
+                    cy={rowY + rowH / 2}
+                    r={dotR}
+                    fill={moodColors[dot.mood]}
+                    opacity={hasAnimated ? 0.85 : 0}
+                    style={{
+                      transition: `opacity 0.3s ease ${di * 0.012 + ci * 0.15}s`,
+                    }}
+                  />
+                );
+              })}
+
+              {/* Count */}
+              <text
+                x={labelW + 8 + dots.length * dotStride + 10}
+                y={rowY + rowH / 2 + 4}
+                fill="var(--page-text-muted)"
+                fontSize="9"
+                fontFamily="var(--font-sans)"
+                style={{
+                  opacity: hasAnimated ? 0.7 : 0,
+                  transition: `opacity 0.5s ease ${0.8 + ci * 0.15}s`,
+                }}
+              >
+                n={city.n}
+              </text>
+
+              {/* Separator */}
+              {ci < cityMoods.length - 1 && (
+                <line
+                  x1={labelW}
+                  y1={rowY + rowH}
+                  x2={chartW - 10}
+                  y2={rowY + rowH}
+                  stroke="rgba(255,255,255,0.04)"
+                  strokeWidth={1}
+                />
+              )}
+            </g>
+          );
+        })}
+      </svg>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.6rem",
+        color: "var(--page-text-muted)",
+        textAlign: "center",
+        marginTop: "0.5rem",
+      }}>
+        Each dot = one council meeting. Lafayette has all the red dots; Moraga has none.
+        Council stratum 2023+ &middot; <em style={{ fontStyle: "italic" }}>p</em> &lt; 0.001 (chi-squared)
+      </p>
+    </div>
+  );
+}
+
+// ============================================================================
+// VIZ 5: FISCAL GROUPED BAR CHART (SVG)
+// ============================================================================
+function FiscalBarChart() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !hasAnimated) setHasAnimated(true);
+  }, [isVisible, hasAnimated]);
+
+  const groups = [
+    {
+      label: "Total Budget",
+      lafayette: DATA.budgets.lafayette.totalBudget / 1e6,
+      orinda: DATA.budgets.orinda.totalBudget / 1e6,
+      moraga: DATA.budgets.moraga.totalBudget / 1e6,
+    },
+    {
+      label: "GF Spending",
+      lafayette: DATA.budgets.lafayette.gfExpenditure / 1e6,
+      orinda: DATA.budgets.orinda.gfExpenditure / 1e6,
+      moraga: DATA.budgets.moraga.gfExpenditure / 1e6,
+    },
+    {
+      label: "Reserves",
+      lafayette: DATA.budgets.lafayette.reserves / 1e6,
+      orinda: DATA.budgets.orinda.reserves / 1e6,
+      moraga: DATA.budgets.moraga.reserves / 1e6,
+    },
+  ];
+
+  const colors = ["#5B9BD5", "#E67E54", "#7B9E6B"];
+  const cityNames = ["Lafayette", "Orinda", "Moraga"];
+
+  const chartW = 720;
+  const padL = 80;
+  const padR = 30;
+  const padT = 40;
+  const padB = 50;
+  const innerW = chartW - padL - padR;
+  const innerH = 260;
+  const svgH = padT + innerH + padB;
+  const maxVal = 50; // $50M max for nice grid
+
+  const groupW = innerW / groups.length;
+  const barW = 28;
+  const barGap = 4;
+  const clusterW = 3 * barW + 2 * barGap;
+
+  const yScale = (val: number) => padT + innerH - (val / maxVal) * innerH;
+
+  return (
+    <div ref={ref} className="lam-graphic" style={{ maxWidth: "760px", margin: "2rem auto 3rem", padding: "0 1rem" }}>
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        color: "var(--page-text)",
+        textAlign: "center",
+        marginBottom: "0.75rem",
+        letterSpacing: "0.02em",
+      }}>
+        Fiscal Comparison &mdash; FY2025-26 ($M)
+      </div>
+      <svg viewBox={`0 0 ${chartW} ${svgH}`} style={{ width: "100%", height: "auto" }}>
+        {/* Legend */}
+        {cityNames.map((name, i) => (
+          <g key={name} transform={`translate(${padL + i * 120}, 8)`}>
+            <rect x={0} y={0} width={10} height={10} rx={2} fill={colors[i]} opacity={0.85} />
+            <text x={15} y={9} fill={colors[i]} fontSize="10" fontFamily="var(--font-sans)" fontWeight={500}>{name}</text>
+          </g>
+        ))}
+
+        {/* Horizontal grid lines at $10M increments */}
+        {[0, 10, 20, 30, 40, 50].map((tick) => (
+          <g key={tick}>
+            <line
+              x1={padL}
+              y1={yScale(tick)}
+              x2={chartW - padR}
+              y2={yScale(tick)}
+              stroke="rgba(255,255,255,0.06)"
+              strokeWidth={1}
+            />
+            <text
+              x={padL - 10}
+              y={yScale(tick) + 3}
+              textAnchor="end"
+              fill="var(--page-text-muted)"
+              fontSize="9"
+              fontFamily="var(--font-sans)"
+            >
+              ${tick}M
+            </text>
+          </g>
+        ))}
+
+        {/* Grouped bars */}
+        {groups.map((group, gi) => {
+          const groupX = padL + gi * groupW + (groupW - clusterW) / 2;
+          const vals = [group.lafayette, group.orinda, group.moraga];
+
+          return (
+            <g key={group.label}>
+              {/* Group label */}
+              <text
+                x={padL + gi * groupW + groupW / 2}
+                y={svgH - 15}
+                textAnchor="middle"
+                fill="var(--page-text)"
+                fontSize="11"
+                fontFamily="var(--font-sans)"
+                fontWeight={500}
+              >
+                {group.label}
+              </text>
+
+              {/* Bars */}
+              {vals.map((val, ci) => {
+                const barX = groupX + ci * (barW + barGap);
+                const barHeight = hasAnimated ? (val / maxVal) * innerH : 0;
+                const barY = padT + innerH - barHeight;
+
+                return (
+                  <g key={ci}>
+                    <rect
+                      x={barX}
+                      y={barY}
+                      width={barW}
+                      height={barHeight}
+                      rx={3}
+                      fill={colors[ci]}
+                      opacity={0.8}
+                      style={{
+                        transition: `height 1s var(--ease-elegant) ${gi * 0.15 + ci * 0.06}s, y 1s var(--ease-elegant) ${gi * 0.15 + ci * 0.06}s`,
+                      }}
+                    />
+                    {hasAnimated && (
+                      <text
+                        x={barX + barW / 2}
+                        y={barY - 6}
+                        textAnchor="middle"
+                        fill={colors[ci]}
+                        fontSize="9"
+                        fontFamily="var(--font-sans)"
+                        fontWeight={600}
+                        style={{
+                          opacity: hasAnimated ? 1 : 0,
+                          transition: `opacity 0.5s ease ${0.8 + gi * 0.15}s`,
+                        }}
+                      >
+                        ${val.toFixed(1)}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+            </g>
+          );
+        })}
+      </svg>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.6rem",
+        color: "var(--page-text-muted)",
+        textAlign: "center",
+        marginTop: "0.5rem",
+      }}>
+        Source: City adopted budgets FY2025-26. Lafayette and Orinda approved nearly identical totals despite a 6,000-resident gap.
+      </p>
+    </div>
+  );
+}
+
+// ============================================================================
+// VIZ 6: MEASURE T VOTE PROGRESS BAR (SVG)
+// ============================================================================
+function MeasureTProgressBar() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !hasAnimated) setHasAnimated(true);
+  }, [isVisible, hasAnimated]);
+
+  const votePct = DATA.auhsd.measureTResult;
+  const thresholdPct = DATA.auhsd.measureTRequired;
+  const gapPct = thresholdPct - votePct;
+
+  const chartW = 720;
+  const padLR = 30;
+  const barW = chartW - padLR * 2;
+  const barH = 48;
+  const barY = 55;
+  const svgH = 160;
+
+  const voteX = padLR + (votePct / 100) * barW;
+  const thresholdX = padLR + (thresholdPct / 100) * barW;
+
+  return (
+    <div ref={ref} className="lam-graphic" style={{ maxWidth: "760px", margin: "3rem auto", padding: "0 1rem" }}>
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        color: "var(--page-text)",
+        textAlign: "center",
+        marginBottom: "0.75rem",
+        letterSpacing: "0.02em",
+      }}>
+        Measure T &mdash; The Missing 4.5%
+      </div>
+      <svg viewBox={`0 0 ${chartW} ${svgH}`} style={{ width: "100%", height: "auto" }}>
+        {/* Background track */}
+        <rect
+          x={padLR}
+          y={barY}
+          width={barW}
+          height={barH}
+          rx={6}
+          fill="rgba(255,255,255,0.06)"
+        />
+
+        {/* Yes votes fill */}
+        <rect
+          x={padLR}
+          y={barY}
+          width={hasAnimated ? (votePct / 100) * barW : 0}
+          height={barH}
+          rx={6}
+          fill="#4ECDC4"
+          opacity={0.7}
+          style={{
+            transition: "width 1.2s var(--ease-elegant) 0.1s",
+          }}
+        />
+
+        {/* The gap — highlighted in red */}
+        {hasAnimated && (
+          <rect
+            x={voteX}
+            y={barY}
+            width={(gapPct / 100) * barW}
+            height={barH}
+            fill="#E05555"
+            opacity={hasAnimated ? 0.5 : 0}
+            style={{
+              transition: "opacity 0.8s ease 1.3s",
+            }}
+          />
+        )}
+
+        {/* Threshold dashed line */}
+        <line
+          x1={thresholdX}
+          y1={barY - 8}
+          x2={thresholdX}
+          y2={barY + barH + 8}
+          stroke="#ffffff"
+          strokeWidth={2}
+          strokeDasharray="4,3"
+          opacity={hasAnimated ? 0.8 : 0}
+          style={{ transition: "opacity 0.5s ease 0.8s" }}
+        />
+
+        {/* "62.2% voted yes" label */}
+        {hasAnimated && (
+          <>
+            <text
+              x={padLR + 14}
+              y={barY + barH / 2 + 5}
+              fill="#ffffff"
+              fontSize="16"
+              fontFamily="var(--font-sans)"
+              fontWeight={700}
+              style={{ opacity: hasAnimated ? 1 : 0, transition: "opacity 0.5s ease 1.2s" }}
+            >
+              {votePct}% voted yes
+            </text>
+
+            {/* Threshold label above */}
+            <text
+              x={thresholdX}
+              y={barY - 16}
+              textAnchor="middle"
+              fill="#ffffff"
+              fontSize="11"
+              fontFamily="var(--font-sans)"
+              fontWeight={600}
+              style={{ opacity: hasAnimated ? 0.9 : 0, transition: "opacity 0.5s ease 1s" }}
+            >
+              {thresholdPct.toFixed(1)}% needed
+            </text>
+
+            {/* Gap annotation */}
+            <text
+              x={(voteX + thresholdX) / 2}
+              y={barY + barH + 24}
+              textAnchor="middle"
+              fill="#E05555"
+              fontSize="11"
+              fontFamily="var(--font-sans)"
+              fontWeight={600}
+              style={{ opacity: hasAnimated ? 1 : 0, transition: "opacity 0.5s ease 1.5s" }}
+            >
+              {gapPct.toFixed(1)}% gap
+            </text>
+
+            {/* $2M cuts annotation */}
+            <text
+              x={chartW / 2}
+              y={barY + barH + 44}
+              textAnchor="middle"
+              fill="var(--page-text-muted)"
+              fontSize="10"
+              fontFamily="var(--font-sans)"
+              style={{ opacity: hasAnimated ? 0.8 : 0, transition: "opacity 0.5s ease 1.7s" }}
+            >
+              Result: ${DATA.auhsd.cutsAfterFailure / 1e6}M in budget cuts &middot; Per-pupil spending ${(DATA.auhsd.perPupil / 1000).toFixed(0)}K (below CA avg)
+            </text>
+          </>
+        )}
+      </svg>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.6rem",
+        color: "var(--page-text-muted)",
+        textAlign: "center",
+        marginTop: "0.5rem",
+      }}>
+        Source: CalTax, Contra Costa County Elections. Every school parcel tax statewide failed the two-thirds threshold in May 2025.
+      </p>
+    </div>
+  );
+}
+
+// ============================================================================
 // TABLE OF CONTENTS
 // ============================================================================
 const TOC_SECTIONS = [
@@ -472,15 +1221,9 @@ export default function LamorindaTrianglePage() {
   });
   const { ref: conclusionRef, isVisible: conclusionVisible } =
     useIntersectionObserver({ threshold: 0.3 });
-  const { ref: cityCardsRef, isVisible: cityCardsVisible } =
-    useIntersectionObserver({ threshold: 0.2 });
-  const { ref: fireStatRef, isVisible: fireStatVisible } =
-    useIntersectionObserver({ threshold: 0.2 });
   const { ref: housingQuoteRef, isVisible: housingQuoteVisible } =
     useIntersectionObserver({ threshold: 0.2 });
   const { ref: roadStatRef, isVisible: roadStatVisible } =
-    useIntersectionObserver({ threshold: 0.2 });
-  const { ref: schoolStatRef, isVisible: schoolStatVisible } =
     useIntersectionObserver({ threshold: 0.2 });
 
   const maxTopicPct = Math.max(
@@ -573,17 +1316,14 @@ export default function LamorindaTrianglePage() {
             (38%) and Moraga (38%) at <em>p</em> &lt; 0.001.
           </p>
           <p>
-            Moraga sits tucked behind both of them, accessible primarily
-            through Orinda via the two-lane Moraga Way or from Lafayette
-            through a gap in the hills. It is the smallest (16,790 residents),
-            the least wealthy by Lamorinda standards, and the quietest
-            politically. Nearly half of Moraga&rsquo;s council meetings in our
-            analysis period were classified as routine&nbsp;&mdash; meaning
-            minimal public comment and low contentiousness. Not a single
-            Moraga meeting registered as contentious in the council stratum.
-            The town runs its own 12-officer police department, operates on a
-            general fund of roughly $13 million, and devotes more political
-            energy to budget and infrastructure than either of its neighbors.
+            Moraga sits tucked behind both, accessible primarily through
+            Orinda via two-lane Moraga Way. It is the smallest (16,790
+            residents), the least wealthy by Lamorinda standards, and the
+            quietest politically: nearly half its council meetings were
+            classified as routine, and not a single one registered as
+            contentious in our analysis period. The town runs its own
+            12-officer police department and operates on a general fund of
+            roughly $13 million.
           </p>
           <p>
             These three cities share a fire district, a high school system,
@@ -604,147 +1344,22 @@ export default function LamorindaTrianglePage() {
             burning down the neighborhoods they already have.
           </p>
           <p>
-            We transcribed and analyzed 998 meetings across all 14 government
+            We transcribed 998 meetings across all 14 government
             bodies&nbsp;&mdash; city councils, planning commissions, school
-            boards, and the MOFD fire district board. The corpus spans 2015
-            through March 2026 and contains 17.8 million words of public
-            testimony, staff presentations, and council deliberation. What
-            follows is what the transcripts reveal about how three communities
-            that look identical from the outside have developed fundamentally
-            different answers to the same questions.
+            boards, and the MOFD fire board&nbsp;&mdash; spanning 2015
+            through March 2026. What follows is what 17.8 million words
+            reveal about how three communities that look identical from the
+            freeway have developed fundamentally different answers to the
+            same questions.
           </p>
         </div>
       </section>
 
-      {/* ---- Visual: Tri-city stat cards ---- */}
-      <div
-        className="lam-graphic"
-        ref={cityCardsRef}
-        style={{
-          opacity: cityCardsVisible ? 1 : 0,
-          transform: cityCardsVisible ? "translateY(0)" : "translateY(30px)",
-          transition: "all 0.8s var(--ease-elegant)",
-        }}
-      >
-        <div className="lam-city-cards">
-          {([
-            {
-              key: "lafayette" as const,
-              mod: "lafayette",
-              bodies: 5,
-              bodiesLabel: "City Council, Planning, Design Review, Parks & Trails, Circulation",
-            },
-            {
-              key: "orinda" as const,
-              mod: "orinda",
-              bodies: 3,
-              bodiesLabel: "City Council, Planning, Parks & Rec",
-            },
-            {
-              key: "moraga" as const,
-              mod: "moraga",
-              bodies: 2,
-              bodiesLabel: "Town Council, Planning Commission",
-            },
-          ]).map((c) => {
-            const city = DATA.cities[c.key];
-            return (
-              <div
-                key={c.key}
-                className={`lam-city-card lam-city-card--${c.mod}`}
-              >
-                <div className="lam-city-name">{city.name}</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                  <div>
-                    <div style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "1.75rem",
-                      fontWeight: 600,
-                      color: "var(--accent-primary)",
-                      lineHeight: 1,
-                    }}>
-                      {city.population.toLocaleString()}
-                    </div>
-                    <div style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "0.65rem",
-                      color: "var(--page-text-muted)",
-                      marginTop: "0.2rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                    }}>
-                      Population
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "1.75rem",
-                      fontWeight: 600,
-                      color: "var(--accent-primary)",
-                      lineHeight: 1,
-                    }}>
-                      ${Math.round(city.medianIncome / 1000)}K
-                    </div>
-                    <div style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "0.65rem",
-                      color: "var(--page-text-muted)",
-                      marginTop: "0.2rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                    }}>
-                      Median Income
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "1.75rem",
-                      fontWeight: 600,
-                      color: "var(--accent-primary)",
-                      lineHeight: 1,
-                    }}>
-                      ${city.medianHomeValue >= 2000000 ? "2M+" : `${(city.medianHomeValue / 1000000).toFixed(1)}M`}
-                    </div>
-                    <div style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "0.65rem",
-                      color: "var(--page-text-muted)",
-                      marginTop: "0.2rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                    }}>
-                      Median Home Value
-                    </div>
-                  </div>
-                  <div>
-                    <div style={{
-                      fontFamily: "var(--font-display)",
-                      fontSize: "1.75rem",
-                      fontWeight: 600,
-                      color: "var(--accent-primary)",
-                      lineHeight: 1,
-                    }}>
-                      {c.bodies}
-                    </div>
-                    <div style={{
-                      fontFamily: "var(--font-sans)",
-                      fontSize: "0.65rem",
-                      color: "var(--page-text-muted)",
-                      marginTop: "0.2rem",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.06em",
-                    }}>
-                      Govt Bodies
-                    </div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      {/* ---- Visual: Tri-city comparison bar chart (SVG) ---- */}
+      <TriCityBarChart />
+
+      {/* ---- Visual: Mapbox map ---- */}
+      <LamorindaMap />
 
       {/* ================================================================
           CHAPTER 2 — FIRE AND FEAR
@@ -802,23 +1417,11 @@ export default function LamorindaTrianglePage() {
             ground.&rdquo;
           </p>
           <p>
-            An insurance actuary named Nancy Watkins, who advises FEMA and
-            state regulators on wildfire risk, showed the room a photograph of
-            her husband and son digging out Zone Zero around their own Orinda
-            home&nbsp;&mdash; one of the 70,000-plus California policies
-            non-renewed in 2024. The crisis had arrived at the expert&rsquo;s
-            doorstep.
-          </p>
-          <p>
             Fire dominates Lamorinda politics in a way that sets the region
-            apart from most Bay Area suburbs. In our council-stratum analysis
-            of 211 meetings since January 2023, fire safety appeared in 69% of
+            apart from most Bay Area suburbs. In our analysis
+            of 211 council meetings since January 2023, fire safety appeared in 69% of
             Orinda&rsquo;s meetings, compared to 38% in both Lafayette and
-            Moraga. The gap is not a matter of perception&nbsp;&mdash; it is
-            statistically significant at <em>p</em> &lt; 0.001, with a
-            medium effect size. The Moraga-Orinda Fire District serves two of
-            the three cities; Lafayette contracts separately with Contra Costa
-            County Fire. But the hills do not observe city limits. When the{" "}
+            Moraga&nbsp;&mdash; statistically significant at <em>p</em> &lt; 0.001. The{" "}
             <a
               href="https://www.fire.ca.gov/"
               target="_blank"
@@ -826,7 +1429,7 @@ export default function LamorindaTrianglePage() {
             >
               Diablo winds
             </a>{" "}
-            push fire from the northeast, Lafayette and Orinda are the first
+            do not observe city limits: Lafayette and Orinda are the first
             line of defense. Moraga sits behind them, buffered but not immune.
           </p>
           <p>
@@ -865,72 +1468,19 @@ export default function LamorindaTrianglePage() {
             wrong battle.&rdquo;
           </p>
           <p>
-            The meeting exposed a geographic fault line. Moraga council
-            members passionately supported Zone Zero adoption while
-            acknowledging their town faces lower direct fire risk. Orinda&rsquo;s
+            The meeting exposed a geographic fault line. Moraga supported Zone
+            Zero adoption while acknowledging lower direct risk. Orinda&rsquo;s
             mayor warned that residents who had already spent thousands on
-            compliance and still lost their insurance would view new mandates
+            compliance and still lost insurance would view new mandates
             with hostility. MOFD Board President Romer declared he was willing
-            to lose his seat over the issue. &ldquo;If I can show leadership
-            and if I can be part of a team that inspires this community to do
-            what may be an example to the rest of the state,&rdquo; he said,
-            &ldquo;that one term will be good enough for me.&rdquo;
+            to lose his seat: &ldquo;That one term will be good enough for
+            me.&rdquo;
           </p>
         </div>
       </section>
 
-      {/* ---- Visual: Fire stat callout ---- */}
-      <div
-        ref={fireStatRef}
-        style={{
-          maxWidth: "720px",
-          margin: "3rem auto",
-          padding: "3rem 2rem",
-          textAlign: "center",
-          background: "var(--card-bg)",
-          borderRadius: "16px",
-          border: "1px solid var(--card-border)",
-          boxShadow: "0 0 60px rgba(78, 205, 196, 0.06)",
-          opacity: fireStatVisible ? 1 : 0,
-          transform: fireStatVisible ? "translateY(0)" : "translateY(30px)",
-          transition: "all 0.8s var(--ease-elegant)",
-        }}
-      >
-        <div style={{
-          fontFamily: "var(--font-display)",
-          fontSize: "5rem",
-          fontWeight: 700,
-          color: "var(--accent-primary)",
-          lineHeight: 1,
-        }}>
-          {DATA.councilTopics.find(t => t.topic === "Fire Safety & Wildfire")?.orinda ?? 69}%
-        </div>
-        <div style={{
-          fontFamily: "var(--font-sans)",
-          fontSize: "1rem",
-          color: "var(--page-text-muted)",
-          marginTop: "1rem",
-          lineHeight: 1.6,
-          maxWidth: "400px",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}>
-          of Orinda council meetings mention fire safety — vs{" "}
-          {DATA.councilTopics.find(t => t.topic === "Fire Safety & Wildfire")?.lafayette ?? 38}% in Lafayette
-          and {DATA.councilTopics.find(t => t.topic === "Fire Safety & Wildfire")?.moraga ?? 38}% in Moraga
-        </div>
-        <div style={{
-          fontFamily: "var(--font-sans)",
-          fontSize: "0.65rem",
-          color: "var(--page-text-muted)",
-          marginTop: "0.75rem",
-          opacity: 0.6,
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-        }}>
-          Council stratum 2023+ &middot; <em style={{ fontStyle: "italic" }}>p</em> &lt; 0.001
-        </div>
-      </div>
+      {/* ---- Visual: Meeting mood dots (Pittsburgh vote-dots style) ---- */}
+      <MeetingMoodDots />
 
       {/* ================================================================
           CHAPTER 3 — THE HOUSING WARS
@@ -1006,31 +1556,18 @@ export default function LamorindaTrianglePage() {
           </p>
           <p>
             A design consultant hired to help Orinda write objective design
-            standards&nbsp;&mdash; the kind of standards state law requires
-            cities to adopt&nbsp;&mdash; offered a candid admission that drew
-            an audible deflation from the room. &ldquo;Most of the
-            applications currently using objective standards are density bonus
-            projects which tend to waive the standards, the very standards that
-            we&rsquo;re all writing,&rdquo; said Tony Perez of Opticos Design.
-            The observation captured a frustration that runs through meeting
-            after meeting across all three cities: the sense that state
-            mandates require enormous local effort to produce rules that
-            developers can legally bypass.
-          </p>
-          <p>
-            The BART parking lot&nbsp;&mdash; 26 acres sitting half-empty next
-            to transit in Orinda&nbsp;&mdash; emerged as the rallying point
-            everyone could agree on at a 2025 Planning Commission hearing.
-            Multiple speakers called it the obvious housing site. But staff
-            revealed a complex three-way ownership dispute between Caltrans,
-            BART, and the city that makes development there years away.
-            Meanwhile, a commissioner reframed the entire debate with a point
-            that shifted the room: state law SB4 already allows buy-right
-            ministerial housing on church sites without any city oversight.
-            &ldquo;That ship sailed when Sacramento took away our right to
-            have decisions on development at those locations,&rdquo; he said.
-            The rezoning vote was not about whether development would happen,
-            but whether Orinda would have any control over how it happened.
+            standards offered an admission that drew an audible deflation:
+            &ldquo;Most of the applications currently using objective standards
+            are density bonus projects which tend to waive the standards, the
+            very standards that we&rsquo;re all writing.&rdquo; The BART
+            parking lot&nbsp;&mdash; 26 acres sitting half-empty next to
+            transit&nbsp;&mdash; emerged as the obvious housing site at a 2025
+            hearing, but a three-way ownership dispute between Caltrans, BART,
+            and the city makes development years away. A commissioner reframed
+            the debate: state law SB4 already allows buy-right housing on
+            church sites without city oversight. The rezoning vote was not
+            about whether development would happen, but whether Orinda would
+            have any control over how it happened.
           </p>
           <p>
             Moraga&rsquo;s housing politics run quieter, but the fiscal
@@ -1148,29 +1685,15 @@ export default function LamorindaTrianglePage() {
             the open road.
           </p>
           <p>
-            In Lafayette&rsquo;s other major transportation fight, the Topper
-            Lane pathway, a federally funded pedestrian and bike route consumed
-            22 months of community conflict before reaching the Planning
-            Commission in June 2024. The project originated after a pedestrian
-            death on the same road. Opponents, led by Topper Lane resident
-            Mark Brennan, framed it as a predetermined outcome driven by a
-            $3.85 million federal grant: &ldquo;The plan ill-suited is going
-            ahead because the invitations have been sent to the wedding,&rdquo;
-            he said. Supporters invoked the death that catalyzed the project.
-            Chris Fessen Meyer, a parent on Birdhaven Court, flipped the
-            opposition&rsquo;s core argument: &ldquo;No one is using the
-            street. I don&rsquo;t really use the street that often, nor do my
-            kids, because it&rsquo;s unsafe.&rdquo; Low pedestrian
-            traffic&nbsp;&mdash; the same data point&nbsp;&mdash; supported
-            both sides&rsquo; case.
-          </p>
-          <p>
-            The commission voted 5-1 to advance the project. Two
-            commissioners used the identical phrase &ldquo;not ready for prime
-            time.&rdquo; One voted no. The other voted yes. That uncomfortable
-            middle ground&nbsp;&mdash; between believing a project is flawed
-            and believing inaction is worse&nbsp;&mdash; runs through nearly
-            every contested decision in the Lamorinda transcripts.
+            Lafayette&rsquo;s other major transportation fight, the Topper
+            Lane pathway, consumed 22 months before reaching the Planning
+            Commission in June 2024. Opponents framed it as predetermined by a
+            $3.85 million federal grant. Chris Fessen Meyer, a parent, flipped
+            the opposition&rsquo;s core argument: &ldquo;No one is using the
+            street&nbsp;&mdash; because it&rsquo;s unsafe.&rdquo; The
+            commission voted 5-1 to advance it. Two commissioners used the
+            identical phrase &ldquo;not ready for prime time.&rdquo; One
+            voted no. The other voted yes.
           </p>
         </div>
       </section>
@@ -1275,18 +1798,12 @@ export default function LamorindaTrianglePage() {
             removed one unfunded officer position to balance the books.
           </p>
           <p>
-            At a July 2024 Lafayette meeting, the structural deficit became
-            personal. Staff told the council that the city faced not a one-time
-            shortfall but an ongoing, growing gap of at least $2 million per
-            year. A resident put it bluntly: &ldquo;We went from a surplus
-            where our city was buying millions of dollars in property to a
-            $2.5 million deficit very quickly.&rdquo; Another called the sales
-            tax measure unconscionable: &ldquo;I am 100% against the people
-            paying for what has become a tradition of poor decisions and
-            expenditures that shouldn&rsquo;t be made.&rdquo; Council members
-            reframed the ballot measure as democratic choice rather than
-            imposition. &ldquo;The city council is not here imposing a tax on
-            the public,&rdquo; Vice Mayor Kwok said. &ldquo;It is the
+            At a July 2024 meeting, staff told Lafayette&rsquo;s council the
+            city faced an ongoing gap of $2 million per year. A resident put
+            it bluntly: &ldquo;We went from a surplus where our city was
+            buying millions in property to a $2.5 million deficit very
+            quickly.&rdquo; Vice Mayor Kwok reframed the ballot measure:
+            &ldquo;The city council is not here imposing a tax. It is the
             public&rsquo;s decision in November.&rdquo;
           </p>
           <p>
@@ -1303,94 +1820,8 @@ export default function LamorindaTrianglePage() {
           </p>
         </div>
 
-        {/* Side-by-side comparison table */}
-        <div className="lam-graphic">
-          <table className="lam-comparison-table">
-            <thead>
-              <tr>
-                <th>Metric</th>
-                <th style={{ color: "#5B9BD5" }}>Lafayette</th>
-                <th style={{ color: "#E67E54" }}>Orinda</th>
-                <th style={{ color: "#7B9E6B" }}>Moraga</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Population (ACS 2023)</td>
-                <td>25,277</td>
-                <td>19,472</td>
-                <td>16,790</td>
-              </tr>
-              <tr>
-                <td>Median HH Income</td>
-                <td>$222,393</td>
-                <td style={{ color: "var(--accent-primary)" }}>$250,001</td>
-                <td>$199,800</td>
-              </tr>
-              <tr>
-                <td>Median Home Value</td>
-                <td style={{ color: "var(--accent-primary)" }}>$2M+</td>
-                <td>$1.8M</td>
-                <td>$1.6M</td>
-              </tr>
-              <tr>
-                <td>Total Budget (FY25-26)</td>
-                <td>$43.3M</td>
-                <td style={{ color: "var(--accent-primary)" }}>$43.9M</td>
-                <td>~$13M GF</td>
-              </tr>
-              <tr>
-                <td>GF Per Capita</td>
-                <td style={{ color: "var(--accent-primary)" }}>$1,005</td>
-                <td>$953</td>
-                <td>$770</td>
-              </tr>
-              <tr>
-                <td>Reserves</td>
-                <td style={{ color: "var(--accent-primary)" }}>$18.1M (80%)</td>
-                <td>$6.2M</td>
-                <td>$6.4M (50%)</td>
-              </tr>
-              <tr>
-                <td>New Revenue Measure</td>
-                <td>Measure H ($2.4M)</td>
-                <td>Measure R ($4.0M)</td>
-                <td>None</td>
-              </tr>
-              <tr>
-                <td>Owner-Occupied Homes</td>
-                <td>77.3%</td>
-                <td style={{ color: "var(--accent-primary)" }}>92.2%</td>
-                <td>84.3%</td>
-              </tr>
-              <tr>
-                <td>Police Model</td>
-                <td>Sheriff contract</td>
-                <td>Sheriff contract</td>
-                <td>Own PD (12 officers)</td>
-              </tr>
-              <tr>
-                <td>Fire Service</td>
-                <td>ConFire (county)</td>
-                <td>MOFD</td>
-                <td>MOFD</td>
-              </tr>
-            </tbody>
-          </table>
-          <p
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: "0.65rem",
-              color: "var(--page-text-muted)",
-              textAlign: "center",
-              marginTop: "0.5rem",
-            }}
-          >
-            Demographics: Census ACS 2023. Budgets: City adopted budgets
-            FY2025-26. Services: CA State Controller FY2024.
-            Teal highlights indicate highest value in row.
-          </p>
-        </div>
+        {/* Fiscal grouped bar chart (SVG) */}
+        <FiscalBarChart />
       </section>
 
       {/* ================================================================
@@ -1441,16 +1872,14 @@ export default function LamorindaTrianglePage() {
             and A.
           </p>
           <p>
-            The Measure T failure was not a rejection of education. It was
-            a 4.5-percentage-point gap between a strong majority and the
-            supermajority California requires for parcel taxes. Every school
-            parcel tax on the May 2025 ballot statewide failed to reach the
-            two-thirds threshold. Below the high school level, each city
-            operates an independent K-8 district&nbsp;&mdash; Lafayette School
-            District, Orinda Union School District, and Moraga School
-            District&nbsp;&mdash; creating a fragmented governance landscape
-            where the elementary and middle schools that feed Acalanes,
-            Miramonte, and Campolindo answer to entirely different boards.
+            The failure was not a rejection of education but a
+            4.5-percentage-point gap between a strong majority and the
+            supermajority California requires. Every school parcel tax on the
+            May 2025 statewide ballot failed to reach two-thirds. Below the
+            high school level, each city operates an independent K-8
+            district, creating a fragmented landscape where the schools
+            that feed Acalanes, Miramonte, and Campolindo answer to entirely
+            different boards.
           </p>
           <p>
             Schools appear in fewer than 10% of council meetings in any of
@@ -1465,71 +1894,8 @@ export default function LamorindaTrianglePage() {
         </div>
       </section>
 
-      {/* ---- Visual: AUHSD stat card ---- */}
-      <div
-        ref={schoolStatRef}
-        style={{
-          maxWidth: "720px",
-          margin: "3rem auto",
-          padding: "2.5rem 2rem",
-          background: "var(--card-bg)",
-          borderRadius: "16px",
-          border: "1px solid var(--card-border)",
-          opacity: schoolStatVisible ? 1 : 0,
-          transform: schoolStatVisible ? "translateY(0)" : "translateY(30px)",
-          transition: "all 0.8s var(--ease-elegant)",
-        }}
-      >
-        <div style={{
-          fontFamily: "var(--font-sans)",
-          fontSize: "0.7rem",
-          fontWeight: 600,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "var(--page-text-muted)",
-          marginBottom: "1.5rem",
-        }}>
-          Acalanes Union High School District
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-          {([
-            { value: `${DATA.auhsd.measureTResult}%`, desc: "voted yes on Measure T" },
-            { value: `${DATA.auhsd.measureTRequired.toFixed(1)}%`, desc: "was needed to pass" },
-            { value: `$${DATA.auhsd.cutsAfterFailure / 1000000}M`, desc: "in cuts to FY2025-26 budget" },
-            { value: `$${(DATA.auhsd.perPupil / 1000).toFixed(0)}K`, desc: "per-pupil spending (below CA avg)" },
-          ]).map((row, i) => (
-            <div
-              key={i}
-              style={{
-                display: "flex",
-                alignItems: "baseline",
-                gap: "1.25rem",
-                paddingBottom: i < 3 ? "1.25rem" : 0,
-                borderBottom: i < 3 ? "1px solid rgba(255,255,255,0.06)" : "none",
-              }}
-            >
-              <div style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "2rem",
-                fontWeight: 700,
-                color: "var(--accent-primary)",
-                lineHeight: 1,
-                minWidth: "100px",
-                textAlign: "right",
-              }}>
-                {row.value}
-              </div>
-              <div style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.85rem",
-                color: "var(--page-text-muted)",
-              }}>
-                {row.desc}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* ---- Visual: Measure T vote progress bar (SVG) ---- */}
+      <MeasureTProgressBar />
 
       {/* ================================================================
           CHAPTER 7 — THE INSTITUTIONAL WEB
@@ -1556,17 +1922,13 @@ export default function LamorindaTrianglePage() {
             evacuation corridor for both South Orinda and all of Moraga.
           </p>
           <p>
-            These shared dependencies create pressure points where one
-            city&rsquo;s decisions ripple through the others. When Orinda
-            proposes rezoning for housing near downtown, Moraga residents pack
-            the hearing because their only escape route runs through
-            Orinda&rsquo;s development zone&nbsp;&mdash; it takes 23 minutes
-            to travel 3.2 miles on Moraga Way during school hours, according
-            to testimony at the August 2025 Planning Commission meeting.
-            When MOFD&rsquo;s fire chief tells the board that voluntary
-            compliance has failed, both Orinda and Moraga must decide together
-            whether to mandate enforcement, even though they face different
-            risk profiles and different political constraints.
+            These dependencies create pressure points. When Orinda proposes
+            rezoning, Moraga residents pack the hearing because their only
+            escape route runs through Orinda&rsquo;s development
+            zone&nbsp;&mdash; 23 minutes to travel 3.2 miles on Moraga Way
+            during school hours. When the fire chief tells the MOFD board
+            that voluntary compliance has failed, both cities must decide
+            together despite different risk profiles.
           </p>
           <p>
             The most striking feature of the institutional web is what it does
@@ -1772,14 +2134,12 @@ export default function LamorindaTrianglePage() {
             grass.&rdquo; The council voted unanimously to convert the field.
           </p>
           <p>
-            That meeting&nbsp;&mdash; dandelions, softball, and a family name
-            on a field&nbsp;&mdash; is what local governance actually sounds
-            like in Lamorinda. Not the abstract policy debates that dominate
-            state and national coverage, but the lived-in arguments about
-            whose kids get which field, whose street gets which sidewalk,
-            and whether $135,000 for public art is an investment in civic
-            beauty or an insult to families who have been waiting 40 years
-            for equal access to a patch of dirt.
+            Dandelions, softball, and a family name on a field&nbsp;&mdash;
+            that is what local governance sounds like in Lamorinda. Not
+            abstract policy debates, but lived-in arguments about whose kids
+            get which field and whether $135,000 for public art is civic
+            beauty or an insult to families waiting 40 years for equal access
+            to a patch of dirt.
           </p>
         </div>
       </section>
