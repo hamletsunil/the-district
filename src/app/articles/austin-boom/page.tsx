@@ -957,7 +957,7 @@ function MicrophoneSection() {
             a less-lethal round by Austin police during the May 2020 protests,
             testified{" "}
             <a href="https://austintx.new.swagit.com/videos/116828" target="_blank" rel="noopener noreferrer">
-            for the first time in March 2021</a>. He came back 11 times across
+            for the first time in March 2021</a>. He came back eleven times across
             four years. In{" "}
             <a href="https://austintx.new.swagit.com/videos/343677" target="_blank" rel="noopener noreferrer">
             May 2025</a>, he returned: &ldquo;Five weeks ago, my eye had to be
