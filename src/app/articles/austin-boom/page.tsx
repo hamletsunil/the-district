@@ -252,6 +252,7 @@ const DATA = {
       meeting: "HOME Phase 1 Hearing",
       date: "Dec 7, 2023",
       videoId: "283723",
+      startSeconds: 1801,
       sentiment: "negative",
     },
     {
@@ -261,6 +262,7 @@ const DATA = {
       meeting: "HOME Phase 1 Hearing",
       date: "Dec 7, 2023",
       videoId: "283723",
+      startSeconds: 11701,
       sentiment: "positive",
     },
     {
@@ -270,6 +272,7 @@ const DATA = {
       meeting: "City Council",
       date: "Feb 4, 2021",
       videoId: "112547",
+      startSeconds: 21603,
       sentiment: "positive",
     },
     {
@@ -279,6 +282,7 @@ const DATA = {
       meeting: "HOME Phase 2 Hearing",
       date: "May 16, 2024",
       videoId: "305483",
+      startSeconds: 15601,
       sentiment: "negative",
     },
     {
@@ -288,6 +292,7 @@ const DATA = {
       meeting: "HOME Phase 2 Hearing",
       date: "May 16, 2024",
       videoId: "305483",
+      startSeconds: 308,
       sentiment: "negative",
     },
     {
@@ -297,6 +302,7 @@ const DATA = {
       meeting: "Joint Council & Planning Commission",
       date: "Oct 26, 2023",
       videoId: "277617",
+      startSeconds: 17401,
       sentiment: "negative",
     },
     {
@@ -306,6 +312,7 @@ const DATA = {
       meeting: "HOME Phase 2 Hearing",
       date: "May 16, 2024",
       videoId: "305483",
+      startSeconds: 606,
       sentiment: "negative",
     },
     {
@@ -315,6 +322,7 @@ const DATA = {
       meeting: "Special City Council \u2014 Police Contract",
       date: "Feb 15, 2023",
       videoId: "208390",
+      startSeconds: 301,
       sentiment: "negative",
     },
   ],
@@ -436,7 +444,7 @@ function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
       </div>
       <blockquote className="au-mention-text">&ldquo;{quote.text}&rdquo;</blockquote>
       <a
-        href={`https://austintx.new.swagit.com/videos/${quote.videoId}`}
+        href={`https://austintx.new.swagit.com/videos/${quote.videoId}${quote.startSeconds ? `?start=${quote.startSeconds}` : ""}`}
         target="_blank"
         rel="noopener noreferrer"
         className="au-mention-link"
