@@ -578,14 +578,109 @@
   border: 1.5px solid rgba(255, 255, 255, 0.3);
 }
 
-/* ---- Institutional Web Diagram ---- */
+/* ---- Institutional Web Layout ---- */
 .lam-web-diagram {
   max-width: 700px;
   margin: 2rem auto;
+}
+
+.lam-web-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .lam-web-two-col {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---- Radar Chart ---- */
 .lam-radar-container {
   max-width: 500px;
   margin: 2rem auto;
+}
+
+/* ---- Prose links ---- */
+[data-theme="lamorinda"] .article-body-prose a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: text-decoration 0.2s var(--ease-elegant);
+}
+
+[data-theme="lamorinda"] .article-body-prose a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Methodology Section (lam- prefix classes) ---- */
+.lam-section.lam-methodology {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.lam-prose-header {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.lam-prose-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  color: var(--page-text);
+  text-wrap: balance;
+  padding-bottom: 0.1em;
+}
+
+.lam-section-number {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+}
+
+.lam-prose {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: 1.6;
+  color: var(--page-text-muted);
+}
+
+@media (min-width: 768px) {
+  .lam-prose {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.lam-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.lam-prose strong {
+  color: var(--page-text);
+  font-weight: 600;
+}
+
+.lam-prose-small {
+  font-size: 0.9375rem;
 }

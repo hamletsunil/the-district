@@ -18,9 +18,6 @@ import { PullQuote } from "@/components/article/PullQuote";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import type { Source } from "@/types/article";
 import { LamorindaSkylineSVG } from "./skyline-svg";
-import Map, { Marker } from "react-map-gl/mapbox";
-import "mapbox-gl/dist/mapbox-gl.css";
-
 // ============================================================================
 // DATA — Every statistic traces to this object.
 // Meeting analysis: Claude Sonnet 4.6 (classification) + Opus 4.6 (extraction)
@@ -289,268 +286,19 @@ function HeroSection() {
 }
 
 // ============================================================================
-// TOPIC COMPARISON BARS (tri-city)
+// TOPIC COMPARISON TABLE (top 5-6 significant topics, clean table format)
 // ============================================================================
-function TopicComparisonBar({
-  topic,
-  lafayette,
-  orinda,
-  moraga,
-  maxPct,
-  significant,
-}: {
-  topic: string;
-  lafayette: number;
-  orinda: number;
-  moraga: number;
-  maxPct: number;
-  significant?: boolean;
-}) {
-  return (
-    <div className="lam-topic-compare" style={{ marginBottom: "1.25rem" }}>
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "0.35rem",
-      }}>
-        <span style={{
-          fontFamily: "var(--font-sans)",
-          fontSize: "0.75rem",
-          fontWeight: 500,
-          color: "var(--page-text)",
-          letterSpacing: "0.01em",
-        }}>
-          {topic}
-          {significant && (
-            <span style={{ color: "var(--accent-primary)", marginLeft: "0.35rem", fontSize: "0.6rem" }}>*</span>
-          )}
-        </span>
-      </div>
-      {[
-        { label: "Lafayette", pct: lafayette, color: "#5B9BD5" },
-        { label: "Orinda", pct: orinda, color: "#E67E54" },
-        { label: "Moraga", pct: moraga, color: "#7B9E6B" },
-      ].map(({ label, pct, color }) => (
-        <div key={label} style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.15rem" }}>
-          <span style={{
-            fontFamily: "var(--font-sans)",
-            fontSize: "0.6rem",
-            color: color,
-            width: "60px",
-            textAlign: "right",
-            flexShrink: 0,
-          }}>
-            {label}
-          </span>
-          <div style={{
-            flex: 1,
-            height: "6px",
-            background: "rgba(255,255,255,0.06)",
-            borderRadius: "3px",
-            overflow: "hidden",
-          }}>
-            <div style={{
-              width: `${(pct / maxPct) * 100}%`,
-              height: "100%",
-              background: color,
-              opacity: 0.75,
-              borderRadius: "3px",
-              transition: "width 0.8s var(--ease-elegant)",
-            }} />
-          </div>
-          <span style={{
-            fontFamily: "var(--font-sans)",
-            fontSize: "0.6rem",
-            color: "var(--page-text-muted)",
-            width: "36px",
-            flexShrink: 0,
-          }}>
-            {pct.toFixed(0)}%
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ============================================================================
-// VIZ 1: TRI-CITY HORIZONTAL BAR CHART (Ann Arbor dissent bar style)
-// ============================================================================
-function TriCityBarChart() {
+function TopicComparisonTable() {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
-  const [hasAnimated, setHasAnimated] = useState(false);
 
-  useEffect(() => {
-    if (isVisible && !hasAnimated) setHasAnimated(true);
-  }, [isVisible, hasAnimated]);
-
-  const metrics = [
-    {
-      label: "Population",
-      lafayette: DATA.cities.lafayette.population,
-      orinda: DATA.cities.orinda.population,
-      moraga: DATA.cities.moraga.population,
-      format: (v: number) => v.toLocaleString(),
-    },
-    {
-      label: "Median Income",
-      lafayette: DATA.cities.lafayette.medianIncome,
-      orinda: DATA.cities.orinda.medianIncome,
-      moraga: DATA.cities.moraga.medianIncome,
-      format: (v: number) => `$${Math.round(v / 1000)}K`,
-    },
-    {
-      label: "Median Home Value",
-      lafayette: DATA.cities.lafayette.medianHomeValue,
-      orinda: DATA.cities.orinda.medianHomeValue,
-      moraga: DATA.cities.moraga.medianHomeValue,
-      format: (v: number) => v >= 2000000 ? "$2M+" : `$${(v / 1000000).toFixed(1)}M`,
-    },
+  // Top 5 most interesting topics only — nobody cares about Parks at 21% vs 17%
+  const significantTopics = [
+    { topic: "Fire Safety & Wildfire", lafayette: 37.6, orinda: 69.4, moraga: 37.5, significant: true },
+    { topic: "Budget & Revenue", lafayette: 37.6, orinda: 32.3, moraga: 59.4, significant: true },
+    { topic: "Transportation & Traffic", lafayette: 45.9, orinda: 25.8, moraga: 31.3, significant: true },
+    { topic: "Infrastructure & Utilities", lafayette: 16.5, orinda: 27.4, moraga: 42.2, significant: true },
+    { topic: "Housing & Development", lafayette: 55.3, orinda: 43.6, moraga: 50.0, significant: false },
   ];
-
-  const colors = ["#5B9BD5", "#E67E54", "#7B9E6B"];
-  const cityNames = ["Lafayette", "Orinda", "Moraga"];
-
-  const chartW = 720;
-  const labelW = 130;
-  const valueW = 70;
-  const barAreaW = chartW - labelW - valueW;
-  const rowGroupH = 80;
-  const barH = 16;
-  const barGap = 4;
-  const groupGap = 14;
-  const topPad = 30;
-  const svgH = topPad + metrics.length * (rowGroupH + groupGap);
-
-  const globalMax = Math.max(
-    ...metrics.flatMap((m) => [m.lafayette, m.orinda, m.moraga])
-  );
-
-  return (
-    <div ref={ref} className="lam-graphic" style={{ maxWidth: "760px", margin: "3rem auto", padding: "0 1rem" }}>
-      <div style={{
-        fontFamily: "var(--font-sans)",
-        fontSize: "0.8rem",
-        fontWeight: 600,
-        color: "var(--page-text)",
-        textAlign: "center",
-        marginBottom: "0.75rem",
-        letterSpacing: "0.02em",
-      }}>
-        Three Cities at a Glance
-      </div>
-      <svg viewBox={`0 0 ${chartW} ${svgH}`} style={{ width: "100%", height: "auto" }}>
-        {/* Legend */}
-        {cityNames.map((name, i) => (
-          <g key={name} transform={`translate(${labelW + i * 120}, 8)`}>
-            <rect x={0} y={0} width={10} height={10} rx={2} fill={colors[i]} opacity={0.85} />
-            <text x={15} y={9} fill={colors[i]} fontSize="10" fontFamily="var(--font-sans)" fontWeight={500}>{name}</text>
-          </g>
-        ))}
-
-        {metrics.map((metric, mi) => {
-          const groupY = topPad + mi * (rowGroupH + groupGap);
-          const maxVal = Math.max(metric.lafayette, metric.orinda, metric.moraga);
-          const vals = [metric.lafayette, metric.orinda, metric.moraga];
-
-          return (
-            <g key={metric.label}>
-              {/* Metric label */}
-              <text
-                x={labelW - 12}
-                y={groupY + rowGroupH / 2 + 3}
-                textAnchor="end"
-                fill="var(--page-text)"
-                fontSize="11"
-                fontFamily="var(--font-sans)"
-                fontWeight={500}
-              >
-                {metric.label}
-              </text>
-
-              {/* Separator line */}
-              {mi > 0 && (
-                <line
-                  x1={labelW}
-                  y1={groupY - groupGap / 2}
-                  x2={chartW - 10}
-                  y2={groupY - groupGap / 2}
-                  stroke="rgba(255,255,255,0.06)"
-                  strokeWidth={1}
-                />
-              )}
-
-              {/* Bars for each city */}
-              {vals.map((val, ci) => {
-                const barY = groupY + ci * (barH + barGap) + 6;
-                const barW = hasAnimated
-                  ? (val / maxVal) * (barAreaW - 20)
-                  : 0;
-
-                return (
-                  <g key={ci}>
-                    <rect
-                      x={labelW}
-                      y={barY}
-                      width={barW}
-                      height={barH}
-                      rx={3}
-                      fill={colors[ci]}
-                      opacity={0.8}
-                      style={{
-                        transition: `width 1s var(--ease-elegant) ${mi * 0.15 + ci * 0.06}s`,
-                      }}
-                    />
-                    {hasAnimated && (
-                      <text
-                        x={labelW + barW + 8}
-                        y={barY + barH / 2 + 4}
-                        fill={colors[ci]}
-                        fontSize="10"
-                        fontFamily="var(--font-sans)"
-                        fontWeight={600}
-                        style={{
-                          opacity: hasAnimated ? 1 : 0,
-                          transition: `opacity 0.5s ease ${0.8 + mi * 0.15}s`,
-                        }}
-                      >
-                        {metric.format(val)}
-                      </text>
-                    )}
-                  </g>
-                );
-              })}
-            </g>
-          );
-        })}
-      </svg>
-      <p style={{
-        fontFamily: "var(--font-sans)",
-        fontSize: "0.6rem",
-        color: "var(--page-text-muted)",
-        textAlign: "center",
-        marginTop: "0.5rem",
-      }}>
-        Source: U.S. Census Bureau, American Community Survey 5-Year Estimates (2023)
-      </p>
-    </div>
-  );
-}
-
-// ============================================================================
-// VIZ 7: MAPBOX MAP — Lamorinda Cities
-// ============================================================================
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN as string;
-
-const CITY_MARKERS = [
-  { name: "Lafayette", lat: 37.8858, lng: -122.1178, color: "#5B9BD5" },
-  { name: "Orinda", lat: 37.8771, lng: -122.1797, color: "#E67E54" },
-  { name: "Moraga", lat: 37.8349, lng: -122.1297, color: "#7B9E6B" },
-];
-
-function LamorindaMap() {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
 
   return (
     <div
@@ -558,54 +306,180 @@ function LamorindaMap() {
       className="lam-graphic"
       style={{
         maxWidth: "760px",
-        margin: "2rem auto 3rem",
-        borderRadius: "12px",
-        overflow: "hidden",
-        border: "1px solid var(--card-border)",
-        height: "340px",
+        margin: "3rem auto",
+        padding: "0 1rem",
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        transform: isVisible ? "translateY(0)" : "translateY(30px)",
         transition: "all 0.8s var(--ease-elegant)",
       }}
     >
-      <Map
-        initialViewState={{
-          longitude: -122.155,
-          latitude: 37.862,
-          zoom: 11.8,
-        }}
-        style={{ width: "100%", height: "100%" }}
-        mapStyle="mapbox://styles/mapbox/dark-v11"
-        mapboxAccessToken={MAPBOX_TOKEN}
-        interactive={false}
-        attributionControl={false}
-      >
-        {CITY_MARKERS.map((city) => (
-          <Marker key={city.name} longitude={city.lng} latitude={city.lat} anchor="bottom">
-            <div style={{ textAlign: "center" }}>
-              <div style={{
-                width: "12px",
-                height: "12px",
-                borderRadius: "50%",
-                background: city.color,
-                border: "2px solid rgba(255,255,255,0.6)",
-                margin: "0 auto 4px",
-                boxShadow: `0 0 12px ${city.color}66`,
-              }} />
-              <div style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: "11px",
-                fontWeight: 600,
-                color: city.color,
-                textShadow: "0 1px 4px rgba(0,0,0,0.8)",
-                whiteSpace: "nowrap",
-              }}>
-                {city.name}
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        color: "var(--page-text)",
+        textAlign: "center",
+        marginBottom: "1rem",
+        letterSpacing: "0.02em",
+      }}>
+        What Each City Talks About
+      </div>
+      <table className="lam-comparison-table">
+        <thead>
+          <tr>
+            <th style={{ textAlign: "left", color: "var(--page-text-muted)" }}>Topic</th>
+            <th style={{ color: "#5B9BD5" }}>Lafayette</th>
+            <th style={{ color: "#E67E54" }}>Orinda</th>
+            <th style={{ color: "#7B9E6B" }}>Moraga</th>
+            <th style={{ color: "var(--page-text-muted)", width: "60px" }}>Sig.</th>
+          </tr>
+        </thead>
+        <tbody>
+          {significantTopics.map((row) => {
+            const max = Math.max(row.lafayette, row.orinda, row.moraga);
+            return (
+              <tr key={row.topic}>
+                <td style={{ textAlign: "left" }}>{row.topic}</td>
+                <td style={{ fontWeight: row.lafayette === max ? 700 : 400, color: row.lafayette === max ? "#5B9BD5" : "var(--page-text)" }}>
+                  {row.lafayette.toFixed(0)}%
+                </td>
+                <td style={{ fontWeight: row.orinda === max ? 700 : 400, color: row.orinda === max ? "#E67E54" : "var(--page-text)" }}>
+                  {row.orinda.toFixed(0)}%
+                </td>
+                <td style={{ fontWeight: row.moraga === max ? 700 : 400, color: row.moraga === max ? "#7B9E6B" : "var(--page-text)" }}>
+                  {row.moraga.toFixed(0)}%
+                </td>
+                <td style={{ textAlign: "center", color: row.significant ? "var(--accent-primary)" : "var(--page-text-muted)" }}>
+                  {row.significant ? "*" : "\u2014"}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.6rem",
+        color: "var(--page-text-muted)",
+        marginTop: "0.75rem",
+        lineHeight: 1.6,
+      }}>
+        Percentage of council meetings since January 2023 where topic appeared.
+        n&nbsp;=&nbsp;85 Lafayette, 62 Orinda, 64 Moraga.
+        * = statistically significant difference (chi-squared, <em style={{ fontStyle: "italic" }}>p</em>&nbsp;&lt;&nbsp;0.05, Bonferroni-corrected).
+        Bold = highest rate for that topic.
+      </p>
+    </div>
+  );
+}
+
+// ============================================================================
+// VIZ 1: TRI-CITY STAT CARDS (SF-style card grid)
+// ============================================================================
+function TriCityStatCards() {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.15 });
+
+  const cities = [
+    {
+      key: "lafayette",
+      name: "Lafayette",
+      color: "#5B9BD5",
+      cssClass: "lam-city-card--lafayette",
+      stats: [
+        { value: DATA.cities.lafayette.population.toLocaleString(), label: "population" },
+        { value: `$${Math.round(DATA.cities.lafayette.medianIncome / 1000)}K`, label: "median income" },
+        { value: "$2M+", label: "median home" },
+        { value: `${DATA.cities.lafayette.ownerOccupiedPct}%`, label: "owner-occupied" },
+      ],
+    },
+    {
+      key: "orinda",
+      name: "Orinda",
+      color: "#E67E54",
+      cssClass: "lam-city-card--orinda",
+      stats: [
+        { value: DATA.cities.orinda.population.toLocaleString(), label: "population" },
+        { value: `$${Math.round(DATA.cities.orinda.medianIncome / 1000)}K`, label: "median income" },
+        { value: `$${(DATA.cities.orinda.medianHomeValue / 1000000).toFixed(1)}M`, label: "median home" },
+        { value: `${DATA.cities.orinda.ownerOccupiedPct}%`, label: "owner-occupied" },
+      ],
+    },
+    {
+      key: "moraga",
+      name: "Moraga",
+      color: "#7B9E6B",
+      cssClass: "lam-city-card--moraga",
+      stats: [
+        { value: DATA.cities.moraga.population.toLocaleString(), label: "population" },
+        { value: `$${Math.round(DATA.cities.moraga.medianIncome / 1000)}K`, label: "median income" },
+        { value: `$${(DATA.cities.moraga.medianHomeValue / 1000000).toFixed(1)}M`, label: "median home" },
+        { value: `${DATA.cities.moraga.ownerOccupiedPct}%`, label: "owner-occupied" },
+      ],
+    },
+  ];
+
+  return (
+    <div
+      ref={ref}
+      className="lam-graphic"
+      style={{
+        maxWidth: "760px",
+        margin: "3rem auto",
+        padding: "0 1rem",
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(30px)",
+        transition: "all 0.8s var(--ease-elegant)",
+      }}
+    >
+      <div style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.8rem",
+        fontWeight: 600,
+        color: "var(--page-text)",
+        textAlign: "center",
+        marginBottom: "1.25rem",
+        letterSpacing: "0.02em",
+      }}>
+        Three Cities at a Glance
+      </div>
+      <div className="lam-city-cards">
+        {cities.map((city) => (
+          <div key={city.key} className={`lam-city-card ${city.cssClass}`}>
+            <div className="lam-city-name">{city.name}</div>
+            {city.stats.map((stat, i) => (
+              <div key={i} style={{ marginBottom: i < city.stats.length - 1 ? "1rem" : 0 }}>
+                <div style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "1.75rem",
+                  fontWeight: 600,
+                  color: "var(--accent-primary)",
+                  lineHeight: 1.1,
+                }}>
+                  {stat.value}
+                </div>
+                <div style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.7rem",
+                  color: "var(--page-text-muted)",
+                  letterSpacing: "0.02em",
+                  marginTop: "0.15rem",
+                }}>
+                  {stat.label}
+                </div>
               </div>
-            </div>
-          </Marker>
+            ))}
+          </div>
         ))}
-      </Map>
+      </div>
+      <p style={{
+        fontFamily: "var(--font-sans)",
+        fontSize: "0.6rem",
+        color: "var(--page-text-muted)",
+        textAlign: "center",
+        marginTop: "0.75rem",
+      }}>
+        Source: U.S. Census Bureau, American Community Survey 5-Year Estimates (2023)
+      </p>
     </div>
   );
 }
@@ -678,7 +552,7 @@ function MeetingMoodDots() {
         marginBottom: "0.75rem",
         letterSpacing: "0.02em",
       }}>
-        Meeting Mood by City &mdash; Council Stratum, 2023+
+        Meeting Mood by City &mdash; Council Meetings, 2023+
       </div>
       <svg viewBox={`0 0 ${chartW} ${svgH}`} style={{ width: "100%", height: "auto" }}>
         {/* Legend */}
@@ -778,7 +652,7 @@ function MeetingMoodDots() {
         marginTop: "0.5rem",
       }}>
         Each dot = one council meeting. Lafayette has all the red dots; Moraga has none.
-        Council stratum 2023+ &middot; <em style={{ fontStyle: "italic" }}>p</em> &lt; 0.001 (chi-squared)
+        Council meetings Jan 2023+ &middot; <em style={{ fontStyle: "italic" }}>p</em> &lt; 0.001 (chi-squared)
       </p>
     </div>
   );
@@ -1213,9 +1087,6 @@ function TableOfContents() {
 // MAIN PAGE
 // ============================================================================
 export default function LamorindaTrianglePage() {
-  const { ref: topicsRef, isVisible: topicsVisible } = useIntersectionObserver({
-    threshold: 0.15,
-  });
   const { ref: webRef, isVisible: webVisible } = useIntersectionObserver({
     threshold: 0.15,
   });
@@ -1225,11 +1096,6 @@ export default function LamorindaTrianglePage() {
     useIntersectionObserver({ threshold: 0.2 });
   const { ref: roadStatRef, isVisible: roadStatVisible } =
     useIntersectionObserver({ threshold: 0.2 });
-
-  const maxTopicPct = Math.max(
-    ...DATA.councilTopics.flatMap((t) => [t.lafayette, t.orinda, t.moraga]),
-    1
-  );
 
   return (
     <main className="lam-article article-page" data-theme="lamorinda">
@@ -1269,7 +1135,7 @@ export default function LamorindaTrianglePage() {
             >
               Lamorinda Weekly
             </a>{" "}
-            started publishing in 2007. The hills are golden in summer and
+            started publishing in 2006. The hills are golden in summer and
             green in winter. The homes are expensive. The politics are local
             in the truest sense: arguments about oak trees, building setbacks,
             and whether a new convenience store needs 47 or 52 parking spaces
@@ -1279,10 +1145,10 @@ export default function LamorindaTrianglePage() {
           <p>
             Lafayette, the largest of the three with 25,277 residents, hugs a
             BART station and a reinvented downtown along Mount Diablo Boulevard
-            where farm-to-table restaurants share sidewalks with an 88-year-old
+            where farm-to-table restaurants share sidewalks with an 90-year-old
             family hardware store called Diamond K Supply. The city was{" "}
             <a
-              href="https://www.lovelafayette.org/city-hall/about-the-city/history-of-lafayette"
+              href="https://www.lovelafayette.org/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -1298,11 +1164,10 @@ export default function LamorindaTrianglePage() {
             Orinda, immediately to the west, is hillier, wealthier, and more
             fire-prone. Ninety-two percent of its homes are owner-occupied,
             the highest rate in Contra Costa County for a city of its size. Its
-            median household income tops $250,000. Theatre Square, an art deco
-            complex anchoring what passes for a downtown, struggles with retail
+            median household income tops $250,000. Theatre Square, a retail complex anchoring what passes for a downtown, struggles with retail
             vacancies even as the{" "}
             <a
-              href="https://lamorindatheatres.com/"
+              href="https://www.orindamovies.com/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -1313,7 +1178,7 @@ export default function LamorindaTrianglePage() {
             of the highest-risk wildfire zones in the East Bay, and 69% of its
             council meetings since 2023 have touched on fire safety. That
             figure is statistically significant compared to both Lafayette
-            (38%) and Moraga (38%) at <em>p</em> &lt; 0.001.
+            (38%) and Moraga (38%) — a gap too large to be explained by chance.
           </p>
           <p>
             Moraga sits tucked behind both, accessible primarily through
@@ -1328,7 +1193,7 @@ export default function LamorindaTrianglePage() {
           <p>
             These three cities share a fire district, a high school system,
             a water utility, a county library, and the single two-lane road
-            that serves as the primary evacuation route for 36,000 people. They
+            that serves as the primary evacuation route for tens of thousands of residents. They
             share hills that the{" "}
             <a
               href="https://www.eastbaytimes.com/"
@@ -1355,11 +1220,8 @@ export default function LamorindaTrianglePage() {
         </div>
       </section>
 
-      {/* ---- Visual: Tri-city comparison bar chart (SVG) ---- */}
-      <TriCityBarChart />
-
-      {/* ---- Visual: Mapbox map ---- */}
-      <LamorindaMap />
+      {/* ---- Visual: Tri-city stat cards ---- */}
+      <TriCityStatCards />
 
       {/* ================================================================
           CHAPTER 2 — FIRE AND FEAR
@@ -1372,7 +1234,7 @@ export default function LamorindaTrianglePage() {
         <div className="article-body-prose">
           <p>
             On an October evening in 2024, Moraga-Orinda Fire District Chief
-            Dave Winoker walked into a joint board meeting with 70 days left
+            Dave Winnacker walked into a joint board meeting with 70 days left
             before retirement and delivered what multiple elected officials
             later called the most persuasive presentation they had ever seen.
             The subject was Zone Zero&nbsp;&mdash; the five-foot perimeter
@@ -1394,7 +1256,7 @@ export default function LamorindaTrianglePage() {
           <p>
             &ldquo;I don&rsquo;t see how this can be both a crisis and not
             important enough to suggest a change in our landscaping,&rdquo;
-            Winoker told the room. He was speaking to elected officials from
+            Winnacker told the room. He was speaking to elected officials from
             both cities, but the remark landed differently on each side of
             the hills. Brandyn Iverson, an Orinda council member who opened by
             admitting her spouse had begged her not to be &ldquo;yet another
@@ -1411,7 +1273,7 @@ export default function LamorindaTrianglePage() {
             properties at $5,000 to $10,000 each. &ldquo;Just do the math.
             We&rsquo;re talking 20 to $40 million that you&rsquo;re putting on
             Moraga residents,&rdquo; he said. &ldquo;Just like a property
-            tax.&rdquo; Board President Mike Romer broke protocol and responded
+            tax.&rdquo; Board President Mike Roemer broke protocol and responded
             directly: &ldquo;I wonder if the next speaker is going to deal
             with the cost of rebuilding this community if it burns to the
             ground.&rdquo;
@@ -1421,9 +1283,9 @@ export default function LamorindaTrianglePage() {
             apart from most Bay Area suburbs. In our analysis
             of 211 council meetings since January 2023, fire safety appeared in 69% of
             Orinda&rsquo;s meetings, compared to 38% in both Lafayette and
-            Moraga&nbsp;&mdash; statistically significant at <em>p</em> &lt; 0.001. The{" "}
+            Moraga — a difference far too large to be coincidence. The{" "}
             <a
-              href="https://www.fire.ca.gov/"
+              href="https://www.fire.ca.gov/incidents"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -1438,7 +1300,7 @@ export default function LamorindaTrianglePage() {
             evacuation routes. Traffic calming advocates cite emergency vehicle
             access. School board discussions circle back to whether children
             can safely evacuate during school hours. At an August 2025 Orinda
-            Planning Commission hearing on the housing element, a UC Berkeley
+            Planning Commission hearing on the city&rsquo;s housing plan, a UC Berkeley
             environmental sciences professor called Moraga Way &ldquo;already a
             death trap&rdquo; and said rezoning without solving evacuation
             first was &ldquo;absolutely insanity.&rdquo; Nobody on the dais
@@ -1472,7 +1334,7 @@ export default function LamorindaTrianglePage() {
             Zero adoption while acknowledging lower direct risk. Orinda&rsquo;s
             mayor warned that residents who had already spent thousands on
             compliance and still lost insurance would view new mandates
-            with hostility. MOFD Board President Romer declared he was willing
+            with hostility. MOFD Board President Roemer declared he was willing
             to lose his seat: &ldquo;That one term will be good enough for
             me.&rdquo;
           </p>
@@ -1501,9 +1363,10 @@ export default function LamorindaTrianglePage() {
           </p>
           <p>
             Lafayette&rsquo;s defining housing battle played out over nearly a
-            decade. The city&rsquo;s RHNA allocation requires 2,114 new
-            dwelling units in eight years&nbsp;&mdash; a 20% increase for a
-            city with roughly 10,000 existing units. Council Member Wei-Tai
+            decade. Under California&rsquo;s state-mandated housing target,
+            Lafayette must plan for 2,114 new dwelling units in eight
+            years&nbsp;&mdash; a 20% increase for a city with roughly 10,000
+            existing units. Council Member Wei-Tai
             Kwok framed the scale at a November 2023 meeting: &ldquo;We&rsquo;ve
             been assigned 2,114 dwelling units to put in in the next eight
             years. And for a city of just 10,000 dwelling units, that 20%
@@ -1515,20 +1378,21 @@ export default function LamorindaTrianglePage() {
             to the city&rsquo;s housing consultant and asked, flatly:
             &ldquo;You knew. Then why didn&rsquo;t you tell us?&rdquo; The
             accusation&nbsp;&mdash; that the consultant had steered Lafayette
-            toward a RHNA income allocation methodology that maximized downtown
-            density when neighboring cities like Orinda and Walnut Creek used
-            alternatives with less impact&nbsp;&mdash; split the council 3-2
-            on the housing element direction. Mayor Anduri, who sided with the
+            toward a formula for distributing the housing target by income level
+            that maximized downtown density, when neighboring cities like Orinda
+            and Walnut Creek used alternatives with less impact&nbsp;&mdash;
+            split the council 3-2 on the direction of the city&rsquo;s housing
+            plan. Mayor Anduri, who sided with the
             majority, acknowledged the outcome pleased nobody: &ldquo;I think
             we can confidently say that we&rsquo;ve made nobody happy and we
             made specific individuals upset at specific decisions.&rdquo;
           </p>
           <p>
             The policy battles in Lafayette have periodically spilled into
-            raw political conflict. In January 2019, after Council Member Mark
-            Mitchell&rsquo;s death, the city needed to appoint a replacement.
-            The meeting drew 18 speakers, pitted 4,600 voters for candidate
-            Ivor Sampson against supporters of Planning Commissioner Stephen
+            raw political conflict. In January 2019, two months after Council Member Mark
+            Mitchell&rsquo;s death in November 2018, the city needed to appoint a replacement.
+            The meeting drew 18 speakers, pitted supporters of Ivor Samson&nbsp;&mdash; who had received
+            4,600 votes in the November election&nbsp;&mdash; against backers of Planning Commissioner Stephen
             Bliss, and produced accusations of &ldquo;Trumpian&rdquo; political
             intimidation from a former Chamber of Commerce president. Mayor
             Carl Anduri broke a deadlock by reversing his position between
@@ -1536,7 +1400,7 @@ export default function LamorindaTrianglePage() {
             not on the democratic arguments that dominated public comment but
             on the existential threat of Sacramento housing legislation.
             &ldquo;The number one risk that we face right now as a city is
-            coming at us from Sacramento,&rdquo; Anduri said.
+            coming at us from Sacramento,&rdquo; Burks said.
           </p>
           <p>
             Orinda&rsquo;s housing fights take a different form&nbsp;&mdash;
@@ -1550,7 +1414,7 @@ export default function LamorindaTrianglePage() {
             the preceding century. Vice Mayor Iverson acknowledged the core
             fear driving dozens of residents to pack the chamber: &ldquo;The
             momentum of spending $500,000 can become kind of a self-fulfilling
-            thing,&rdquo; he said, validating the concern that once the
+            thing,&rdquo; she said, validating the concern that once the
             environmental review machine starts, approval becomes nearly
             inevitable.
           </p>
@@ -1573,8 +1437,8 @@ export default function LamorindaTrianglePage() {
             Moraga&rsquo;s housing politics run quieter, but the fiscal
             pressure beneath them is louder. Budget appears in 59% of
             Moraga&rsquo;s council meetings&nbsp;&mdash; the highest of any
-            city, significantly above both Lafayette (38%) and Orinda (32%) at{" "}
-            <em>p</em> &lt; 0.005. A young father who grew up in the area
+            city, significantly above Orinda (32%) and Lafayette (38%) at{" "}
+            a statistically significant margin. A young father who grew up in the area
             connected the dots at that November 2023 Lafayette meeting:
             &ldquo;Acalanes High School has lost 17% of its student body in
             seven years,&rdquo; said Gary Bird of East Bay for Everyone. The
@@ -1636,13 +1500,13 @@ export default function LamorindaTrianglePage() {
           </p>
           <p>
             In September 2021, Lafayette&rsquo;s city council convened in
-            the aftermath of a pedestrian death. Crossing guard Ashley Diaz
+            the aftermath of a pedestrian death. Crossing guard Ashley Dias
             had been struck and killed on a road that two professional safety
             studies&nbsp;&mdash; a 2013 Safe Routes to School report and a 2020
             UC Berkeley Safe Trek analysis&nbsp;&mdash; had already flagged as
             dangerous. Jennifer Lieberman, whose 12-year-old son Max had
-            thanked Diaz moments before the man died, told the council: &ldquo;What
-            happened to Mr. Diaz was not an accident. It was a system
+            thanked Dias moments before the man died, told the council: &ldquo;What
+            happened to Mr. Dias was not an accident. It was a system
             failure.&rdquo; Max was the same boy who had lost a classmate to a
             traffic fatality at Burton Valley Elementary two years earlier.
           </p>
@@ -1677,7 +1541,7 @@ export default function LamorindaTrianglePage() {
           <p>
             Transportation and traffic appear in 46% of Lafayette council
             meetings since 2023&nbsp;&mdash; significantly higher than
-            Orinda&rsquo;s 26% at <em>p</em> &lt; 0.02. Part of this reflects
+            Orinda&rsquo;s 26% — a statistically significant gap. Part of this reflects
             Lafayette&rsquo;s denser downtown, but the transcripts suggest
             something deeper: a community that has spent a decade filing
             reports, attending meetings, and watching children jaywalking
@@ -1790,7 +1654,7 @@ export default function LamorindaTrianglePage() {
             59% of council meetings&nbsp;&mdash; significantly more than
             Lafayette (38%) or Orinda (32%). Infrastructure consumes 42% of
             Moraga meetings versus just 16% in Lafayette&nbsp;&mdash; a
-            statistically significant gap (<em>p</em> &lt; 0.001) that
+            statistically significant gap that
             reflects aging pipes, roads, and facilities in a community with
             less fiscal headroom. Moraga&rsquo;s police department&nbsp;&mdash;
             the only independent force in Lamorinda&nbsp;&mdash; costs $4
@@ -1884,7 +1748,7 @@ export default function LamorindaTrianglePage() {
           <p>
             Schools appear in fewer than 10% of council meetings in any of
             the three cities, making them the least-discussed topic in our
-            taxonomy. The irony is impossible to miss: the institution that
+            taxonomy. The institution that
             most defines Lamorinda&rsquo;s identity and property values is
             largely invisible in the civic forums where residents spend their
             political energy. The fire district, which directly employs no
@@ -1948,81 +1812,229 @@ export default function LamorindaTrianglePage() {
           </p>
         </div>
 
-        {/* Institutional Web SVG Diagram */}
+        {/* Institutional Web — Structured Card Layout */}
         <div
           className="lam-graphic"
           ref={webRef}
           style={{
+            maxWidth: "760px",
+            margin: "3rem auto",
+            padding: "0 1rem",
             opacity: webVisible ? 1 : 0,
             transform: webVisible ? "translateY(0)" : "translateY(30px)",
             transition: "all 0.8s var(--ease-elegant)",
           }}
         >
-          <div className="lam-web-diagram">
-            <svg viewBox="0 0 720 480" style={{ width: "100%", height: "auto" }}>
-              {/* City nodes */}
-              <circle cx="140" cy="140" r="55" fill="#5B9BD5" opacity={0.12} stroke="#5B9BD5" strokeWidth={1.5} />
-              <text x="140" y="132" textAnchor="middle" fill="#5B9BD5" fontSize="14" fontWeight={600}>Lafayette</text>
-              <text x="140" y="150" textAnchor="middle" fill="#8b99a8" fontSize="10">25,277</text>
-
-              <circle cx="580" cy="140" r="55" fill="#E67E54" opacity={0.12} stroke="#E67E54" strokeWidth={1.5} />
-              <text x="580" y="132" textAnchor="middle" fill="#E67E54" fontSize="14" fontWeight={600}>Orinda</text>
-              <text x="580" y="150" textAnchor="middle" fill="#8b99a8" fontSize="10">19,472</text>
-
-              <circle cx="360" cy="360" r="55" fill="#7B9E6B" opacity={0.12} stroke="#7B9E6B" strokeWidth={1.5} />
-              <text x="360" y="352" textAnchor="middle" fill="#7B9E6B" fontSize="14" fontWeight={600}>Moraga</text>
-              <text x="360" y="370" textAnchor="middle" fill="#8b99a8" fontSize="10">16,790</text>
-
-              {/* Acalanes UHSD — all three */}
-              <line x1="190" y1="155" x2="530" y2="155" stroke="#4ECDC4" strokeWidth={2} opacity={0.35} />
-              <line x1="360" y1="155" x2="360" y2="310" stroke="#4ECDC4" strokeWidth={2} opacity={0.35} />
-              <rect x="295" y="140" width="130" height="30" rx="8" fill="#1a2636" stroke="#4ECDC4" strokeWidth={1.2} />
-              <text x="360" y="160" textAnchor="middle" fill="#4ECDC4" fontSize="10" fontWeight={600}>Acalanes UHSD</text>
-
-              {/* CC County Sheriff — Lafayette + Orinda */}
-              <line x1="190" y1="125" x2="530" y2="125" stroke="#9B7ED8" strokeWidth={1.5} opacity={0.25} />
-              <rect x="300" y="95" width="120" height="26" rx="6" fill="#1a2636" stroke="#9B7ED8" strokeWidth={1} />
-              <text x="360" y="112" textAnchor="middle" fill="#9B7ED8" fontSize="9" fontWeight={500}>CC County Sheriff</text>
-
-              {/* MOFD Fire — Orinda + Moraga */}
-              <line x1="545" y1="190" x2="395" y2="315" stroke="#E67E54" strokeWidth={2} opacity={0.4} strokeDasharray="6,3" />
-              <rect x="440" y="235" width="110" height="28" rx="8" fill="#1a2636" stroke="#E67E54" strokeWidth={1.2} />
-              <text x="495" y="253" textAnchor="middle" fill="#E67E54" fontSize="10" fontWeight={600}>MOFD Fire</text>
-
-              {/* Lafayette only: ConFire */}
-              <line x1="120" y1="193" x2="105" y2="218" stroke="#5B9BD5" strokeWidth={1.5} opacity={0.35} />
-              <rect x="50" y="218" width="110" height="26" rx="6" fill="#1a2636" stroke="#5B9BD5" strokeWidth={1} opacity={0.8} />
-              <text x="105" y="235" textAnchor="middle" fill="#5B9BD5" fontSize="9" fontWeight={500}>ConFire (County)</text>
-
-              {/* Moraga only: Own Police Dept */}
-              <rect x="290" y="420" width="140" height="26" rx="6" fill="#1a2636" stroke="#7B9E6B" strokeWidth={1} opacity={0.8} />
-              <text x="360" y="437" textAnchor="middle" fill="#7B9E6B" fontSize="9" fontWeight={500}>Moraga Police Dept</text>
-              <text x="360" y="455" textAnchor="middle" fill="#8b99a8" fontSize="7">Independent (12 officers)</text>
-
-              {/* Moraga Way evacuation corridor */}
-              <path d="M 540 190 Q 460 275 390 320" fill="none" stroke="#E05555" strokeWidth={2} opacity={0.45} strokeDasharray="4,2" />
-              <text x="500" y="262" fill="#E05555" fontSize="8" opacity={0.7} transform="rotate(-40, 500, 262)">Moraga Way</text>
-
-              {/* EBMUD Water — all three */}
-              <rect x="10" y="300" width="90" height="22" rx="4" fill="#1a2636" stroke="#8b99a8" strokeWidth={0.5} opacity={0.4} />
-              <text x="55" y="315" textAnchor="middle" fill="#8b99a8" fontSize="7" opacity={0.6}>EBMUD Water</text>
-
-              {/* CC County Library — all three */}
-              <rect x="560" y="400" width="120" height="22" rx="4" fill="#1a2636" stroke="#8b99a8" strokeWidth={0.5} opacity={0.4} />
-              <text x="620" y="415" textAnchor="middle" fill="#8b99a8" fontSize="7" opacity={0.6}>CC County Library</text>
-            </svg>
+          <div style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "0.8rem",
+            fontWeight: 600,
+            color: "var(--page-text)",
+            textAlign: "center",
+            marginBottom: "1.25rem",
+            letterSpacing: "0.02em",
+          }}>
+            Who Governs What
           </div>
-          <p
-            style={{
+
+          {/* Shared Across All Three */}
+          <div className="lam-card" style={{ marginBottom: "1rem", borderTop: "3px solid var(--accent-primary)" }}>
+            <div style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "0.7rem",
-              color: "var(--page-text-muted)",
-              textAlign: "center",
-              marginTop: "0.75rem",
-            }}
-          >
+              fontSize: "0.65rem",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--accent-primary)",
+              marginBottom: "1rem",
+            }}>
+              Shared Across All Three Cities
+            </div>
+            {[
+              { icon: "Acalanes UHSD", desc: "High schools \u2014 Lafayette, Orinda, Moraga, Walnut Creek", detail: "$104M budget, 5,425 students" },
+              { icon: "EBMUD", desc: "Water service \u2014 all three cities", detail: "East Bay Municipal Utility District" },
+              { icon: "CC County Library", desc: "Public library branches \u2014 all three cities", detail: "Contra Costa County Library system" },
+            ].map((item, i) => (
+              <div key={i} style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "0.75rem",
+                padding: "0.6rem 0",
+                borderTop: i > 0 ? "1px solid rgba(255,255,255,0.04)" : "none",
+              }}>
+                <div style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  color: "var(--accent-primary)",
+                  minWidth: "120px",
+                  flexShrink: 0,
+                }}>
+                  {item.icon}
+                </div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--page-text)" }}>
+                    {item.desc}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "var(--page-text-muted)", marginTop: "0.15rem" }}>
+                    {item.detail}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Shared: Orinda + Moraga */}
+          <div className="lam-card" style={{ marginBottom: "1rem", borderTop: "3px solid #E67E54" }}>
+            <div style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.65rem",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "1rem",
+            }}>
+              <span style={{ color: "#E67E54" }}>Orinda</span>
+              <span style={{ color: "var(--page-text-muted)" }}> + </span>
+              <span style={{ color: "#7B9E6B" }}>Moraga</span>
+              <span style={{ color: "var(--page-text-muted)" }}> Only</span>
+            </div>
+            {[
+              { icon: "MOFD Fire", desc: "Fire & emergency services", detail: "$28\u201332M budget, property tax funded" },
+              { icon: "Moraga Way", desc: "Shared evacuation corridor \u2014 2 lanes, 23 min for 3.2 miles at peak", detail: "Primary route for South Orinda and all of Moraga" },
+            ].map((item, i) => (
+              <div key={i} style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: "0.75rem",
+                padding: "0.6rem 0",
+                borderTop: i > 0 ? "1px solid rgba(255,255,255,0.04)" : "none",
+              }}>
+                <div style={{
+                  fontFamily: "var(--font-sans)",
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  color: "#E67E54",
+                  minWidth: "120px",
+                  flexShrink: 0,
+                }}>
+                  {item.icon}
+                </div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--page-text)" }}>
+                    {item.desc}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "var(--page-text-muted)", marginTop: "0.15rem" }}>
+                    {item.detail}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Two-column: Lafayette Only + Moraga Only */}
+          <div className="lam-web-two-col">
+            <div className="lam-card" style={{ borderTop: "3px solid #5B9BD5" }}>
+              <div style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#5B9BD5",
+                marginBottom: "0.75rem",
+              }}>
+                Lafayette Only
+              </div>
+              <div style={{ padding: "0.4rem 0" }}>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", fontWeight: 600, color: "#5B9BD5" }}>
+                  ConFire
+                </div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", color: "var(--page-text)", marginTop: "0.15rem" }}>
+                  County fire service
+                </div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "var(--page-text-muted)", marginTop: "0.1rem" }}>
+                  Contra Costa County Fire Protection District
+                </div>
+              </div>
+            </div>
+
+            <div className="lam-card" style={{ borderTop: "3px solid #7B9E6B" }}>
+              <div style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.65rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "#7B9E6B",
+                marginBottom: "0.75rem",
+              }}>
+                Moraga Only
+              </div>
+              <div style={{ padding: "0.4rem 0" }}>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.7rem", fontWeight: 600, color: "#7B9E6B" }}>
+                  Moraga Police
+                </div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", color: "var(--page-text)", marginTop: "0.15rem" }}>
+                  Own police department (12 officers)
+                </div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "var(--page-text-muted)", marginTop: "0.1rem" }}>
+                  Only independent force in Lamorinda &mdash; $4M, 31% of general fund
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Shared: Lafayette + Orinda */}
+          <div className="lam-card" style={{ borderTop: "3px solid #9B7ED8" }}>
+            <div style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: "0.65rem",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              marginBottom: "0.75rem",
+            }}>
+              <span style={{ color: "#5B9BD5" }}>Lafayette</span>
+              <span style={{ color: "var(--page-text-muted)" }}> + </span>
+              <span style={{ color: "#E67E54" }}>Orinda</span>
+              <span style={{ color: "var(--page-text-muted)" }}> Only</span>
+            </div>
+            <div style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "0.75rem",
+              padding: "0.4rem 0",
+            }}>
+              <div style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                color: "#9B7ED8",
+                minWidth: "120px",
+                flexShrink: 0,
+              }}>
+                CC Sheriff
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.8rem", color: "var(--page-text)" }}>
+                  Police services via Contra Costa County Sheriff
+                </div>
+                <div style={{ fontFamily: "var(--font-sans)", fontSize: "0.65rem", color: "var(--page-text-muted)", marginTop: "0.15rem" }}>
+                  Contract policing &mdash; neither city operates its own department
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p style={{
+            fontFamily: "var(--font-sans)",
+            fontSize: "0.6rem",
+            color: "var(--page-text-muted)",
+            textAlign: "center",
+            marginTop: "1rem",
+          }}>
             Verified against official city, district, and county websites.
-            Dashed line = shared evacuation corridor.
           </p>
         </div>
       </section>
@@ -2044,57 +2056,20 @@ export default function LamorindaTrianglePage() {
             substantive agenda item. The sample sizes&nbsp;&mdash; 85 meetings
             in Lafayette, 62 in Orinda, 64 in Moraga&nbsp;&mdash; are large
             enough for meaningful statistical comparison. Topics marked with
-            an asterisk showed statistically significant differences across
-            the three cities (chi-squared test, Bonferroni-corrected pairwise
-            comparisons).
+            an asterisk showed differences too large to be explained by
+            chance alone.
           </p>
         </div>
 
-        {/* Topic comparison visualization */}
-        <div
-          className="lam-graphic"
-          ref={topicsRef}
-          style={{
-            opacity: topicsVisible ? 1 : 0,
-            transform: topicsVisible ? "translateY(0)" : "translateY(30px)",
-            transition: "all 0.8s var(--ease-elegant)",
-          }}
-        >
-          {DATA.councilTopics.map((t) => (
-            <TopicComparisonBar
-              key={t.topic}
-              topic={t.topic}
-              lafayette={t.lafayette}
-              orinda={t.orinda}
-              moraga={t.moraga}
-              maxPct={maxTopicPct}
-              significant={
-                ["Fire Safety & Wildfire", "Budget & Revenue", "Transportation & Traffic", "Infrastructure & Utilities"].includes(t.topic)
-              }
-            />
-          ))}
-          <p
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontSize: "0.6rem",
-              color: "var(--page-text-muted)",
-              marginTop: "0.75rem",
-            }}
-          >
-            * Statistically significant difference across the three cities
-            (chi-squared, <em>p</em> &lt; 0.05, Bonferroni-corrected pairwise
-            Fisher exact tests). Council stratum only, Jan 2023+. n = 85 /
-            62 / 64. Wilson 95% confidence intervals.
-          </p>
-        </div>
+        {/* Topic comparison table */}
+        <TopicComparisonTable />
 
         <div className="article-body-prose">
           <p>
             Lafayette is the loudest of the three. Its average contentiousness
             score (2.10 on our 5-point scale) and public engagement score
             (2.58) are both the highest, and the difference from Moraga is
-            statistically significant at <em>p</em> &lt; 0.001 on the
-            Kruskal-Wallis test. Nine percent of Lafayette meetings registered
+            statistically significant. Nine percent of Lafayette meetings registered
             as contentious. Moraga recorded zero. Orinda falls between them
             (4.8% contentious) but carries the highest share of engaged
             meetings (81%) compared to Lafayette (72%) and Moraga (55%). The
