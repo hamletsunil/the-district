@@ -1296,8 +1296,9 @@ function VoicesSection() {
             <iframe
               src="https://austintx.new.swagit.com/videos/283723/embed?start=3600"
               title="Dec 7, 2023 \u2014 Special City Council: HOME Phase 1"
-              allow="autoplay; encrypted-media"
+              allow="encrypted-media"
               allowFullScreen
+              loading="lazy"
               style={{ width: "100%", height: "100%", border: "none" }}
             />
           </div>
@@ -1337,8 +1338,9 @@ function VoicesSection() {
             <iframe
               src="https://austintx.new.swagit.com/videos/208390/embed?start=5400"
               title="Feb 15, 2023 \u2014 Special City Council: Police Contract"
-              allow="autoplay; encrypted-media"
+              allow="encrypted-media"
               allowFullScreen
+              loading="lazy"
               style={{ width: "100%", height: "100%", border: "none" }}
             />
           </div>
