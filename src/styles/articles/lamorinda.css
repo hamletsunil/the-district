@@ -96,7 +96,7 @@
 .lam-hero-title {
   font-family: var(--font-display);
   font-weight: 500;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 1.5rem;
 }
 
@@ -109,6 +109,7 @@
 .lam-hero-title-line2 {
   display: block;
   font-size: clamp(2.5rem, 6vw, 4.5rem);
+  padding-bottom: 0.15em;
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -263,6 +264,44 @@
 @media (max-width: 768px) {
   .lam-map-container {
     height: 350px;
+  }
+
+  /* Mobile: make comparison table scrollable */
+  .lam-comparison-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.7rem;
+  }
+
+  /* Mobile: reduce hero title size */
+  .lam-hero-title-line1,
+  .lam-hero-title-line2 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  /* Mobile: reduce editorial section padding */
+  .lam-editorial-section {
+    padding: 3rem 1rem;
+  }
+
+  /* Mobile: reduce conclusion padding */
+  .lam-conclusion {
+    padding: 4rem 1.5rem;
+  }
+
+  .lam-conclusion-number {
+    font-size: 3.5rem;
+  }
+
+  /* Mobile: stat values smaller */
+  .lam-stat-value {
+    font-size: 1.75rem;
+  }
+
+  /* Mobile: ensure institutional web cards stack */
+  .lam-web-two-col {
+    grid-template-columns: 1fr;
   }
 }
 
