@@ -227,7 +227,7 @@ function HeroSection() {
           left: 0,
           right: 0,
           height: "55%",
-          opacity: heroOpacity * 0.85,
+          opacity: heroOpacity * 1.0,
           transform: `translateY(${heroTranslate * 0.5}px)`,
           pointerEvents: "none",
         }}
@@ -1145,7 +1145,7 @@ export default function LamorindaTrianglePage() {
           <p>
             Lafayette, the largest of the three with 25,277 residents, hugs a
             BART station and a reinvented downtown along Mount Diablo Boulevard
-            where farm-to-table restaurants share sidewalks with an 90-year-old
+            where farm-to-table restaurants share sidewalks with a 90-year-old
             family hardware store called Diamond K Supply. The city was{" "}
             <a
               href="https://www.lovelafayette.org/"
@@ -1157,7 +1157,7 @@ export default function LamorindaTrianglePage() {
             with a founding mission that begins: &ldquo;The city of Lafayette
             was incorporated for the preservation and enhancement of the
             semi-rural character of the community.&rdquo; That sentence has been
-            quoted in at least four council meetings in our dataset by members
+            quoted in at least four council meetings in the transcripts by members
             on opposite sides of the housing debate.
           </p>
           <p>
@@ -1186,7 +1186,7 @@ export default function LamorindaTrianglePage() {
             residents), the least wealthy by Lamorinda standards, and the
             quietest politically: nearly half its council meetings were
             classified as routine, and not a single one registered as
-            contentious in our analysis period. The town runs its own
+            contentious since 2023. The town runs its own
             12-officer police department and operates on a general fund of
             roughly $13 million.
           </p>
@@ -1324,7 +1324,7 @@ export default function LamorindaTrianglePage() {
             at $20,000 a year. &ldquo;The only people we could get was
             Scottsdale,&rdquo; he told the council. &ldquo;And we had no
             choice because we didn&rsquo;t want to have our loan cancelled.&rdquo;
-            Nick Warrenoff distilled the problem into a sentence that drew nods
+            Nick Waranoff distilled the problem into a sentence that drew nods
             across the chamber: &ldquo;It&rsquo;s great having low rates, but
             if no one&rsquo;s writing insurance, you&rsquo;re winning the
             wrong battle.&rdquo;
@@ -1495,7 +1495,7 @@ export default function LamorindaTrianglePage() {
         </div>
         <div className="article-body-prose">
           <p>
-            The most emotionally devastating meeting in our entire corpus was
+            The most emotionally devastating meeting in all 998 transcripts was
             not about housing or fire. It was about a crossing guard.
           </p>
           <p>
