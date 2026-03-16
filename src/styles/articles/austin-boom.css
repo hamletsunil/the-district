@@ -115,6 +115,18 @@
   opacity: 0.7;
 }
 
+.au-byline-link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(191, 87, 0, 0.4);
+  transition: text-decoration-color var(--ease-elegant) 0.2s;
+}
+
+.au-byline-link:hover {
+  text-decoration-color: #BF5700;
+}
+
 .au-hero-skyline {
   position: absolute;
   bottom: 0;

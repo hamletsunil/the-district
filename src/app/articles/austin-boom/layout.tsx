@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "2,588 meetings. 93 government bodies. 5,108 hours. The most passionate meetings end in the most lopsided votes.",
     type: "article",
     publishedTime: "2026-03-11T12:00:00.000Z",
-    modifiedTime: "2026-03-11T12:00:00.000Z",
+    modifiedTime: "2026-03-16T18:00:00.000Z",
     authors: ["The District"],
     siteName: "The District",
     url: URL,
@@ -59,7 +59,7 @@ export default function AustinBoomLayout({
             description:
               "We transcribed 2,588 Austin government meetings \u2014 47.5 million words across 93 official bodies. The most passionate meetings end in the most lopsided votes.",
             datePublished: "2026-03-11T12:00:00.000Z",
-            dateModified: "2026-03-11T12:00:00.000Z",
+            dateModified: "2026-03-16T18:00:00.000Z",
             author: {
               "@type": "Person",
               name: "Sunil Rajaraman",

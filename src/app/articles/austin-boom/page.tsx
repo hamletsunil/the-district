@@ -197,9 +197,9 @@ const DATA = {
       sentiment: "negative",
     },
     {
-      text: "Cade died less than five minutes after having a peanut-butter-free snack at the kitchen table after school with his brothers. In less than five minutes, our lives were changed forever.",
+      text: "Kade died less than five minutes after having a peanut-butter-free snack at the kitchen table after school with his brothers. In less than five minutes, our lives were changed forever.",
       speaker: "Julie Damian",
-      role: "Mother of Cade Damian",
+      role: "Mother of Kade Damian",
       meeting: "Planning Commission",
       date: "May 23, 2023",
       videoId: "230911",
@@ -216,7 +216,7 @@ const DATA = {
     },
     {
       text: "I\u2019ve taken time away from my family, kids, work, and stayed up until 3:00 AM many nights to research, navigate the system, and understand what power we as citizens have to stand up to defend our rights.",
-      speaker: "Jade Lavera",
+      speaker: "Jade Lovera",
       role: "District 4 resident, community leader",
       meeting: "Planning Commission",
       date: "Jul 27, 2021",
@@ -573,11 +573,11 @@ function HeroSection({ scrollY }: { scrollY: number }) {
         </h1>
 
         <p className="au-hero-subtitle">
-          Austin talked for five thousand hours. We read the transcript.
+          Austin talked for five thousand hours. We read the transcripts.
         </p>
 
         <p className="au-hero-byline">
-          By Sunil Rajaraman &middot; March 2026
+          By <a href="https://www.linkedin.com/in/sunilrajaraman" target="_blank" rel="noopener noreferrer" className="au-byline-link">Sunil Rajaraman</a> &middot; March 2026
         </p>
       </div>
 
@@ -612,7 +612,7 @@ function LedeSection() {
           area grew 33% between 2010 and 2020, the fastest rate of any
           major American metro. Median home prices doubled, briefly touching
           $550,000 before the market reversed. A failed five-year attempt
-          to rewrite the land development code (CodeNEXT, $8.2 million spent,
+          to rewrite the land development code (CodeNEXT, more than $8 million spent,
           abandoned in 2018) left the zoning debate unfinished. The pandemic
           pushed many early meetings onto Zoom. Voters approved a $7.1 billion
           transit expansion (Project Connect) in November 2020. And then the
@@ -689,10 +689,11 @@ function SystemSection() {
           </p>
           <p>
             Some of these bodies are ephemeral. The Reimagining Public Safety
-            Task Force was created in the summer of 2020 and presented its
-            final recommendations nine months later, calling for $150 million
-            or more to be shifted from the police department to other city
-            services. The task force dissolved. The
+            Task Force was created in the summer of 2020. The council had
+            already voted in August 2020 to reallocate roughly $150 million
+            from the police department; the task force spent ten months
+            developing recommendations for how to use those funds and
+            proposing further reforms. The task force dissolved. The
             debate it catalyzed did not&mdash;police reform consumed dozens
             of meetings across a dozen bodies for years afterward, from
             Public Safety Commission hearings to council budget work sessions.
@@ -775,12 +776,12 @@ function AgendaSection() {
             long tail of the CodeNEXT failure and a city watching its median
             home price approach $550,000. HOME Phase 1 passed in December 2023,
             Phase 2 the following May. Housing&rsquo;s share of meeting
-            discourse has since fallen to 36.0% by 2025&mdash;the argument moved from
+            discourse fell to 36.0% by 2025&mdash;the argument moved from
             &ldquo;whether&rdquo; to &ldquo;implementation.&rdquo;
           </p>
           <p>
-            Budget &amp; Finance, meanwhile, has risen every year without
-            exception: 55.0% of meeting discussion in 2021, 60.9% in 2025. The city
+            Budget &amp; Finance, meanwhile, has climbed from
+            55.0% of meeting discussion in 2021 to 60.9% in 2025. The city
             shifted from &ldquo;how do we house everyone&rdquo; to &ldquo;how
             do we pay for what we promised.&rdquo; Fiscal austerity measures
             are arriving now.
@@ -790,12 +791,12 @@ function AgendaSection() {
             Sustainability climbed steadily from 30.6% to 41.8% between 2021
             and 2024&mdash;Austin Energy rate debates, I-35 expansion reviews,
             water supply concerns during drought years&mdash;yet produced no
-            signature legislation. Talk, by itself, has not produced a vote. What
-            converts meeting volume into votes is a forcing mechanism: a ballot
-            initiative (Prop B), a thirteen-hour hearing that backs council into
-            a binary choice (HOME), or a fiscal crisis that narrows the options
-            to cut or borrow. The environment has the chatter but lacks the
-            crisis moment that collapses deliberation into a single vote.
+            signature legislation. Prop B forced a vote because activists
+            collected enough signatures to put it on the ballot. HOME forced
+            a vote because a thirteen-hour hearing backed council into a
+            binary choice. Budget cuts forced votes because the money ran
+            out. The environment has consumed enormous meeting time but
+            nothing has yet forced the question.
           </p>
         </div>
       </FadeIn>
@@ -932,7 +933,7 @@ function MicrophoneSection() {
             December 2023 HOME hearing</a> that she was &ldquo;nowhere closer
             to home ownership.&rdquo; Julie Damian testified before the{" "}
             <a href={`https://austintx.new.swagit.com/videos/${DATA.testimonyQuotes[3].videoId}`} target="_blank" rel="noopener noreferrer">
-            Planning Commission in May 2023</a> about the death of her son Cade,
+            Planning Commission in May 2023</a> about the death of her son Kade,
             advocating for fence safety standards. She came back two months later
             to testify again.
           </p>
@@ -958,15 +959,16 @@ function MicrophoneSection() {
             scale&mdash;the highest of any meeting in the dataset. Linda Nuno
             told the council: &ldquo;It doesn&rsquo;t matter if I am speaking
             Swahili, French or Japanese. You&rsquo;re still not hearing the
-            voice of the people.&rdquo; Council voted 9-2 to direct negotiators toward a one-year contract over vehement
-            objection.
+            voice of the people.&rdquo; The vote was 9-2.
           </p>
           <p>
-            Sam Kirsch, who told the council he was shot in the head with
-            a less-lethal round by Austin police during the May 2020 protests,
-            testified{" "}
+            Sam Kirsch was shot in the face with a less-lethal round by
+            Austin police during the May 2020 protests&mdash;an injury the
+            city later{" "}
+            <a href="https://www.kvue.com/article/news/politics/austin-mayor-and-council/austin-settlement-man-injured-2020-social-justice-black-lives-matter-protests-sam-kirsch/269-1f111e3e-dfe3-4168-a3f2-d1b59de77073" target="_blank" rel="noopener noreferrer">
+            settled for $4.5 million</a>. He testified{" "}
             <a href="https://austintx.new.swagit.com/videos/116828" target="_blank" rel="noopener noreferrer">
-            for the first time in March 2021</a>. He came back eleven times across
+            for the first time in March 2021</a>. He came back across
             four years. In{" "}
             <a href="https://austintx.new.swagit.com/videos/343677" target="_blank" rel="noopener noreferrer">
             May 2025</a>, he returned: &ldquo;Five weeks ago, my eye had to be
@@ -1158,25 +1160,22 @@ function TemperatureSection() {
           <p>
             The HOME Initiative passed; the housing debate moved from argument
             to implementation.{" "}
-            <a href="https://www.texastribune.org/2024/05/17/austin-lot-size-housing-affordability/" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.texaspolicy.com/austins-simple-fix-for-soaring-housing-costs/" target="_blank" rel="noopener noreferrer">
             Single-family building permits jumped 86% in the first
-            year</a>, according to the Texas Tribune. The police controversy
+            year</a>, according to the Texas Public Policy Foundation. The police controversy
             of 2020&ndash;2023&mdash;the protests, the beanbag rounds, the
             contract fights&mdash;evolved into oversight and reform. The housing market itself cooled:{" "}
             <a href="https://www.wsj.com/real-estate/austin-texas-housing-market-cooldown-f0388afb" target="_blank" rel="noopener noreferrer">
-            the Wall Street Journal called Austin&rsquo;s price reversal</a> the
+
+            The Wall Street Journal called Austin&rsquo;s price reversal</a> the
             most dramatic in the country, easing the existential pressure that
             drove residents to microphones in tears.
           </p>
           <p>
-            Austin processed its hardest questions&mdash;about race,
-            displacement, policing, and growth&mdash;and came out with lower
-            temperatures and intact institutions. Displacement
-            continues. Affordability remains desperate for many. The water
-            system faces infrastructure challenges that the next decade will
-            amplify. The problems remain. But the 93 bodies that argue over
-            them are still meeting, still recording, still accepting public
-            comment.
+            Displacement continues. Affordability remains desperate for
+            many. The water system faces infrastructure challenges that the
+            next decade will amplify. But the 93 bodies that argue over
+            these problems have not stopped convening.
           </p>
         </div>
       </FadeIn>
@@ -1256,13 +1255,12 @@ function RegularsSection() {
             These are not outliers. Austin&rsquo;s transcript archive surfaces
             dozens of names that recur across years and bodies&mdash;residents for whom Wednesday night public comment has become
             as routine as Wednesday itself. Sam
-            Kirsch testified eleven times across four years about homelessness
-            policy, losing an eye in the interval between his first and last
+            Kirsch testified across four years about police
+            accountability, losing an eye in the interval between his first and last
             appearance. He kept coming back.
           </p>
           <p>
-            The regulars carry the institutional memory that city hall
-            itself often lacks&mdash;the people who remember what was promised
+            They are the people who remember what was promised
             in 2021 and show up in 2024 to ask what happened.
           </p>
         </div>
@@ -1375,7 +1373,7 @@ function CloseSection() {
     <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
       <div className="au-body-prose">
         <p>
-          Forty-seven and a half million words. Eighty-one percent of all
+          Forty-seven and a half million words. About 80% of all
           meetings fall Monday through Wednesday&mdash;a schedule that
           self-selects for retirees, activists, and anyone whose employer
           tolerates a midday absence. The 0.7% of meetings held on weekends
@@ -1392,8 +1390,8 @@ function CloseSection() {
           members could nearly recite it. None of this has stopped her.
         </p>
         <p>
-          The data cannot tell us why people keep testifying after the votes
-          are counted. It can only confirm that they do.
+          Forty-seven million words, and Zenobia Joseph is still
+          bringing printouts.
         </p>
       </div>
     </FadeIn>

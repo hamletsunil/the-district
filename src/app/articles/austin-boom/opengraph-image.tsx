@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 export const alt =
-  "Forty-Seven Million Words: Austin talked for five thousand hours. We read the transcript.";
+  "Forty-Seven Million Words: Austin talked for five thousand hours. We read the transcripts.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -118,7 +118,7 @@ export default async function Image() {
             marginTop: 16,
           }}
         >
-          Austin talked for five thousand hours. We read the transcript.
+          Austin talked for five thousand hours. We read the transcripts.
         </p>
 
         {/* Stat bar */}
