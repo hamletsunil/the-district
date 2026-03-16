@@ -7,6 +7,16 @@ import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 
 const articles = [
   {
+    id: "austin-boom",
+    topic: "City Deep Dive",
+    title: "Forty-Seven Million Words",
+    description:
+      "2,588 meetings. 93 government bodies. 5,108 hours. We transcribed every public meeting Austin held in five years\u2014the most passionate debates produced the most lopsided votes.",
+    meta: "15 min read \u00b7 Interactive",
+    colorScheme: "austin",
+    illustrationType: "austin" as const,
+  },
+  {
     id: "pittsburghs-bill",
     topic: "City Deep Dive",
     title: "The Bill Comes Due",
