@@ -1189,7 +1189,7 @@ export default function LamorindaTrianglePage() {
           <p>
             Moraga sits tucked behind both, accessible primarily through
             Orinda via two-lane Moraga Way. It is the smallest (16,790
-            residents), the least wealthy by Lamorinda standards, and the
+            residents), the most self-contained of the three, and the
             quietest politically: nearly half its council meetings were
             classified as routine, and not a single one registered as
             contentious since 2023. The town runs its own
