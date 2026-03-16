@@ -1167,7 +1167,7 @@ export default function LamorindaTrianglePage() {
             on opposite sides of the housing debate.
           </p>
           <p>
-            Orinda, immediately to the west, is hillier, wealthier, and more
+            Orinda, immediately to the west, is hillier, more residential, and more
             fire-prone. Ninety-two percent of its homes are owner-occupied,
             the highest rate in Contra Costa County for a city of its size. Its
             median household income tops $250,000. Theatre Square, a retail complex anchoring what passes for a downtown, struggles with retail
@@ -1723,7 +1723,7 @@ export default function LamorindaTrianglePage() {
           </p>
           <p>
             The budget debates in Moraga carry a different tenor than those in
-            its wealthier neighbors. In Moraga, budget and revenue appear in
+            its larger neighbors. In Moraga, budget and revenue appear in
             59% of council meetings&nbsp;&mdash; significantly more than
             Lafayette (38%) or Orinda (32%). Infrastructure consumes 42% of
             Moraga meetings versus just 16% in Lafayette&nbsp;&mdash; a
