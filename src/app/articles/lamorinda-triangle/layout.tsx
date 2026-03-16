@@ -7,7 +7,7 @@ const URL = `${BASE_URL}/articles/${SLUG}`;
 export const metadata: Metadata = {
   title: "Three Cities, One Fire Zone — The District",
   description:
-    "What 1,700+ government meetings reveal about Lafayette, Orinda, and Moraga — three neighboring cities that share a fire district, a school system, and a set of hills, but govern completely differently.",
+    "What 1,700+ government meetings reveal about Lafayette, Orinda, and Moraga — three neighboring cities that share a school system, a water utility, and a set of hills, but govern completely differently.",
   keywords: [
     "Lamorinda",
     "Lafayette",

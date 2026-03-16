@@ -1114,7 +1114,7 @@ export default function LamorindaTrianglePage() {
           { value: "998", label: "Meetings Transcribed" },
           { value: "14", label: "Government Bodies" },
         ]}
-        finding="Three neighboring cities that share a fire district, a school system, and a set of hills — but approach housing, safety, and spending in completely different ways."
+        finding="Three neighboring cities that share a school system, a water utility, and a set of hills — but approach housing, safety, and spending in completely different ways."
       />
 
       {/* ================================================================
@@ -1133,15 +1133,7 @@ export default function LamorindaTrianglePage() {
             freeway ramps. On the eastern side, the land rises into oak-studded
             ridges where three small cities&nbsp;&mdash; Lafayette, Orinda, and
             Moraga&nbsp;&mdash; occupy a set of sun-bleached valleys that
-            locals have called &ldquo;Lamorinda&rdquo; since at least the{" "}
-            <a
-              href="https://lamorindaweekly.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Lamorinda Weekly
-            </a>{" "}
-            started publishing in 2006. The hills are golden in summer and
+            locals have called &ldquo;Lamorinda&rdquo; for decades. The hills are golden in summer and
             green in winter. The homes are expensive. The politics are local
             in the truest sense: arguments about oak trees, building setbacks,
             and whether a new convenience store needs 47 or 52 parking spaces
@@ -1187,8 +1179,11 @@ export default function LamorindaTrianglePage() {
             (38%) and Moraga (38%) — a gap too large to be explained by chance.
           </p>
           <p>
-            Moraga sits tucked behind both, accessible primarily through
-            Orinda via two-lane Moraga Way. It is the smallest (16,790
+            Moraga sits tucked behind both, connected to the rest of the
+            East Bay primarily through Moraga Way, a winding two-lane road
+            via Orinda. (St. Mary&rsquo;s Road, Moraga Road, and Canyon Road
+            also serve the town, but Moraga Way carries the heaviest traffic
+            and dominates evacuation planning.) It is the smallest (16,790
             residents), the most self-contained of the three, and the
             quietest politically: nearly half its council meetings were
             classified as routine, and not a single one registered as
@@ -1197,9 +1192,12 @@ export default function LamorindaTrianglePage() {
             roughly $13 million.
           </p>
           <p>
-            These three cities share a fire district, a high school system,
-            a water utility, a county library, and the single two-lane road
-            that serves as the primary evacuation route for tens of thousands of residents. They
+            Two of these cities share a fire district (Moraga and Orinda,
+            through MOFD; Lafayette contracts separately with Contra Costa County
+            Fire). All three share a high school system,
+            a water utility, a county library, and a tangle of narrow roads
+            where Moraga Way&nbsp;&mdash; the primary evacuation corridor&nbsp;&mdash;
+            funnels tens of thousands of residents through a single two-lane bottleneck. They
             share hills that the{" "}
             <a
               href="https://www.eastbaytimes.com/"
@@ -1398,8 +1396,8 @@ export default function LamorindaTrianglePage() {
             at $20,000 a year. &ldquo;The only people we could get was
             Scottsdale,&rdquo; he told the council. &ldquo;And we had no
             choice because we didn&rsquo;t want to have our loan cancelled.&rdquo;
-            Nick Waranoff distilled the problem into a sentence that drew nods
-            across the chamber: &ldquo;It&rsquo;s great having low rates, but
+            Nick Waranoff, at the May 29, 2024 Orinda council meeting, distilled
+            the problem into a sentence that drew nods across the chamber: &ldquo;It&rsquo;s great having low rates, but
             if no one&rsquo;s writing insurance, you&rsquo;re winning the
             wrong battle.&rdquo;
           </p>
@@ -1860,7 +1858,7 @@ export default function LamorindaTrianglePage() {
           </p>
           <p>
             These dependencies create pressure points. When Orinda proposes
-            rezoning, Moraga residents pack the hearing because their only
+            rezoning, Moraga residents pack the hearing because their primary
             escape route runs through Orinda&rsquo;s development
             zone&nbsp;&mdash; 23 minutes to travel 3.2 miles on Moraga Way
             during school hours. When the fire chief tells the MOFD board
@@ -2251,6 +2249,25 @@ export default function LamorindaTrianglePage() {
       </div>
 
       <SocialShare title="The Lamorinda Triangle — The District" />
+
+      {/* Corrections */}
+      <div className="lam-editorial-section" style={{ borderTop: "1px solid rgba(78, 205, 196, 0.15)", paddingTop: "2rem", maxWidth: 720, margin: "0 auto" }}>
+        <p style={{ fontFamily: "var(--font-sans)", fontSize: "var(--type-tiny)", textTransform: "uppercase" as const, letterSpacing: "0.1em", color: "var(--accent-primary)", marginBottom: "0.75rem", fontWeight: 600 }}>
+          Corrections &amp; Updates
+        </p>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "var(--page-text-muted)", lineHeight: 1.7 }}>
+          <strong>March 16, 2026:</strong> An earlier version of this article
+          described Moraga Way as Moraga&rsquo;s sole evacuation route. While
+          Moraga Way is the primary evacuation corridor and carries the heaviest
+          traffic, St. Mary&rsquo;s Road, Moraga Road, and Canyon Road also
+          serve the town. The text has been updated. Separately, an earlier
+          reference to a &ldquo;shared fire district&rdquo; among all three
+          cities was imprecise: the Moraga-Orinda Fire District (MOFD) serves
+          Orinda and Moraga; Lafayette contracts separately with Contra Costa
+          County Fire. The language has been clarified.
+        </p>
+      </div>
+
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />
