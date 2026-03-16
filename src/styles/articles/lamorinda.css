@@ -316,13 +316,18 @@
 
 /* ---- Conclusion ---- */
 .lam-conclusion {
-  padding: 10rem 2rem;
+  position: relative;
+  z-index: 10;
+  padding: 6rem 2rem;
   text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
   background: linear-gradient(
     180deg,
     rgba(78, 205, 196, 0.05) 0%,
     rgba(78, 205, 196, 0.12) 100%
   );
+  border-radius: 12px;
 }
 
 .lam-conclusion-number {
