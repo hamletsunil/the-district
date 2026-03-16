@@ -1334,15 +1334,11 @@ export default function LamorindaTrianglePage() {
           <p>
             &ldquo;I don&rsquo;t see how this can be both a crisis and not
             important enough to suggest a change in our landscaping,&rdquo;
-            Winnacker told the room. He was speaking to elected officials from
-            both cities, but the remark landed differently on each side of
-            the hills. Brandyn Iverson, an Orinda council member who opened by
-            admitting her spouse had begged her not to be &ldquo;yet another
-            overzealous over-regulating&rdquo; official, publicly reversed her
-            position during the meeting. &ldquo;Seven years of asking people
-            to do the right thing and educating and all of our measure dollars
-            pounding people over the head with information doesn&rsquo;t
-            change behavior,&rdquo; Iverson said. &ldquo;Enforcement does.&rdquo;
+            Winnacker told the room. The presentation changed minds
+            in real time. At least one elected official who had arrived
+            skeptical of new mandates reversed position before the meeting
+            ended, citing the seven-year track record of voluntary
+            compliance as evidence that education alone was not enough.
           </p>
           <p>
             The sharpest moment came from the audience. Charlie Cork, a
@@ -1489,12 +1485,11 @@ export default function LamorindaTrianglePage() {
             same geologically unstable area. Judy Een, a 51-year resident of
             Tahos Road, cited reports calling Orinda the community with the
             most individual landslide property damage in the United States over
-            the preceding century. Vice Mayor Iverson acknowledged the core
-            fear driving dozens of residents to pack the chamber: &ldquo;The
-            momentum of spending $500,000 can become kind of a self-fulfilling
-            thing,&rdquo; she said, validating the concern that once the
-            environmental review machine starts, approval becomes nearly
-            inevitable.
+            the preceding century. The core fear driving dozens of residents
+            to pack the chamber was procedural momentum: once a city spends
+            $500,000 on environmental review, the political pressure to approve
+            the project becomes nearly irresistible regardless of what the
+            review finds.
           </p>
           <p>
             A design consultant hired to help Orinda write objective design
