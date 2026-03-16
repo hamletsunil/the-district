@@ -18,6 +18,12 @@ import { PullQuote } from "@/components/article/PullQuote";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import type { Source } from "@/types/article";
 import { LamorindaSkylineSVG } from "./skyline-svg";
+
+// Mapbox
+import Map, { Marker } from "react-map-gl/mapbox";
+import "mapbox-gl/dist/mapbox-gl.css";
+
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? "";
 // ============================================================================
 // DATA — Every statistic traces to this object.
 // Meeting analysis: Claude Sonnet 4.6 (classification) + Opus 4.6 (extraction)
@@ -1222,6 +1228,78 @@ export default function LamorindaTrianglePage() {
 
       {/* ---- Visual: Tri-city stat cards ---- */}
       <TriCityStatCards />
+
+      {/* ---- Mapbox: Lamorinda with fire risk context ---- */}
+      <div className="lam-graphic" style={{ maxWidth: 1000, margin: "2rem auto 3rem" }}>
+        <div style={{
+          borderRadius: "12px",
+          overflow: "hidden",
+          border: "1px solid var(--card-border)",
+          height: 420,
+        }}>
+          <Map
+            initialViewState={{
+              longitude: -122.15,
+              latitude: 37.86,
+              zoom: 11.6,
+              pitch: 20,
+            }}
+            style={{ width: "100%", height: "100%" }}
+            mapStyle="mapbox://styles/mapbox/dark-v11"
+            mapboxAccessToken={MAPBOX_TOKEN}
+            interactive={false}
+          >
+            {[
+              { name: "Lafayette", lat: 37.8858, lng: -122.1178, color: "#5B9BD5", fire: "Moderate" },
+              { name: "Orinda", lat: 37.8771, lng: -122.1797, color: "#E67E54", fire: "Very High" },
+              { name: "Moraga", lat: 37.8349, lng: -122.1297, color: "#7B9E6B", fire: "High" },
+            ].map((city) => (
+              <Marker key={city.name} longitude={city.lng} latitude={city.lat} anchor="bottom">
+                <div style={{ textAlign: "center" }}>
+                  <div style={{
+                    width: 14, height: 14, borderRadius: "50%",
+                    background: city.color, border: "2px solid rgba(255,255,255,0.4)",
+                    margin: "0 auto 4px",
+                    boxShadow: `0 0 12px ${city.color}60`,
+                  }} />
+                  <div style={{
+                    fontFamily: "var(--font-sans)", fontSize: "0.7rem",
+                    fontWeight: 600, color: city.color, letterSpacing: "0.04em",
+                  }}>{city.name}</div>
+                  <div style={{
+                    fontFamily: "var(--font-sans)", fontSize: "0.55rem",
+                    color: city.fire === "Very High" ? "#E67E54" : city.fire === "High" ? "#DFA654" : "#8b99a8",
+                    marginTop: 1,
+                  }}>
+                    {city.fire === "Very High" ? "\u26A0 Very High Fire Risk" :
+                     city.fire === "High" ? "\u26A0 High Fire Risk" : "Moderate Fire Risk"}
+                  </div>
+                </div>
+              </Marker>
+            ))}
+            {/* BART stations */}
+            {[
+              { name: "Lafayette BART", lat: 37.8934, lng: -122.1246 },
+              { name: "Orinda BART", lat: 37.8784, lng: -122.1838 },
+            ].map((stn) => (
+              <Marker key={stn.name} longitude={stn.lng} latitude={stn.lat} anchor="center">
+                <div style={{
+                  width: 8, height: 8, borderRadius: 2, background: "#8b99a8",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }} />
+              </Marker>
+            ))}
+          </Map>
+        </div>
+        <p style={{
+          fontFamily: "var(--font-sans)", fontSize: "0.65rem",
+          color: "var(--page-text-muted)", textAlign: "center",
+          marginTop: "0.5rem",
+        }}>
+          Fire hazard severity per CalFire FHSZ designations. Orinda sits in the
+          highest-risk wildfire zone in the East Bay. Small squares mark BART stations.
+        </p>
+      </div>
 
       {/* ================================================================
           CHAPTER 2 — FIRE AND FEAR
