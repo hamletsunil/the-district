@@ -1010,7 +1010,7 @@ function VoicesSection() {
               Piedmont&apos;s three mayors over this period left distinct verbal footprints.
               Teddy Gray King, who served from 2020 to 2022, averaged 12,550 words per meeting &mdash;
               the highest per-session average of any official &mdash; though our diarization
-              confidently identified her voice in only 14 of her sessions. Jen Cavenaugh,
+              confidently identified her voice in 14 meetings. Jen Cavenaugh,
               who followed from 2022 to 2024, appeared at 85 meetings and spoke 730,000 words.
               Betsy Smegal Andersen, the current mayor, has appeared at 86 meetings with
               a somewhat lower total &mdash; tracking the post-peak decline in meeting length
@@ -1152,7 +1152,7 @@ export default function PiedmontsDeliberation() {
           { label: "NLP Classification", content: "437 meetings were analyzed using Claude Sonnet for topic tagging, contentiousness scoring (1-5 scale), and mood classification. Contentiousness measures disagreement intensity, emotional charge, and procedural conflict within each transcript." },
           { label: "Speaker Identification", content: "A custom speaker registry maps AssemblyAI's speaker labels (A, B, C) to verified official names using roll call detection, title mention matching, and fuzzy name matching against ASR variants. 39 current and 12 past officials are tracked." },
           { label: "Time Period", content: "January 6, 2020 through March 16, 2026. Five meetings from 2020-2022 with oversized video files (exceeding AssemblyAI's 5.5GB limit) could not be transcribed." },
-          { label: "Limitations", content: "Speaker diarization is imperfect — meetings with similar-sounding speakers may undercount distinct voices. Topic classification uses NLP probabilities, not hand-coding. We do not have pre-2020 data, so we cannot establish a pre-pandemic baseline for comparison." },
+          { label: "Limitations", content: "Speaker diarization is imperfect — meetings with similar-sounding speakers may undercount distinct voices. Word counts attributed to specific speakers are approximations. Topic classification uses NLP probabilities, not hand-coding; individual meeting classifications (e.g., 'contentious') are algorithmic assessments based on transcript features, not editorial judgments about the conduct of any participant. We do not have pre-2020 data, so we cannot establish a pre-pandemic baseline for comparison." },
         ]}
       />
 
