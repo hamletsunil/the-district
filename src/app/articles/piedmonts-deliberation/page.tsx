@@ -700,16 +700,16 @@ function PickleballLede() {
             {" "}were standing room only &mdash; residents lined up to testify about a sport most
             of them had never played two years earlier. One widower described finding friends
             at the Linda Beach courts after losing his wife. A woman who had lived on Howard
-            Avenue for 53 years called the crack of paddle on polymer ball &ldquo;explosive,
+            Avenue for 53 years called the crack of a pickleball &ldquo;explosive,
             penetrating and nerve-shattering,&rdquo; and warned that striping the courts
             would push her from her home. A lawyer in the audience mentioned litigation.
             The commission voted 5-1 to recommend permanent lines anyway.
           </p>
           <p>
-            That is Piedmont, California, in miniature. A city of roughly 11,000 people, occupying
-            {DATA.summary.areaSquareMiles} square miles completely hemmed in by Oakland, where
+            That is Piedmont, California, in miniature. A city of roughly 11,000 people,
+            {" "}{DATA.summary.areaSquareMiles} square miles completely hemmed in by Oakland, where
             residents will pack a government hearing on a summer weeknight to argue about
-            the acoustic properties of a plastic ball.
+            pickleball acoustics.
           </p>
         </div>
       </FadeIn>
@@ -754,10 +754,10 @@ function ReckoningSection() {
               >
                 School Board session on June 24, 2020
               </a>
-              {" "}&mdash; ran {DATA.longestMeetings[0].words.toLocaleString()} words across
+              {" "}&mdash; ran {DATA.longestMeetings[0].words.toLocaleString()} words over
               five and a half hours. Schools were closed. George Floyd had been killed
-              a month earlier. The meeting opened with an APT representative giving language to
-              something the entire virtual room could feel but nobody had named.
+              a month earlier. The meeting opened with an APT representative naming a feeling
+              the entire Zoom call shared but nobody had put words to.
             </p>
           </div>
         </FadeIn>
@@ -773,7 +773,7 @@ function ReckoningSection() {
         <FadeIn delay={300}>
           <div className="pm-body-prose">
             <p>
-              &ldquo;Equal disequilibrium&rdquo; became the operational condition. COVID appeared
+              &ldquo;Equal disequilibrium&rdquo; is a good name for what followed. COVID appeared
               as a primary topic in 51% of all Piedmont meetings in 2020 &mdash; and in the School
               Board specifically, the figure was higher still. Session after session touched pandemic
               logistics, ventilation studies, hybrid scheduling, or parent fury about reopening
@@ -781,7 +781,7 @@ function ReckoningSection() {
               completely as it had overtaken it.
             </p>
             <p>
-              Two years after Kessler spoke, the second-longest meeting landed. On{" "}
+              Two years later came the second-longest meeting. The School Board convened{" "}
               <a
                 href="https://piedmont.granicus.com/MediaPlayer.php?view_id=9&clip_id=2538"
                 target="_blank"
@@ -809,7 +809,7 @@ function ReckoningSection() {
         <FadeIn delay={500}>
           <div className="pm-body-prose">
             <p>
-              The pattern across these crisis meetings is consistent: Piedmont did not abbreviate.
+              In every crisis meeting, the pattern held: Piedmont did not abbreviate.
               Where other cities might have deferred agenda items or limited public comment,
               Piedmont&apos;s governing bodies sat through it. The five longest meetings in
               the dataset each exceed 45,000 words, and each was driven by forces originating
@@ -854,7 +854,7 @@ function HousingSection() {
               >
                 August 1, 2022
               </a>, when 29 public commenters crammed a Council session to nearly
-              47,000 words. The argument was dense &mdash; literally. Opponents cited Section 9.02
+              47,000 words. Opponents cited Section 9.02
               of Piedmont&apos;s city charter, which they argued mandated a public vote on
               any zoning change.
             </p>
@@ -925,8 +925,8 @@ function TrackingSection() {
                 October 8, 2025
               </a>, the School Board heard from parents who called detracking an equity
               imperative and parents who called it an academic betrayal. A student board member
-              voted no. The board overrode her 5-0. One parent cut through the procedural
-              language with a line that earned the loudest reaction of the evening.
+              voted no &mdash; student members cast advisory votes &mdash; and the board
+              passed the courses 5-0. One parent cut through the procedural language.
             </p>
           </div>
         </FadeIn>
@@ -943,8 +943,8 @@ function TrackingSection() {
           <div className="pm-body-prose">
             <p>
               The tracking debate distilled something that runs through six years of Piedmont
-              transcripts: a community wealthy enough to fund almost anything, arguing about
-              whether funding it equitably means the same thing as funding it well. The school
+              transcripts: a community rich enough to fund its schools generously, divided over
+              whether generosity and equity point in the same direction. The school
               budget crisis of February 2024 carried the same tension. Teachers testified that
               cuts were the deepest since 2008. A special education parent did the math on
               what happens when you defer intervention.
@@ -962,9 +962,8 @@ function TrackingSection() {
         <FadeIn delay={500}>
           <div className="pm-body-prose">
             <p>
-              Intercut with the internal debates is the presence that never fully leaves:
-              Oakland. Piedmont&apos;s border with its surrounding city is, in places, two feet
-              of curb. On{" "}
+              Oakland is never far from the conversation. Piedmont&apos;s border with it is,
+              in places, two feet of curb. During a{" "}
               <a
                 href="https://piedmont.granicus.com/MediaPlayer.php?view_id=9&clip_id=2759"
                 target="_blank"
@@ -972,8 +971,7 @@ function TrackingSection() {
               >
                 September 18, 2023
               </a>, the City Council heard from an Oakland woman during a
-              crime-and-policing discussion. Her testimony was the most direct statement about
-              the border that appears anywhere in the dataset.
+              crime-and-policing discussion. She did not mince words.
             </p>
           </div>
         </FadeIn>
@@ -1061,8 +1059,10 @@ function CloseSection() {
             </a>
             , renewing a parcel tax that funds the school district&apos;s operations. The Piedmont
             Educational Foundation, a private entity that supplements the public budget, contributes
-            approximately $4 million per year &mdash; a per-student figure that most California
-            districts cannot approach.
+            approximately{" "}
+            <a href="https://piedmontedfoundation.org/about" target="_blank" rel="noopener noreferrer">
+              $4 million per year
+            </a>.
           </p>
           <p>
             The{" "}
@@ -1076,7 +1076,7 @@ function CloseSection() {
             , a project that consumed years of Recreation Commission meetings, bond measure
             debates, and construction updates. The Moraga Canyon housing plan passed. The
             pickleball courts were striped. The school calendar committee, which presented
-            nine different schedule versions at a single{" "}
+            nine schedule versions at a single{" "}
             <a
               href="https://piedmont.granicus.com/MediaPlayer.php?view_id=9&clip_id=3113"
               target="_blank"
@@ -1087,18 +1087,11 @@ function CloseSection() {
             , eventually chose one.
           </p>
           <p>
-            Whether all that deliberation produces better governance than a city council
-            that meets for 45 minutes and votes unanimously is a question the transcripts
-            cannot answer. They can show that one community of{" "}
-            {DATA.summary.population.toLocaleString()} people, occupying{" "}
-            {DATA.summary.areaSquareMiles} square miles on one side of a curb, chose to do
-            the work at a scale most cities never attempt.
-          </p>
-          <p>
-            {(DATA.summary.totalWords / 1000000).toFixed(1)} million words.{" "}
-            {DATA.summary.totalHours.toLocaleString()} hours.{" "}
-            {DATA.summary.totalMeetings} meetings.
-            All of it spoken, recorded, and transcribed on one side of a curb.
+            The transcripts cannot tell you whether Piedmont governs better than a city
+            council that meets for 45 minutes and votes unanimously. They can tell you what
+            one community of {DATA.summary.population.toLocaleString()} people chose to do:
+            show up, talk it through, vote, and come back two weeks later to do it again.
+            All of it on the record.
           </p>
         </div>
       </FadeIn>
