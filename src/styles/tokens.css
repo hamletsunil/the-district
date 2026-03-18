@@ -211,6 +211,18 @@ body {
   --card-border: rgba(191, 87, 0, 0.15);
 }
 
+[data-theme="piedmont"] {
+  --page-bg: #111a12;
+  --page-bg-alt: #182019;
+  --page-text: #f0ede6;
+  --page-text-muted: #9a9e93;
+  --accent-primary: #d4a44a;
+  --accent-secondary: #e8c06a;
+  --accent-glow: rgba(212, 164, 74, 0.12);
+  --card-bg: rgba(24, 32, 25, 0.8);
+  --card-border: rgba(212, 164, 74, 0.15);
+}
+
 @theme inline {
   --color-navy-950: var(--navy-950);
   --color-navy-900: var(--navy-900);

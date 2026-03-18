@@ -77,6 +77,11 @@ The District draws from:
 - FBI/BLS/EPA/HUD/FEMA federal datasets
 - Local news reporting and academic research
 
+### The Most Deliberative Square Mile in America
+URL: https://district.myhamlet.com/articles/piedmonts-deliberation
+Published: March 2026
+Summary: Analysis of 461 government meetings (9.3 million words) from Piedmont, California — a tiny, wealthy city entirely surrounded by Oakland. Covers five governing bodies across six years (2020-2026), examining deliberation volume, speaker patterns, topic distribution, and the flashpoint meetings where national crises met local governance.
+
 ## Contact
 
 For corrections, data requests, or press inquiries: https://www.myhamlet.com
