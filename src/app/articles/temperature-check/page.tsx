@@ -80,7 +80,7 @@ const SOURCES = [
   {
     title: "Hamlet",
     outlet: "Civic Intelligence Platform",
-    url: "https://app.myhamlet.com/indices",
+    url: "https://www.myhamlet.com?ref=district",
   },
 ];
 

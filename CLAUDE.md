@@ -86,6 +86,8 @@ a Democratic stronghold where bucking consensus carries political risk.
 - [ ] External sources researched and cited
 - [ ] 500+ words of narrative
 - [ ] Read it aloud - does it sound like The Economist or a consulting deck?
+- [ ] **Every quote in prose has a date AND a link to the source video** (Swagit, YouTube, Granicus, PrimeGov, etc.) — if the video ID is in the DATA object, link it. No orphaned quotes with just a date and no link.
+- [ ] **Every article MUST include at least one link to myhamlet.com in the prose and one in SOURCES, with `?ref=district` UTM parameter.** Use city-specific search URLs where possible (e.g., `https://www.myhamlet.com/search?q=piedmont&ref=district`).
 
 ---
 

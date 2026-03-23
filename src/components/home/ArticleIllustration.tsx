@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh" | "piedmont" | "lamorinda";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -25,6 +25,8 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     "ann-arbor": <AnnArborIllustration />,
     austin: <AustinIllustration />,
     pittsburgh: <PittsburghIllustration />,
+    piedmont: <PiedmontIllustration />,
+    lamorinda: <LamorindaIllustration />,
   };
 
   return (
@@ -1054,6 +1056,182 @@ function PittsburghIllustration() {
 
       {/* Ground */}
       <rect x="0" y="158" width="280" height="22" fill="#FFB81C" opacity="0.06" />
+    </svg>
+  );
+}
+
+function PiedmontIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      <defs>
+        <linearGradient id="pmSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1a1612" />
+          <stop offset="100%" stopColor="#2a2418" />
+        </linearGradient>
+        <linearGradient id="pmGold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#d4a44a" />
+          <stop offset="100%" stopColor="#b08436" />
+        </linearGradient>
+        <linearGradient id="pmHill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#d4a44a" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#2d5a2e" stopOpacity="0.15" />
+        </linearGradient>
+        <linearGradient id="pmTree" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#2d5a2e" />
+          <stop offset="100%" stopColor="#153416" />
+        </linearGradient>
+      </defs>
+
+      {/* Sky */}
+      <rect width="280" height="180" fill="url(#pmSky)" />
+
+      {/* Rolling hills — Piedmont sits on hills above Oakland */}
+      <path d="M0,130 Q40,105 80,115 Q120,95 160,108 Q200,98 240,110 Q270,105 280,112 L280,180 L0,180Z" fill="url(#pmHill)" />
+      <path d="M0,140 Q50,125 100,132 Q140,120 180,128 Q220,118 260,125 L280,122 L280,180 L0,180Z" fill="url(#pmHill)" opacity="0.6" />
+
+      {/* Trees scattered on hills */}
+      <g opacity="0.7">
+        <ellipse cx="30" cy="128" rx="8" ry="12" fill="url(#pmTree)" />
+        <ellipse cx="55" cy="122" rx="6" ry="10" fill="url(#pmTree)" />
+        <ellipse cx="95" cy="118" rx="7" ry="11" fill="url(#pmTree)" />
+        <ellipse cx="130" cy="115" rx="5" ry="9" fill="url(#pmTree)" />
+        <ellipse cx="175" cy="112" rx="8" ry="12" fill="url(#pmTree)" />
+        <ellipse cx="210" cy="116" rx="6" ry="10" fill="url(#pmTree)" />
+        <ellipse cx="245" cy="113" rx="7" ry="11" fill="url(#pmTree)" />
+      </g>
+
+      {/* Small-town buildings — Piedmont civic buildings */}
+      <g filter="url(#softShadow)">
+        {/* City Hall */}
+        <rect x="100" y="85" width="22" height="35" fill="url(#pmGold)" opacity="0.9" rx="1" />
+        <rect x="104" y="80" width="14" height="8" fill="#d4a44a" opacity="0.7" rx="1" />
+        <rect x="109" y="76" width="4" height="6" fill="#d4a44a" opacity="0.5" />
+        {/* School */}
+        <rect x="135" y="92" width="28" height="28" fill="url(#pmGold)" opacity="0.8" rx="1" />
+        <rect x="145" y="87" width="8" height="7" fill="#d4a44a" opacity="0.6" />
+        {/* Houses */}
+        <rect x="70" y="100" width="16" height="20" fill="url(#pmGold)" opacity="0.6" rx="1" />
+        <rect x="180" y="96" width="14" height="24" fill="url(#pmGold)" opacity="0.65" rx="1" />
+        <rect x="205" y="100" width="12" height="18" fill="url(#pmGold)" opacity="0.5" rx="1" />
+      </g>
+
+      {/* Windows — warm lit */}
+      <g opacity="0.8">
+        <rect x="106" y="90" width="3" height="3" fill="#e8c06a" rx="0.5" />
+        <rect x="113" y="90" width="3" height="3" fill="#e8c06a" rx="0.5" />
+        <rect x="106" y="98" width="3" height="3" fill="#e8c06a" rx="0.5" />
+        <rect x="113" y="98" width="3" height="3" fill="#e8c06a" rx="0.5" />
+        <rect x="141" y="98" width="3" height="3" fill="#e8c06a" rx="0.5" />
+        <rect x="148" y="98" width="3" height="3" fill="#e8c06a" rx="0.5" />
+        <rect x="155" y="98" width="3" height="3" fill="#e8c06a" rx="0.5" />
+      </g>
+
+      {/* Distant Oakland skyline — faint in background */}
+      <g opacity="0.12">
+        <rect x="220" y="65" width="6" height="50" fill="#9a9e93" />
+        <rect x="230" y="55" width="8" height="60" fill="#9a9e93" />
+        <rect x="242" y="70" width="5" height="45" fill="#9a9e93" />
+        <rect x="250" y="60" width="7" height="55" fill="#9a9e93" />
+      </g>
+
+      {/* Ambient glow */}
+      <g filter="url(#glow)">
+        <circle cx="110" cy="80" r="2" fill="#d4a44a" opacity="0.3" />
+        <circle cx="150" cy="90" r="1.5" fill="#e8c06a" opacity="0.25" />
+      </g>
+
+      {/* Ground */}
+      <rect x="0" y="158" width="280" height="22" fill="#d4a44a" opacity="0.06" />
+    </svg>
+  );
+}
+
+function LamorindaIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      <defs>
+        <linearGradient id="lamSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0d1f1d" />
+          <stop offset="100%" stopColor="#1a3530" />
+        </linearGradient>
+        <linearGradient id="lamTeal" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4ECDC4" />
+          <stop offset="100%" stopColor="#2DADA6" />
+        </linearGradient>
+        <linearGradient id="lamHill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4ECDC4" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#1a3530" stopOpacity="0.1" />
+        </linearGradient>
+        <linearGradient id="lamSage" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#7B9E6B" />
+          <stop offset="100%" stopColor="#5A7D4A" />
+        </linearGradient>
+      </defs>
+
+      {/* Sky */}
+      <rect width="280" height="180" fill="url(#lamSky)" />
+
+      {/* Mount Diablo — dominant background peak */}
+      <path d="M100,60 Q140,25 180,60 Q200,75 220,90 L60,90 Q80,75 100,60Z" fill="#4ECDC4" opacity="0.12" />
+
+      {/* Rolling hills — three ridges for three cities */}
+      <path d="M0,125 Q30,108 70,118 Q90,112 110,120 L110,180 L0,180Z" fill="url(#lamHill)" opacity="0.8" />
+      <path d="M90,120 Q120,105 150,115 Q170,108 190,118 L190,180 L90,180Z" fill="url(#lamHill)" opacity="0.7" />
+      <path d="M170,118 Q200,102 230,112 Q255,106 280,115 L280,180 L170,180Z" fill="url(#lamHill)" opacity="0.6" />
+
+      {/* Trees — oak-studded hillsides */}
+      <g opacity="0.6">
+        <ellipse cx="25" cy="120" rx="7" ry="10" fill="url(#lamSage)" />
+        <ellipse cx="50" cy="115" rx="5" ry="8" fill="url(#lamSage)" />
+        <ellipse cx="110" cy="114" rx="6" ry="9" fill="url(#lamSage)" />
+        <ellipse cx="150" cy="110" rx="7" ry="10" fill="url(#lamSage)" />
+        <ellipse cx="195" cy="112" rx="5" ry="8" fill="url(#lamSage)" />
+        <ellipse cx="235" cy="108" rx="6" ry="9" fill="url(#lamSage)" />
+        <ellipse cx="260" cy="112" rx="7" ry="10" fill="url(#lamSage)" />
+      </g>
+
+      {/* Three town centers — Lafayette, Orinda, Moraga */}
+      <g filter="url(#softShadow)">
+        {/* Lafayette — left cluster */}
+        <rect x="35" y="98" width="18" height="22" fill="url(#lamTeal)" opacity="0.85" rx="1" />
+        <rect x="55" y="102" width="12" height="18" fill="url(#lamTeal)" opacity="0.7" rx="1" />
+        {/* Orinda — center cluster */}
+        <rect x="120" y="95" width="16" height="25" fill="url(#lamTeal)" opacity="0.9" rx="1" />
+        <rect x="138" y="100" width="14" height="20" fill="url(#lamTeal)" opacity="0.75" rx="1" />
+        {/* Moraga — right cluster */}
+        <rect x="210" y="96" width="15" height="22" fill="url(#lamTeal)" opacity="0.8" rx="1" />
+        <rect x="228" y="100" width="11" height="16" fill="url(#lamTeal)" opacity="0.65" rx="1" />
+      </g>
+
+      {/* Windows */}
+      <g opacity="0.7">
+        <rect x="40" y="103" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="46" y="103" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="40" y="110" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="124" y="100" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="130" y="100" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="124" y="107" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="214" y="101" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+        <rect x="220" y="101" width="2.5" height="2.5" fill="#7BE8E0" rx="0.5" />
+      </g>
+
+      {/* Dividing lines between cities — subtle borders */}
+      <line x1="93" y1="90" x2="93" y2="145" stroke="#4ECDC4" strokeWidth="0.5" opacity="0.15" strokeDasharray="3 3" />
+      <line x1="183" y1="90" x2="183" y2="145" stroke="#4ECDC4" strokeWidth="0.5" opacity="0.15" strokeDasharray="3 3" />
+
+      {/* Ambient glow */}
+      <g filter="url(#glow)">
+        <circle cx="45" cy="95" r="1.5" fill="#4ECDC4" opacity="0.3" />
+        <circle cx="128" cy="92" r="2" fill="#4ECDC4" opacity="0.25" />
+        <circle cx="218" cy="93" r="1.5" fill="#4ECDC4" opacity="0.2" />
+      </g>
+
+      {/* Ground */}
+      <rect x="0" y="158" width="280" height="22" fill="#4ECDC4" opacity="0.06" />
     </svg>
   );
 }

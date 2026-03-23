@@ -64,7 +64,7 @@ export function SubscribeBar() {
         </div>
 
         <a
-          href="https://app.myhamlet.com/signup"
+          href="https://www.myhamlet.com?ref=district"
           target="_blank"
           rel="noopener noreferrer"
           className="subscribe-bar__button"

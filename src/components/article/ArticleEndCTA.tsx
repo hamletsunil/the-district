@@ -9,7 +9,12 @@
 
 import { useState } from "react";
 
-export function ArticleEndCTA() {
+interface ArticleEndCTAProps {
+  cityName?: string;
+  hamletSearchUrl?: string;
+}
+
+export function ArticleEndCTA({ cityName, hamletSearchUrl }: ArticleEndCTAProps = {}) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -74,6 +79,35 @@ export function ArticleEndCTA() {
             )}
           </form>
         )}
+
+        <div className="article-end-cta__divider" />
+
+        <a
+          href={hamletSearchUrl ?? "https://www.myhamlet.com?ref=district"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="article-end-cta__hamlet-link"
+        >
+          <span className="article-end-cta__hamlet-text">
+            {cityName
+              ? `Search ${cityName}'s meetings on Hamlet`
+              : "Explore local government data on Hamlet"}
+          </span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="article-end-cta__hamlet-arrow"
+          >
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </a>
       </div>
     </section>
   );

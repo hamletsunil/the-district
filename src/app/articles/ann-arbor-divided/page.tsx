@@ -253,7 +253,7 @@ const SOURCES: Source[] = [
   {
     title: "Hamlet",
     outlet: "Civic Intelligence Platform",
-    url: "https://app.myhamlet.com/indices/city/ann-arbor-mi",
+    url: "https://www.myhamlet.com?ref=district",
   },
 ];
 
@@ -353,7 +353,7 @@ export default function AnnArborDivided() {
       <div className="aa-author-bio">
         <p>
           <em>
-            <a href="https://www.linkedin.com/in/sunilrajaraman/" target="_blank" rel="noopener noreferrer">Sunil Rajaraman</a> is the founder of The District and <a href="https://myhamlet.com" target="_blank" rel="noopener noreferrer">Hamlet</a>. He links to his LinkedIn rather than his X account, which is either a principled stand or an admission that his tweets aren&rsquo;t very good.
+            <a href="https://www.linkedin.com/in/sunilrajaraman/" target="_blank" rel="noopener noreferrer">Sunil Rajaraman</a> is the founder of The District and <a href="https://www.myhamlet.com?ref=district" target="_blank" rel="noopener noreferrer">Hamlet</a>. He links to his LinkedIn rather than his X account, which is either a principled stand or an admission that his tweets aren&rsquo;t very good.
           </em>
         </p>
       </div>

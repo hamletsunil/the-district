@@ -9,7 +9,7 @@ export function Header() {
       <div className="flex items-center gap-3 district-logo">
         {/* H mark links to parent site */}
         <a
-          href="https://www.myhamlet.com"
+          href="https://www.myhamlet.com?ref=district"
           target="_blank"
           rel="noopener noreferrer"
           className="flex-shrink-0 district-logo-mark hamlet-mark-link"

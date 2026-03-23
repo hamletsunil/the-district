@@ -47,7 +47,7 @@ export function DistrictLogo({ className, showTagline = true, size = "default" }
               Stories from city halls
             </span>
             <a
-              href="https://myhamlet.com"
+              href="https://www.myhamlet.com?ref=district"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[9px] font-medium tracking-[0.15em] district-logo-attribution uppercase mt-2 hamlet-link"

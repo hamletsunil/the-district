@@ -498,6 +498,18 @@
   --accent: #BF5700;
 }
 
+.card-piedmont {
+  background: linear-gradient(135deg, #3a3225 0%, #2a2418 100%);
+  color: #f5efe6;
+  --accent: #d4a44a;
+}
+
+.card-lamorinda {
+  background: linear-gradient(135deg, #1a3530 0%, #122824 100%);
+  color: #f5efe6;
+  --accent: #4ECDC4;
+}
+
 /* ===========================
    CARD TYPOGRAPHY
    =========================== */

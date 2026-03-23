@@ -222,6 +222,7 @@ const SOURCES: Source[] = [
   { title: "Piedmont district officials say overwhelming Measure P victory will be a huge boon for schools", outlet: "East Bay Times", url: "https://www.eastbaytimes.com/2024/11/13/piedmont-district-officials-say-overwhelming-measure-p-victory-will-be-a-huge-boon-for-schools/" },
   { title: "Moraga Canyon specific plan clears another hurdle with Council adoption", outlet: "Piedmont Exedra", url: "https://piedmontexedra.com/2025/10/moraga-canyon-specific-plan-clears-another-hurdle-with-council-adoption-monday-night" },
   { title: "Piedmont Educational Foundation — About", outlet: "PEF", url: "https://piedmontedfoundation.org/about" },
+  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?q=piedmont&ref=district" },
 ];
 
 // ============================================================================
@@ -719,7 +720,7 @@ function PickleballLede() {
       <FadeIn delay={200}>
         <div className="pm-body-prose" style={{ marginTop: "2rem" }}>
           <p>
-            The pickleball hearing was one of {DATA.summary.totalMeetings} public meetings
+            The pickleball hearing was one of <a href="https://www.myhamlet.com/search?q=piedmont&ref=district" target="_blank" rel="noopener noreferrer">{DATA.summary.totalMeetings} public meetings</a>{" "}
             Piedmont held between January 2020 and March 2026. Five governing bodies &mdash;
             City Council, School Board, Planning Commission, Park Commission, Recreation
             Commission &mdash; generated approximately 9.3 million words of recorded
@@ -944,8 +945,9 @@ function TrackingSection() {
             <p>
               The tracking debate distilled something that runs through six years of Piedmont
               transcripts: a community rich enough to fund its schools generously, divided over
-              whether generosity and equity point in the same direction. The school
-              budget crisis of February 2024 carried the same tension. Teachers testified that
+              whether generosity and equity point in the same direction. The{" "}
+              <a href="https://www.myhamlet.com/search?q=piedmont+school+board+budget&ref=district" target="_blank" rel="noopener noreferrer">school
+              budget crisis of February 2024</a> carried the same tension. Teachers testified that
               cuts were the deepest since 2008. A special education parent did the math on
               what happens when you defer intervention.
             </p>
@@ -970,7 +972,7 @@ function TrackingSection() {
                 rel="noopener noreferrer"
               >
                 September 18, 2023
-              </a>, the City Council heard from an Oakland woman during a
+              </a>, the <a href="https://www.myhamlet.com/search?q=piedmont+city+council&ref=district" target="_blank" rel="noopener noreferrer">City Council</a> heard from an Oakland woman during a
               crime-and-policing discussion. She did not mince words.
             </p>
           </div>
@@ -1157,7 +1159,7 @@ export default function PiedmontsDeliberation() {
       />
 
       <SocialShare title="The Most Deliberative Square Mile in America" />
-      <ArticleEndCTA />
+      <ArticleEndCTA cityName="Piedmont" hamletSearchUrl="https://www.myhamlet.com/search?q=piedmont&ref=district" />
       <SourcesCitations sources={SOURCES} />
       <SubscribeBar />
     </main>

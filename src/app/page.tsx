@@ -7,6 +7,26 @@ import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 
 const articles = [
   {
+    id: "piedmonts-deliberation",
+    topic: "City Deep Dive",
+    title: "The Most Deliberative Square Mile in America",
+    description:
+      "461 meetings. Five governing bodies. 9.3 million words. We transcribed everything Piedmont said in six years\u2014from pickleball wars to school tracking debates.",
+    meta: "18 min read \u00b7 Interactive",
+    colorScheme: "piedmont",
+    illustrationType: "piedmont" as const,
+  },
+  {
+    id: "lamorinda-triangle",
+    topic: "City Deep Dive",
+    title: "Three Cities, One Fire Zone",
+    description:
+      "1,700+ government meetings. Three cities that share a school system, a water utility, and a set of hills\u2014but govern completely differently.",
+    meta: "15 min read \u00b7 Interactive",
+    colorScheme: "lamorinda",
+    illustrationType: "lamorinda" as const,
+  },
+  {
     id: "austin-boom",
     topic: "City Deep Dive",
     title: "Forty-Seven Million Words",
@@ -221,7 +241,7 @@ function HeroSection() {
           <span className="district-badge-dot" />
           A{" "}
           <a
-            href="https://myhamlet.com"
+            href="https://www.myhamlet.com?ref=district"
             target="_blank"
             rel="noopener noreferrer"
             className="hamlet-link"
@@ -397,7 +417,7 @@ function RevealFooter() {
 
         {/* Team Link */}
         <a
-          href="https://www.myhamlet.com/about"
+          href="https://www.myhamlet.com/about?ref=district"
           target="_blank"
           rel="noopener noreferrer"
           className="reveal-footer-team-link"
@@ -410,7 +430,7 @@ function RevealFooter() {
           <p>
             A{" "}
             <a
-              href="https://myhamlet.com"
+              href="https://www.myhamlet.com?ref=district"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -420,7 +440,7 @@ function RevealFooter() {
           </p>
           <p className="reveal-footer-about">
             <a
-              href="https://www.myhamlet.com/about"
+              href="https://www.myhamlet.com/about?ref=district"
               target="_blank"
               rel="noopener noreferrer"
             >
