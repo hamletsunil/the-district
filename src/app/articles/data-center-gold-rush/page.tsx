@@ -14,6 +14,8 @@ import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
+import { MethodologySection } from "@/components/article/MethodologySection";
+import { PullQuote } from "@/components/article/PullQuote";
 
 // Real data from our analysis
 const DATA = {
@@ -129,7 +131,18 @@ export default function DataCenterArticle() {
       <TheBattlegroundsSection />
       <TheImplicationsSection />
       <ConclusionSection />
-      <MethodologySection />
+      <MethodologySection
+        prefix="dc"
+        title="How We Built This Analysis"
+        items={[
+          { label: "Data Source", content: "Hamlet municipal meeting transcripts from local government bodies across the United States." },
+          { label: "Sample", content: "156 cities with mentions of \"data center\" in their council or commission meeting transcripts." },
+          { label: "Selection Criteria", content: "Cities were included if their transcripts contained references to data centers. This creates an inherent selection bias toward cities where data centers are an active topic of discussion." },
+          { label: "Mentions Analyzed", content: "5,007 transcript segments across all 156 cities." },
+          { label: "Sentiment Scoring", content: "Each mention was classified on a 0-100 sentiment scale: scores below 45 indicate skepticism, 45-55 indicate neutral discussion, and above 55 indicate welcoming sentiment." },
+          { label: "Limitations", content: "Coverage varies by region. Sentiment scores are derived from NLP analysis and may not capture sarcasm, irony, or complex rhetorical positions. All verbatim quotes are sourced from publicly available municipal meeting transcripts." },
+        ]}
+      />
       <SocialShare title="The Data Center Gold Rush: Inside the local battles for AI infrastructure" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
@@ -563,6 +576,16 @@ function TheGeographySection() {
           at 49.9&mdash;fitting for a state that prides itself on business-friendliness
           while grappling with grid reliability.
         </p>
+      </div>
+
+      <PullQuote
+        text="Data centers, in this context, aren't a question mark—they're part of the plan."
+        city="Temple"
+        state="TX"
+        className="dc-pull-quote"
+      />
+
+      <div className="article-body-prose">
         <p>
           The most skeptical major state? <strong>Illinois, at 43.8</strong>.
         </p>
@@ -687,47 +710,6 @@ function ConclusionSection() {
             Where it goes next depends on what happens in rooms like these.
           </p>
         </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// METHODOLOGY
-// ============================================================================
-function MethodologySection() {
-  return (
-    <section className="dc-methodology-editorial">
-      <div className="article-body-prose">
-        <p>
-          <strong>Data source:</strong> Municipal meeting transcripts from city
-          councils and planning commissions, collected by Hamlet.
-        </p>
-        <p>
-          <strong>Sample:</strong> 156 cities across the United States
-        </p>
-        <p>
-          <strong>Selection criteria:</strong> Cities were included if they had
-          transcript segments containing &ldquo;data center&rdquo; in Hamlet&rsquo;s
-          database. This creates selection bias&mdash;we over-represent cities with
-          accessible meeting recordings and active data center discussions.
-        </p>
-        <p>
-          <strong>Mentions analyzed:</strong> 5,007 transcript segments containing
-          &ldquo;data center&rdquo;
-        </p>
-        <p>
-          <strong>Sentiment scoring:</strong> NLP analysis on a 0-100 scale (below
-          45 = skeptical, 45-55 = neutral, above 55 = welcoming). These thresholds
-          are analytical conventions.
-        </p>
-        <p>
-          <strong>Limitations:</strong> Coverage varies by region; not all cities
-          in the US are represented. The external sources cited validate that data
-          center debates are active in specific cities; sentiment scores are derived
-          from Hamlet&rsquo;s proprietary NLP analysis. All quotes are verbatim
-          from transcripts.
-        </p>
       </div>
     </section>
   );

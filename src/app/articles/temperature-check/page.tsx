@@ -14,6 +14,8 @@ import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
+import { MethodologySection } from "@/components/article/MethodologySection";
+import { PullQuote } from "@/components/article/PullQuote";
 
 // Real data from our analysis of 438 cities with friction metrics
 const DATA = {
@@ -102,7 +104,20 @@ export default function TemperatureCheckArticle() {
       <CalmestCitiesSection />
       <StatePatternSection />
       <ImplicationsSection />
-      <MethodologySection />
+      <MethodologySection
+        prefix="temp"
+        title="How We Built This Analysis"
+        items={[
+          { label: "Data Source", content: "438 cities from the Hamlet transcript database with 9 or more transcribed public meetings." },
+          { label: "Selection Criteria", content: "Cities must have 9 or more transcribed meetings to be included. This threshold creates a selection bias toward cities with active meeting documentation." },
+          { label: "Contention Rate", content: "The percentage of discussion blocks containing adversarial language, scored on a 0-100 scale." },
+          { label: "Opposition Frequency", content: "The percentage of meetings with explicit opposition statements, scored on a 0-100 scale." },
+          { label: "Friction Score", content: "Calculated as 60% contention rate plus 40% opposition frequency. This weights the intensity of debate more heavily than the mere presence of opposition." },
+          { label: "Minimum Coverage", content: "The 9-meeting threshold ensures a baseline of data per city but may exclude cities with legitimate civic activity that simply haven't been transcribed." },
+          { label: "Limitations", content: "Transcript quality varies by source. NLP-based classification may misidentify heated agreement as opposition, or polite disagreement as consensus. Cities with professional transcription services may show different patterns than those relying on automated transcription." },
+          { label: "Date Range", content: "2023 through January 2025." },
+        ]}
+      />
       <SocialShare title="The Temperature Check: Where local politics runs hot" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
@@ -527,6 +542,14 @@ function ImplicationsSection() {
           speak out, and challenge proposals are the lifeblood of local democracy.
           A city with zero opposition might indicate apathy, not harmony.
         </p>
+
+        <PullQuote
+          text="High friction isn't inherently bad. Engaged citizens who show up, speak out, and challenge proposals are the lifeblood of local democracy."
+          city=""
+          state=""
+          className="temp-pull-quote"
+        />
+
         <p>
           But friction scores have predictive value. A project in Grants Pass will
           face a different reception than one in Sparks. Understanding the pattern
@@ -559,68 +582,6 @@ function ImplicationsSection() {
             <div className="temp-takeaway-label">National average friction score</div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// SECTION 7: METHODOLOGY
-// ============================================================================
-function MethodologySection() {
-  return (
-    <section className="temp-section temp-methodology">
-      <div className="article-prose-header">
-        <span className="article-section-num">Methodology</span>
-        <h2 className="gradient-text">How We Measured Friction</h2>
-      </div>
-
-      <div className="article-body-prose article-body-prose-small">
-        <p>
-          <strong>Data Source:</strong> Meeting transcripts from 438 cities in the
-          Hamlet transcript database, analyzed using natural language processing.
-          We processed transcript segments to identify adversarial language patterns,
-          opposition statements, and discussion intensity.
-        </p>
-        <p>
-          <strong>Selection Criteria:</strong> Cities were included if they had 9+
-          transcribed meetings in Hamlet&rsquo;s database with sufficient audio quality
-          for analysis. This creates selection bias: we over-represent cities with
-          active civic engagement infrastructure and accessible meeting recordings.
-          Cities without transcribed meetings are not represented.
-        </p>
-        <p>
-          <strong>Contention Rate:</strong> Percentage of discussion blocks containing
-          adversarial language. This includes direct opposition (&ldquo;I oppose this&rdquo;),
-          criticism of process (&ldquo;This wasn&rsquo;t properly noticed&rdquo;),
-          challenges to claims (&ldquo;That&rsquo;s not accurate&rdquo;), and interpersonal
-          conflict. Measured on a 0-100 scale.
-        </p>
-        <p>
-          <strong>Opposition Frequency:</strong> Percentage of meetings where at
-          least one speaker explicitly opposed a proposal. Also 0-100 scale.
-        </p>
-        <p>
-          <strong>Overall Friction Score:</strong> Weighted combination of contention
-          rate (60%) and opposition frequency (40%), normalized to 0-100.
-        </p>
-        <p>
-          <strong>Minimum Coverage:</strong> Only cities with 9+ meetings analyzed
-          were included to ensure statistical reliability.
-        </p>
-        <p>
-          <strong>Limitations:</strong> Transcript quality varies by city. Some
-          municipalities don&rsquo;t transcribe all meetings or may edit transcripts.
-          Our NLP models may misclassify some language as adversarial. Friction
-          scores should be interpreted as indicators, not definitive measures.
-          The external sources cited validate city demographics; the friction scores
-          themselves are derived from Hamlet&rsquo;s proprietary NLP analysis of
-          meeting transcripts.
-        </p>
-        <p>
-          <strong>Date Range:</strong> Transcripts analyzed span 2023 through
-          January 2025.
-        </p>
       </div>
     </section>
   );

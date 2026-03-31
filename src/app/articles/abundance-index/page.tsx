@@ -15,6 +15,8 @@ import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
+import { MethodologySection } from "@/components/article/MethodologySection";
+import { PullQuote } from "@/components/article/PullQuote";
 
 // Real data from our analysis of 84 cities with 10+ data center mentions
 const DATA = {
@@ -120,7 +122,26 @@ export default function AbundanceIndexArticle() {
       <TheVoicesSection />
       <StateRankingsSection />
       <ImplicationsSection />
-      <MethodologySection />
+      <PullQuote
+        text="Most analyses of local government stop at approval rates. But a city that approves 80% of projects reluctantly is not the same as one that approves 80% with enthusiasm."
+        city=""
+        state=""
+        className="abundance-pull-quote"
+      />
+      <MethodologySection
+        prefix="abundance"
+        title="How We Built This Analysis"
+        items={[
+          { label: "Data Source", content: "84 cities with 10 or more mentions of \"data center\" in municipal meeting transcripts from the Hamlet database." },
+          { label: "Sentiment Analysis", content: "Each mention was classified as positive, negative, or neutral using NLP sentiment analysis on the surrounding transcript context." },
+          { label: "Abundance Index", content: "Calculated as 60% sentiment score (0-100 scale) plus 40% positive mention ratio. This weights overall tone heavily while accounting for the proportion of welcoming language." },
+          { label: "Classification", content: "Cities scoring 55 or above are classified as YIMBY (welcoming), 45 or below as NIMBY (resistant), and 45-55 as neutral." },
+          { label: "Sample Size Variation", content: "Mention counts vary significantly across cities, from 10 to 300+. Cities with fewer mentions have less reliable index scores." },
+          { label: "Selection Bias", content: "Cities in this dataset self-selected by having active data center discussions in their public meetings. Cities without data center proposals or without digitized transcripts are not represented." },
+          { label: "Limitations", content: "Sentiment analysis has known limitations with sarcasm, irony, and complex rhetorical positions. A statement like \"we welcome data centers that respect our community\" may score as positive despite containing conditions." },
+          { label: "Date Range", content: "January 2023 through January 2025." },
+        ]}
+      />
       <SocialShare title="The Abundance Index: America's most welcoming and resistant cities for development" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
@@ -651,69 +672,6 @@ function ImplicationsSection() {
             <div className="abundance-takeaway-label">Average Abundance Index (above 55 = YIMBY)</div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// SECTION 8: METHODOLOGY
-// ============================================================================
-function MethodologySection() {
-  return (
-    <section className="abundance-section abundance-methodology">
-      <div className="article-prose-header">
-        <span className="article-section-num">Methodology</span>
-        <h2>How We Calculated the Index</h2>
-      </div>
-
-      <div className="article-body-prose article-body-prose-small">
-        <p>
-          <strong>Data Source:</strong> Municipal meeting transcripts from{" "}
-          <strong>84 cities</strong> across the United States, collected via
-          public records and council streaming services. Only cities with 10+
-          mentions of &ldquo;data center&rdquo; in their transcripts were included.
-        </p>
-        <p>
-          <strong>Sentiment Analysis:</strong> Transcript segments were analyzed
-          using natural language processing to classify mentions as positive,
-          negative, or neutral. The sentiment score (0-100) reflects the overall
-          tone of discussion.
-        </p>
-        <p>
-          <strong>Abundance Index Calculation:</strong> The index combines sentiment
-          score (60% weight) with positive mention ratio (40% weight). This weighting
-          emphasizes overall tone while still accounting for the balance of favorable
-          vs. unfavorable mentions. Alternative weightings would shift rankings modestly
-          but preserve the general pattern.
-        </p>
-        <p>
-          <strong>Classification:</strong> Cities with Abundance Index ≥55 are
-          classified as YIMBY; ≤45 as NIMBY; between 45-55 as Neutral. These thresholds
-          are analytical conventions, not bright lines&mdash;a city at 54 is functionally
-          similar to one at 56.
-        </p>
-        <p>
-          <strong>Sample Size Variation:</strong> Mention counts vary significantly
-          by city (from 10 to 300+). Cities with fewer mentions should be interpreted
-          with more caution, as a single heated meeting can skew their scores.
-        </p>
-        <p>
-          <strong>Selection Bias:</strong> These 84 cities self-selected into our
-          dataset by having active data center discussions. They are not a random
-          sample of American cities and likely skew toward areas with existing tech
-          infrastructure or active development proposals.
-        </p>
-        <p>
-          <strong>Limitations:</strong> Sentiment analysis has inherent limitations
-          in capturing sarcasm, irony, or complex positions. This analysis measures
-          how cities <em>discuss</em> data centers, which may differ from how they
-          ultimately <em>vote</em>. Population data from U.S. Census Bureau estimates.
-        </p>
-        <p>
-          <strong>Date Range:</strong> Transcripts analyzed span January 2023 through
-          January 2025, with the majority from 2024-2025.
-        </p>
       </div>
     </section>
   );

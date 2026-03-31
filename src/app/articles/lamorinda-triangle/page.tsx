@@ -204,6 +204,11 @@ const SOURCES: Source[] = [
     outlet: "California Department of Insurance",
     url: "https://www.insurance.ca.gov/",
   },
+  {
+    title: "Hamlet — Search Lamorinda government meetings",
+    outlet: "Hamlet",
+    url: "https://www.myhamlet.com/search?q=lafayette+orinda+moraga&ref=district",
+  },
 ];
 
 // ============================================================================
@@ -1367,7 +1372,7 @@ export default function LamorindaTrianglePage() {
             line of defense. Moraga sits behind them, buffered but not immune.
           </p>
           <p>
-            What the transcripts reveal is that fire has become the rhetorical
+            What the <a href="https://www.myhamlet.com/search?q=lafayette+orinda+moraga&ref=district" target="_blank" rel="noopener noreferrer">transcripts</a> reveal is that fire has become the rhetorical
             lever that moves every other debate. Housing opponents invoke
             evacuation routes. Traffic calming advocates cite emergency vehicle
             access. School board discussions circle back to whether children

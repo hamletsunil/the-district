@@ -389,6 +389,11 @@ const SOURCES: Source[] = [
     url: "https://www.bls.gov/eag/eag.tx_austin_msa.htm",
     accessDate: "2026-03-03",
   },
+  {
+    title: "Hamlet — Search Austin government meetings",
+    outlet: "Hamlet",
+    url: "https://www.myhamlet.com/search?q=austin&ref=district",
+  },
 ];
 
 // Table of contents
@@ -606,6 +611,8 @@ function LedeSection() {
           {DATA.meetings.swagitBodies} government bodies. We classified
           every passage for topic, urgency, and contentiousness using AI,
           then extracted the most significant quotes and speakers.
+          Explore the full archive on{" "}
+          <a href="https://www.myhamlet.com/search?q=austin&ref=district" target="_blank" rel="noopener noreferrer">Hamlet</a>.
         </p>
         <p>
           The window captures Austin at its most volatile. The Austin metro
@@ -1293,14 +1300,16 @@ function VoicesSection() {
       <FadeIn className="au-editorial-section" style={{ paddingTop: 0 }}>
         <div className="au-video-embed">
           <div className="au-video-embed-frame">
-            <iframe
-              src="https://austintx.new.swagit.com/videos/283723/embed?start=3600"
-              title="Dec 7, 2023 \u2014 Special City Council: HOME Phase 1"
-              allow="encrypted-media"
-              allowFullScreen
-              loading="lazy"
-              style={{ width: "100%", height: "100%", border: "none" }}
-            />
+            <a
+              href="https://austintx.new.swagit.com/videos/283723"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="au-video-poster"
+              aria-label="Watch Dec 7, 2023 Special City Council: HOME Phase 1 on Swagit"
+            >
+              <span className="au-video-poster-play" />
+              <span className="au-video-poster-label">Watch on Austin TX Swagit</span>
+            </a>
           </div>
           <div className="au-video-embed-meta">
             <div className="au-video-embed-title">
@@ -1335,14 +1344,16 @@ function VoicesSection() {
       <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
         <div className="au-video-embed">
           <div className="au-video-embed-frame">
-            <iframe
-              src="https://austintx.new.swagit.com/videos/208390/embed?start=5400"
-              title="Feb 15, 2023 \u2014 Special City Council: Police Contract"
-              allow="encrypted-media"
-              allowFullScreen
-              loading="lazy"
-              style={{ width: "100%", height: "100%", border: "none" }}
-            />
+            <a
+              href="https://austintx.new.swagit.com/videos/208390"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="au-video-poster"
+              aria-label="Watch Feb 15, 2023 Special City Council: Police Contract on Swagit"
+            >
+              <span className="au-video-poster-play" />
+              <span className="au-video-poster-label">Watch on Austin TX Swagit</span>
+            </a>
           </div>
           <div className="au-video-embed-meta">
             <div className="au-video-embed-title">

@@ -14,6 +14,8 @@ import { SubscribeBar } from "@/components/article/SubscribeBar";
 import { UpNext } from "@/components/article/UpNext";
 import { SocialShare } from "@/components/article/SocialShare";
 import { AtAGlance } from "@/components/article/AtAGlance";
+import { MethodologySection } from "@/components/article/MethodologySection";
+import { PullQuote } from "@/components/article/PullQuote";
 
 // Real data from our analysis of 1,524 officials across multiple cities
 const DATA = {
@@ -118,7 +120,20 @@ export default function VoteTrackerArticle() {
       <NoVotersSection />
       <TopicBreakdownSection />
       <ImplicationsSection />
-      <MethodologySection />
+      <MethodologySection
+        prefix="vote"
+        title="How We Built This Analysis"
+        items={[
+          { label: "Data Source", content: "Roll-call voting records from Legistar, the municipal government software used by hundreds of U.S. cities to manage legislative proceedings." },
+          { label: "Officials Included", content: "1,524 elected officials across 87 cities who cast 3 or more recorded votes during the analysis period." },
+          { label: "Topic Classification", content: "Votes were classified as administrative (procedural motions, minutes approval, ceremonial resolutions) or substantive (policy, budget, land use, regulation). Topic-specific analysis focuses on substantive votes only." },
+          { label: "Approval Rate", content: "Calculated as yes votes divided by total votes cast per official, excluding abstentions." },
+          { label: "Polarization Index", content: "Measures voting alignment within each council. A score of 0 means all members vote identically; higher scores indicate more frequent disagreement." },
+          { label: "Selection Bias", content: "This dataset over-represents cities that use Legistar and maintain publicly accessible voting records. Smaller municipalities, towns without digital record-keeping, and cities using other platforms are underrepresented." },
+          { label: "Limitations", content: "Roll-call vote recording practices vary by city. Some record only contested votes, inflating apparent dissent rates. Others record all votes, including unanimous procedural items, which can deflate dissent rates. Comparisons across cities should account for these differences." },
+          { label: "Date Range", content: "2023 through January 2025." },
+        ]}
+      />
       <SocialShare title="The Vote Tracker: Newark agrees on everything. Princeton fights about everything. Why?" />
       <ArticleEndCTA />
       <SourcesCitations sources={SOURCES} />
@@ -448,6 +463,14 @@ function ImplicationsSection() {
           unanimity could be healthy consensus; it could be something else. Princeton&rsquo;s
           resistance bloc could be principled skepticism; it could be NIMBYism.
         </p>
+
+        <PullQuote
+          text="Voting records don't explain motives. They reveal patterns."
+          city="Newark"
+          state="NJ"
+          className="vote-pull-quote"
+        />
+
         <p>
           What the data does is point. It identifies where the interesting questions are.
           Why does one New Jersey council never disagree while another fights over every
@@ -456,72 +479,6 @@ function ImplicationsSection() {
         </p>
         <p>
           These are questions for local reporters. The voting records are the map.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-// ============================================================================
-// SECTION 8: METHODOLOGY
-// ============================================================================
-function MethodologySection() {
-  return (
-    <section className="vote-section vote-methodology">
-      <div className="article-prose-header">
-        <span className="article-section-num">Methodology</span>
-        <h2 className="gradient-text">How We Built This Dataset</h2>
-      </div>
-
-      <div className="article-body-prose article-body-prose-small">
-        <p>
-          <strong>Data Source:</strong> Voting records from Legistar, the municipal
-          government software used by hundreds of U.S. cities. We extracted individual
-          roll-call votes and linked them to person records.
-        </p>
-        <p>
-          <strong>Officials Included:</strong> We tracked 1,524 officials who cast at
-          least 3 votes on development-related matters. This threshold ensures
-          a minimum sample while including part-time and recently-elected
-          officials. Officials with fewer than 20 votes should be interpreted with
-          caution&mdash;their rates may change significantly with additional data.
-        </p>
-        <p>
-          <strong>Topic Classification:</strong> Votes were categorized by topic
-          using matter type classifications from each municipality. We distinguish
-          between <em>administrative</em> votes (meeting minutes, ceremonial items,
-          routine approvals&mdash;13,132 votes at 97.1% approval) and <em>substantive</em>
-          votes (budget, zoning, environmental, residential, commercial, infrastructure&mdash;3,073
-          votes at 93.8% approval). The analysis focuses on substantive votes where
-          policy disagreement is meaningful.
-        </p>
-        <p>
-          <strong>Approval Rate:</strong> Calculated as (Yes Votes) / (Yes Votes + No Votes).
-          Abstentions are excluded from the denominator.
-        </p>
-        <p>
-          <strong>Polarization Index:</strong> For councils with 3+ tracked officials,
-          we calculated the difference between the highest and lowest individual
-          approval rates.
-        </p>
-        <p>
-          <strong>Selection Bias:</strong> Our dataset only includes cities that use
-          Legistar and publish machine-readable roll-call votes. This over-represents
-          larger cities with sophisticated record-keeping and excludes municipalities
-          using other systems. The cities in our analysis self-selected by having
-          accessible data infrastructure.
-        </p>
-        <p>
-          <strong>Limitations:</strong> Some cities
-          don&rsquo;t record roll-call votes for routine matters.
-          Vote counts may include procedural votes alongside substantive ones.
-          The sources cited validate that housing and development debates are active
-          in these cities, but do not independently verify individual vote tallies&mdash;those
-          come directly from Legistar records.
-        </p>
-        <p>
-          <strong>Date Range:</strong> Records span 2023 through January 2025,
-          with most data from 2024.
         </p>
       </div>
     </section>
