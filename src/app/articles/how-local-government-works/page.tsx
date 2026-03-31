@@ -134,6 +134,10 @@ function ChapterGrid() {
   return (
     <section className="lg-chapters">
       <div className="lg-chapters-inner">
+        <div className="lg-chapters-intro">
+          <h2>The 14 chapters</h2>
+          <p>Each chapter explores a different dimension of how local government works in America.</p>
+        </div>
         <div className="lg-featured-grid">
           {FEATURED.map((ch, i) => (
             <FadeIn key={ch.id} delay={i * 0.05}>
@@ -170,6 +174,18 @@ function ChapterGrid() {
               </Link>
             </FadeIn>
           ))}
+          {/* Glossary card */}
+          <FadeIn>
+            <Link href={`${basePath}/glossary`} className="lg-compact-card">
+              <div className="lg-compact-accent" style={{ backgroundColor: "#6b7280" }} />
+              <div className="lg-compact-content">
+                <span className="lg-chapter-num">Reference</span>
+                <h3 className="lg-compact-title">Glossary of Terms</h3>
+                <p className="lg-compact-desc">45 key terms in local government, defined for general readers.</p>
+              </div>
+              <span className="lg-compact-arrow">&rarr;</span>
+            </Link>
+          </FadeIn>
         </div>
       </div>
     </section>

@@ -167,7 +167,7 @@ export function InfrastructureChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              Water and sewer utilities are typically organized as enterprise funds, meaning they must
+              Water and sewer utilities are typically organized as <a href="/articles/how-local-government-works/glossary#enterprise-fund">enterprise fund</a>s, meaning they must
               cover their costs through user rates rather than general tax revenue. Rate-setting is a
               political high-wire act. The{" "}
               <a href="https://www.epa.gov/waterfinancecenter/water-affordability-resources-utilities" target="_blank" rel="noopener noreferrer">
@@ -253,7 +253,7 @@ export function InfrastructureChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              Special districts are the quiet workhorses of American local government. The 2022 Census
+              <a href="/articles/how-local-government-works/glossary#special-district">Special districts</a> are the quiet workhorses of American local government. The 2022 Census
               counted{" "}
               <a href="https://www.census.gov/newsroom/press-releases/2023/census-of-governments.html" target="_blank" rel="noopener noreferrer">
                 39,555
@@ -302,7 +302,7 @@ export function InfrastructureChapter() {
               </a>{" "}
               each exceeding $100 million in annual revenue, and consolidation accelerates every year.
               A citizen&rsquo;s ability to participate in local government — to find an agenda, read a
-              staff report, submit public comment — depends on commercial software decisions made by a
+              <a href="/articles/how-local-government-works/glossary#staff-report">staff report</a>, submit public comment — depends on commercial software decisions made by a
               procurement office they have never heard of.
             </p>
           </FadeIn>

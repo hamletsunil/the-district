@@ -108,6 +108,11 @@ Chapters:
 - XIII. Infrastructure: https://district.myhamlet.com/articles/how-local-government-works/infrastructure
 - XIV. The Future: https://district.myhamlet.com/articles/how-local-government-works/challenges
 
+### Glossary of Local Government Terms
+URL: https://district.myhamlet.com/articles/how-local-government-works/glossary
+Published: March 2026
+Summary: 45 key terms in American local government defined for general readers. Covers structure (municipality, county, special district, charter city), process (consent calendar, ordinance, variance, public hearing), law (Dillon's Rule, home rule, preemption, Brown Act, CEQA, eminent domain), finance (property tax, enterprise fund, fiscalization, RHNA), roles (city manager, city clerk, city attorney), and elections (at-large, district, off-cycle, recall, ranked choice voting). Each term links to the chapter(s) where it is discussed.
+
 ## Contact
 
 For corrections, data requests, or press inquiries: https://www.myhamlet.com

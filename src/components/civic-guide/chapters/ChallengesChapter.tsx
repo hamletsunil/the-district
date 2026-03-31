@@ -138,7 +138,7 @@ export function ChallengesChapter() {
               </a>. On average, states preempted{" "}
               <a href="https://phlr.temple.edu/news/2025/10/how-state-laws-have-changed-five-years-impacted-local-decision-making" target="_blank" rel="noopener noreferrer">
                 four policy areas in 2024, up from three in 2019
-              </a>. Florida and Texas have moved from targeted preemption — blocking a specific
+              </a>. Florida and Texas have moved from targeted <a href="/articles/how-local-government-works/glossary#preemption">preemption</a> — blocking a specific
               ordinance in a specific domain — to omnibus restrictions that strip cities of authority
               across a broad range of policies. In 2024, Florida&rsquo;s HB433{" "}
               <a href="https://www.epi.org/blog/updated-epi-preemption-tracker/" target="_blank" rel="noopener noreferrer">
@@ -227,7 +227,7 @@ export function ChallengesChapter() {
             <p className="lg-prose-paragraph">
               Chicago carries{" "}
               <a href="https://umbc.edu/stories/a-fiscal-crisis-is-looming-for-many-us-cities/" target="_blank" rel="noopener noreferrer">
-                $35 billion in unfunded pension liabilities
+                $35 billion in <a href="/articles/how-local-government-works/glossary#unfunded-pension-liability">unfunded pension</a> liabilities
               </a>{" "}
               and nearly $2 billion in unfunded retiree health benefits. Nationally, unfunded public
               pension obligations run to{" "}

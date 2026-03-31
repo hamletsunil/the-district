@@ -135,7 +135,7 @@ export function WhyItMattersChapter() {
             <p className="lg-prose-paragraph">
               The <a href="https://www.census.gov/data/tables/2022/econ/gus/2022-governments.html" target="_blank" rel="noopener noreferrer">2022 Census of Governments</a> counts
               19,491 municipal governments, 16,214 townships, 3,031 counties, 12,546 independent
-              school districts, and 39,555 special districts — those strange, often invisible entities
+              school districts, and 39,555 <a href="/articles/how-local-government-works/glossary#special-district">special districts</a> — those strange, often invisible entities
               that handle everything from mosquito abatement to port operations. Illinois alone has
               6,930 local governments, more than any other state and more than the entire nation of
               Japan. Texas follows with 5,533, then Pennsylvania, California, and Ohio.
@@ -248,7 +248,7 @@ export function WhyItMattersChapter() {
               for the{" "}
               <a href="https://ballotpedia.org/Election_results,_2024:_Analysis_of_voter_turnout_in_the_2024_general_election" target="_blank" rel="noopener noreferrer">
                 2024 presidential election
-              </a>, while the average off-cycle mayoral election draws{" "}
+              </a>, while the average <a href="/articles/how-local-government-works/glossary#off-cycle-election">off-cycle</a> mayoral election draws{" "}
               <a href="https://yankelovichcenter.ucsd.edu/_files/reports/Big-Cities-Tiny-Votes.pdf" target="_blank" rel="noopener noreferrer">
                 just 26 percent of registered voters
               </a>.

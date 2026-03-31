@@ -185,7 +185,7 @@ export function LandUseChapter() {
             <p className="lg-prose-paragraph">
               Getting a project approved means navigating a
               process that ranges from straightforward to Kafkaesque. A project that complies with all
-              zoning standards is entitled to &ldquo;by-right&rdquo; or ministerial approval: staff
+              zoning standards is entitled to &ldquo;<a href="/articles/how-local-government-works/glossary#by-right-development">by-right</a>&rdquo; or ministerial approval: staff
               checks the boxes, issues the permit, no public hearing required. Research from Los
               Angeles found that by-right projects are{" "}
               <a href="https://www.tandfonline.com/doi/full/10.1080/01944363.2022.2106291" target="_blank" rel="noopener noreferrer">
@@ -196,7 +196,7 @@ export function LandUseChapter() {
                 only 6% of homes
               </a>{" "}
               in LA projects of five or more units were approved by-right. Any project requesting a
-              deviation — a zone change, a conditional use permit, a variance, additional height —
+              deviation — a zone change, a conditional use permit, a <a href="/articles/how-local-government-works/glossary#variance">variance</a>, additional height —
               enters the discretionary process: pre-application conference, staff review, environmental
               analysis, planning commission hearing, public notice, and potentially a city council
               appeal. Median permitting for large multifamily projects runs{" "}
@@ -242,7 +242,7 @@ export function LandUseChapter() {
           <FadeIn>
             <p className="lg-prose-paragraph">
               California&rsquo;s Environmental
-              Quality Act (CEQA) requires an environmental analysis for any discretionary government
+              Quality Act (<a href="/articles/how-local-government-works/glossary#ceqa">CEQA</a>) requires an environmental analysis for any discretionary government
               action that may have a significant effect. A full Environmental Impact Report takes{" "}
               <a href="https://strompermit.com/ceqa-eir-process-management/" target="_blank" rel="noopener noreferrer">
                 6 to 12 months
@@ -356,7 +356,7 @@ export function LandUseChapter() {
               Pfizer-anchored redevelopment. The backlash was bipartisan and volcanic: over 80% of
               Americans disapproved, and{" "}
               <a href="https://statecourtreport.org/our-work/analysis-opinion/assessing-state-reaction-supreme-courts-undermining-property-rights" target="_blank" rel="noopener noreferrer">
-                45 states enacted eminent domain reform laws
+                45 states enacted <a href="/articles/how-local-government-works/glossary#eminent-domain">eminent domain</a> reform laws
               </a>{" "}
               — the most widespread legislative response to a Supreme Court decision in American
               history. The irony proved exquisite. Pfizer left New London in 2009. The condemned land{" "}

@@ -77,7 +77,7 @@ export function MoneyChapter() {
                 $2.32 trillion in 2022
               </a>{" "}
               — a sum larger than the GDP of Italy, Brazil, or Canada. Where does the money come
-              from? Property taxes dominate, supplying{" "}
+              from? <a href="/articles/how-local-government-works/glossary#property-tax">Property taxes</a> dominate, supplying{" "}
               <a href="https://taxpolicycenter.org/briefing-book/what-are-sources-revenue-state-and-local-governments" target="_blank" rel="noopener noreferrer">
                 72 percent of all local tax revenue
               </a>. Intergovernmental transfers from state and federal sources provide another 37 percent
@@ -187,7 +187,7 @@ export function MoneyChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              The &ldquo;fiscalization of land use&rdquo; — cities approving developments based on
+              The &ldquo;<a href="/articles/how-local-government-works/glossary#fiscalization-of-land-use">fiscalization of land use</a>&rdquo; — cities approving developments based on
               tax revenue potential rather than community need — is a direct consequence of property
               tax dependence. A shopping center generates sales tax revenue; an apartment building
               generates schoolchildren who cost money to educate. The math pushes cities toward

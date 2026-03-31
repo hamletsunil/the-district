@@ -96,7 +96,7 @@ export function LegalFrameworkChapter() {
                 Dillon&rsquo;s Rule
               </a>{" "}
               to all municipalities, and another 8 that apply it selectively — California, Illinois,
-              and Tennessee among them. In a Dillon&rsquo;s Rule state, if the legislature has not
+              and Tennessee among them. In a <a href="/articles/how-local-government-works/glossary#dillons-rule">Dillon&rsquo;s Rule</a> state, if the legislature has not
               specifically authorized a city to regulate, say, short-term rental platforms, the city
               cannot do so. Virginia is a classic example: its cities must seek explicit enabling
               legislation from Richmond for powers that cities in Colorado or Oregon exercise as a
@@ -132,7 +132,7 @@ export function LegalFrameworkChapter() {
               <a href="https://en.wikipedia.org/wiki/Home_rule_in_the_United_States" target="_blank" rel="noopener noreferrer">
                 home rule
               </a>{" "}
-              movement. Missouri adopted the first home rule provision in 1875, and by the Progressive
+              movement. Missouri adopted the first <a href="/articles/how-local-government-works/glossary#home-rule">home rule</a> provision in 1875, and by the Progressive
               Era, the idea had spread. Today, 10 states grant broad home rule to all municipalities,
               allowing cities to exercise any power not expressly prohibited by the state. The
               practical consequences are profound: a home-rule city can experiment with new forms of
@@ -162,7 +162,7 @@ export function LegalFrameworkChapter() {
           <FadeIn>
             <p className="lg-prose-paragraph">
               The distinction between charter cities and general-law cities operationalizes this
-              divide. A charter city adopts its own governing document — essentially a local
+              divide. A <a href="/articles/how-local-government-works/glossary#charter-city">charter city</a> adopts its own governing document — essentially a local
               constitution — that defines its structure, powers, and procedures. A general-law city
               relies entirely on the state&rsquo;s municipal code. In California,{" "}
               <a href="https://www.spur.org/news/2025-08-25/understanding-city-charters-local-governments-constitution" target="_blank" rel="noopener noreferrer">
@@ -192,7 +192,7 @@ export function LegalFrameworkChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              Against this backdrop, the rise of state preemption — states affirmatively stripping
+              Against this backdrop, the rise of state <a href="/articles/how-local-government-works/glossary#preemption">preemption</a> — states affirmatively stripping
               cities of power — has become the dominant story in intergovernmental relations. The{" "}
               <a href="https://www.nlc.org/article/2025/10/09/five-year-review-how-state-laws-have-impacted-local-decision-making/" target="_blank" rel="noopener noreferrer">
                 NLC&rsquo;s longitudinal database

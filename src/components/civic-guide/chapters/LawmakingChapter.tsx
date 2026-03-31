@@ -69,7 +69,7 @@ export function LawmakingChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              An ordinance is local law. It carries penalties, binds residents, and can be repealed only
+              An <a href="/articles/how-local-government-works/glossary#ordinance">ordinance</a> is local law. It carries penalties, binds residents, and can be repealed only
               by another ordinance — never by a resolution or motion. When the Phoenix City Council{" "}
               <a href="https://www.phoenix.gov/administration/mayorcouncil.html" target="_blank" rel="noopener noreferrer">
                 adopts a new noise regulation
@@ -124,7 +124,7 @@ export function LawmakingChapter() {
               <a href="https://icma.org/blog-posts/municipal-form-government-numbers" target="_blank" rel="noopener noreferrer">
                 54% of municipalities over 10,000 population
               </a>{" "}
-              — the city manager&rsquo;s office prepares the staff report that will frame the
+              — the city manager&rsquo;s office prepares the <a href="/articles/how-local-government-works/glossary#staff-report">staff report</a> that will frame the
               council&rsquo;s deliberation.
             </p>
           </FadeIn>
@@ -203,7 +203,7 @@ export function LawmakingChapter() {
 
           <FadeIn delay={0.05}>
             <p className="lg-prose-paragraph">
-              The consent calendar bundles non-controversial items — contract renewals, meeting minutes,
+              The <a href="/articles/how-local-government-works/glossary#consent-calendar">consent calendar</a> bundles non-controversial items — contract renewals, meeting minutes,
               routine budget transfers — into a single vote. In a typical council meeting,{" "}
               <a href="https://www.civicplus.com/blog/am/how-to-use-a-consent-agenda-to-save-time-and-refocus-discussion-on-critical-matters/" target="_blank" rel="noopener noreferrer">
                 60 to 80 percent of agenda items
@@ -318,7 +318,7 @@ export function LawmakingChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              Once adopted, an ordinance does not simply file itself. Codification — the process of
+              Once adopted, an ordinance does not simply file itself. <a href="/articles/how-local-government-works/glossary#codification">Codification</a> — the process of
               integrating new ordinances into a city&rsquo;s organized code — is handled by professional
               publishers.{" "}
               <a href="https://www.municode.com/" target="_blank" rel="noopener noreferrer">

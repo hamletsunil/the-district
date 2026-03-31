@@ -72,7 +72,7 @@ export function ElectionsChapter() {
                 27 percent of eligible voters
               </a>{" "}
               cast ballots in a typical municipal election. In the 30 largest cities, turnout in
-              off-cycle races falls below 15 percent. The culprit is timing. Most cities hold elections
+              <a href="/articles/how-local-government-works/glossary#off-cycle-election">off-cycle</a> races falls below 15 percent. The culprit is timing. Most cities hold elections
               in odd-numbered years or in spring — deliberately separated from state and federal
               contests. The rationale, dating to Progressive Era reforms, is that local elections
               should be insulated from national partisan currents. The cost is staggering: when
@@ -126,7 +126,7 @@ export function ElectionsChapter() {
           <FadeIn>
             <h3 className="lg-prose-subhead">At-Large vs. District: The Voting Rights Transformation</h3>
             <p className="lg-prose-paragraph">
-              For most of the twentieth century, the default local election structure was at-large:
+              For most of the twentieth century, the default local election structure was <a href="/articles/how-local-government-works/glossary#at-large-election">at-large</a>:
               every council member elected by every voter citywide. The federal Voting Rights Act of
               1965 began challenging that model where it diluted minority voting strength, but the
               legal standard was demanding — plaintiffs had to prove that a minority group was
@@ -181,7 +181,7 @@ export function ElectionsChapter() {
           <FadeIn delay={0.05}>
             <h3 className="lg-prose-subhead">Ranked Choice Voting: The Reform That Caught On</h3>
             <p className="lg-prose-paragraph">
-              Ranked choice voting has grown from a niche experiment to a movement. In 2016, ten U.S.
+              <a href="/articles/how-local-government-works/glossary#ranked-choice-voting">Ranked-choice voting</a> has grown from a niche experiment to a movement. In 2016, ten U.S.
               jurisdictions used RCV. By 2025,{" "}
               <a href="https://fairvote.org/press/fact-sheet-ranked-choice-voting-in-2025-elections/" target="_blank" rel="noopener noreferrer">
                 51 jurisdictions serving 14 million voters

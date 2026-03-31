@@ -56,7 +56,7 @@ export function CountyGovernmentChapter() {
         <div className="lg-prose-container">
           <FadeIn>
             <p className="lg-prose-paragraph">
-              The American county is a paradox: a unit of government that most residents cannot name
+              The American <a href="/articles/how-local-government-works/glossary#county">county</a> is a paradox: a unit of government that most residents cannot name
               the leaders of, yet one that runs the jail they might end up in, maintains the road they
               drive on, records the deed to their house, and prosecutes the crimes committed in their
               neighborhood. Counties invest{" "}

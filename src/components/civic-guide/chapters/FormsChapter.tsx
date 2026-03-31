@@ -126,7 +126,7 @@ export function FormsChapter() {
         <div className="lg-prose-container">
           <FadeIn>
             <p className="lg-prose-paragraph">
-              The council-manager form dominates American local government. According to the{" "}
+              The <a href="/articles/how-local-government-works/glossary#council-manager">council-manager</a> form dominates American local government. According to the{" "}
               <a href="https://icma.org/documents/forms-local-government" target="_blank" rel="noopener noreferrer">
                 International City/County Management Association
               </a>, approximately 48 percent of municipalities with populations above 2,500 use it —
@@ -192,7 +192,7 @@ export function FormsChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              Town meetings persist in New England as a living artifact of colonial governance.
+              <a href="/articles/how-local-government-works/glossary#town-meeting">Town meetings</a> persist in New England as a living artifact of colonial governance.
               Brookline, Massachusetts — population 63,000 — still governs by open town meeting,
               where any registered voter can attend, speak, and vote on the annual budget. The
               practical reality is that a few hundred engaged residents make decisions for tens of

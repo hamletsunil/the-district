@@ -192,7 +192,7 @@ export function RolesChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              The city manager is the most powerful appointed official in American local government and
+              The <a href="/articles/how-local-government-works/glossary#city-manager">city manager</a> is the most powerful appointed official in American local government and
               among the least understood by residents. In council-manager cities — 48% of all
               municipalities — the manager hires and fires department heads, prepares the budget, directs
               daily operations, and serves as the council&rsquo;s primary policy advisor.
@@ -256,7 +256,7 @@ export function RolesChapter() {
 
           <FadeIn delay={0.05}>
             <p className="lg-prose-paragraph">
-              The clerk maintains official records, administers elections, records council proceedings,
+              The <a href="/articles/how-local-government-works/glossary#city-clerk">city clerk</a> maintains official records, administers elections, records council proceedings,
               issues licenses, and serves as custodian of the city seal. In some states the position is
               elected; in others, appointed. The clerk is often the municipality&rsquo;s longest-serving
               official and its institutional memory — the person who knows where every ordinance,
@@ -277,7 +277,7 @@ export function RolesChapter() {
               Cities obtain legal counsel through in-house attorneys, contracted outside firms, or both.
               Larger cities maintain full legal departments — Los Angeles employs hundreds of attorneys —
               while small municipalities contract with private firms specializing in municipal law. The
-              city attorney drafts ordinances, reviews contracts, advises the council on open-meeting and
+              <a href="/articles/how-local-government-works/glossary#city-attorney">city attorney</a> drafts ordinances, reviews contracts, advises the council on open-meeting and
               public-records law, and represents the city in litigation. Some city attorneys are elected
               (in many California cities, among others), giving them political independence but also
               introducing electoral considerations into legal advice ({" "}

@@ -57,7 +57,7 @@ export function EngagementChapter() {
           <FadeIn>
             <p className="lg-prose-paragraph">
               The most powerful tool in American local government is also the most neglected. Citizen
-              engagement — the web of public comment, ballot initiatives, recall elections, records
+              engagement — the web of public comment, ballot initiatives, <a href="/articles/how-local-government-works/glossary#recall">recall</a> elections, records
               requests, and advisory committees that gives residents direct leverage over city hall —
               exists in law as a robust architecture of democratic accountability. In practice, it is
               exercised by a narrow, unrepresentative slice of the population, and the officials who
@@ -232,7 +232,7 @@ export function EngagementChapter() {
 
           <FadeIn>
             <p className="lg-prose-paragraph">
-              Participatory budgeting represents an attempt to widen the funnel. Imported from Porto
+              <a href="/articles/how-local-government-works/glossary#participatory-budgeting">Participatory budgeting</a> represents an attempt to widen the funnel. Imported from Porto
               Alegre, Brazil, and first piloted in the United States in{" "}
               <a href="https://www.tandfonline.com/doi/full/10.1080/07393148.2014.894695" target="_blank" rel="noopener noreferrer">
                 Chicago&rsquo;s 49th Ward in 2009

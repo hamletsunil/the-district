@@ -68,7 +68,7 @@ export function TaxonomyChapter() {
                 2022 Census of Governments
               </a>{" "}
               tallied 19,491 municipalities, 3,031 counties, 16,214 townships, 12,546 school districts,
-              and 39,555 special districts. Taken together, they employ more Americans than the federal
+              and 39,555 <a href="/articles/how-local-government-works/glossary#special-district">special districts</a>. Taken together, they employ more Americans than the federal
               government and the fifty state governments combined.
             </p>
           </FadeIn>
@@ -133,7 +133,7 @@ export function TaxonomyChapter() {
 
           <FadeIn delay={0.05}>
             <p className="lg-prose-paragraph">
-              Townships occupy a peculiar middle tier, found in{" "}
+              <a href="/articles/how-local-government-works/glossary#township">Townships</a> occupy a peculiar middle tier, found in{" "}
               <a href="https://en.wikipedia.org/wiki/Township_(United_States)" target="_blank" rel="noopener noreferrer">
                 20 states
               </a>{" "}
