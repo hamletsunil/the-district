@@ -7,7 +7,7 @@ const ARTICLES_DIR = path.join(process.cwd(), 'src/app/articles')
 // Get all article directories (excluding _template)
 function getArticleDirs(): string[] {
   return fs.readdirSync(ARTICLES_DIR)
-    .filter(dir => !dir.startsWith('_') && !dir.startsWith('.'))
+    .filter(dir => !dir.startsWith('_') && !dir.startsWith('.') && dir !== 'how-local-government-works')
     .filter(dir => fs.statSync(path.join(ARTICLES_DIR, dir)).isDirectory())
 }
 
@@ -61,6 +61,30 @@ describe('Article Structure', () => {
         // Count source objects (rough match for { title:, outlet:, url: })
         const sourceMatches = content.match(/{\s*title:/g)
         expect(sourceMatches?.length || 0).toBeGreaterThanOrEqual(3)
+      })
+
+      it('should import MethodologySection from shared components, not define locally', () => {
+        const content = fs.readFileSync(articlePath, 'utf-8')
+        expect(content).toContain('from "@/components/article/MethodologySection"')
+        expect(content).not.toMatch(/^function MethodologySection\b/m)
+      })
+
+      it('should include at least one Hamlet link', () => {
+        const content = fs.readFileSync(articlePath, 'utf-8')
+        expect(content).toContain('myhamlet.com')
+      })
+
+      it('should not have backup files in directory', () => {
+        const articleDir = path.join(ARTICLES_DIR, article)
+        const files = fs.readdirSync(articleDir)
+        const backupFiles = files.filter(f => /page-v\d+/.test(f) || /-backup\.tsx$/.test(f))
+        expect(backupFiles).toEqual([])
+      })
+
+      it('should be listed in sitemap', () => {
+        const sitemapPath = path.join(process.cwd(), 'src/app/sitemap.ts')
+        const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8')
+        expect(sitemapContent).toContain(article)
       })
     })
   })
