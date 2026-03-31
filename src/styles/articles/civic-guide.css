@@ -233,6 +233,28 @@
   margin-top: 0.05em;
 }
 
+.lg-opener-cta {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.lg-opener-start-btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: var(--type-small);
+  font-weight: 600;
+  color: white;
+  background: var(--accent-primary);
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.lg-opener-start-btn:hover {
+  opacity: 0.9;
+}
+
 @media (max-width: 640px) {
   .lg-opener {
     padding: 3.5rem 1.25rem;
@@ -1174,7 +1196,7 @@
 .lg-scrolly-body {
   font-family: var(--font-body);
   font-size: 0.9375rem;
-  color: var(--page-text-muted);
+  color: #d4d8de;
   line-height: 1.65;
 }
 

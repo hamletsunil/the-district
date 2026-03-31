@@ -11,10 +11,7 @@ interface ChapterFooterProps {
 export function ChapterFooter({ sources, prevChapter, nextChapter }: ChapterFooterProps) {
   return (
     <footer className="lg-chapter-footer">
-      {/* Sources */}
-      <SourcesCitations sources={sources} />
-
-      {/* Chapter Navigation */}
+      {/* Chapter Navigation — above sources for visibility */}
       <nav className="lg-chapter-nav-footer">
         {prevChapter ? (
           <Link href={`/articles/how-local-government-works/${prevChapter.slug}`} className="lg-chapter-nav-link lg-prev">
@@ -24,9 +21,9 @@ export function ChapterFooter({ sources, prevChapter, nextChapter }: ChapterFoot
             </span>
           </Link>
         ) : (
-          <Link href="/" className="lg-chapter-nav-link lg-prev">
-            <span className="lg-chapter-nav-label">&larr; Home</span>
-            <span className="lg-chapter-nav-title">The Guide</span>
+          <Link href="/articles/how-local-government-works" className="lg-chapter-nav-link lg-prev">
+            <span className="lg-chapter-nav-label">&larr; Guide</span>
+            <span className="lg-chapter-nav-title">All Chapters</span>
           </Link>
         )}
 
@@ -38,12 +35,15 @@ export function ChapterFooter({ sources, prevChapter, nextChapter }: ChapterFoot
             </span>
           </Link>
         ) : (
-          <Link href="/" className="lg-chapter-nav-link lg-next">
+          <Link href="/articles/how-local-government-works" className="lg-chapter-nav-link lg-next">
             <span className="lg-chapter-nav-label">Finish &rarr;</span>
             <span className="lg-chapter-nav-title">Back to Guide</span>
           </Link>
         )}
       </nav>
+
+      {/* Sources */}
+      {sources.length > 0 && <SourcesCitations sources={sources} />}
     </footer>
   );
 }

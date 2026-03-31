@@ -87,6 +87,23 @@ function EditorialOpener() {
             that put them there.
           </p>
         </FadeIn>
+        <FadeIn delay={0.2}>
+          <p className="lg-opener-text">
+            This guide is an attempt to change that. Across 14 chapters, we explain how
+            local government is structured, how it makes decisions, where the money comes
+            from and where it goes, who shows up to participate and who doesn&rsquo;t, and
+            what legal framework holds it all together. Every claim traces to a source.
+            Every number traces to a dataset. If you want to understand the government
+            closest to your daily life, start here.
+          </p>
+        </FadeIn>
+        <FadeIn delay={0.3}>
+          <div className="lg-opener-cta">
+            <Link href="/articles/how-local-government-works/why-it-matters" className="lg-opener-start-btn">
+              Start reading: Chapter I &rarr;
+            </Link>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
