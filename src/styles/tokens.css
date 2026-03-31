@@ -223,6 +223,38 @@ body {
   --card-border: rgba(212, 164, 74, 0.15);
 }
 
+/* Civic Guide — light editorial theme */
+[data-theme="civic-guide"] {
+  --page-bg: #faf8f5;
+  --page-bg-alt: #f0ede8;
+  --page-text: #1a1a2e;
+  --page-text-muted: #5c5c6e;
+  --accent-primary: #2563eb;
+  --accent-secondary: #1e40af;
+  --accent-warm: #c2410c;
+  --accent-gold: #b45309;
+  --accent-green: #047857;
+  --accent-glow: rgba(37, 99, 235, 0.06);
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --hero-bg: #1a1a2e;
+  --hero-text: #faf8f5;
+  --hero-muted: #a8a8b8;
+}
+
+[data-theme="civic-guide-dark"] {
+  --page-bg: #0f1419;
+  --page-bg-alt: #171d24;
+  --page-text: #f0ede6;
+  --page-text-muted: #b0b8c4;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #60a5fa;
+  --accent-glow: rgba(59, 130, 246, 0.1);
+  --card-bg: rgba(23, 29, 36, 0.85);
+  --card-border: rgba(59, 130, 246, 0.15);
+}
+
 @theme inline {
   --color-navy-950: var(--navy-950);
   --color-navy-900: var(--navy-900);

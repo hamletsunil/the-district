@@ -82,6 +82,32 @@ URL: https://district.myhamlet.com/articles/piedmonts-deliberation
 Published: March 2026
 Summary: Analysis of 461 government meetings (9.3 million words) from Piedmont, California — a tiny, wealthy city entirely surrounded by Oakland. Covers five governing bodies across six years (2020-2026), examining deliberation volume, speaker patterns, topic distribution, and the flashpoint meetings where national crises met local governance.
 
+### Three Cities, One Fire Zone — Lamorinda
+URL: https://district.myhamlet.com/articles/lamorinda-triangle
+Published: March 2026
+Summary: Analysis of government meetings across Lafayette, Orinda, and Moraga — three wealthy Contra Costa County cities sharing wildfire risk, school districts, and a fire district, yet governing with fundamentally different approaches. Examines how fire shapes every policy debate from housing to traffic to school budgets.
+
+### How Local Government Works — The Definitive Guide
+URL: https://district.myhamlet.com/articles/how-local-government-works
+Published: March 2026
+Summary: The most comprehensive guide to American local government ever published. 14 chapters covering the full landscape: 90,837 government entities (2022 Census of Governments), $2.32 trillion in annual spending, 500,396 elected officials, 14.2 million public employees. Chapters cover government types and taxonomy, five forms of municipal government (council-manager at 48%, strong mayor at 30%), roles and compensation (mayor salaries from $30K to $353K), lawmaking processes, public meetings and open meeting laws (all 50 states), land use and zoning (77.8% of California residential land zoned single-family), municipal finance (72% of local tax revenue from property taxes, $1.34T unfunded pensions), elections (26% average off-cycle turnout), citizen engagement (95% of public commenters are white per Einstein/Glick/Palmer), legal framework (Dillon's Rule vs home rule, state preemption), county government (3,143 counties), infrastructure ($3.7T investment gap), and future challenges.
+Data sources: 2022 Census of Governments (U.S. Census Bureau), ICMA Municipal Form of Government Survey, Tax Policy Center, Urban Institute, Brookings Institution, ASCE 2025 Infrastructure Report Card, Einstein/Glick/Palmer participation research (Boston University), National League of Cities, DOJ Ferguson investigation, Northwestern Medill Local News Initiative.
+Chapters:
+- I. Why It Matters: https://district.myhamlet.com/articles/how-local-government-works/why-it-matters
+- II. The Taxonomy: https://district.myhamlet.com/articles/how-local-government-works/taxonomy
+- III. Forms of Government: https://district.myhamlet.com/articles/how-local-government-works/forms
+- IV. The Roles: https://district.myhamlet.com/articles/how-local-government-works/roles
+- V. Lawmaking: https://district.myhamlet.com/articles/how-local-government-works/lawmaking
+- VI. The Meeting: https://district.myhamlet.com/articles/how-local-government-works/the-meeting
+- VII. Land Use & Zoning: https://district.myhamlet.com/articles/how-local-government-works/land-use
+- VIII. The Money: https://district.myhamlet.com/articles/how-local-government-works/money
+- IX. Elections: https://district.myhamlet.com/articles/how-local-government-works/elections
+- X. Citizen Power: https://district.myhamlet.com/articles/how-local-government-works/engagement
+- XI. Legal Framework: https://district.myhamlet.com/articles/how-local-government-works/legal-framework
+- XII. County Government: https://district.myhamlet.com/articles/how-local-government-works/county-government
+- XIII. Infrastructure: https://district.myhamlet.com/articles/how-local-government-works/infrastructure
+- XIV. The Future: https://district.myhamlet.com/articles/how-local-government-works/challenges
+
 ## Contact
 
 For corrections, data requests, or press inquiries: https://www.myhamlet.com
