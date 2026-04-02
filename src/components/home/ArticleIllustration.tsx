@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh" | "piedmont" | "lamorinda";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh" | "piedmont" | "lamorinda" | "civics";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -27,6 +27,7 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     pittsburgh: <PittsburghIllustration />,
     piedmont: <PiedmontIllustration />,
     lamorinda: <LamorindaIllustration />,
+    civics: <CivicsIllustration />,
   };
 
   return (
@@ -1232,6 +1233,131 @@ function LamorindaIllustration() {
 
       {/* Ground */}
       <rect x="0" y="158" width="280" height="22" fill="#4ECDC4" opacity="0.06" />
+    </svg>
+  );
+}
+
+/**
+ * Civics: Stylized city hall with dome, pillars, and steps
+ */
+function CivicsIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      {/* Gold gradient for civic accents */}
+      <defs>
+        <linearGradient id="civicGold" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#d4b054" />
+          <stop offset="100%" stopColor="#a07c2e" />
+        </linearGradient>
+        <linearGradient id="civicSlate" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#3d5a80" />
+          <stop offset="100%" stopColor="#1a2a3a" />
+        </linearGradient>
+        <linearGradient id="civicDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#2c3e50" />
+          <stop offset="100%" stopColor="#162028" />
+        </linearGradient>
+      </defs>
+
+      {/* Background ambient glow */}
+      <ellipse cx="140" cy="160" rx="130" ry="25" fill="#c9a84c" opacity="0.06" />
+      <ellipse cx="140" cy="160" rx="80" ry="15" fill="#c9a84c" opacity="0.1" />
+
+      {/* Main building body */}
+      <g filter="url(#softShadow)">
+        <rect x="70" y="70" width="140" height="90" rx="3" fill="url(#civicSlate)" />
+        {/* Front facade detail */}
+        <rect x="75" y="75" width="130" height="80" rx="2" fill="#1a2a3a" opacity="0.4" />
+      </g>
+
+      {/* Pillars */}
+      <g filter="url(#softShadow)">
+        <rect x="88" y="78" width="8" height="75" rx="2" fill="url(#civicSlate)" />
+        <rect x="112" y="78" width="8" height="75" rx="2" fill="url(#civicSlate)" />
+        <rect x="136" y="78" width="8" height="75" rx="2" fill="url(#civicSlate)" />
+        <rect x="160" y="78" width="8" height="75" rx="2" fill="url(#civicSlate)" />
+        <rect x="184" y="78" width="8" height="75" rx="2" fill="url(#civicSlate)" />
+      </g>
+
+      {/* Pillar capitals — gold accent */}
+      <g opacity="0.8">
+        <rect x="86" y="76" width="12" height="4" rx="1" fill="url(#civicGold)" />
+        <rect x="110" y="76" width="12" height="4" rx="1" fill="url(#civicGold)" />
+        <rect x="134" y="76" width="12" height="4" rx="1" fill="url(#civicGold)" />
+        <rect x="158" y="76" width="12" height="4" rx="1" fill="url(#civicGold)" />
+        <rect x="182" y="76" width="12" height="4" rx="1" fill="url(#civicGold)" />
+      </g>
+
+      {/* Triangular pediment */}
+      <g filter="url(#softShadow)">
+        <polygon points="140,38 72,72 208,72" fill="url(#civicDark)" />
+        <polygon points="140,42 78,70 202,70" fill="#2c3e50" opacity="0.6" />
+      </g>
+
+      {/* Dome */}
+      <g filter="url(#softShadow)">
+        <ellipse cx="140" cy="42" rx="28" ry="20" fill="url(#civicDark)" />
+        <ellipse cx="140" cy="42" rx="24" ry="17" fill="#3d5a80" opacity="0.4" />
+      </g>
+
+      {/* Dome lantern/cupola */}
+      <rect x="135" y="20" width="10" height="10" rx="2" fill="url(#civicSlate)" />
+      <g filter="url(#glow)">
+        <circle cx="140" cy="18" r="3" fill="#c9a84c" opacity="0.9" />
+      </g>
+
+      {/* Entrance — central door */}
+      <rect x="127" y="120" width="26" height="35" rx="3" fill="#162028" />
+      <rect x="130" y="122" width="20" height="30" rx="2" fill="#0d1820" />
+      {/* Door arch detail */}
+      <path d="M130 122 Q140 114 150 122" stroke="#c9a84c" strokeWidth="1" fill="none" opacity="0.5" />
+
+      {/* Windows */}
+      <g opacity="0.7">
+        <rect x="82" y="100" width="10" height="14" rx="1.5" fill="#0d1820" />
+        <rect x="100" y="100" width="10" height="14" rx="1.5" fill="#0d1820" />
+        <rect x="170" y="100" width="10" height="14" rx="1.5" fill="#0d1820" />
+        <rect x="188" y="100" width="10" height="14" rx="1.5" fill="#0d1820" />
+      </g>
+
+      {/* Window glow — warm light inside */}
+      <g filter="url(#glow)">
+        <rect x="84" y="102" width="6" height="10" rx="1" fill="#c9a84c" opacity="0.15" />
+        <rect x="102" y="102" width="6" height="10" rx="1" fill="#c9a84c" opacity="0.12" />
+        <rect x="172" y="102" width="6" height="10" rx="1" fill="#c9a84c" opacity="0.15" />
+        <rect x="190" y="102" width="6" height="10" rx="1" fill="#c9a84c" opacity="0.12" />
+      </g>
+
+      {/* Steps */}
+      <rect x="60" y="155" width="160" height="5" rx="1" fill="#2c3e50" opacity="0.8" />
+      <rect x="55" y="160" width="170" height="5" rx="1" fill="#243442" opacity="0.7" />
+      <rect x="50" y="165" width="180" height="5" rx="1" fill="#1c2c3a" opacity="0.6" />
+
+      {/* Side wings */}
+      <g filter="url(#softShadow)" opacity="0.6">
+        <rect x="20" y="95" width="52" height="60" rx="3" fill="url(#civicDark)" />
+        <rect x="208" y="95" width="52" height="60" rx="3" fill="url(#civicDark)" />
+      </g>
+
+      {/* Wing windows */}
+      <g opacity="0.5">
+        <rect x="30" y="108" width="8" height="12" rx="1" fill="#0d1820" />
+        <rect x="44" y="108" width="8" height="12" rx="1" fill="#0d1820" />
+        <rect x="58" y="108" width="8" height="12" rx="1" fill="#0d1820" />
+        <rect x="218" y="108" width="8" height="12" rx="1" fill="#0d1820" />
+        <rect x="232" y="108" width="8" height="12" rx="1" fill="#0d1820" />
+        <rect x="246" y="108" width="8" height="12" rx="1" fill="#0d1820" />
+      </g>
+
+      {/* Floating accent particles */}
+      <circle cx="40" cy="50" r="1.5" fill="#c9a84c" opacity="0.4" />
+      <circle cx="240" cy="45" r="2" fill="#c9a84c" opacity="0.3" />
+      <circle cx="260" cy="75" r="1.5" fill="#c9a84c" opacity="0.25" />
+
+      {/* Ground line */}
+      <rect x="0" y="168" width="280" height="12" fill="#c9a84c" opacity="0.04" />
     </svg>
   );
 }

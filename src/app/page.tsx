@@ -7,6 +7,16 @@ import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
 
 const articles = [
   {
+    id: "how-local-government-works",
+    topic: "Guide",
+    title: "How Local Government Works",
+    description:
+      "14 chapters on the machinery closest to daily life — from who runs your city to where your property taxes go. Built on meeting transcripts, case law, and Census data from 90,000+ jurisdictions.",
+    meta: "45 min read · 14 chapters",
+    colorScheme: "civics",
+    illustrationType: "civics" as const,
+  },
+  {
     id: "piedmonts-deliberation",
     topic: "City Deep Dive",
     title: "The Most Deliberative Square Mile in America",

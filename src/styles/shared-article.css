@@ -510,6 +510,12 @@
   --accent: #4ECDC4;
 }
 
+.card-civics {
+  background: linear-gradient(135deg, #2c3e50 0%, #1a2a3a 100%);
+  color: #f5f0e8;
+  --accent: #c9a84c;
+}
+
 /* ===========================
    CARD TYPOGRAPHY
    =========================== */
