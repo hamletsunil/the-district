@@ -3,16 +3,10 @@
 import Link from "next/link";
 import { CHAPTERS } from "@/data/civic-guide/chapters";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import dynamic from "next/dynamic";
 import { CivicSkyline } from "@/components/civic-guide/CivicSkyline";
 import { SubscribeBar } from "@/components/article/SubscribeBar";
 import type { ReactNode } from "react";
 import "@/styles/articles/civic-guide.css";
-
-const CityLookup = dynamic(
-  () => import("@/components/civic-guide/CityLookup").then((m) => m.CityLookup),
-  { ssr: false, loading: () => <p className="lg-loading-text">Loading city search...</p> }
-);
 
 function FadeIn({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
   const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
@@ -192,31 +186,11 @@ function ChapterGrid() {
   );
 }
 
-function CitySearchSection() {
-  return (
-    <section className="lg-search-section">
-      <div className="lg-search-section-inner">
-        <FadeIn>
-          <h2 className="lg-search-section-heading">Look up your city</h2>
-          <p className="lg-search-section-desc">
-            See how your local government is structured &mdash; who runs it, what form
-            it takes, and how it compares.
-          </p>
-          <div className="lg-search-section-input">
-            <CityLookup />
-          </div>
-        </FadeIn>
-      </div>
-    </section>
-  );
-}
-
 export default function HowLocalGovernmentWorks() {
   return (
     <main className="article-page" data-theme="civic-guide">
       <Hero />
       <EditorialOpener />
-      <CitySearchSection />
       <ChapterGrid />
       <SubscribeBar />
 
