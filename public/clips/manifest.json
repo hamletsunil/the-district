@@ -1,0 +1,85 @@
+{
+  "generated": "2026-04-19T16:49:12.228977",
+  "clips": [
+    {
+      "videoId": "208390",
+      "startSeconds": 301,
+      "durationSeconds": 45,
+      "slug": "linda-nuno-police-contract-2023-02-15",
+      "label": "Linda Nuno \u2014 Feb 15, 2023 Police Contract",
+      "speaker": "Linda Nuno",
+      "clipPath": "/clips/linda-nuno-police-contract-2023-02-15.mp4",
+      "sizeMB": 2.15
+    },
+    {
+      "videoId": "283723",
+      "startSeconds": 1801,
+      "durationSeconds": 45,
+      "slug": "jeremy-hendricks-home-phase1-2023-12-07",
+      "label": "Jeremy Hendricks \u2014 HOME Phase 1",
+      "speaker": "Jeremy Hendricks",
+      "clipPath": "/clips/jeremy-hendricks-home-phase1-2023-12-07.mp4",
+      "sizeMB": 2.62
+    },
+    {
+      "videoId": "283723",
+      "startSeconds": 11701,
+      "durationSeconds": 45,
+      "slug": "lan-ani-home-phase1-2023-12-07",
+      "label": "Lan Ani \u2014 HOME Phase 1",
+      "speaker": "Lan Ani",
+      "clipPath": "/clips/lan-ani-home-phase1-2023-12-07.mp4",
+      "sizeMB": 5.25
+    },
+    {
+      "videoId": "112547",
+      "startSeconds": 21603,
+      "durationSeconds": 45,
+      "slug": "henry-morghan-council-2021-02-04",
+      "label": "Henry Morghan \u2014 Feb 4, 2021",
+      "speaker": "Henry Morghan",
+      "clipPath": "/clips/henry-morghan-council-2021-02-04.mp4",
+      "sizeMB": 1.7
+    },
+    {
+      "videoId": "305483",
+      "startSeconds": 15601,
+      "durationSeconds": 45,
+      "slug": "ella-thompson-home-phase2-2024-05-16",
+      "label": "Ella Thompson \u2014 HOME Phase 2",
+      "speaker": "Ella Thompson",
+      "clipPath": "/clips/ella-thompson-home-phase2-2024-05-16.mp4",
+      "sizeMB": 4.15
+    },
+    {
+      "videoId": "305483",
+      "startSeconds": 308,
+      "durationSeconds": 45,
+      "slug": "barbara-epstein-home-phase2-2024-05-16",
+      "label": "Barbara Epstein \u2014 HOME Phase 2",
+      "speaker": "Barbara Epstein",
+      "clipPath": "/clips/barbara-epstein-home-phase2-2024-05-16.mp4",
+      "sizeMB": 2.73
+    },
+    {
+      "videoId": "277617",
+      "startSeconds": 17401,
+      "durationSeconds": 50,
+      "slug": "christina-pollard-joint-2023-10-26",
+      "label": "Christina Pollard \u2014 Joint Council/Planning",
+      "speaker": "Christina Pollard",
+      "clipPath": "/clips/christina-pollard-joint-2023-10-26.mp4",
+      "sizeMB": 5.49
+    },
+    {
+      "videoId": "305483",
+      "startSeconds": 606,
+      "durationSeconds": 45,
+      "slug": "marva-overton-home-phase2-2024-05-16",
+      "label": "Marva Overton \u2014 HOME Phase 2",
+      "speaker": "Marva Overton",
+      "clipPath": "/clips/marva-overton-home-phase2-2024-05-16.mp4",
+      "sizeMB": 3.16
+    }
+  ]
+}

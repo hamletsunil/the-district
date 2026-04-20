@@ -254,6 +254,7 @@ const DATA = {
       videoId: "283723",
       startSeconds: 1801,
       sentiment: "negative",
+      clipPath: "/clips/jeremy-hendricks-home-phase1-2023-12-07.mp4",
     },
     {
       text: "A duplex is a home. A triplex is a home. An apartment is a home. A single family is a home. A home is a home is a home.",
@@ -264,6 +265,7 @@ const DATA = {
       videoId: "283723",
       startSeconds: 11701,
       sentiment: "positive",
+      clipPath: "/clips/lan-ani-home-phase1-2023-12-07.mp4",
     },
     {
       text: "We\u2019re people too\u2026 this trauma of living on the streets lives with you for a long time. But I want you to know that we are neighbors and members of your community and we do vote.",
@@ -274,6 +276,7 @@ const DATA = {
       videoId: "112547",
       startSeconds: 21603,
       sentiment: "positive",
+      clipPath: "/clips/henry-morghan-council-2021-02-04.mp4",
     },
     {
       text: "I was born and raised in central Austin, and I\u2019m a fourth generation Austinite. I don\u2019t think my children will be fifth generation Austinites. This is the end of the line for my family.",
@@ -284,6 +287,7 @@ const DATA = {
       videoId: "305483",
       startSeconds: 15601,
       sentiment: "negative",
+      clipPath: "/clips/ella-thompson-home-phase2-2024-05-16.mp4",
     },
     {
       text: "City staff says there are 19,757 vacant houses. Why haven\u2019t you done something about them first?",
@@ -294,6 +298,7 @@ const DATA = {
       videoId: "305483",
       startSeconds: 308,
       sentiment: "negative",
+      clipPath: "/clips/barbara-epstein-home-phase2-2024-05-16.mp4",
     },
     {
       text: "I wrote a speech a while ago to set fire to the unruffled stoicism of this establishment, but I\u2019m all outta fire.",
@@ -304,6 +309,7 @@ const DATA = {
       videoId: "277617",
       startSeconds: 17401,
       sentiment: "negative",
+      clipPath: "/clips/christina-pollard-joint-2023-10-26.mp4",
     },
     {
       text: "Each year when I get that property tax bill and it has gone up incrementally every year, I\u2019m wondering: is this going to be the year that I\u2019m not going to be able to pay that increase?",
@@ -314,6 +320,7 @@ const DATA = {
       videoId: "305483",
       startSeconds: 606,
       sentiment: "negative",
+      clipPath: "/clips/marva-overton-home-phase2-2024-05-16.mp4",
     },
     {
       text: "It doesn\u2019t matter if I am speaking Swahili, French or Japanese. You\u2019re still not hearing the voice of the people.",
@@ -324,6 +331,7 @@ const DATA = {
       videoId: "208390",
       startSeconds: 301,
       sentiment: "negative",
+      clipPath: "/clips/linda-nuno-police-contract-2023-02-15.mp4",
     },
   ],
 };
@@ -376,6 +384,24 @@ const SOURCES: Source[] = [
     outlet: "City of Austin",
     url: "https://www.austintexas.gov/page/home-amendments",
     accessDate: "2026-03-03",
+  },
+  {
+    title: "Open Meetings, Closed Minds",
+    outlet: "The Austin Bulldog (Ken Martin, January 25, 2011)",
+    url: "https://theaustinbulldog.org/open-meetings-act/",
+    accessDate: "2026-04-19",
+  },
+  {
+    title: "Deferred Prosecution Ends Open Meetings Investigation",
+    outlet: "The Austin Bulldog",
+    url: "https://theaustinbulldog.org/deferred-prosecution-ends-open-meetings-investigation/",
+    accessDate: "2026-04-19",
+  },
+  {
+    title: "Bill penalizing Texas cities that cut funding for police heads to governor\u2019s desk",
+    outlet: "Austin Monitor",
+    url: "https://austinmonitor.com/stories/2021/06/bill-penalizing-texas-cities-that-cut-funding-for-police-heads-to-governors-desk/",
+    accessDate: "2026-04-19",
   },
   {
     title: "American Community Survey 1-Year Estimates: Austin, TX",
@@ -436,6 +462,8 @@ function FadeIn({ children, className = "", delay = 0, style }: {
 
 function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
   const initials = quote.speaker.split(" ").map(w => w[0]).join("").slice(0, 2);
+  const clipPath = (quote as { clipPath?: string }).clipPath;
+  const swagitUrl = `https://austintx.new.swagit.com/videos/${quote.videoId}${quote.startSeconds ? `?start=${quote.startSeconds}` : ""}`;
 
   return (
     <div className="au-mention-card" style={{ borderLeftColor: "rgba(191, 87, 0, 0.4)" }}>
@@ -448,14 +476,35 @@ function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
         </div>
       </div>
       <blockquote className="au-mention-text">&ldquo;{quote.text}&rdquo;</blockquote>
-      <a
-        href={`https://austintx.new.swagit.com/videos/${quote.videoId}${quote.startSeconds ? `?start=${quote.startSeconds}` : ""}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="au-mention-link"
-      >
-        Watch on Swagit &rarr;
-      </a>
+      {clipPath ? (
+        <div className="au-mention-clip">
+          <video
+            src={clipPath}
+            controls
+            preload="metadata"
+            playsInline
+            className="au-mention-video"
+            aria-label={`Clip of ${quote.speaker} speaking at ${quote.meeting}, ${quote.date}`}
+          />
+          <a
+            href={swagitUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="au-mention-link"
+          >
+            Watch full meeting on Swagit &rarr;
+          </a>
+        </div>
+      ) : (
+        <a
+          href={swagitUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="au-mention-link"
+        >
+          Watch on Swagit &rarr;
+        </a>
+      )}
     </div>
   );
 }
@@ -1034,14 +1083,36 @@ function ParadoxSection() {
             scored {DATA.hotMeetings[0].cont} on our five-point scale, the
             highest of any meeting in the dataset. Council voted 9-2 to direct negotiators toward a one-year contract.
             HOME Phase 1 scored {DATA.hotMeetings[3].cont} after thirteen hours
-            of testimony. It passed 9-2.
+            of testimony. It passed 9-2. Three of the four most contentious
+            meetings in the entire dataset ended within a single vote of that
+            margin. That pattern is the animating question of this piece:
+            if the testimony was heard, why was the final math identical
+            every time?
           </p>
           <p>
             The simplest explanation is cynical: the decisions are pre-made
-            and the hearings are theater. Chicago&rsquo;s city council operated
-            this way for decades under the Daleys and Rahm Emanuel; University
-            of Illinois researchers documented the pattern. But Austin&rsquo;s
-            data supports a more generous reading. HOME appeared
+            and the hearings are theater. That answer was empirically true in
+            Austin fifteen years ago. In January 2011, Ken Martin&rsquo;s{" "}
+            <a href="https://theaustinbulldog.org/open-meetings-act/" target="_blank" rel="noopener noreferrer">
+            reporting in The Austin Bulldog</a> documented that the mayor and
+            council members were conducting regularly scheduled private
+            round-robin meetings in which quorums of the body discussed
+            business before convening publicly. The Travis County attorney
+            opened an investigation the day the story ran; it lasted 21
+            months and ended in{" "}
+            <a href="https://theaustinbulldog.org/deferred-prosecution-ends-open-meetings-investigation/" target="_blank" rel="noopener noreferrer">
+            deferred prosecution agreements</a> signed by Mayor Lee Leffingwell,
+            Mayor Pro Tem Sheryl Cole, and five council members, alongside
+            mandatory Texas Open Meetings Act training and new public
+            work-session procedures. The practice of a pre-decided vote
+            ratified by a public show was the actual Austin pre-reform.
+            Measuring deliberation in the 2020&ndash;2026 window is measuring a
+            process that exists because that earlier practice was documented
+            and forced into the open.
+          </p>
+          <p>
+            Within that reformed landscape, Austin&rsquo;s data supports a more
+            generous reading of the lopsided votes. HOME appeared
             in {DATA.crossBodyFlows.home.meetings} meetings across{" "}
             {DATA.crossBodyFlows.home.bodies} bodies before the final council
             vote&mdash;planning commissions, neighborhood advisory groups,
@@ -1169,11 +1240,22 @@ function TemperatureSection() {
             to implementation.{" "}
             <a href="https://www.texaspolicy.com/austins-simple-fix-for-soaring-housing-costs/" target="_blank" rel="noopener noreferrer">
             Single-family building permits jumped 86% in the first
-            year</a>, according to the Texas Public Policy Foundation. The police controversy
-            of 2020&ndash;2023&mdash;the protests, the beanbag rounds, the
-            contract fights&mdash;evolved into oversight and reform. The housing market itself cooled:{" "}
+            year</a>, according to the Texas Public Policy Foundation. The
+            police question was removed from Austin&rsquo;s table by the state.
+            After Council&rsquo;s August 2020 vote to reallocate roughly $150
+            million of the police department&rsquo;s $434 million budget, Governor
+            Greg Abbott called for legislation to penalize cities that cut
+            police funding.{" "}
+            <a href="https://austinmonitor.com/stories/2021/06/bill-penalizing-texas-cities-that-cut-funding-for-police-heads-to-governors-desk/" target="_blank" rel="noopener noreferrer">
+            House Bill 1900</a> passed the Texas Legislature in the next
+            session, Abbott signed it on June 1, 2021, and it took effect
+            September 1, 2021. It withholds sales-tax revenue and freezes
+            property-tax and utility rates for any city over 250,000 that
+            reduces its law-enforcement budget. Austin restored the funding.
+            What looks in our data like a declining public-safety debate is
+            substantially a debate the state foreclosed. The housing market
+            itself cooled in parallel:{" "}
             <a href="https://www.wsj.com/real-estate/austin-texas-housing-market-cooldown-f0388afb" target="_blank" rel="noopener noreferrer">
-
             The Wall Street Journal called Austin&rsquo;s price reversal</a> the
             most dramatic in the country, easing the existential pressure that
             drove residents to microphones in tears.
@@ -1386,21 +1468,29 @@ function CloseSection() {
     <FadeIn className="au-editorial-section" style={{ paddingTop: "2rem" }}>
       <div className="au-body-prose">
         <p>
-          Forty-seven and a half million words. About 80% of all
-          meetings fall Monday through Wednesday&mdash;a schedule that
-          self-selects for retirees, activists, and anyone whose employer
-          tolerates a midday absence. The 0.7% of meetings held on weekends
-          is not a scheduling detail. It is a barrier. The analysis window
+          Forty-seven and a half million words. About 80% of all meetings
+          fall Monday through Wednesday, and scheduling within the week
+          splits along two different filters. Council and council work
+          sessions&mdash;the largest bodies by word volume&mdash;convene at
+          10 a.m. on weekdays, a window that screens out anyone with a
+          fixed day job. Many boards and commissions meet in the evenings,
+          which shifts the filter toward people without young children at
+          home, caregiving duties, or a second shift. Both filters are
+          real. They screen for different populations, and neither
+          screen is neutral. The 0.7% of meetings held on weekends is not
+          a scheduling detail. It is a third barrier. The analysis window
           begins in December 2020, which means some of these meetings were
           held on Zoom during the pandemic&mdash;expanding access for some
           residents and narrowing it for others.
         </p>
         <p>
           Linda Nuno told the council it did not matter what language she
-          spoke&mdash;they were not hearing her. The council voted 9-2.
-          Zenobia Joseph has attended {DATA.regulars[0].meetings} meetings.
-          The council has heard her testimony so many times that several
-          members could nearly recite it. None of this has stopped her.
+          spoke&mdash;they were not hearing her. The council voted 9-2, the
+          same margin three of the four most contentious meetings in the
+          dataset produced. Zenobia Joseph has attended{" "}
+          {DATA.regulars[0].meetings} meetings. The council has heard her
+          testimony so many times that several members could nearly recite
+          it. None of this has stopped her.
         </p>
         <p>
           Forty-seven million words, and Zenobia Joseph is still

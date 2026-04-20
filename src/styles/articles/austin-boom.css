@@ -429,6 +429,21 @@
   opacity: 0.7;
 }
 
+.au-mention-clip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.au-mention-video {
+  width: 100%;
+  max-height: 320px;
+  border-radius: 8px;
+  background: #000;
+  display: block;
+}
+
 /* Sentiment badge */
 .au-sentiment-badge {
   display: inline-flex;
@@ -465,7 +480,54 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--card-border);
-  background: #000;
+  background: #111;
+}
+
+.au-video-poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s var(--ease-elegant, ease);
+}
+
+.au-video-poster:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.au-video-poster-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  position: relative;
+  display: block;
+}
+
+.au-video-poster-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 12px 0 12px 22px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.8);
+}
+
+.au-video-poster-label {
+  font-family: var(--font-sans);
+  font-size: var(--type-tiny);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
 }
 
 .au-video-embed-meta {
