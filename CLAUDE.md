@@ -237,6 +237,21 @@ Set via `data-theme` attribute:
 - `vote-tracker` - Dark slate/amber
 - `temperature` - Dark brown/red
 
+## Design System Governance
+
+**Read before touching anything under `src/styles/`, `src/components/layout/`, or `src/app/page.tsx`.**
+
+Rules that keep the design system and brand coherent. `DESIGN_SYSTEM.md` is the reference for per-article visuals; `BRAND_IDENTITY.md` is the reference for homepage and chrome.
+
+- **Themes live in `src/styles/tokens.css`.** New `data-theme` blocks are defined there, not in per-article CSS. Per-article CSS files *consume* theme variables; they do not define them.
+- **Tokenize before you paint.** Any color used in the masthead, homepage, footer, or shared chrome must be a CSS variable in `tokens.css` before it appears elsewhere. No hardcoded hex values in `base.css`, `Header.tsx`, `page.tsx`, or `theme-overrides.css`.
+- **Don't duplicate shared classes.** Before adding a rule to `shared-article.css`, search for the selector — `.article-page`, `.article-hero`, and similar structural classes already exist. Extend the existing block or open a new, uniquely named class.
+- **Use the existing typography scale.** `--type-hero`, `--type-body`, `--type-tiny`, etc. from `tokens.css`. Don't invent new scales inline.
+- **Contrast must meet WCAG AA.** 4.5:1 for body text, 3:1 for large text (≥18pt or 14pt bold). Verify new theme text-on-background pairs before shipping.
+- **Adding a theme, token, or class prefix → update `DESIGN_SYSTEM.md`.** The theme registry, CSS file map, and class-prefix list are the source of truth. A design change that doesn't touch the doc has drifted.
+- **Changing the masthead, homepage, colophon, or reveal footer → update `BRAND_IDENTITY.md`.** These are brand surfaces, not article chrome — they must stay in sync with the identity reference.
+- **Shared vs. article-specific:** unique visuals (article heroes, charts, one-off layouts) go in `src/styles/articles/[name].css` behind a class prefix. Anything reusable belongs in `shared-article.css` or a shared component.
+
 ## Creating a New Article
 
 1. Copy `src/app/articles/_template/page.tsx.example` to a new folder, rename to `page.tsx`
