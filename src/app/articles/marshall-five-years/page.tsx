@@ -91,17 +91,15 @@ const DATA = {
   },
 
   legislation: {
-    hb221115Title: "Wildfire Resiliency Code Board",
-    hb221115Year: 2022,
     sb23166Title: "Establishment Of A Wildfire Resiliency Code Board",
-    sb23166Year: 2023,
+    sb23166Signed: "2023-05-12",
     cwrcAdoptedByState: "2025-07-01",
     cwrcLocalDeadline: "2026-04-01",
     hb231288Title: "Colorado FAIR Plan Association",
     hb231288Year: 2023,
     fairPlanLaunch: "2025-04-10",
-    louisvilleFireHardeningOrd: "Ordinance 1891, series 2025",
-    louisvilleOrdEffectiveMonth: "December 2024",
+    louisvilleFireHardeningOrd: "Ordinance 1891",
+    louisvilleOrdEffectiveDate: "2024-12-10",
     louisvilleMarshallRebuildExemption: true,
   },
 
@@ -165,7 +163,7 @@ const DATA = {
     {
       speaker: "Jonathan Vai",
       role: "Marshall Fire survivor rebuilding in Sagamore",
-      text: "A Twitter user in Boulder just tweeted a few days ago that State Farm will not be renewing his homeowner\u2019s insurance. And this could become a widespread trend among the insurance companies. If all of us who lost homes are going to have to rebuild to this enormous cost and then we can\u2019t get insurance, we\u2019re going to be up a creek without a paddle.",
+      text: "A Twitter user in Boulder just tweeted a few days ago that State Farm will not be renewing his homeowner’s insurance. And this could become a widespread trend among the insurance companies. If all of us who lost homes are going to have to rebuild to this enormous cost and then we can’t get insurance, we’re going to be up a creek without a paddle.",
       jurisdiction: "Superior",
       meeting: "Town Board Meeting",
       date: "Apr 11, 2022",
@@ -175,7 +173,7 @@ const DATA = {
     {
       speaker: "Rodney Mitchell",
       role: "Marshall Fire survivor",
-      text: "I\u2019m on my knees and I\u2019m being treated very poorly by State Farm Insurance. I\u2019ve gone to the state of Colorado. I\u2019ve talked to the Department of Insurance regulatory office. I have exhausted nearly every except for litigation. And I\u2019m told that that\u2019s a two year ordeal and there\u2019s a very good chance it\u2019s a 50/50. I put $75,000 on the table. The attorney runs with it. If the attorney fails, I lose the 75 grand and I pay State Farm their insurance.",
+      text: "I’m on my knees and I’m being treated very poorly by State Farm Insurance. I’ve gone to the state of Colorado. I’ve talked to the Department of Insurance regulatory office. I have exhausted nearly every except for litigation. And I’m told that that’s a two year ordeal and there’s a very good chance it’s a 50/50. I put $75,000 on the table. The attorney runs with it. If the attorney fails, I lose the 75 grand and I pay State Farm their insurance.",
       jurisdiction: "Superior",
       meeting: "Town Board Meeting",
       date: "Oct 28, 2024",
@@ -185,7 +183,7 @@ const DATA = {
     {
       speaker: "Phil Kuffner",
       role: "Sixth-generation Superior resident, fire survivor",
-      text: "I didn\u2019t hire a contractor this time. I can\u2019t afford to hire a contractor. The price increase on materials is so high that I cannot. If I don\u2019t build it myself, I can\u2019t rebuild that house. So we\u2019re pounding nails again at 61, the cold months are coming and I\u2019m waiting on a permit.",
+      text: "I didn’t hire a contractor this time. I can’t afford to hire a contractor. The price increase on materials is so high that I cannot. If I don’t build it myself, I can’t rebuild that house. So we’re pounding nails again at 61, the cold months are coming and I’m waiting on a permit.",
       jurisdiction: "Superior",
       meeting: "Town Board Meeting",
       date: "Sep 12, 2022",
@@ -195,7 +193,7 @@ const DATA = {
     {
       speaker: "Michael Friedberg",
       role: "Marshall Fire survivor, underinsured",
-      text: "We too are underinsured. We\u2019re living with my parents and we desperately need to rebuild. We\u2019ve only lived there for two years, so we\u2019re in a bad equity position. We\u2019re good friends with the guys at Studio Shed. They build prefab. Since we are underinsured, we\u2019re going to take that settlement and build something small on our side lot, and that allows us to go home.",
+      text: "We too are underinsured. We’re living with my parents and we desperately need to rebuild. We’ve only lived there for two years, so we’re in a bad equity position. We’re good friends with the guys at Studio Shed. They build prefab. Since we are underinsured, we’re going to take that settlement and build something small on our side lot, and that allows us to go home.",
       jurisdiction: "Superior",
       meeting: "Town Board Meeting",
       date: "Sep 12, 2022",
@@ -205,7 +203,7 @@ const DATA = {
     {
       speaker: "Mike Neustetter",
       role: "Fire survivor, 212 W. William St. Superior",
-      text: "We\u2019re about $160,000 underinsured. And it doesn\u2019t matter what the insurance company does. Like, that\u2019s the number. And so we\u2019re going to everyone we can. I\u2019m going to my grandma, who\u2019s 92 years old and asking her for $500. I\u2019m going to my mom, who is unemployed, doesn\u2019t have money to ever retire. And I\u2019m asking her for money, and she\u2019s like, here\u2019s $150.",
+      text: "We’re about $160,000 underinsured. And it doesn’t matter what the insurance company does. Like, that’s the number. And so we’re going to everyone we can. I’m going to my grandma, who’s 92 years old and asking her for $500. I’m going to my mom, who is unemployed, doesn’t have money to ever retire. And I’m asking her for money, and she’s like, here’s $150.",
       jurisdiction: "Superior",
       meeting: "Town Board Meeting",
       date: "Apr 25, 2022",
@@ -215,7 +213,7 @@ const DATA = {
     {
       speaker: "Shannon Cody",
       role: "Andrew Drive resident, Marshall Fire survivor",
-      text: "My husband and I lived in the rubble and ruin of other people\u2019s lives for eight months until it was cleared. And for the almost two years after that of the rebuild which is still in full force. It\u2019s been extremely stressful. It\u2019s loud, it\u2019s dangerous, dirty, it\u2019s scary with all the possible toxins with the intense wind.",
+      text: "My husband and I lived in the rubble and ruin of other people’s lives for eight months until it was cleared. And for the almost two years after that of the rebuild which is still in full force. It’s been extremely stressful. It’s loud, it’s dangerous, dirty, it’s scary with all the possible toxins with the intense wind.",
       jurisdiction: "Superior",
       meeting: "Planning Commission Regular Meeting",
       date: "Feb 18, 2025",
@@ -225,7 +223,7 @@ const DATA = {
     {
       speaker: "Lafayette resident",
       role: "Read into record at Planning Commission (speaker unnamed in transcript)",
-      text: "The lot on the next block over, two houses down, used to house multiple long-term renters, including a small family with two children who I used to say hi to when they would play on the lawn. I\u2019ve watched that property be purchased by an investor external to the neighborhood who has converted all three small residences into Airbnbs.",
+      text: "The lot on the next block over, two houses down, used to house multiple long-term renters, including a small family with two children who I used to say hi to when they would play on the lawn. I’ve watched that property be purchased by an investor external to the neighborhood who has converted all three small residences into Airbnbs.",
       jurisdiction: "Lafayette",
       meeting: "Planning Commission",
       date: "Jul 26, 2023",
@@ -235,7 +233,7 @@ const DATA = {
     {
       speaker: "Superior Town Trustee",
       role: "Town Trustee, on ADU zoning and STR conversion risk",
-      text: "This is the issue that all the Airbnbs are saying they\u2019re just getting picked. The homes are getting picked up by LLCs. Because that would be an easy way to do this. Right. And just add, you know, 20 different ADUs in different places and move on. I\u2019d rather not see that happen.",
+      text: "This is the issue that all the Airbnbs are saying they’re just getting picked. The homes are getting picked up by LLCs. Because that would be an easy way to do this. Right. And just add, you know, 20 different ADUs in different places and move on. I’d rather not see that happen.",
       jurisdiction: "Superior",
       meeting: "Town Board Quarterly Work Session",
       date: "Dec 16, 2024",
@@ -245,7 +243,7 @@ const DATA = {
     {
       speaker: "Lafayette City Council member",
       role: "Addressing post-fire rebuild cost and displacement",
-      text: "If we should have a massive event that would cause a large number of our population to lose their homes, the cost of rebuilding means we need an off-ramp in order to not lose the diversity of our community\u2014because now we are pricing our residents out. I think we\u2019re all seeing it live next door in Louisville and Superior and what\u2019s going on in those communities.",
+      text: "If we should have a massive event that would cause a large number of our population to lose their homes, the cost of rebuilding means we need an off-ramp in order to not lose the diversity of our community—because now we are pricing our residents out. I think we’re all seeing it live next door in Louisville and Superior and what’s going on in those communities.",
       jurisdiction: "Lafayette",
       meeting: "City Council",
       date: "Sep 06, 2022",
@@ -271,7 +269,7 @@ const DATA = {
 const SOURCES: Source[] = [
   // Fire facts + investigation
   {
-    title: "Marshall Fire Resources \u2014 Boulder County Office of Emergency Management",
+    title: "Marshall Fire Resources — Boulder County Office of Emergency Management",
     outlet: "Boulder County Government",
     url: "https://www.bouldercounty.gov/disasters/marshall-fire/",
     accessDate: "2026-04-22",
@@ -321,7 +319,7 @@ const SOURCES: Source[] = [
     accessDate: "2026-04-22",
   },
   {
-    title: "Boulder built a housing factory. Now it\u2019s rebuilding Marshall Fire homes.",
+    title: "Boulder built a housing factory. Now it’s rebuilding Marshall Fire homes.",
     outlet: "Boulder Reporting Lab",
     url: "https://boulderreportinglab.org/2026/02/19/boulders-modular-housing-factory-gets-latest-project-rebuilding-marshall-fire-burn-area/",
     accessDate: "2026-04-22",
@@ -335,7 +333,7 @@ const SOURCES: Source[] = [
   // Insurance
   {
     title: "Division of Insurance Releases Initial Estimates of Underinsurance for Homes in the Marshall Fire",
-    outlet: "Colorado Department of Regulatory Agencies \u2014 Division of Insurance",
+    outlet: "Colorado Department of Regulatory Agencies — Division of Insurance",
     url: "https://doi.colorado.gov/news-releases-consumer-advisories/division-of-insurance-releases-initial-estimates-of",
     accessDate: "2026-04-22",
   },
@@ -346,26 +344,26 @@ const SOURCES: Source[] = [
     accessDate: "2026-04-22",
   },
   {
-    title: "Colorado\u2019s property insurer of last resort is now covering more than two dozen families",
+    title: "Colorado’s property insurer of last resort is now covering more than two dozen families",
     outlet: "The Colorado Sun",
     url: "https://coloradosun.com/2025/07/14/colorado-fair-plan-applications-launch/",
     accessDate: "2026-04-22",
   },
   {
-    title: "Why is your Colorado homeowners insurance going up? Ice, fire and a \u201cwildly different\u201d market",
+    title: "Why is your Colorado homeowners insurance going up? Ice, fire and a “wildly different” market",
     outlet: "Colorado Public Radio",
     url: "https://www.cpr.org/2024/12/27/colorado-homeowners-insurance-going-up-blame-natural-disasters/",
     accessDate: "2026-04-22",
   },
   {
-    title: "Marshall Fire Response \u2014 Frequently Asked Questions on Underinsurance",
+    title: "Marshall Fire Response — Frequently Asked Questions on Underinsurance",
     outlet: "Colorado Division of Insurance",
     url: "https://doi.colorado.gov/announcements/marshall-fire-response-frequently-asked-questions-on-underinsurance",
     accessDate: "2026-04-22",
   },
   // Building code / legislation
   {
-    title: "Colorado Wildfire Resiliency Code \u2014 Board adoption, July 2025",
+    title: "Colorado Wildfire Resiliency Code — Board adoption, July 2025",
     outlet: "Colorado Division of Fire Prevention and Control",
     url: "https://dfpc.colorado.gov/colorado-wildfire-resiliency-code",
     accessDate: "2026-04-22",
@@ -383,13 +381,25 @@ const SOURCES: Source[] = [
     accessDate: "2026-04-22",
   },
   {
-    title: "HB 22-1115 \u2014 Creation of the Wildfire Resiliency Code Board",
+    title: "SB 23-166 — Establishment of a Wildfire Resiliency Code Board",
     outlet: "Colorado General Assembly",
-    url: "https://leg.colorado.gov/bills/hb22-1115",
+    url: "https://leg.colorado.gov/bills/sb23-166",
     accessDate: "2026-04-22",
   },
   {
-    title: "HB 23-1288 \u2014 Colorado FAIR Plan Association",
+    title: "Most Marshall Fire claims resolved; some minor plaintiffs still pending (Jan 13, 2026)",
+    outlet: "Colorado Public Radio",
+    url: "https://www.cpr.org/2026/01/13/marshall-fire-trail-claims-excel-boulder/",
+    accessDate: "2026-04-22",
+  },
+  {
+    title: "Xcel Energy nears completion of Marshall Fire settlements",
+    outlet: "Boulder Reporting Lab",
+    url: "https://boulderreportinglab.org/2025/11/06/xcel-energy-nears-completion-of-marshall-fire-settlements/",
+    accessDate: "2026-04-22",
+  },
+  {
+    title: "HB 23-1288 — Colorado FAIR Plan Association",
     outlet: "Colorado General Assembly",
     url: "https://leg.colorado.gov/bills/hb23-1288",
     accessDate: "2026-04-22",
@@ -397,12 +407,12 @@ const SOURCES: Source[] = [
   // Science
   {
     title: "What the Marshall Fire can teach us as we prepare for future climate catastrophes",
-    outlet: "University of Colorado Boulder \u2014 Earth Lab (Jennifer Balch)",
+    outlet: "University of Colorado Boulder — Earth Lab (Jennifer Balch)",
     url: "https://www.colorado.edu/today/2022/01/25/what-marshall-fire-can-teach-us-we-prepare-future-climate-catastrophes",
     accessDate: "2026-04-22",
   },
   {
-    title: "Marshall fire smoke was health hazard in neighbors\u2019 homes, CU studies say",
+    title: "Marshall fire smoke was health hazard in neighbors’ homes, CU studies say",
     outlet: "The Colorado Sun",
     url: "https://coloradosun.com/2025/01/09/marshall-fire-smoke-health-hazards-cu-boulder-studies/",
     accessDate: "2026-04-22",
@@ -428,7 +438,7 @@ const SOURCES: Source[] = [
   },
   // Hamlet
   {
-    title: "Hamlet \u2014 Search Boulder-area government meetings",
+    title: "Hamlet — Search Boulder-area government meetings",
     outlet: "Hamlet",
     url: "https://www.myhamlet.com/search?q=marshall+fire&ref=district",
   },
@@ -442,7 +452,7 @@ const TOC_SECTIONS = [
   { id: "the-spillover",     label: "Lafayette Absorbed",       number: "05" },
   { id: "the-code",          label: "Zoning the Actuarial Map", number: "06" },
   { id: "the-routinization", label: "The Routine Returned",     number: "07" },
-  { id: "voices",            label: "In Their Own Words",       number: "\u2014" },
+  { id: "voices",            label: "In Their Own Words",       number: "—" },
 ];
 
 // ============================================================================
@@ -480,7 +490,7 @@ function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
         <div>
           <div className="mf-mention-speaker">{quote.speaker}</div>
           <div className="mf-mention-role">{quote.role}</div>
-          <div className="mf-mention-meeting">{quote.jurisdiction} \u00b7 {quote.meeting} \u00b7 {quote.date}</div>
+          <div className="mf-mention-meeting">{quote.jurisdiction} · {quote.meeting} · {quote.date}</div>
         </div>
       </div>
       <blockquote className="mf-mention-text">&ldquo;{quote.text}&rdquo;</blockquote>
@@ -831,7 +841,7 @@ function LedeSection() {
           On the morning of December 30, 2021, a grassland fire ignited near the Marshall Mesa Trailhead in the foothills between Boulder and Superior. The wind was already doing most of the work. Before the sun set, gusts exceeded 100 miles per hour, the flames jumped four lanes of U.S. 36, and {DATA.burnZone.homesDestroyed.toLocaleString()} homes were destroyed. Two people died. Thirty-seven thousand people evacuated. The towns of Superior and Louisville and a strip of unincorporated Boulder County lost their neighborhoods. The City of Boulder &mdash; whose Flatirons frame every tourist photograph of the region &mdash; lost zero.
         </p>
         <p>
-          Four years later, the rebuild rate across the three actual burn-zone jurisdictions stands at {DATA.rebuild.overallRebuildRatePct}%, roughly triple the national average for a five-year wildfire recovery. Louisville reports {DATA.rebuild.louisvilleRebuiltPct}% of its lost homes rebuilt or under construction. Xcel Energy, whose power line has been identified by Boulder County investigators as the source of the primary ignition, announced a ${DATA.xcelSettlement.settlementAmount} million settlement in September 2025 &mdash; without admitting fault. Colorado\u2019s Division of Insurance put the average underinsurance gap, at local reconstruction costs, at between ${DATA.insurance.gapAt250Sqft.toLocaleString()} and ${DATA.insurance.gapAt350Sqft.toLocaleString()} per policy.
+          Four years later, the rebuild rate across the three actual burn-zone jurisdictions stands at {DATA.rebuild.overallRebuildRatePct}%, roughly triple the national average for a five-year wildfire recovery. Louisville reports {DATA.rebuild.louisvilleRebuiltPct}% of its lost homes rebuilt or under construction. Xcel Energy &mdash; whose power line Boulder County investigators identified as the most probable cause of the primary ignition &mdash; announced a ${DATA.xcelSettlement.settlementAmount} million settlement in September 2025, without admitting fault. By January 2026, nearly all of the roughly 4,000 plaintiffs had signed. Colorado’s Division of Insurance put the average underinsurance gap, at local reconstruction costs, at between ${DATA.insurance.gapAt250Sqft.toLocaleString()} and ${DATA.insurance.gapAt350Sqft.toLocaleString()} per policy.
         </p>
         <p>
           This article uses a different lens: the four years of post-fire council testimony. We transcribed {DATA.meetings.totalTranscribed.toLocaleString()} governing-body meetings across four burn-zone Granicus archives &mdash; Superior, Lafayette, Broomfield, and Erie &mdash; for {(DATA.meetings.totalWords / 1e6).toFixed(2)} million words of public record. Then we classified every ~2,000-word chunk on eight topics and four rhetorical dimensions, and pulled {DATA.meetings.totalCandidateQuotes.toLocaleString()} candidate quotes from the highest-signal segments. That corpus captures what residents and officials argued about, in the order they argued about it, for the four years after the wind stopped.
@@ -853,13 +863,13 @@ function WindSection() {
       </div>
       <FadeIn className="mf-body-prose">
         <p>
-          The Marshall Fire does not sit comfortably in the mental category most Americans have for a wildfire. It was not a forest. It did not crown in pine canopy. It crossed a grassland in daylight, in winter, with Category-1 hurricane-force winds at its back. Boulder County\u2019s subsequent after-action analysis concluded that the fire primarily spread through wind-blown embers landing on fences, wood mulch, and attached structures &mdash; the same transmission mechanism that drove the 2018 Camp Fire in California. Grasslands, not forests, were the first fuel.
+          The Marshall Fire does not sit comfortably in the mental category most Americans have for a wildfire. It was not a forest. It did not crown in pine canopy. It crossed a grassland in daylight, in winter, with Category-1 hurricane-force winds at its back. Boulder County’s subsequent after-action analysis concluded that the fire primarily spread through wind-blown embers landing on fences, wood mulch, and attached structures &mdash; the same transmission mechanism that drove the 2018 Camp Fire in California. Grasslands, not forests, were the first fuel.
         </p>
         <p>
-          The National Institute of Standards and Technology has spent years cataloging how structure losses occur in wildland-urban-interface fires, and the finding that changed fire science &mdash; that ember transport, not direct flame, is the dominant loss mechanism &mdash; applies in full here. What made Marshall novel was the topography. The fire\u2019s vector was across flat, open grassland between two high-density subdivisions. Neither Superior nor Louisville&apos;s western edge had historically been mapped as a wildland-urban-interface parcel. After December 30, 2021, both were.
+          The National Institute of Standards and Technology has spent years cataloging how structure losses occur in wildland-urban-interface fires, and the finding that changed fire science &mdash; that ember transport, not direct flame, is the dominant loss mechanism &mdash; applies in full here. What made Marshall novel was the topography. The fire’s vector was across flat, open grassland between two high-density subdivisions. Neither Superior nor Louisville&apos;s western edge had historically been mapped as a wildland-urban-interface parcel. After December 30, 2021, both were.
         </p>
         <p>
-          Jennifer Balch, who directs the Earth Lab at the University of Colorado Boulder, spent the weeks after the fire quantifying what made houses burn. Her group\u2019s subsequent analysis of Marshall\u2019s loss pattern pointed to home-to-home spread at the scale of the subdivision, not embers arriving from miles away. The fire taught a lesson that western utilities and carriers had already learned elsewhere but Colorado had not yet fully absorbed: the WUI is not a fixed geographic edge. It is a weather condition.
+          Jennifer Balch, who directs the Earth Lab at the University of Colorado Boulder, spent the weeks after the fire quantifying what made houses burn. Her group’s subsequent analysis of Marshall’s loss pattern pointed to home-to-home spread at the scale of the subdivision, not embers arriving from miles away. The fire taught a lesson that western utilities and carriers had already learned elsewhere but Colorado had not yet fully absorbed: the WUI is not a fixed geographic edge. It is a weather condition.
         </p>
         <p>
           The utility question was separate, and slower to resolve. Boulder County&apos;s investigators concluded the most probable cause of the primary ignition was &ldquo;hot particles discharged from Xcel Energy power lines&rdquo; near the Marshall Mesa Trailhead. A second ignition may have come from a smoldering coal seam at the Lewis mine site that investigators and plaintiffs contested for years. Xcel never admitted fault. That distinction would become the load-bearing wall of the litigation four years later.
@@ -896,7 +906,7 @@ function InsuranceSilenceSection() {
       </FadeIn>
       <FadeIn className="mf-body-prose">
         <p>
-          Part of the drop reflects where the policy fight moved. HB 23-1288 created the Colorado FAIR Plan Association in 2023 and the state\u2019s insurer of last resort began accepting residential applications on April 10, 2025 &mdash; moving the carrier-non-renewal conversation out of council chambers and into the Division of Insurance. HB 22-1115 had done the same a year earlier for wildfire building code, eventually producing the Colorado Wildfire Resiliency Code adopted by the state board on {DATA.legislation.cwrcAdoptedByState}.
+          Part of the drop reflects where the policy fight moved. HB 23-1288 created the Colorado FAIR Plan Association in 2023, and the state’s insurer of last resort began accepting residential applications on April 10, 2025 &mdash; moving the carrier-non-renewal conversation out of council chambers and into the Division of Insurance. SB 23-166, signed that May, set up the Wildfire Resiliency Code Board, whose work eventually produced the Colorado Wildfire Resiliency Code adopted by the state board on {DATA.legislation.cwrcAdoptedByState}.
         </p>
         <p>
           Part of it reflects something harder. The insurance conversation stopped happening in public because it stopped being negotiable at the municipal level. Rodney Mitchell told the Superior Town Board in October 2024 that he had &ldquo;exhausted nearly every except for litigation&rdquo; with State Farm, and that the litigation math was fifty-fifty at a $75,000 attorney deposit. He was describing a household-scale legal calculation, and he was describing it to a town board that could not directly change it. No council in this corpus passed a resolution, formed a committee, or changed a zoning code in direct response to what residents told them about carrier behavior.
@@ -919,13 +929,13 @@ function GapSection() {
           The Colorado Division of Insurance pulled {ins.policiesAnalyzed.toLocaleString()} of the 1,084 total-loss policies in May 2022 and published a figure that subsequent CU research has since confirmed at the household level: only {ins.fullReplacementPct}% of Marshall Fire homeowners had enough coverage to fully replace their homes at local construction costs.
         </p>
         <p>
-          The gap depended on the per-square-foot reconstruction assumption used. At $250 per square foot, the DOI calculated average underinsurance at ${ins.gapAt250Sqft.toLocaleString()} per policy. At $300, ${ins.gapAt300Sqft.toLocaleString()}. At $350, ${ins.gapAt350Sqft.toLocaleString()}. The catch is that actual rebuild quotes in Louisville, Superior, and unincorporated Boulder County landed between ${ins.localBuildCostLowSqft} and ${ins.localBuildCostHighSqft} per square foot &mdash; at the upper end of the DOI\u2019s scenario band. In other words: the numbers in the most expensive column were the real-world numbers.
+          The gap depended on the per-square-foot reconstruction assumption used. At $250 per square foot, the DOI calculated average underinsurance at ${ins.gapAt250Sqft.toLocaleString()} per policy. At $300, ${ins.gapAt300Sqft.toLocaleString()}. At $350, ${ins.gapAt350Sqft.toLocaleString()}. The catch is that actual rebuild quotes in Louisville, Superior, and unincorporated Boulder County landed between ${ins.localBuildCostLowSqft} and ${ins.localBuildCostHighSqft} per square foot &mdash; at the upper end of the DOI’s scenario band. In other words: the numbers in the most expensive column were the real-world numbers.
         </p>
         <p>
           The council record makes this concrete. Mike Neustetter told the Superior Town Board on April 25, 2022 that his household was $160,000 underinsured and he was asking his 92-year-old grandmother for $500. Michael Friedberg told the same board on September 12, 2022 that he and his wife were so underinsured they would take their settlement, park a prefab Studio Shed unit on their side lot, and move in. Phil Kuffner, a sixth-generation Superior resident, said in the same meeting that he could not afford a contractor, so he was &ldquo;pounding nails again at 61.&rdquo;
         </p>
         <p>
-          Those are three of roughly 180 complaints Marshall Fire residents filed with the Colorado Division of Insurance in the first year. They are a thin slice of what the DOI\u2019s own estimate implies: if the typical household faced a gap of six figures at real local build costs, the unmade calls, the unwritten appeals, and the quiet equity absorption from surviving family members did not show up in any state database. They showed up in the council record, one testimony at a time.
+          Those are three of roughly 180 complaints Marshall Fire residents filed with the Colorado Division of Insurance in the first year. They are a thin slice of what the DOI’s own estimate implies: if the typical household faced a gap of six figures at real local build costs, the unmade calls, the unwritten appeals, and the quiet equity absorption from surviving family members did not show up in any state database. They showed up in the council record, one testimony at a time.
         </p>
       </FadeIn>
     </section>
@@ -942,13 +952,16 @@ function SettlementSection() {
       </div>
       <FadeIn className="mf-body-prose">
         <p>
-          On September 24, 2025, on the eve of a Boulder County jury trial, Xcel Energy and two telecommunications companies announced a ${x.settlementAmount} million &ldquo;agreement in principle&rdquo; with nearly {x.plaintiffCount.toLocaleString()} plaintiffs in the Marshall Fire civil litigation. Xcel stated the settlement would not be borne by ratepayers; roughly ${x.xcelInsuranceContribution} million is expected to be covered by the company\u2019s own insurance, with the rest coming from shareholders and the co-defendants. The company did not admit fault.
+          On September 24, 2025, on the eve of a Boulder County jury trial, Xcel Energy and two telecommunications companies announced a ${x.settlementAmount} million &ldquo;agreement in principle&rdquo; with nearly {x.plaintiffCount.toLocaleString()} plaintiffs in the Marshall Fire civil litigation. Xcel stated the settlement would not be borne by ratepayers; roughly ${x.xcelInsuranceContribution} million is expected to be covered by the company’s own insurance, with the rest coming from shareholders and the co-defendants. The company did not admit fault.
         </p>
         <p>
-          The factual record that went unexamined by a jury is narrow but consequential. Xcel acknowledged &ldquo;that its facilities appear to have been involved in an ignition&rdquo; near the Marshall Mesa Trailhead. Boulder County investigators had already concluded that the most probable cause of that ignition was hot particles discharged from the utility\u2019s power lines. The trial would have asked a different question: whether Xcel was legally liable, or whether a smoldering Lewis coal seam fire at a historic mine site was a sufficient intervening cause to foreclose liability. The settlement removed the answer.
+          By a January 13, 2026 status hearing, according to Colorado Public Radio, nearly all the individual plaintiffs had signed and all insurer subrogation claims had been paid. Roughly 600 of the signatories are minors whose settlements still require court approval through guardians or conservators, a process a Boulder district court judge said could extend the administrative close-out by months. A further status hearing was set for February 26, 2026. Only four individual claims remained unresolved at the start of the year.
         </p>
         <p>
-          In the council record across the four years, Xcel appears most often in utility-coordination contexts: the debate over undergrounding, discussion of vegetation-management obligations along rights-of-way, questions about grid hardening. Residents testified about the company\u2019s role; councils did not litigate it. That was correct procedurally &mdash; the civil case was in district court &mdash; but it meant that the most consequential financial determination of the rebuild happened in a courthouse downtown, not a town hall. The $640 million figure is larger than the combined annual general-fund budgets of Superior, Louisville, and Lafayette for the fiscal year of the settlement.
+          The factual record that went unexamined by a jury is narrow but consequential. Xcel acknowledged &ldquo;that its facilities appear to have been involved in an ignition&rdquo; near the Marshall Mesa Trailhead. Boulder County investigators had already concluded that the most probable cause of that ignition was hot particles discharged from the utility’s power lines. The trial would have asked a different question: whether Xcel was legally liable, or whether a smoldering coal seam fire at a historic mine site near the burn origin was a sufficient intervening cause to foreclose liability. The settlement removed the answer.
+        </p>
+        <p>
+          In the council record across the four years, Xcel appears most often in utility-coordination contexts: the debate over undergrounding, discussion of vegetation-management obligations along rights-of-way, questions about grid hardening. Residents testified about the company’s role; councils did not litigate it. That was correct procedurally &mdash; the civil case was in district court &mdash; but it meant that the most consequential financial determination of the rebuild happened in a courthouse downtown, not a town hall. The $640 million figure is a multiple of the combined annual general-fund budgets of Superior, Louisville, and Lafayette for the fiscal year of the settlement.
         </p>
       </FadeIn>
     </section>
@@ -965,7 +978,7 @@ function SpilloverSection() {
       </div>
       <FadeIn className="mf-body-prose">
         <p>
-          Superior lost houses. Lafayette absorbed the people who lost them. That geographic distinction shows up cleanly in the topic mix of the two cities\u2019 council records.
+          Superior lost houses. Lafayette absorbed the people who lost them. That geographic distinction shows up cleanly in the topic mix of the two cities’ council records.
         </p>
       </FadeIn>
       <FadeIn className="mf-chart-wrap" delay={120}>
@@ -981,13 +994,13 @@ function SpilloverSection() {
       </FadeIn>
       <FadeIn className="mf-body-prose">
         <p>
-          Superior\u2019s classified chunks cluster on direct physical recovery: rebuild, wildfire resilience, and open-space fire management. Lafayette\u2019s cluster somewhere else entirely &mdash; on housing policy: ADU ordinances, short-term rental regulation, displacement, affordability. A Lafayette resident, read into the record at a Planning Commission hearing in July 2023, watched her neighbor\u2019s house get purchased by an out-of-town investor who split three units into Airbnbs. Her neighbors were gone. Nothing about the fire touched her block directly; the effects arrived anyway.
+          Superior’s classified chunks cluster on direct physical recovery: rebuild, wildfire resilience, and open-space fire management. Lafayette’s cluster somewhere else entirely &mdash; on housing policy: ADU ordinances, short-term rental regulation, displacement, affordability. A Lafayette resident, read into the record at a Planning Commission hearing in July 2023, watched her neighbor’s house get purchased by an out-of-town investor who split three units into Airbnbs. Her neighbors were gone. Nothing about the fire touched her block directly; the effects arrived anyway.
         </p>
         <p>
-          The rent data from the first year corroborates the direction. Colorado Sun and KUNC coverage in early 2022 documented rental rates jumping from roughly $2,400 a month to $3,000 and above in the Lafayette and Louisville rental market, with more extreme individual cases climbing into the $6,000 range. The Colorado Attorney General\u2019s office opened a price-gouging inquiry in January 2022. About 340 renters were displaced by the fire itself; the pressure on neighboring rental stock was immediate and, as the meeting record shows, sustained for years.
+          The rent data from the first year corroborates the direction. Colorado Sun and KUNC coverage in early 2022 documented rental rates jumping from roughly $2,400 a month to $3,000 and above in the Lafayette and Louisville rental market, with more extreme individual cases climbing into the $6,000 range. The Colorado Attorney General’s office opened a price-gouging inquiry in January 2022. About 340 renters were displaced by the fire itself; the pressure on neighboring rental stock was immediate and, as the meeting record shows, sustained for years.
         </p>
         <p>
-          A Lafayette council member, speaking in a September 2022 meeting, named the frame cleanly: <em>&ldquo;we\u2019re all seeing it live next door in Louisville and Superior and what\u2019s going on in those communities.&rdquo;</em> The cost of rebuilding didn\u2019t stay where the fire was. It traveled down the displacement curve, stopping in the next affordable town.
+          A Lafayette council member, speaking in a September 2022 meeting, named the frame cleanly: <em>&ldquo;we’re all seeing it live next door in Louisville and Superior and what’s going on in those communities.&rdquo;</em> The cost of rebuilding didn’t stay where the fire was. It traveled down the displacement curve, stopping in the next affordable town.
         </p>
       </FadeIn>
     </section>
@@ -1004,7 +1017,7 @@ function CodeSection() {
       </div>
       <FadeIn className="mf-body-prose">
         <p>
-          What the council record captures, at scale, is a region zoning around insurance outcomes it cannot directly control. The discussion doesn\u2019t sound like that in any one meeting &mdash; each agenda item is about an ADU here, a setback variance there, a prescribed-burn schedule, a short-term rental cap. Across {DATA.meetings.totalTranscribed.toLocaleString()} meetings it accumulates into a coherent pattern: municipal zoning compensating for a private insurance market that has pulled back from risk.
+          What the council record captures, at scale, is a region zoning around insurance outcomes it cannot directly control. The discussion doesn’t sound like that in any one meeting &mdash; each agenda item is about an ADU here, a setback variance there, a prescribed-burn schedule, a short-term rental cap. Across {DATA.meetings.totalTranscribed.toLocaleString()} meetings it accumulates into a coherent pattern: municipal zoning compensating for a private insurance market that has pulled back from risk.
         </p>
       </FadeIn>
       <FadeIn className="mf-chart-wrap" delay={120}>
@@ -1020,16 +1033,16 @@ function CodeSection() {
       </FadeIn>
       <FadeIn className="mf-body-prose">
         <p>
-          The sharpest articulation of the shift came from Stephan Reinhold, a Boulder County Parks and Open Space forester, speaking to the Superior Town Board in September 2023. He described the moment the region\u2019s fire scientists realized the Marshall Fire had exposed an actuarial and institutional blind spot: <em>&ldquo;we had to involve the grasslands as part of the wildland urban interface.&rdquo;</em> A flat grassland on the Front Range had never been a wildland-urban-interface parcel in the insurance sense. After December 30, 2021, it was.
+          The sharpest articulation of the shift came from Stephan Reinhold, a Boulder County Parks and Open Space forester, speaking to the Superior Town Board in September 2023. He described the moment the region’s fire scientists realized the Marshall Fire had exposed an actuarial and institutional blind spot: <em>&ldquo;we had to involve the grasslands as part of the wildland urban interface.&rdquo;</em> A flat grassland on the Front Range had never been a wildland-urban-interface parcel in the insurance sense. After December 30, 2021, it was.
         </p>
         <p>
-          Louisville moved first on code. In November 2024 the city council unanimously adopted Ordinance 1891 &mdash; the Fire Hardening Code &mdash; mandating Class A roofs, fire-resistant vents and siding, and ignition-resistant fencing within five feet of a structure on all new builds. Already-permitted Marshall Fire rebuilds were specifically exempted, a pragmatic concession to underinsured households still in the permit queue. The ordinance took effect in December 2024, making Louisville the first Colorado municipality to impose such requirements. Superior adopted its own building-code updates separately.
+          Louisville moved first on code. In November 2024 the city council unanimously adopted Ordinance 1891 &mdash; the Fire Hardening Code &mdash; mandating Class A roofs, fire-resistant vents and siding, and ignition-resistant fencing within five feet of a structure on all new builds. Already-permitted Marshall Fire rebuilds were specifically exempted, a pragmatic concession to underinsured households still in the permit queue. The ordinance took effect on December 10, 2024, making Louisville the first Colorado municipality to impose such requirements. Superior and Boulder County have advanced their own building-code updates on separate tracks.
         </p>
         <p>
-          The state caught up at the board level. The Wildfire Resiliency Code Board established by HB 22-1115 (and organizationally rebuilt under SB 23-166) adopted the Colorado Wildfire Resiliency Code on July 1, 2025. Local jurisdictions have until April 1, 2026 to adopt it, though many have flagged that the state\u2019s draft WUI-application map does not accurately reflect their parcel conditions. That tension &mdash; between a code written at the state level and a map that each city feels is imprecise &mdash; is how the actuarial re-mapping becomes land use, one ordinance hearing at a time.
+          The state caught up at the board level. The Wildfire Resiliency Code Board, established by SB 23-166 in May 2023 and seated by that fall, adopted the Colorado Wildfire Resiliency Code on July 1, 2025. Local jurisdictions have until April 1, 2026 to adopt it, though many have flagged that the state’s draft WUI-application map does not accurately reflect their parcel conditions. That tension &mdash; between a code written at the state level and a map that each city feels is imprecise &mdash; is how the actuarial re-mapping becomes land use, one ordinance hearing at a time.
         </p>
         <p>
-          The other side of the re-mapping, recorded in the same corpus, is investor pressure. A Superior trustee put it bluntly in a December 2024 work session on ADU zoning: homes in the rebuilt neighborhoods &ldquo;are getting picked up by LLCs,&rdquo; with the risk that density changes intended to add housing will instead let institutional capital <em>&ldquo;just add 20 different ADUs in different places and move on.&rdquo;</em> Burned lots are assets on a spec builder\u2019s spreadsheet. The fire made them cheaper; the rebuild made them liquid.
+          The other side of the re-mapping, recorded in the same corpus, is what trustees and residents themselves called investor pressure. A Superior trustee put it bluntly in a December 2024 work session on ADU zoning: homes in the rebuilt neighborhoods &ldquo;are getting picked up by LLCs,&rdquo; with the risk that density changes intended to add housing will instead let institutional capital <em>&ldquo;just add 20 different ADUs in different places and move on.&rdquo;</em> Residents across the Lafayette planning record reported watching neighboring houses sold to out-of-town buyers and converted to short-term rentals. We have not joined the council record to Boulder County clerk deed transfers, which would be the step required to verify any specific transfer pattern by name; that is a methodological limit of this piece.
         </p>
       </FadeIn>
     </section>
@@ -1052,13 +1065,13 @@ function RoutinizationSection() {
           Urgency fell every year. In 2022, the average chunk in the burn-zone corpus scored {dims[0].urgency} on urgency. In 2023, {dims[1].urgency}. In 2024, {dims[2].urgency}. In 2025, {dims[3].urgency}. In 2026 through mid-April, {dims[4].urgency}. The drop was not gradual &mdash; it was cliff-shaped between years one and two. Technical complexity held almost steady: {dims[0].technical_complexity} in 2022, {dims[4].technical_complexity} in 2026. The meetings kept the same substantive content; they just stopped sounding like crises.
         </p>
         <p>
-          Personal testimony drifted down through 2024, then ticked back up in Superior in 2025, driven by a cluster of Andrew Drive and Original Town residents returning to council to object to a redevelopment proposed adjacent to their rebuilt homes. On November 10, 2025, Katie Neustetter appeared before the Superior Town Council over a fencing-and-landscaping dispute on her rebuilt lot and described what her family had spent to get back into the neighborhood. &ldquo;We really wanted to follow the rules,&rdquo; she said, and the backyard her children played in was &ldquo;making us feel a little more comfortable being back.&rdquo; She and her husband, Mike, had been $160,000 underinsured on their Superior house three and a half years earlier. They came back. They are still showing up to public hearings.
+          Personal testimony drifted down through 2024, then ticked back up in Superior in 2025, driven by residents returning to council to object to redevelopment adjacent to their rebuilt homes. On November 10, 2025, Katie Neustetter appeared before the Superior Town Council over a fencing-and-landscaping dispute on her rebuilt lot and described what the family had spent to get back into the neighborhood. &ldquo;We really wanted to follow the rules,&rdquo; she told the council, adding that the backyard her children played in was &ldquo;making us feel a little more comfortable being back.&rdquo; Her husband, Mike Neustetter, had told the same board three and a half years earlier that the couple was $160,000 underinsured. The household came back. They are still showing up to public hearings.
         </p>
         <p>
-          Stephanie Miller, a Superior trustee, was referenced by name {DATA.speakerID.stephanieMillerMentions} times across the corpus. Allison James, Superior\u2019s Disaster Preparedness and Recovery Manager, returned to the board repeatedly to present the town\u2019s recovery status. Trisha Cheek and Shannon Cody on Andrew Drive testified in nearly every meeting cycle during 2024&ndash;25 about the redevelopment adjacent to their block. These are a small set of people. Across {DATA.meetings.totalTranscribed.toLocaleString()} meetings and {(DATA.meetings.totalWords / 1e6).toFixed(2)} million words, {DATA.speakerID.uniqueIdentified} unique named speakers accounted for the identified record. The true population is larger &mdash; transcription splits names, and some testifiers speak only at the microphone without a roll-call signature &mdash; but the concentration holds. Public memory of the Marshall Fire rebuild, at the municipal level, is carried by the same few people over and over.
+          Stephanie Miller, a Superior trustee, was referenced by name {DATA.speakerID.stephanieMillerMentions} times across the corpus. Allison James, Superior’s Disaster Preparedness and Recovery Manager, returned to the board repeatedly to present the town’s recovery status. Shannon Cody, an Andrew Drive resident who identified herself as a Marshall Fire survivor, testified at the February 18, 2025 Planning Commission about a redevelopment adjacent to her rebuilt block. Across {DATA.meetings.totalTranscribed.toLocaleString()} meetings and {(DATA.meetings.totalWords / 1e6).toFixed(2)} million words, {DATA.speakerID.uniqueIdentified} unique named speakers accounted for the identified record. The true population is larger &mdash; transcription splits names, and some testifiers speak only at the microphone without a roll-call signature &mdash; but the concentration holds. Public memory of the Marshall Fire rebuild, at the municipal level, is carried by the same few people over and over.
         </p>
         <p>
-          The corpus also captures a counterfactual that Boulder-area officials usually won\u2019t utter publicly. A Lafayette City Council candidate, speaking at the January 9, 2026 special meeting that followed an early-January wildland incident near the Mayhofer singletrack trail, said out loud what many in the region think privately: <em>&ldquo;if conditions had been a little bit different on Monday&hellip; we could have lost a substantial chunk of the city.&rdquo;</em> On December 30, 2021, the wind shifted. That is part of the reason Lafayette and the City of Boulder still sit intact in 2026. Four years of council record accumulate that fact as a structural condition, not a one-time event.
+          The corpus also captures a counterfactual that Boulder-area officials usually won’t utter publicly. A Lafayette City Council candidate, speaking at the January 9, 2026 special meeting that followed an early-January wildland incident near the Mayhofer Single Tree Trail area of Boulder County Open Space, said out loud what many in the region think privately: <em>&ldquo;if conditions had been a little bit different on Monday&hellip; we could have lost a substantial chunk of the city.&rdquo;</em> On December 30, 2021, the wind shifted. That is part of the reason Lafayette and the City of Boulder still sit intact in 2026. Four years of council record accumulate that fact as a structural condition, not a one-time event.
         </p>
       </FadeIn>
     </section>
@@ -1086,13 +1099,13 @@ function CloseSection() {
     <FadeIn className="mf-section mf-close-section">
       <div className="mf-body-prose">
         <p>
-          Five years is long enough to see the shape of a recovery. {DATA.rebuild.overallRebuildRatePct}% of the destroyed homes are back or nearly back. Xcel has written a check without conceding the sentence that would have cost more. The FAIR Plan is accepting applications. Louisville\u2019s code requires Class A roofs. The Colorado Wildfire Resiliency Code is on a deadline. The Boulder County Wildfire Fund\u2019s last grant cycle has closed. The Community Foundation\u2019s final distributions went out in the first quarter of 2026.
+          Five years is long enough to see the shape of a recovery. {DATA.rebuild.overallRebuildRatePct}% of the destroyed homes are back or nearly back. Xcel has written a check without conceding the sentence that would have cost more. The FAIR Plan is accepting applications. Louisville’s code requires Class A roofs. The Colorado Wildfire Resiliency Code is on a deadline. The Boulder County Wildfire Fund’s last grant cycle has closed. The Community Foundation’s final distributions went out in the first quarter of 2026.
         </p>
         <p>
-          Underneath those milestones, the corpus captures a slower consolidation. Underinsured survivors sold, or rented, or never rebuilt. LLC buyers with no prior connection to the block assembled lots. Lafayette, next door, absorbed the displaced into rental stock that investors were already converting to short-term units. The insurance market\u2019s retreat did not produce a vacuum; it produced a buyer. Four years of council record accumulate that transfer one permit at a time.
+          Underneath those milestones, the corpus captures what trustees and residents themselves described as a slower consolidation. Underinsured survivors sold, or rented, or never rebuilt. Trustees and residents described LLC buyers with no prior connection to a block assembling lots. Lafayette, next door, absorbed the displaced into rental stock that residents said investors were already converting to short-term units. The insurance market’s retreat did not produce a vacuum; in the testimony of the people it touched, it produced a buyer.
         </p>
         <p>
-          Ten point eight million words of public testimony, and on Andrew Drive in Superior, Shannon Cody is still waiting for the wind to stop carrying dust through her kitchen window. The second fire &mdash; the one the Lafayette City Council candidate described on January 9, 2026 &mdash; did not come. On December 30, 2021, the wind shifted south. That is the only reason most of what this piece describes ever had a chance to happen at all.
+          Ten point eight million words of public testimony, and on Andrew Drive in Superior, Shannon Cody told the Planning Commission in February 2025 that she had lived &ldquo;in the rubble and ruin of other people’s lives&rdquo; for eight months. The second fire &mdash; the one the Lafayette City Council candidate warned about on January 9, 2026 &mdash; did not come. On December 30, 2021, the wind shifted. That is part of the reason most of what this piece describes ever had a chance to happen at all.
         </p>
       </div>
     </FadeIn>
@@ -1121,7 +1134,7 @@ function HeroSection({ scrollY }: { scrollY: number }) {
         </h1>
         <p className="mf-hero-sub">
           Ten point eight million words of council testimony across four burn-zone jurisdictions.
-          The insurance market didn\u2019t collapse. It re-drew the map.
+          The insurance market didn’t collapse. It re-drew the map.
         </p>
         <div className="mf-hero-byline">
           By The District &middot; {DATA.meetings.totalTranscribed.toLocaleString()} meetings &middot; {(DATA.meetings.totalWords / 1e6).toFixed(1)}M words
