@@ -7,7 +7,7 @@
 
 import type { ReactElement } from "react";
 
-type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh" | "piedmont" | "lamorinda" | "civics";
+type IllustrationType = "data-centers" | "housing" | "zoning" | "climate" | "oakland" | "san-francisco" | "ann-arbor" | "austin" | "pittsburgh" | "piedmont" | "lamorinda" | "civics" | "marshall";
 
 interface ArticleIllustrationProps {
   type: IllustrationType;
@@ -28,6 +28,7 @@ export function ArticleIllustration({ type, className }: ArticleIllustrationProp
     piedmont: <PiedmontIllustration />,
     lamorinda: <LamorindaIllustration />,
     civics: <CivicsIllustration />,
+    marshall: <MarshallIllustration />,
   };
 
   return (
@@ -1358,6 +1359,135 @@ function CivicsIllustration() {
 
       {/* Ground line */}
       <rect x="0" y="168" width="280" height="12" fill="#c9a84c" opacity="0.04" />
+    </svg>
+  );
+}
+
+/**
+ * Marshall Fire Five Years: Flatirons silhouette + scorched grassland +
+ * three rebuilt rooftop clusters (Superior / Louisville / Lafayette).
+ * Ember accent — no flames, no pine forest (per editorial validation memo).
+ */
+function MarshallIllustration() {
+  return (
+    <svg viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <PremiumFilters />
+
+      <defs>
+        <linearGradient id="mfSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1d1712" />
+          <stop offset="100%" stopColor="#2a2119" />
+        </linearGradient>
+        <linearGradient id="mfFlatirons" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#4a5c6b" stopOpacity="0.85" />
+          <stop offset="100%" stopColor="#2a3541" stopOpacity="0.95" />
+        </linearGradient>
+        <linearGradient id="mfGrass" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#c9b58a" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="#6b5a3d" stopOpacity="0.75" />
+        </linearGradient>
+        <linearGradient id="mfRoof" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#c8562a" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#8a3a18" stopOpacity="0.9" />
+        </linearGradient>
+        <radialGradient id="mfEmberGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#c8562a" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#c8562a" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Sky */}
+      <rect width="280" height="180" fill="url(#mfSky)" />
+
+      {/* Horizon ember glow — actuarial re-mapping, not flame */}
+      <ellipse cx="140" cy="128" rx="170" ry="28" fill="url(#mfEmberGlow)" />
+
+      {/* Flatirons — three distinctive sandstone slabs, angled */}
+      <g filter="url(#softShadow)">
+        <polygon points="35,120 70,50 95,120" fill="url(#mfFlatirons)" />
+        <polygon points="80,120 115,58 140,120" fill="url(#mfFlatirons)" opacity="0.92" />
+        <polygon points="125,120 160,65 185,120" fill="url(#mfFlatirons)" opacity="0.85" />
+        {/* Slab highlight edges */}
+        <line x1="70" y1="50" x2="95" y2="120" stroke="#c9b58a" strokeWidth="0.4" opacity="0.3" />
+        <line x1="115" y1="58" x2="140" y2="120" stroke="#c9b58a" strokeWidth="0.4" opacity="0.25" />
+        <line x1="160" y1="65" x2="185" y2="120" stroke="#c9b58a" strokeWidth="0.4" opacity="0.2" />
+      </g>
+
+      {/* Far ridgeline */}
+      <path d="M0,122 Q50,115 100,118 Q160,113 220,117 Q260,115 280,118 L280,135 L0,135 Z"
+        fill="#2a3541" opacity="0.6" />
+
+      {/* Scorched grassland foreground — tan, dry, WUI flatland */}
+      <path d="M0,135 Q40,128 80,132 Q140,126 200,131 Q240,128 280,131 L280,180 L0,180 Z"
+        fill="url(#mfGrass)" />
+
+      {/* Grass strokes */}
+      <g stroke="#c9b58a" strokeWidth="0.6" opacity="0.5">
+        <line x1="10" y1="148" x2="10" y2="154" />
+        <line x1="22" y1="150" x2="22" y2="155" />
+        <line x1="38" y1="147" x2="38" y2="154" />
+        <line x1="52" y1="149" x2="52" y2="155" />
+        <line x1="75" y1="146" x2="75" y2="153" />
+        <line x1="92" y1="150" x2="92" y2="156" />
+        <line x1="108" y1="147" x2="108" y2="154" />
+        <line x1="175" y1="148" x2="175" y2="155" />
+        <line x1="195" y1="146" x2="195" y2="153" />
+        <line x1="215" y1="149" x2="215" y2="155" />
+        <line x1="245" y1="147" x2="245" y2="154" />
+        <line x1="262" y1="149" x2="262" y2="155" />
+      </g>
+
+      {/* Three rooftop clusters — rebuilt neighborhoods */}
+      {/* Superior (left cluster) */}
+      <g filter="url(#softShadow)">
+        <polygon points="28,140 38,130 48,140" fill="url(#mfRoof)" />
+        <rect x="30" y="140" width="16" height="10" fill="#3d2e1f" />
+        <polygon points="50,143 59,135 68,143" fill="url(#mfRoof)" opacity="0.8" />
+        <rect x="52" y="143" width="14" height="8" fill="#3d2e1f" opacity="0.85" />
+        <polygon points="70,141 79,132 88,141" fill="url(#mfRoof)" opacity="0.7" />
+        <rect x="72" y="141" width="14" height="9" fill="#3d2e1f" opacity="0.75" />
+      </g>
+
+      {/* Louisville (center cluster) */}
+      <g filter="url(#softShadow)">
+        <polygon points="118,138 128,128 138,138" fill="url(#mfRoof)" />
+        <rect x="120" y="138" width="16" height="11" fill="#3d2e1f" />
+        <polygon points="140,140 149,132 158,140" fill="url(#mfRoof)" opacity="0.85" />
+        <rect x="142" y="140" width="14" height="9" fill="#3d2e1f" opacity="0.9" />
+      </g>
+
+      {/* Lafayette (right cluster — slightly farther, spillover absorption) */}
+      <g filter="url(#softShadow)" opacity="0.85">
+        <polygon points="200,142 209,134 218,142" fill="url(#mfRoof)" opacity="0.75" />
+        <rect x="202" y="142" width="14" height="8" fill="#3d2e1f" opacity="0.7" />
+        <polygon points="220,144 228,137 236,144" fill="url(#mfRoof)" opacity="0.65" />
+        <rect x="222" y="144" width="12" height="7" fill="#3d2e1f" opacity="0.65" />
+        <polygon points="240,142 248,134 256,142" fill="url(#mfRoof)" opacity="0.7" />
+        <rect x="242" y="142" width="12" height="8" fill="#3d2e1f" opacity="0.7" />
+      </g>
+
+      {/* Window lights — ember specks in each rooftop cluster */}
+      <g opacity="0.9" filter="url(#glow)">
+        <rect x="34" y="145" width="1.5" height="1.5" fill="#c8562a" />
+        <rect x="40" y="145" width="1.5" height="1.5" fill="#c8562a" opacity="0.7" />
+        <rect x="126" y="143" width="1.5" height="1.5" fill="#c8562a" />
+        <rect x="132" y="143" width="1.5" height="1.5" fill="#c8562a" opacity="0.7" />
+        <rect x="146" y="144" width="1.5" height="1.5" fill="#c8562a" opacity="0.8" />
+        <rect x="206" y="146" width="1.5" height="1.5" fill="#c8562a" opacity="0.6" />
+        <rect x="246" y="146" width="1.5" height="1.5" fill="#c8562a" opacity="0.5" />
+      </g>
+
+      {/* Ember particles drifting east — wind was the fire's weapon */}
+      <g filter="url(#glow)">
+        <circle cx="95" cy="65" r="1.2" fill="#c8562a" opacity="0.55" />
+        <circle cx="155" cy="82" r="0.9" fill="#c8562a" opacity="0.45" />
+        <circle cx="200" cy="95" r="1.1" fill="#c8562a" opacity="0.4" />
+        <circle cx="235" cy="78" r="0.7" fill="#c8562a" opacity="0.35" />
+        <circle cx="258" cy="110" r="1" fill="#c8562a" opacity="0.3" />
+      </g>
+
+      {/* Ground line */}
+      <rect x="0" y="168" width="280" height="12" fill="#c8562a" opacity="0.04" />
     </svg>
   );
 }
