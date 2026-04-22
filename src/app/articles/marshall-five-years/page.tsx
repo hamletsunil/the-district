@@ -158,6 +158,7 @@ const DATA = {
       meeting: "Town Board Meeting",
       date: "Sep 11, 2023",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_2f35b7e8-33d5-4ef6-9256-840771f8e238.mp4",
+      startSeconds: 2180,
       topic: "Open Space & Fire Mgmt",
     },
     {
@@ -168,6 +169,7 @@ const DATA = {
       meeting: "Town Board Meeting",
       date: "Apr 11, 2022",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_0dacd237-c8c1-4127-8723-3bbb0438423e.mp4",
+      startSeconds: 3550,
       topic: "Insurance",
     },
     {
@@ -178,6 +180,7 @@ const DATA = {
       meeting: "Town Board Meeting",
       date: "Oct 28, 2024",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_3528ede5-effa-46bc-a411-9afc45c3ec0e.mp4",
+      startSeconds: 1929,
       topic: "Insurance",
     },
     {
@@ -188,6 +191,7 @@ const DATA = {
       meeting: "Town Board Meeting",
       date: "Sep 12, 2022",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_cbb0fc78-1dfe-4d34-8c41-cfa4d1fc8f1c.mp4",
+      startSeconds: 2577,
       topic: "Rebuild",
     },
     {
@@ -198,6 +202,7 @@ const DATA = {
       meeting: "Town Board Meeting",
       date: "Sep 12, 2022",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_cbb0fc78-1dfe-4d34-8c41-cfa4d1fc8f1c.mp4",
+      startSeconds: 3023,
       topic: "Rebuild",
     },
     {
@@ -208,6 +213,7 @@ const DATA = {
       meeting: "Town Board Meeting",
       date: "Apr 25, 2022",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_6a3f4b95-bc8a-11ec-ae70-0050569183fa.mp4",
+      startSeconds: 6716,
       topic: "Insurance",
     },
     {
@@ -218,6 +224,7 @@ const DATA = {
       meeting: "Planning Commission Regular Meeting",
       date: "Feb 18, 2025",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_8d2cc280-0c48-4cef-a731-573b7844d44e.mp4",
+      startSeconds: 549,
       topic: "Rebuild",
     },
     {
@@ -228,6 +235,7 @@ const DATA = {
       meeting: "Planning Commission",
       date: "Jul 26, 2023",
       videoUrl: "https://archive-video.granicus.com/cityoflafayette/cityoflafayette_1bf3ad13-7be7-486d-aa16-32af2e913ea6.mp4",
+      startSeconds: 8564,
       topic: "Institutional Capital",
     },
     {
@@ -238,6 +246,7 @@ const DATA = {
       meeting: "Town Board Quarterly Work Session",
       date: "Dec 16, 2024",
       videoUrl: "https://archive-video.granicus.com/townofsuperior/townofsuperior_d4f929d4-bc94-11ef-ab4b-005056a89546.mp4",
+      startSeconds: 6626,
       topic: "Institutional Capital",
     },
     {
@@ -248,6 +257,7 @@ const DATA = {
       meeting: "City Council",
       date: "Sep 06, 2022",
       videoUrl: "https://archive-video.granicus.com/cityoflafayette/cityoflafayette_23cdf077-bafd-4291-9511-e7db75332486.mp4",
+      startSeconds: 7265,
       topic: "Rebuild",
     },
     {
@@ -258,6 +268,7 @@ const DATA = {
       meeting: "Special Meeting",
       date: "Jan 09, 2026",
       videoUrl: "https://archive-video.granicus.com/cityoflafayette/cityoflafayette_e389d2e0-fa48-4a9f-bfa4-851f3e1ce615.mp4",
+      startSeconds: 4682,
       topic: "Wildfire Resilience",
     },
   ],
@@ -481,8 +492,21 @@ function FadeIn({ children, className = "", delay = 0, style }: {
   );
 }
 
+function fmtTime(seconds: number) {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = Math.floor(seconds % 60);
+  return h > 0
+    ? `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`
+    : `${m}:${String(s).padStart(2, "0")}`;
+}
+
 function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
   const initials = quote.speaker.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase();
+  // Media fragment tells the browser to start at this timestamp. Granicus
+  // serves MP4s with CORS + range-request support, so this seeks cleanly
+  // inside an HTML5 <video> element — no external player, no download.
+  const srcWithStart = `${quote.videoUrl}#t=${quote.startSeconds}`;
   return (
     <div className="mf-mention-card">
       <div className="mf-mention-header">
@@ -494,9 +518,95 @@ function MentionCard({ quote }: { quote: typeof DATA.featuredQuotes[number] }) {
         </div>
       </div>
       <blockquote className="mf-mention-text">&ldquo;{quote.text}&rdquo;</blockquote>
-      <a href={quote.videoUrl} target="_blank" rel="noopener noreferrer" className="mf-mention-link">
-        Watch full meeting &rarr;
-      </a>
+      <div className="mf-mention-video-wrap">
+        <video
+          className="mf-mention-video"
+          src={srcWithStart}
+          controls
+          preload="metadata"
+          playsInline
+        />
+        <div className="mf-mention-cue">
+          <span className="mf-mention-cue-dot" />
+          Clip begins at {fmtTime(quote.startSeconds)} in the full meeting
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================================
+// MEETING CLIP EMBED — larger marquee player with moments navigator.
+// Granicus-compatible cousin of HamletMeetingEmbed. Clicking a moment
+// remounts the <video> with a new media fragment (most reliable cross-browser
+// way to seek without holding a ref into an uncontrolled element).
+// ============================================================================
+interface ClipMoment {
+  time: string;
+  seconds: number;
+  speaker: string;
+  quote: string;
+}
+
+function MeetingClipEmbed({
+  videoUrl,
+  initialStart,
+  meetingTitle,
+  meetingDate,
+  bodyName,
+  location,
+  moments,
+}: {
+  videoUrl: string;
+  initialStart: number;
+  meetingTitle: string;
+  meetingDate: string;
+  bodyName: string;
+  location: string;
+  moments: ClipMoment[];
+}) {
+  const [currentStart, setCurrentStart] = useState(initialStart);
+  const srcWithFragment = `${videoUrl}#t=${currentStart}`;
+
+  return (
+    <div className="mf-embed">
+      <div className="mf-embed-video">
+        <video
+          key={currentStart}
+          src={srcWithFragment}
+          controls
+          preload="metadata"
+          playsInline
+        />
+      </div>
+
+      <div className="mf-embed-meta">
+        <div className="mf-embed-location">
+          <span className="mf-embed-dot" />
+          {location} · {bodyName}
+        </div>
+        <div className="mf-embed-title">
+          {meetingTitle} — {meetingDate}
+        </div>
+      </div>
+
+      <ol className="mf-embed-moments">
+        {moments.map((m) => (
+          <li key={m.seconds}>
+            <button
+              className={`mf-embed-moment ${m.seconds === currentStart ? "is-active" : ""}`}
+              onClick={() => setCurrentStart(m.seconds)}
+              title={`Jump to ${m.time}`}
+            >
+              <span className="mf-embed-timestamp">{m.time}</span>
+              <div className="mf-embed-moment-body">
+                <span className="mf-embed-moment-speaker">{m.speaker}</span>
+                <span className="mf-embed-moment-quote">&ldquo;{m.quote}&rdquo;</span>
+              </div>
+            </button>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
@@ -871,8 +981,31 @@ function WindSection() {
         <p>
           Jennifer Balch, who directs the Earth Lab at the University of Colorado Boulder, spent the weeks after the fire quantifying what made houses burn. Her group’s subsequent analysis of Marshall’s loss pattern pointed to home-to-home spread at the scale of the subdivision, not embers arriving from miles away. The fire taught a lesson that western utilities and carriers had already learned elsewhere but Colorado had not yet fully absorbed: the WUI is not a fixed geographic edge. It is a weather condition.
         </p>
+      </FadeIn>
+      <FadeIn className="mf-embed-wrap" delay={120}>
+        <div className="mf-embed-frame">
+          <div className="mf-embed-eyebrow">Hamlet meeting clip · grasslands as WUI</div>
+          <MeetingClipEmbed
+            videoUrl="https://archive-video.granicus.com/townofsuperior/townofsuperior_2f35b7e8-33d5-4ef6-9256-840771f8e238.mp4"
+            initialStart={2180}
+            meetingTitle="Town Board Meeting"
+            meetingDate="September 11, 2023"
+            bodyName="Town Board"
+            location="Superior, CO"
+            moments={[
+              {
+                time: "36:20",
+                seconds: 2180,
+                speaker: "Stephan Reinhold, Boulder County Parks & Open Space",
+                quote: "We realized we had to involve the grasslands as part of the wildland urban interface. Immediately, the first meeting after the Marshall Fire, we started talking about grasslands and trying to understand what the risks were…",
+              },
+            ]}
+          />
+        </div>
+      </FadeIn>
+      <FadeIn className="mf-body-prose">
         <p>
-          The utility question was separate, and slower to resolve. Boulder County&apos;s investigators concluded the most probable cause of the primary ignition was &ldquo;hot particles discharged from Xcel Energy power lines&rdquo; near the Marshall Mesa Trailhead. A second ignition may have come from a smoldering coal seam at the Lewis mine site that investigators and plaintiffs contested for years. Xcel never admitted fault. That distinction would become the load-bearing wall of the litigation four years later.
+          The utility question was separate, and slower to resolve. Boulder County&apos;s investigators concluded the most probable cause of the primary ignition was &ldquo;hot particles discharged from Xcel Energy power lines&rdquo; near the Marshall Mesa Trailhead. Investigators and plaintiffs spent years contesting whether a second ignition came from a smoldering coal seam fire at a historic mine site near the burn origin. Xcel never admitted fault. That distinction would become the load-bearing wall of the litigation four years later.
         </p>
       </FadeIn>
     </section>
@@ -937,6 +1070,33 @@ function GapSection() {
         <p>
           Those are three of roughly 180 complaints Marshall Fire residents filed with the Colorado Division of Insurance in the first year. They are a thin slice of what the DOI’s own estimate implies: if the typical household faced a gap of six figures at real local build costs, the unmade calls, the unwritten appeals, and the quiet equity absorption from surviving family members did not show up in any state database. They showed up in the council record, one testimony at a time.
         </p>
+      </FadeIn>
+      <FadeIn className="mf-embed-wrap" delay={150}>
+        <div className="mf-embed-frame">
+          <div className="mf-embed-eyebrow">Hamlet meeting clip · jump between moments</div>
+          <MeetingClipEmbed
+            videoUrl="https://archive-video.granicus.com/townofsuperior/townofsuperior_cbb0fc78-1dfe-4d34-8c41-cfa4d1fc8f1c.mp4"
+            initialStart={2577}
+            meetingTitle="Town Board Meeting"
+            meetingDate="September 12, 2022"
+            bodyName="Town Board"
+            location="Superior, CO"
+            moments={[
+              {
+                time: "42:57",
+                seconds: 2577,
+                speaker: "Phil Kuffner, sixth-generation Superior resident",
+                quote: "I didn’t hire a contractor this time. I can’t afford to hire a contractor… we’re pounding nails again at 61, the cold months are coming and I’m waiting on a permit.",
+              },
+              {
+                time: "50:24",
+                seconds: 3023,
+                speaker: "Michael Friedberg, Marshall Fire survivor",
+                quote: "We too are underinsured. We’re good friends with the guys at Studio Shed. They build prefab. Since we are underinsured, we’re going to… build something small on our side lot, and that allows us to go home.",
+              },
+            ]}
+          />
+        </div>
       </FadeIn>
     </section>
   );
@@ -1177,7 +1337,7 @@ export default function MarshallFiveYears() {
           { value: `$${DATA.xcelSettlement.settlementAmount}M`, label: "Xcel settlement, no fault" },
           { value: `${DATA.rebuild.overallRebuildRatePct}%`, label: "Homes rebuilt in 4 years" },
         ]}
-        finding="Boulder city lost zero homes. The rebuild, and the insurance pressure that followed, is a Superior, Louisville, and unincorporated Boulder County story that six different Front Range governments have been arguing about for four years."
+        finding="Boulder city lost zero homes. The rebuild, and the insurance pressure that followed, is a Superior, Louisville, and unincorporated Boulder County story that the Front Range councils we can see have been arguing about for four years."
       />
 
       <LedeSection />
@@ -1188,6 +1348,28 @@ export default function MarshallFiveYears() {
       <SpilloverSection />
       <CodeSection />
       <RoutinizationSection />
+
+      <FadeIn className="mf-embed-wrap mf-embed-wrap-wide">
+        <div className="mf-embed-frame">
+          <div className="mf-embed-eyebrow">Hamlet meeting clip · the counterfactual</div>
+          <MeetingClipEmbed
+            videoUrl="https://archive-video.granicus.com/cityoflafayette/cityoflafayette_e389d2e0-fa48-4a9f-bfa4-851f3e1ce615.mp4"
+            initialStart={4682}
+            meetingTitle="Special Meeting — post-Mayhofer incident"
+            meetingDate="January 9, 2026"
+            bodyName="Lafayette City Council"
+            location="Lafayette, CO"
+            moments={[
+              {
+                time: "1:18:02",
+                seconds: 4682,
+                speaker: "Lafayette City Council candidate",
+                quote: "If conditions had been a little bit different on Monday… we could have lost a substantial chunk of the city.",
+              },
+            ]}
+          />
+        </div>
+      </FadeIn>
 
       <PullQuote
         text={"If conditions had been a little bit different on Monday, we could have lost a substantial chunk of the city."}

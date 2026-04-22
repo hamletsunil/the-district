@@ -276,10 +276,177 @@
 
 .mf-mention-video {
   width: 100%;
-  max-height: 320px;
+  height: auto;
+  max-height: 260px;
   border-radius: 8px;
   background: #000;
   display: block;
+}
+
+.mf-mention-video-wrap {
+  margin-top: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mf-mention-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: var(--type-tiny);
+  color: var(--page-text-muted);
+  letter-spacing: 0.01em;
+}
+.mf-mention-cue-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+
+/* ===========================
+   MEETING CLIP EMBED — marquee player with moments navigator
+   =========================== */
+.mf-embed-wrap {
+  max-width: 920px;
+  margin: clamp(2rem, 5vw, 3rem) auto;
+  padding: 0 1.5rem;
+}
+.mf-embed-wrap-wide {
+  max-width: 1100px;
+}
+.mf-embed-frame {
+  background: linear-gradient(180deg, rgba(42, 33, 25, 0.92), rgba(29, 23, 18, 0.92));
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+}
+.mf-embed-eyebrow {
+  padding: 0.85rem 1.25rem;
+  background: rgba(200, 86, 42, 0.12);
+  border-bottom: 1px solid var(--card-border);
+  font-family: var(--font-sans);
+  font-size: var(--type-tiny);
+  font-weight: 700;
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mf-embed {
+  display: flex;
+  flex-direction: column;
+}
+.mf-embed-video {
+  position: relative;
+  width: 100%;
+  background: #000;
+}
+.mf-embed-video video {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  display: block;
+  background: #000;
+}
+.mf-embed-meta {
+  padding: 1rem 1.25rem 0.75rem;
+  border-top: 1px solid var(--card-border);
+}
+.mf-embed-location {
+  font-family: var(--font-sans);
+  font-size: var(--type-tiny);
+  letter-spacing: 0.04em;
+  color: var(--grass);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-transform: uppercase;
+}
+.mf-embed-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+.mf-embed-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--page-text);
+  margin-top: 0.3rem;
+}
+.mf-embed-moments {
+  list-style: none;
+  padding: 0 1rem 1.25rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.mf-embed-moment {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  background: rgba(29, 23, 18, 0.6);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  color: var(--page-text);
+  transition: background 0.2s var(--ease-elegant),
+              border-color 0.2s var(--ease-elegant),
+              transform 0.2s var(--ease-elegant);
+  font-family: inherit;
+}
+.mf-embed-moment:hover {
+  background: rgba(200, 86, 42, 0.12);
+  border-color: rgba(200, 86, 42, 0.3);
+  transform: translateY(-1px);
+}
+.mf-embed-moment.is-active {
+  background: rgba(200, 86, 42, 0.18);
+  border-color: var(--accent-primary);
+}
+.mf-embed-timestamp {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+  background: rgba(200, 86, 42, 0.08);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.mf-embed-moment-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.mf-embed-moment-speaker {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--page-text);
+}
+.mf-embed-moment-quote {
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  line-height: 1.5;
+  color: var(--page-text-muted);
+  font-style: italic;
 }
 
 /* -------- Section variants -------- */
