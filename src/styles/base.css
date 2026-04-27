@@ -833,6 +833,21 @@ body {
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* Anchor clear: don't let the fixed masthead eat the section header */
+.tdh #stories,
+.tdh #civics,
+.tdh #tools {
+  scroll-margin-top: 6rem;
+}
+
+@media (min-width: 768px) {
+  .tdh #stories,
+  .tdh #civics,
+  .tdh #tools {
+    scroll-margin-top: 7rem;
+  }
+}
+
 .tdh-section-head {
   display: flex;
   flex-direction: column;
@@ -1262,7 +1277,8 @@ body {
 }
 
 /* Civics & Tools */
-.tdh-civics {
+.tdh-civics,
+.tdh-tools {
   margin-bottom: 4rem;
 }
 

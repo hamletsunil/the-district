@@ -156,7 +156,7 @@ export const articles: DistrictArticle[] = [
     dek: "33 datasets. 19.5 million rows. 1,310 meeting transcripts. A data-driven autopsy of San Francisco's pandemic crisis and the question everyone's asking: is the turnaround real?",
     city: "San Francisco",
     state: "CA",
-    publishedAt: "2025-12-01",
+    publishedAt: "2026-02-17",
     accentColor: "#DC2626",
     meta: "25 min read",
     illustrationKey: "san-francisco",

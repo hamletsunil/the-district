@@ -74,13 +74,22 @@ export default function Home() {
         ))}
       </section>
 
-      <section id="civics" className="tdh-civics">
+      {explainer && (
+        <section id="civics" className="tdh-civics">
+          <header className="tdh-section-head">
+            <span className="tdh-eyebrow">Civics</span>
+            <h2 className="tdh-section-title">The definitive guide.</h2>
+          </header>
+          <ExplainerRow article={explainer} />
+        </section>
+      )}
+
+      <section id="tools" className="tdh-tools">
         <header className="tdh-section-head">
-          <span className="tdh-eyebrow">Civics &amp; Tools</span>
-          <h2 className="tdh-section-title">Reference and instruments.</h2>
+          <span className="tdh-eyebrow">Tools</span>
+          <h2 className="tdh-section-title">Investigate the data yourself.</h2>
         </header>
-        {explainer && <ExplainerRow article={explainer} />}
-        <ul id="tools" className="tdh-tools-list">
+        <ul className="tdh-tools-list">
           {tools.map((a) => (
             <ToolCard key={a.slug} article={a} />
           ))}
@@ -282,7 +291,11 @@ function Colophon() {
 
 function formatDate(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 }
 
 function groupByRecency(items: DistrictArticle[]): { label: string; articles: DistrictArticle[] }[] {
@@ -295,7 +308,7 @@ function groupByRecency(items: DistrictArticle[]): { label: string; articles: Di
     Earlier: [],
   };
   for (const a of items) {
-    const y = new Date(a.publishedAt).getFullYear();
+    const y = parseInt(a.publishedAt.slice(0, 4), 10);
     if (y === thisYear) groups[`${thisYear}`].push(a);
     else if (y === lastYear) groups[`${lastYear}`].push(a);
     else groups.Earlier.push(a);
