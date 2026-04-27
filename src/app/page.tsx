@@ -30,15 +30,6 @@ export default function Home() {
 
   return (
     <main className="tdh">
-      <section className="tdh-hero">
-        <h1 className="tdh-hero-title">The District</h1>
-        <p className="tdh-hero-sub">
-          Long-form, data-driven reporting on the city halls and zoning committees that
-          shape American life. Built from transcripts, votes, and public records across
-          more than 3,000 jurisdictions.
-        </p>
-      </section>
-
       <section id="stories" className="tdh-featured">
         <FeaturedSpread article={featuredArticle} />
       </section>
@@ -270,12 +261,13 @@ function Colophon() {
   return (
     <section className="tdh-colophon" aria-label="About The District">
       <div className="tdh-colophon-mission">
-        <span className="tdh-eyebrow">How it&rsquo;s made</span>
+        <span className="tdh-eyebrow">About</span>
         <p>
-          Every story starts with data. Hamlet&rsquo;s platform processes transcripts,
-          agendas, and roll-call records from city council meetings across the country.
-          Our team uses that data to find patterns and stories that would be impossible
-          to uncover by hand.
+          Long-form, data-driven reporting on the city halls and zoning committees that
+          shape American life. Every story starts with data — Hamlet&rsquo;s platform
+          processes transcripts, agendas, and roll-call records from city council
+          meetings across more than 3,000 jurisdictions. Our team finds patterns that
+          would be impossible to uncover by hand.
         </p>
       </div>
       <div className="tdh-colophon-byline">

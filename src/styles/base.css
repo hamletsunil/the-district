@@ -866,37 +866,16 @@ body {
   margin: 0;
 }
 
-/* Hero — wordmark + descriptive sub-head */
-.tdh-hero {
-  padding-top: 1rem;
-  padding-bottom: 4rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  margin-bottom: 4rem;
-}
-
-.tdh-hero-title {
-  font-family: var(--font-body);
-  font-size: clamp(3rem, 9vw, 6rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  line-height: 0.95;
-  color: white;
-  margin: 0 0 1.5rem;
-}
-
-.tdh-hero-sub {
-  font-family: var(--font-body);
-  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 640px;
-  margin: 0;
-  text-wrap: balance;
-}
-
 /* Featured story — flat editorial spread */
 .tdh-featured {
+  padding-top: 1rem;
   margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .tdh-featured {
+    padding-top: 2rem;
+  }
 }
 
 .tdh-featured-link {
