@@ -1,0 +1,183 @@
+import type { DistrictArticle } from "@/types/article";
+
+export const articles: DistrictArticle[] = [
+  {
+    slug: "marshall-five-years",
+    kind: "city-deep-dive",
+    status: "draft",
+    title: "Five Years After Marshall",
+    dek: "551 meetings. 10.78 million words. Four years of Boulder-area councils governing in the actuarial shadow of the fire that burned a thousand homes.",
+    city: "Boulder County",
+    state: "CO",
+    publishedAt: "2026-12-30",
+    accentColor: "#c8562a",
+    meta: "20 min read",
+    illustrationKey: "marshall",
+  },
+  {
+    slug: "how-local-government-works",
+    kind: "explainer",
+    status: "published",
+    title: "How Local Government Works",
+    dek: "14 chapters on the machinery closest to daily life — from who runs your city to where your property taxes go. Built on transcripts, case law, and Census data from 90,000+ jurisdictions.",
+    publishedAt: "2026-03-31",
+    accentColor: "#2563eb",
+    meta: "45 min read · 14 chapters",
+    illustrationKey: "civics",
+  },
+  {
+    slug: "lamorinda-triangle",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "Three Cities, One Fire Zone",
+    dek: "1,700+ government meetings across three cities that share a school system, a water utility, and a set of hills — but govern completely differently.",
+    city: "Lamorinda",
+    state: "CA",
+    publishedAt: "2026-03-20",
+    accentColor: "#4ECDC4",
+    meta: "15 min read",
+    illustrationKey: "lamorinda",
+  },
+  {
+    slug: "piedmonts-deliberation",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "The Most Deliberative Square Mile in America",
+    dek: "461 meetings. Five governing bodies. 9.3 million words. Everything Piedmont said in six years — every committee, every debate, every decision.",
+    city: "Piedmont",
+    state: "CA",
+    publishedAt: "2026-03-18",
+    accentColor: "#d4a44a",
+    meta: "18 min read",
+    illustrationKey: "piedmont",
+    featured: true,
+  },
+  {
+    slug: "pittsburghs-bill",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "The Bill Comes Due",
+    dek: "108,394 votes. 25 years. Pittsburgh's council agreed on 97% of everything — then fractured over property taxes, housing, and who pays for a city that deferred hard choices for two decades.",
+    city: "Pittsburgh",
+    state: "PA",
+    publishedAt: "2026-03-04",
+    accentColor: "#FFB81C",
+    meta: "12 min read",
+    illustrationKey: "pittsburgh",
+  },
+  {
+    slug: "austin-boom",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "Forty-Seven Million Words",
+    dek: "2,588 meetings. 93 government bodies. 5,108 hours. Every public meeting Austin held in five years — the most passionate debates produced the most lopsided votes.",
+    city: "Austin",
+    state: "TX",
+    publishedAt: "2026-03-03",
+    accentColor: "#BF5700",
+    meta: "15 min read",
+    illustrationKey: "austin",
+  },
+  {
+    slug: "ann-arbor-divided",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "The City That Won't Agree",
+    dek: "142 cities. 8.1 million votes. Ann Arbor's council has the highest dissent rate in America — and it's been that way for seventeen years.",
+    city: "Ann Arbor",
+    state: "MI",
+    publishedAt: "2026-02-25",
+    accentColor: "#e8b931",
+    meta: "12 min read",
+    illustrationKey: "ann-arbor",
+  },
+  {
+    slug: "oaklands-future",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "Five Futures for Oakland",
+    dek: "$94K median incomes. A $360M deficit. 342 missing officers. An interactive simulation of the trade-offs Oakland faces over the next decade.",
+    city: "Oakland",
+    state: "CA",
+    publishedAt: "2026-02-10",
+    accentColor: "#10997F",
+    meta: "10 min read",
+    illustrationKey: "oakland",
+  },
+  {
+    slug: "data-center-gold-rush",
+    kind: "civics-tool",
+    status: "published",
+    title: "The Data Center Gold Rush",
+    dek: "156 cities. 2,847 meetings. Where will America's digital infrastructure live — and who gets to decide?",
+    publishedAt: "2026-02-04",
+    accentColor: "#3b82f6",
+    meta: "8 min read",
+    illustrationKey: "data-centers",
+  },
+  {
+    slug: "abundance-index",
+    kind: "civics-tool",
+    status: "published",
+    title: "The Abundance Index",
+    dek: "Which cities welcome growth and which fight it? 84 cities ranked by their openness to housing development.",
+    publishedAt: "2026-02-04",
+    accentColor: "#166534",
+    meta: "7 min read",
+    illustrationKey: "housing",
+  },
+  {
+    slug: "vote-tracker",
+    kind: "civics-tool",
+    status: "published",
+    title: "The Vote Tracker",
+    dek: "1,524 local officials. 25,219 recorded votes. See who's voting yes — and who's blocking progress.",
+    publishedAt: "2026-02-04",
+    accentColor: "#f59e0b",
+    meta: "6 min read",
+    illustrationKey: "zoning",
+  },
+  {
+    slug: "temperature-check",
+    kind: "civics-tool",
+    status: "published",
+    title: "Temperature Check",
+    dek: "438 cities. Millions of public comments. How contentious is your local government?",
+    publishedAt: "2026-02-04",
+    accentColor: "#ef4444",
+    meta: "6 min read",
+    illustrationKey: "climate",
+  },
+  {
+    slug: "sf-through-the-fog",
+    kind: "city-deep-dive",
+    status: "published",
+    title: "Through the Fog",
+    dek: "33 datasets. 19.5 million rows. 1,310 meeting transcripts. A data-driven autopsy of San Francisco's pandemic crisis and the question everyone's asking: is the turnaround real?",
+    city: "San Francisco",
+    state: "CA",
+    publishedAt: "2025-12-01",
+    accentColor: "#DC2626",
+    meta: "25 min read",
+    illustrationKey: "san-francisco",
+    href: "/sf/through-the-fog.html",
+  },
+];
+
+const featured = articles.filter((a) => a.featured);
+if (featured.length !== 1) {
+  throw new Error(
+    `src/data/articles.ts: expected exactly 1 featured article, found ${featured.length}. Set featured: true on exactly one entry.`
+  );
+}
+if (featured[0].status !== "published") {
+  throw new Error(
+    `src/data/articles.ts: featured article "${featured[0].slug}" must have status: "published". Currently "${featured[0].status}".`
+  );
+}
+
+export const featuredArticle: DistrictArticle = featured[0];
+
+export function articleHref(article: DistrictArticle): string {
+  return article.href ?? `/articles/${article.slug}`;
+}

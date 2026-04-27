@@ -1,342 +1,212 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ArticleIllustration } from "@/components/home";
-import { ArticleEndCTA } from "@/components/article/ArticleEndCTA";
+import { articles, articleHref, featuredArticle } from "@/data/articles";
+import type { DistrictArticle } from "@/types/article";
 
-const articles = [
-  {
-    id: "how-local-government-works",
-    topic: "Guide",
-    title: "How Local Government Works",
-    description:
-      "14 chapters on the machinery closest to daily life — from who runs your city to where your property taxes go. Built on meeting transcripts, case law, and Census data from 90,000+ jurisdictions.",
-    meta: "45 min read · 14 chapters",
-    colorScheme: "civics",
-    illustrationType: "civics" as const,
-  },
-  {
-    id: "piedmonts-deliberation",
-    topic: "City Deep Dive",
-    title: "The Most Deliberative Square Mile in America",
-    description:
-      "461 meetings. Five governing bodies. 9.3 million words. We transcribed everything Piedmont said in six years\u2014from pickleball wars to school tracking debates.",
-    meta: "18 min read \u00b7 Interactive",
-    colorScheme: "piedmont",
-    illustrationType: "piedmont" as const,
-  },
-  {
-    id: "lamorinda-triangle",
-    topic: "City Deep Dive",
-    title: "Three Cities, One Fire Zone",
-    description:
-      "1,700+ government meetings. Three cities that share a school system, a water utility, and a set of hills\u2014but govern completely differently.",
-    meta: "15 min read \u00b7 Interactive",
-    colorScheme: "lamorinda",
-    illustrationType: "lamorinda" as const,
-  },
-  {
-    id: "austin-boom",
-    topic: "City Deep Dive",
-    title: "Forty-Seven Million Words",
-    description:
-      "2,588 meetings. 93 government bodies. 5,108 hours. We transcribed every public meeting Austin held in five years\u2014the most passionate debates produced the most lopsided votes.",
-    meta: "15 min read \u00b7 Interactive",
-    colorScheme: "austin",
-    illustrationType: "austin" as const,
-  },
-  {
-    id: "pittsburghs-bill",
-    topic: "City Deep Dive",
-    title: "The Bill Comes Due",
-    description:
-      "108,394 votes. 25 years. Pittsburgh\u2019s council agreed on 97% of everything\u2014then fractured over property taxes, housing, and who pays for a city that deferred hard choices for two decades.",
-    meta: "12 min read \u00b7 Interactive",
-    colorScheme: "pittsburgh",
-    illustrationType: "pittsburgh" as const,
-  },
-  {
-    id: "ann-arbor-divided",
-    topic: "City Deep Dive",
-    title: "The City That Won\u2019t Agree",
-    description:
-      "142 cities. 8.1 million votes. Ann Arbor\u2019s council has the highest dissent rate in America\u2014and it\u2019s been that way for seventeen years.",
-    meta: "12 min read \u00b7 Interactive",
-    colorScheme: "ann-arbor",
-    illustrationType: "ann-arbor" as const,
-  },
-  {
-    id: "sf-through-the-fog",
-    topic: "City Deep Dive",
-    title: "Through the Fog",
-    description:
-      "33 datasets. 19.5 million rows. 1,310 meeting transcripts. A data-driven autopsy of San Francisco\u2019s pandemic crisis and the question everyone\u2019s asking: is the turnaround real?",
-    meta: "25 min read · 9 visualizations",
-    colorScheme: "crimson",
-    illustrationType: "san-francisco" as const,
-    href: "/sf/through-the-fog.html",
-  },
-  {
-    id: "oaklands-future",
-    topic: "City Deep Dive",
-    title: "Five Futures for Oakland",
-    description:
-      "$94K median incomes. A $360M deficit. 342 missing officers. An interactive simulation of the trade-offs Oakland faces over the next decade.",
-    meta: "10 min read · Interactive",
-    colorScheme: "oakland",
-    illustrationType: "oakland" as const,
-  },
-  {
-    id: "data-center-gold-rush",
-    topic: "Data Centers",
-    title: "The Data Center Gold Rush",
-    description:
-      "156 cities. 2,847 meetings. Where will America's digital infrastructure live—and who gets to decide?",
-    meta: "8 min read",
-    colorScheme: "navy",
-    illustrationType: "data-centers" as const,
-  },
-  {
-    id: "abundance-index",
-    topic: "Housing",
-    title: "The Abundance Index",
-    description:
-      "Which cities welcome growth and which fight it? 84 cities ranked by their openness to housing development.",
-    meta: "7 min read",
-    colorScheme: "coral",
-    illustrationType: "housing" as const,
-  },
-  {
-    id: "vote-tracker",
-    topic: "Democracy",
-    title: "The Vote Tracker",
-    description:
-      "1,524 local officials. 25,219 recorded votes. See who's voting yes—and who's blocking progress.",
-    meta: "6 min read",
-    colorScheme: "indigo",
-    illustrationType: "zoning" as const,
-  },
-  {
-    id: "temperature-check",
-    topic: "Civic Health",
-    title: "Temperature Check",
-    description:
-      "438 cities. Millions of public comments. How contentious is your local government?",
-    meta: "6 min read",
-    colorScheme: "sage",
-    illustrationType: "climate" as const,
-  },
+const CITY_DEEP_DIVES_RECENT_FIRST = (): DistrictArticle[] =>
+  articles
+    .filter((a) => a.kind === "city-deep-dive" && a.status === "published")
+    .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+
+const TOOLS_ORDER = [
+  "vote-tracker",
+  "temperature-check",
+  "abundance-index",
+  "data-center-gold-rush",
 ];
 
 export default function Home() {
-  const stackRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: "0px 0px -10% 0px" }
-    );
-
-    const cards = stackRef.current?.querySelectorAll(".animate-on-scroll");
-    cards?.forEach((card) => observer.observe(card));
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <>
-      {/* Main content */}
-      <main className="main-content-layer">
-        {/* Hero Section */}
-        <HeroSection />
-
-        {/* 3D Article Stack */}
-        <section ref={stackRef} className="article-stack">
-          {articles.map((article, index) => (
-            <Link
-              key={article.id}
-              href={"href" in article && article.href ? article.href : `/articles/${article.id}`}
-              className={`article-card-3d animate-on-scroll`}
-              style={{ transitionDelay: `${index * 0.1}s` }}
-            >
-              <div className={`card-inner card-${article.colorScheme}`}>
-                <div className="card-spine" />
-                <div className="card-layout">
-                  <div className="card-illustration">
-                    <ArticleIllustration type={article.illustrationType} />
-                  </div>
-                  <div className="card-content">
-                    <span className="card-topic">{article.topic}</span>
-                    <h2 className="card-title">{article.title}</h2>
-                    <p className="card-description">{article.description}</p>
-                    <span className="card-meta">{article.meta}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </section>
-
-        {/* District Newsletter CTA */}
-        <ArticleEndCTA />
-      </main>
-
-      {/* Reveal Footer - revealed when scrolling past main content */}
-      <RevealFooter />
-    </>
+  const cityStories = CITY_DEEP_DIVES_RECENT_FIRST();
+  const latest3 = cityStories.filter((a) => a.slug !== featuredArticle.slug).slice(0, 3);
+  const explainer = articles.find((a) => a.kind === "explainer");
+  const tools = TOOLS_ORDER.map((slug) => articles.find((a) => a.slug === slug)).filter(
+    (a): a is DistrictArticle => Boolean(a)
   );
-}
 
-// ============================================================================
-// HERO SECTION
-// ============================================================================
-function HeroSection() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const opacity = Math.max(0, 1 - scrollY / 600);
-  const translateY = scrollY / 4;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-
-    try {
-      const response = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setStatus("success");
-        setMessage(data.message || "Welcome to The District!");
-        setEmail("");
-      } else {
-        setStatus("error");
-        setMessage(data.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setStatus("error");
-      setMessage("Network error. Please try again.");
-    }
-  };
+  const cityDeskGroups = groupByRecency(cityStories);
 
   return (
-    <section className="district-hero">
-      <div className="district-hero-bg">
-        <div className="district-hero-gradient" />
-        <div className="district-hero-grid" style={{ opacity: opacity * 0.15 }} />
-      </div>
-
-      <div className="district-hero-content" style={{ opacity, transform: `translateY(${translateY}px)` }}>
-        <div className="district-hero-badge">
-          <span className="district-badge-dot" />
-          A{" "}
-          <a
-            href="https://www.myhamlet.com?ref=district"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hamlet-link"
-          >
-            Hamlet
-          </a>{" "}
-          Publication
-        </div>
-
-        <h1 className="district-hero-title">
-          Data-driven stories<br />
-          from <span className="district-title-accent">local government</span>
-        </h1>
-
-        <p className="district-hero-subtitle">
-          We analyze transcripts, votes, and records from 3,000+ city halls
-          to uncover what&rsquo;s really happening in local democracy.
+    <main className="tdh">
+      <section className="tdh-hero">
+        <h1 className="tdh-hero-title">The District</h1>
+        <p className="tdh-hero-sub">
+          Long-form, data-driven reporting on the city halls and zoning committees that
+          shape American life. Built from transcripts, votes, and public records across
+          more than 3,000 jurisdictions.
         </p>
+      </section>
 
-        {status === "success" ? (
-          <div className="district-newsletter-success">
-            <span className="district-success-icon">✓</span>
-            <p>{message}</p>
+      <section id="stories" className="tdh-featured">
+        <FeaturedSpread article={featuredArticle} />
+      </section>
+
+      <section className="tdh-latest">
+        <header className="tdh-section-head">
+          <span className="tdh-eyebrow">Latest</span>
+          <h2 className="tdh-section-title">The most recent dispatches.</h2>
+        </header>
+        <div className="tdh-latest-grid">
+          {latest3.map((a) => (
+            <LatestCard key={a.slug} article={a} />
+          ))}
+        </div>
+      </section>
+
+      <NewsletterSection />
+
+      <section className="tdh-citydesk">
+        <header className="tdh-section-head">
+          <span className="tdh-eyebrow">City Desk</span>
+          <h2 className="tdh-section-title">Every city we&rsquo;ve covered.</h2>
+        </header>
+        {cityDeskGroups.map((group) => (
+          <div key={group.label} className="tdh-citydesk-group">
+            <h3 className="tdh-citydesk-grouplabel">{group.label}</h3>
+            <ul className="tdh-citydesk-list">
+              {group.articles.map((a, i) => (
+                <CityDeskRow key={a.slug} article={a} index={i + 1} />
+              ))}
+            </ul>
           </div>
-        ) : (
-          <form className="district-newsletter" onSubmit={handleSubmit}>
-            <div className="district-newsletter-input-wrapper">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                disabled={status === "loading"}
-                className="district-newsletter-input"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="district-newsletter-button"
-              >
-                {status === "loading" ? "..." : "Subscribe"}
-              </button>
-            </div>
-            {status === "error" ? (
-              <p className="district-newsletter-error">{message}</p>
-            ) : (
-              <p className="district-newsletter-note">
-                Free weekly insights. No spam, ever.
-              </p>
-            )}
-          </form>
-        )}
-      </div>
+        ))}
+      </section>
 
-      <div className="district-hero-scroll-cue" style={{ opacity }}>
-        <div className="district-scroll-line" />
-        <span>Explore stories</span>
-      </div>
-    </section>
+      <section id="civics" className="tdh-civics">
+        <header className="tdh-section-head">
+          <span className="tdh-eyebrow">Civics &amp; Tools</span>
+          <h2 className="tdh-section-title">Reference and instruments.</h2>
+        </header>
+        {explainer && <ExplainerRow article={explainer} />}
+        <ul id="tools" className="tdh-tools-list">
+          {tools.map((a) => (
+            <ToolCard key={a.slug} article={a} />
+          ))}
+        </ul>
+      </section>
+
+      <Colophon />
+    </main>
   );
 }
 
-// ============================================================================
-// REVEAL FOOTER - About section that reveals as you scroll past content
-// ============================================================================
-function RevealFooter() {
+function FeaturedSpread({ article }: { article: DistrictArticle }) {
+  return (
+    <Link href={articleHref(article)} className="tdh-featured-link">
+      <div className="tdh-featured-cover">
+        <ArticleIllustration type={article.illustrationKey as never} />
+      </div>
+      <div className="tdh-featured-text">
+        <span className="tdh-eyebrow tdh-featured-kicker" style={{ color: article.accentColor }}>
+          {article.city ? `${article.city}, ${article.state}` : "Featured"}
+        </span>
+        <h2 className="tdh-featured-title">{article.title}</h2>
+        <p className="tdh-featured-dek">{article.dek}</p>
+        <span className="tdh-featured-meta">
+          {article.meta} · By The District
+        </span>
+        <span
+          className="tdh-featured-cta"
+          style={{ borderBottomColor: article.accentColor, color: article.accentColor }}
+        >
+          Read the full story →
+        </span>
+      </div>
+    </Link>
+  );
+}
+
+function LatestCard({ article }: { article: DistrictArticle }) {
+  return (
+    <Link href={articleHref(article)} className="tdh-latest-card">
+      <div className="tdh-latest-illo">
+        <ArticleIllustration type={article.illustrationKey as never} />
+      </div>
+      <span className="tdh-eyebrow" style={{ color: article.accentColor }}>
+        {article.city ? `${article.city}, ${article.state}` : article.kind}
+      </span>
+      <h3 className="tdh-latest-title">{article.title}</h3>
+      <p className="tdh-latest-dek">{article.dek}</p>
+      <span className="tdh-latest-meta">{article.meta}</span>
+    </Link>
+  );
+}
+
+function CityDeskRow({ article, index }: { article: DistrictArticle; index: number }) {
+  return (
+    <li>
+      <Link href={articleHref(article)} className="tdh-citydesk-row">
+        <span className="tdh-citydesk-num">{String(index).padStart(2, "0")}</span>
+        <div className="tdh-citydesk-text">
+          <span
+            className="tdh-eyebrow tdh-citydesk-kicker"
+            style={{ color: article.accentColor }}
+          >
+            {article.city ? `${article.city}, ${article.state}` : "City"}
+          </span>
+          <h4 className="tdh-citydesk-title">{article.title}</h4>
+        </div>
+        <span className="tdh-citydesk-dek">{article.dek}</span>
+        <span className="tdh-citydesk-date">{formatDate(article.publishedAt)}</span>
+      </Link>
+    </li>
+  );
+}
+
+function ExplainerRow({ article }: { article: DistrictArticle }) {
+  return (
+    <Link href={articleHref(article)} className="tdh-explainer">
+      <div className="tdh-explainer-illo">
+        <ArticleIllustration type={article.illustrationKey as never} />
+      </div>
+      <div>
+        <span className="tdh-eyebrow" style={{ color: article.accentColor }}>
+          The Definitive Guide
+        </span>
+        <h3 className="tdh-explainer-title">{article.title}</h3>
+        <p className="tdh-explainer-dek">{article.dek}</p>
+        <span className="tdh-explainer-meta">{article.meta}</span>
+      </div>
+    </Link>
+  );
+}
+
+function ToolCard({ article }: { article: DistrictArticle }) {
+  return (
+    <li>
+      <Link href={articleHref(article)} className="tdh-tool-card">
+        <div className="tdh-tool-illo">
+          <ArticleIllustration type={article.illustrationKey as never} />
+        </div>
+        <span className="tdh-eyebrow" style={{ color: article.accentColor }}>
+          Tool
+        </span>
+        <h4 className="tdh-tool-title">{article.title}</h4>
+        <p className="tdh-tool-dek">{article.dek}</p>
+        <span className="tdh-tool-meta">{article.meta}</span>
+      </Link>
+    </li>
+  );
+}
+
+function NewsletterSection() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus("loading");
-
     try {
-      const response = await fetch("/api/subscribe", {
+      const r = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
+      const data = await r.json();
+      if (r.ok) {
         setStatus("success");
         setMessage(data.message || "Welcome to The District!");
         setEmail("");
@@ -348,117 +218,91 @@ function RevealFooter() {
       setStatus("error");
       setMessage("Network error. Please try again.");
     }
-  };
+  }
 
   return (
-    <footer className="reveal-footer">
-      <div className="reveal-footer-content">
-        {/* Logo & Tagline */}
-        <div className="reveal-footer-header">
-          <h2 className="reveal-footer-title">The District</h2>
-          <p className="reveal-footer-tagline">Stories from city halls</p>
-        </div>
+    <section className="tdh-newsletter" aria-labelledby="newsletter-heading">
+      <h2 id="newsletter-heading" className="tdh-newsletter-title">
+        One Sunday-morning email per week.
+      </h2>
+      <p className="tdh-newsletter-sub">
+        The story, the data behind it, and a couple lines on what we&rsquo;re working on next.
+      </p>
+      {status === "success" ? (
+        <p className="tdh-newsletter-success">{message}</p>
+      ) : (
+        <form onSubmit={onSubmit} className="tdh-newsletter-form">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            required
+            disabled={status === "loading"}
+            className="tdh-newsletter-input"
+            aria-label="Email address"
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="tdh-newsletter-button"
+          >
+            {status === "loading" ? "..." : "Subscribe"}
+          </button>
+        </form>
+      )}
+      {status === "error" && <p className="tdh-newsletter-error">{message}</p>}
+      <p className="tdh-newsletter-note">Free. No spam. Read by 14,000+.</p>
+    </section>
+  );
+}
 
-        {/* Mission */}
-        <p className="reveal-footer-mission">
-          We analyze transcripts, votes, and public records from more than
-          3,000 city halls across America to uncover what&rsquo;s really
-          happening in local democracy.
+function Colophon() {
+  return (
+    <section className="tdh-colophon" aria-label="About The District">
+      <div className="tdh-colophon-mission">
+        <span className="tdh-eyebrow">How it&rsquo;s made</span>
+        <p>
+          Every story starts with data. Hamlet&rsquo;s platform processes transcripts,
+          agendas, and roll-call records from city council meetings across the country.
+          Our team uses that data to find patterns and stories that would be impossible
+          to uncover by hand.
         </p>
-
-        {/* How It's Made */}
-        <section className="reveal-footer-how">
-          <h3 className="reveal-footer-section-title">How It&rsquo;s Made</h3>
-          <p className="reveal-footer-prose">
-            Every story in The District starts with data. Hamlet&rsquo;s platform
-            processes transcripts, agendas, and voting records from city
-            council meetings across the country. Our journalism team uses
-            this data to find patterns, anomalies, and stories that would
-            be impossible to uncover by hand.
-          </p>
-        </section>
-
-        {/* Author */}
-        <div className="reveal-footer-authors">
-          <div className="reveal-footer-author">
-            <img
-              src="https://www.myhamlet.com/team/sunil-rajaraman.jpg"
-              alt="Sunil Rajaraman"
-              width={48}
-              height={48}
-              className="reveal-footer-avatar"
-            />
-            <div>
-              <p className="reveal-footer-author-name">Sunil Rajaraman</p>
-              <p className="reveal-footer-author-role">Founder &amp; CEO</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter */}
-        <div className="reveal-footer-newsletter">
-          <h3 className="reveal-footer-newsletter-title">Stay informed</h3>
-          {status === "success" ? (
-            <p className="reveal-footer-newsletter-success">{message}</p>
-          ) : (
-            <form onSubmit={handleSubmit} className="reveal-footer-form">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                disabled={status === "loading"}
-                className="reveal-footer-input"
-              />
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="reveal-footer-button"
-              >
-                {status === "loading" ? "..." : "Subscribe"}
-              </button>
-            </form>
-          )}
-          {status === "error" && (
-            <p className="reveal-footer-error">{message}</p>
-          )}
-        </div>
-
-        {/* Team Link */}
-        <a
-          href="https://www.myhamlet.com/about?ref=district"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="reveal-footer-team-link"
-        >
-          Meet the full team at Hamlet →
-        </a>
-
-        {/* Attribution (matches global footer) */}
-        <div className="reveal-footer-attribution">
-          <p>
-            A{" "}
-            <a
-              href="https://www.myhamlet.com?ref=district"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Hamlet
-            </a>{" "}
-            Publication
-          </p>
-          <p className="reveal-footer-about">
-            <a
-              href="https://www.myhamlet.com/about?ref=district"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              About
-            </a>
-          </p>
+      </div>
+      <div className="tdh-colophon-byline">
+        <div className="tdh-colophon-avatar" aria-hidden>SR</div>
+        <div>
+          <div className="tdh-colophon-name">Sunil Rajaraman</div>
+          <div className="tdh-colophon-role">Editor, The District</div>
         </div>
       </div>
-    </footer>
+    </section>
   );
+}
+
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
+function groupByRecency(items: DistrictArticle[]): { label: string; articles: DistrictArticle[] }[] {
+  const now = new Date();
+  const thisYear = now.getFullYear();
+  const lastYear = thisYear - 1;
+  const groups: Record<string, DistrictArticle[]> = {
+    [`${thisYear}`]: [],
+    [`${lastYear}`]: [],
+    Earlier: [],
+  };
+  for (const a of items) {
+    const y = new Date(a.publishedAt).getFullYear();
+    if (y === thisYear) groups[`${thisYear}`].push(a);
+    else if (y === lastYear) groups[`${lastYear}`].push(a);
+    else groups.Earlier.push(a);
+  }
+  return [
+    { label: `${thisYear}`, articles: groups[`${thisYear}`] },
+    { label: `${lastYear}`, articles: groups[`${lastYear}`] },
+    { label: "Earlier", articles: groups.Earlier },
+  ].filter((g) => g.articles.length > 0);
 }
