@@ -4,15 +4,16 @@ export const articles: DistrictArticle[] = [
   {
     slug: "marshall-five-years",
     kind: "city-deep-dive",
-    status: "draft",
+    status: "published",
     title: "Five Years After Marshall",
     dek: "551 meetings. 10.78 million words. Four years of Boulder-area councils governing in the actuarial shadow of the fire that burned a thousand homes.",
     city: "Boulder County",
     state: "CO",
-    publishedAt: "2026-12-30",
+    publishedAt: "2026-04-28",
     accentColor: "#c8562a",
     meta: "20 min read",
     illustrationKey: "marshall",
+    featured: true,
   },
   {
     slug: "how-local-government-works",
@@ -50,7 +51,6 @@ export const articles: DistrictArticle[] = [
     accentColor: "#d4a44a",
     meta: "18 min read",
     illustrationKey: "piedmont",
-    featured: true,
   },
   {
     slug: "pittsburghs-bill",

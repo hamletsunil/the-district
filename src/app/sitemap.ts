@@ -18,9 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/articles/marshall-five-years`,
-      lastModified: new Date("2026-04-21"),
-      changeFrequency: "weekly",
-      priority: 0.85, // draft — lift to 0.9 at publish
+      lastModified: new Date("2026-04-28"),
+      changeFrequency: "monthly",
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/articles/pittsburghs-bill`,

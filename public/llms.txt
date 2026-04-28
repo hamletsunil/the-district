@@ -11,9 +11,9 @@ Publisher: Hamlet (https://www.myhamlet.com)
 
 ## Published Articles
 
-### Five Years After Marshall — Boulder Area [DRAFT, hidden from homepage]
+### Five Years After Marshall — Boulder Area
 - URL: https://district.myhamlet.com/articles/marshall-five-years
-- Status: Draft, target publish around Dec 30, 2026 five-year anniversary
+- Published: April 2026
 - Analysis of four years of post-Marshall-Fire governing-body meetings across Superior, Lafayette, Broomfield, and Erie Granicus archives. The fire destroyed 1,084 homes across Superior, Louisville, and unincorporated Boulder County on Dec 30, 2021; the City of Boulder itself lost zero. Xcel Energy settled the litigation for $640 million in Sept 2025 without admitting fault. What followed in council chambers was a slow, four-year rezoning around the actuarial re-mapping — ADUs, short-term rentals, grassland fuel management, and institutional-investor lot consolidation.
 - Data: 551 meetings ingested, 523 transcribed (94% coverage), 10.78M words of testimony. Pass 1 classification on 8 topics + 4 rhetorical dimensions (Sonnet 4.6). Pass 2 quote extraction (Opus 4.6). Featured-quote curation + narrative arc by Gemini 3 Pro.
 - Sources: Boulder County Lessons Learned + After-Action reports, Colorado Division of Insurance underinsurance study, Colorado Wildfire Resiliency Code record (HB 22-1115 / SB 23-166), Colorado FAIR Plan (HB 23-1288), Boulder Reporting Lab, Colorado Public Radio, The Colorado Sun, CBS Colorado, CU Boulder Earth Lab (Jennifer Balch), four Granicus meeting archives.
