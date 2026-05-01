@@ -7,7 +7,7 @@ const URL = `${BASE_URL}/articles/${SLUG}`;
 export const metadata: Metadata = {
   title: "Eleven Theories of a Highway — The District",
   description:
-    "On February 23, 2026, eight of Charlotte's eleven city council members took the floor on the I-77 South Express Lanes — a state project the city does not control. By April, ten of eleven supported pausing. The lone Republican, who had cast Charlotte's deciding regional vote himself in October 2024, argued against pausing.",
+    "On February 23, 2026, eight of Charlotte's eleven city council members took the floor on the I-77 South Express Lanes — a state project the city does not control. By April, ten of eleven supported pausing. The lone Republican, who had cast Charlotte's full CRTPO bloc himself in October 2024 to back the project, argued against pausing.",
   keywords: [
     "Charlotte",
     "Charlotte City Council",
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     "Victoria Watlington",
     "Black Political Caucus",
     "Sustain Charlotte",
+    "Leigh Altman",
     "Wilmore",
     "McCrorey Heights",
     "Brookhill",
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Eleven Theories of a Highway",
     description:
-      "How eight Charlotte council members and a mayor took a state highway proposal apart on a Monday night in February — and how the lone Republican turned out to have cast the deciding regional vote himself.",
+      "How eight Charlotte council members and a mayor took a state highway proposal apart on a Monday night in February — and how the lone Republican turned out to have cast Charlotte's full CRTPO bloc himself, sixteen months earlier, in favor of NCDOT's plan.",
     type: "article",
     publishedTime: "2026-05-01T00:00:00.000Z",
     modifiedTime: "2026-05-01T00:00:00.000Z",
@@ -58,7 +59,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Eleven Theories of a Highway",
     description:
-      "Eight council members. One mayor. One state highway. One Republican who cast the deciding vote himself. Charlotte, February 23, 2026.",
+      "Eight council members. One mayor. One state highway. One Republican who had cast Charlotte's CRTPO bloc himself. Charlotte, February 23, 2026.",
   },
 };
 
@@ -77,7 +78,7 @@ export default function CharlotteThePauseLayout({
             "@type": "NewsArticle",
             headline: "Eleven Theories of a Highway",
             description:
-              "On February 23, 2026, eight Charlotte City Council members and Mayor Vi Lyles articulated incompatible positions on the I-77 South Express Lanes project — a $3.2-to-$4 billion NCDOT highway expansion through historically Black west-side neighborhoods. The lone Republican argued against pausing the project, while the same member had cast Charlotte's deciding CRTPO vote backing it on October 16, 2024. The meeting deferred to the March 2 council retreat; a follow-on resolution is on the May 11 agenda.",
+              "On February 23, 2026, eight Charlotte City Council members and Mayor Vi Lyles articulated incompatible positions on the I-77 South Express Lanes project — a $3.2-to-$4 billion NCDOT highway expansion through historically Black west-side neighborhoods. The lone Republican argued against pausing the project; the same member had, on October 16, 2024, cast Charlotte's full 46% weighted CRTPO bloc in favor of NCDOT's plan. The meeting deferred to the March 2 council retreat; a follow-on resolution is on the May 11 agenda.",
             datePublished: "2026-05-01T00:00:00.000Z",
             dateModified: "2026-05-01T00:00:00.000Z",
             author: {

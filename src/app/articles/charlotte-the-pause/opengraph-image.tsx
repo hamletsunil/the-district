@@ -129,7 +129,7 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            Eight council members. One mayor. One state highway. One Republican who cast the deciding vote himself.
+            Eight council members. One mayor. One state highway. One Republican who, sixteen months earlier, had cast Charlotte's full CRTPO bloc himself.
           </div>
 
           {/* Accent line */}

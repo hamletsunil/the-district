@@ -229,7 +229,7 @@ export default function CharlotteThePauseArticle() {
       <HeroSection />
 
       <AtAGlance
-        finding="On February 23, 2026, eight council members took the floor on a state highway project the city does not control. By April, ten of eleven supported some form of a pause. The eight who spoke that night did not agree on what kind of pause, what kind of leverage, or whose phone to dial first. The lone Republican on the dais — the same member who cast Charlotte's deciding CRTPO vote backing the project sixteen months earlier — argued against pausing at all."
+        finding="On February 23, 2026, eight council members took the floor on a state highway project the city does not control. By April, ten of eleven supported some form of a pause. The eight who spoke that night did not agree on what kind of pause, what kind of leverage, or whose phone to dial first. The lone Republican on the dais — the same member who, sixteen months earlier, had cast Charlotte's full 46% CRTPO bloc himself to back the project — argued against pausing at all."
         stats={[
           { label: "Council members on the floor Feb 23", value: "8 of 11" },
           { label: "Council members supporting a pause by April", value: "10 of 11" },
@@ -328,8 +328,9 @@ function HeroSection() {
         <p className="charlotte-hero__subtitle">
           Eight council members took the floor on a state project the city
           does not control. By April, ten of eleven supported some form of
-          a pause. The lone Republican &mdash; who had cast the deciding
-          regional vote himself &mdash; argued against pausing at all.
+          a pause. The lone Republican &mdash; who had cast Charlotte&rsquo;s
+          full CRTPO bloc himself in October 2024 &mdash; argued against
+          pausing at all.
         </p>
         <div className="charlotte-hero__byline">
           The District &middot; May 1, 2026
@@ -368,22 +369,25 @@ function TheRoomSection() {
             Charlotte&rsquo;s formal power over this project is small. NCDOT
             owns the road and signs the procurement. The city&rsquo;s only
             seat at the table is on the Charlotte Regional Transportation
-            Planning Organization (CRTPO), where Charlotte holds 46 percent of
-            the weighted board vote. That seat was filled, on October 16,
+            Planning Organization (CRTPO), where Charlotte holds 46 percent
+            of the weighted board vote. That seat was filled, on October 16,
             2024, by Council Member Ed Driggs &mdash; the lone Republican on
-            the dais on Feb 23 &mdash; whose vote that day was the deciding
-            one to back NCDOT&rsquo;s plan. WFAE&rsquo;s Steve Harrison would
-            later call the eighteen-month sequence between that vote and the
-            February meeting &ldquo;a masterful, bureaucratic bait and
-            switch.&rdquo;
+            the dais on Feb 23 &mdash; who cast Charlotte&rsquo;s full bloc
+            in favor of NCDOT&rsquo;s plan. WFAE characterized the
+            eighteen-month sequence between that vote and the February
+            meeting as &ldquo;a masterful, bureaucratic bait and switch,&rdquo;
+            building on Mecklenburg County Commissioner Leigh Altman&rsquo;s
+            complaint that the project&rsquo;s impact maps were withheld
+            until after CRTPO&rsquo;s authority over the matter had lapsed.
           </p>
           <p>
-            The unspoken reference point was 2019, when the I-77 North Express
-            Lanes opened &mdash; operated by the Spanish toll firm Cintra
-            under a fifty-year contract whose Q2 2025 toll revenue alone hit
-            $35.1 million, up roughly thirty percent year over year. Cintra is
-            winning. Every council member who spoke on Feb 23 was arguing
-            about Cintra without saying so.
+            The unspoken reference point was 2019, when the I-77 North
+            Express Lanes opened &mdash; operated by the Spanish toll firm
+            Cintra under a fifty-year contract whose Q2 2025 toll revenue
+            alone hit $35.1 million, up roughly thirty percent year over
+            year. By any commercial measure, Cintra is winning. Every
+            council member who spoke on Feb 23 was arguing about Cintra
+            without saying so.
           </p>
           <p>
             Charlotte runs on a council-manager charter. There are eleven
@@ -553,9 +557,12 @@ function DriggsSection() {
             against NCDOT.
           </p>
           <p>
-            That CRTPO delegate, on October 16, 2024, had been Driggs himself
-            &mdash; and his vote on that date was the deciding one to back
-            NCDOT&rsquo;s plan.
+            That CRTPO delegate, on October 16, 2024, had been Driggs
+            himself &mdash; casting Charlotte&rsquo;s full 46 percent
+            weighted bloc in favor of NCDOT&rsquo;s plan on a board where
+            the motion ultimately passed 14-7. WFAE&rsquo;s Steve Harrison
+            has called Driggs&rsquo;s vote on that date &ldquo;the deciding
+            vote.&rdquo;
           </p>
           <p>
             Driggs had circulated a memo to colleagues. He read from it.
@@ -573,10 +580,10 @@ function DriggsSection() {
           <p>
             What did not appear in the memo, but which Steve Harrison has
             since surfaced on WFAE, is what Driggs himself told constituents
-            on October 14, 2024 &mdash; two days before he cast the deciding
-            CRTPO vote. &ldquo;Bear in mind, sometimes you get these early
-            votes and then later on you don&rsquo;t feel like you have a
-            choice. There&rsquo;s nothing to stop us in nine months from
+            on October 14, 2024 &mdash; two days before he cast Charlotte&rsquo;s
+            CRTPO bloc. &ldquo;Sometimes you get these early votes and then
+            later on you don&rsquo;t feel like you have a choice,&rdquo; he
+            said. &ldquo;There&rsquo;s nothing to stop us in nine months from
             looking at whatever comes out of this process and just saying no,
             not going to do it.&rdquo; The nine months elapsed. The council,
             in February, was trying to figure out whether saying no still
