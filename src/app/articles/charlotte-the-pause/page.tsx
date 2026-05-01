@@ -213,7 +213,7 @@ const SOURCES: Source[] = [
   {
     title: "Charlotte council records on Hamlet",
     outlet: "Hamlet — myhamlet.com",
-    url: "https://www.myhamlet.com/search?q=charlotte+i-77&ref=district",
+    url: "https://www.myhamlet.com/search?q=charlotte+i-77&utm_source=district&utm_medium=internal&utm_content=sources",
     accessDate: "2026-04-30",
   },
 ];
@@ -410,7 +410,7 @@ function MazueraEmbed() {
         meetingDate="February 23, 2026"
         bodyName="Charlotte City Council"
         location="Charlotte, NC"
-        hamletMeetingUrl="https://www.myhamlet.com/search?q=charlotte+i-77+february&ref=district"
+        hamletMeetingUrl="https://www.myhamlet.com/search?q=charlotte+i-77+february&utm_source=district&utm_medium=internal&utm_content=meeting-embed"
         moments={[
           {
             time: "1:15:42",
@@ -437,7 +437,7 @@ function MazueraEmbed() {
               "A pause is not obstruction. It is not anti-growth. It is our due diligence.",
           },
         ]}
-        searchUrl="https://www.myhamlet.com/search?q=charlotte+i-77&ref=district"
+        searchUrl="https://www.myhamlet.com/search?q=charlotte+i-77&utm_source=district&utm_medium=internal&utm_content=meeting-embed-search"
         searchLabel="Charlotte I-77 record"
       />
     </div>
@@ -575,7 +575,7 @@ function DriggsEmbed() {
         meetingDate="February 23, 2026"
         bodyName="Charlotte City Council"
         location="Charlotte, NC"
-        hamletMeetingUrl="https://www.myhamlet.com/search?q=charlotte+i-77+driggs&ref=district"
+        hamletMeetingUrl="https://www.myhamlet.com/search?q=charlotte+i-77+driggs&utm_source=district&utm_medium=internal&utm_content=meeting-embed"
         moments={[
           {
             time: "1:19:48",
@@ -601,7 +601,7 @@ function DriggsEmbed() {
               "I think we just lean on them hard, and then if the time comes when we determine, okay, it's just not working, then we can talk about just blowing the whole thing up.",
           },
         ]}
-        searchUrl="https://www.myhamlet.com/search?q=charlotte+i-77+driggs&ref=district"
+        searchUrl="https://www.myhamlet.com/search?q=charlotte+i-77+driggs&utm_source=district&utm_medium=internal&utm_content=meeting-embed-search"
         searchLabel="Driggs on I-77"
       />
     </div>
@@ -697,7 +697,7 @@ function ClosingSection() {
             The full transcript of the night, fully searchable and timestamped
             against the YouTube video, is available at{" "}
             <a
-              href="https://www.myhamlet.com/search?q=charlotte+i-77+february&ref=district"
+              href="https://www.myhamlet.com/search?q=charlotte+i-77+february&utm_source=district&utm_medium=internal&utm_content=prose"
               target="_blank"
               rel="noopener noreferrer"
               className="charlotte-link"

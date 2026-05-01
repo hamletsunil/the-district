@@ -808,6 +808,49 @@ body {
     gap: 1rem; box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
   }
 }
+
+/* ===== SUBSCRIBE BAR ===== */
+.subscribe-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 1001;
+  transform: translateY(100%);
+  transition: transform 0.4s var(--ease-elegant);
+}
+.subscribe-bar--visible { transform: translateY(0); }
+.subscribe-bar__content {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1.5rem; padding: 0.875rem 1.5rem;
+  background: rgba(10, 15, 26, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(192, 54, 44, 0.4);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
+}
+.subscribe-bar__text { display: flex; align-items: center; gap: 0.75rem; }
+.subscribe-bar__tagline { color: rgba(255,255,255,0.75); font-size: 0.875rem; font-family: var(--font-sans); }
+.subscribe-bar__button {
+  background: var(--accent-primary); color: white; border: none;
+  padding: 0.5rem 1rem; font-size: 0.8125rem; font-weight: 600;
+  border-radius: 6px; cursor: pointer; text-decoration: none;
+  font-family: var(--font-sans); white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.subscribe-bar__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(192, 54, 44, 0.35);
+}
+.subscribe-bar__close {
+  background: none; border: none; color: rgba(255,255,255,0.4);
+  font-size: 1.5rem; cursor: pointer; padding: 0.25rem; line-height: 1;
+  transition: color 0.2s ease;
+}
+.subscribe-bar__close:hover { color: rgba(255,255,255,0.85); }
+@media (max-width: 1100px) {
+  .subscribe-bar__content {
+    flex-wrap: wrap; gap: 0.75rem; padding: 2rem 1rem 0.75rem;
+    position: relative;
+  }
+  .subscribe-bar__text { width: 100%; justify-content: center; text-align: center; }
+  .subscribe-bar__close { position: absolute; top: 0.5rem; right: 0.5rem; }
+}
 </style>
 
 <!-- Google Analytics -->
@@ -956,7 +999,7 @@ body {
   <div class="fog-wisp fog-wisp-5"></div>
   <div class="masthead">
     <div class="district-logo">
-      <a href="https://www.myhamlet.com" target="_blank" rel="noopener noreferrer" class="district-logo-mark" aria-label="Hamlet — parent site">
+      <a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=logo" target="_blank" rel="noopener noreferrer" class="district-logo-mark" aria-label="Hamlet — parent site">
         <svg viewBox="0 0 170 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 20px;">
           <path d="M169.665 0H135.973V150H169.665V0Z" fill="currentColor"/>
           <path d="M57.6378 0H23.9453V150H57.6378V0Z" fill="currentColor"/>
@@ -1265,7 +1308,7 @@ body {
     <div style="font-family:var(--font-sans);font-weight:700;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-primary);margin-bottom:0.75rem;">Contentiousness by Body</div>
     <div id="viz-nlp-body" style="width:100%;"></div>
   </div>
-  <div class="hamlet-badge">Powered by <a href="https://myhamlet.com" target="_blank">Hamlet</a> &middot; Civic intelligence</div>
+  <div class="hamlet-badge">Powered by <a href="https://myhamlet.com?utm_source=district&utm_medium=internal&utm_content=viz-badge" target="_blank">Hamlet</a> &middot; Civic intelligence</div>
   <div class="viz-source">Source: Hamlet NLP pipeline &mdash; 1,310 meeting transcripts analyzed</div>
 </div>
 </div>
@@ -1621,7 +1664,7 @@ body {
 <p>Several data quality decisions shaped the analysis. Crime data uses `DISTINCT incident_id` to deduplicate records that appear in both legacy and updated reporting systems for the 2019-2020 overlap period. The 311 service request analysis combines pre- and post-June 2024 taxonomy changes to maintain continuity. Fire and EMS data excludes the 2021 structural break caused by a reporting system migration, which produced artificial discontinuities incomparable with surrounding years. Employee compensation data filters to calendar-year records only to ensure consistent annual comparisons.</p>
 <p>We excluded partial-year data from year-over-year comparisons, 2026 data (insufficient for annual analysis at time of publication), and direct comparisons between pre-2021 and post-2021 Fire/EMS records. Where data limitations or methodological choices materially affect interpretation, they are noted in the text.</p>
 <p>Meeting analysis powered by Hamlet (myhamlet.com). Data analysis performed February 2026.</p>
-<p style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--card-border);font-size:0.9375rem;color:var(--page-text-muted);"><em><a href="https://www.linkedin.com/in/sunilrajaraman/" target="_blank" style="color:var(--page-text);font-weight:500;">Sunil Rajaraman</a> is the founder of The District and <a href="https://myhamlet.com" target="_blank" style="color:var(--page-text);">Hamlet</a>. He links to his LinkedIn rather than his X account, which is either a principled stand or an admission that his tweets aren&rsquo;t very good.</em></p>
+<p style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--card-border);font-size:0.9375rem;color:var(--page-text-muted);"><em><a href="https://www.linkedin.com/in/sunilrajaraman/" target="_blank" style="color:var(--page-text);font-weight:500;">Sunil Rajaraman</a> is the founder of The District and <a href="https://myhamlet.com?utm_source=district&utm_medium=internal&utm_content=author-bio" target="_blank" style="color:var(--page-text);">Hamlet</a>. He links to his LinkedIn rather than his X account, which is either a principled stand or an admission that his tweets aren&rsquo;t very good.</em></p>
 
 <h3 class="subsection-title">The Data Behind This Article</h3>
 <p>Every dataset, query, and table referenced in this analysis is available to anyone who wants it. Journalists, researchers, city employees, advocates, students &mdash; if you can use it, it&rsquo;s yours. The data is public. It should be organized, easy to understand, and free.</p>
@@ -1650,7 +1693,7 @@ body {
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer-minimal">
-  <p class="footer-attribution">A <a href="https://www.myhamlet.com" target="_blank" rel="noopener noreferrer">Hamlet</a> Publication</p>
+  <p class="footer-attribution">A <a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=footer" target="_blank" rel="noopener noreferrer">Hamlet</a> Publication</p>
   <p class="footer-colophon">&copy; 2026 The District. Data analysis performed February 2026.</p>
 </footer>
 
@@ -9852,6 +9895,42 @@ try { (function () {
   }, { threshold: 0.2 });
   var carousel = document.querySelector('.carousel-wrapper');
   if (carousel) barObserver.observe(carousel);
+})();
+
+// ===== SUBSCRIBE BAR =====
+(function() {
+  var DISMISSED_KEY = 'district-alerts-dismissed';
+  var DISMISS_DURATION = 24 * 60 * 60 * 1000; // 1 day
+  var dismissedAt = null;
+  try { dismissedAt = localStorage.getItem(DISMISSED_KEY); } catch (e) {}
+  if (dismissedAt && (Date.now() - parseInt(dismissedAt, 10) < DISMISS_DURATION)) return;
+
+  var bar = document.createElement('div');
+  bar.className = 'subscribe-bar';
+  bar.innerHTML =
+    '<div class="subscribe-bar__content">' +
+      '<div class="subscribe-bar__text">' +
+        '<span class="subscribe-bar__tagline">Get alerts when your city council discusses issues you care about</span>' +
+      '</div>' +
+      '<a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=subscribe-bar" target="_blank" rel="noopener" class="subscribe-bar__button">Try Hamlet Free</a>' +
+      '<button type="button" class="subscribe-bar__close" aria-label="Dismiss">×</button>' +
+    '</div>';
+  document.body.appendChild(bar);
+
+  var closeBtn = bar.querySelector('.subscribe-bar__close');
+  closeBtn.addEventListener('click', function() {
+    bar.classList.remove('subscribe-bar--visible');
+    try { localStorage.setItem(DISMISSED_KEY, Date.now().toString()); } catch (e) {}
+    setTimeout(function() { bar.remove(); }, 400);
+  });
+
+  function update() {
+    var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+    bar.classList.toggle('subscribe-bar--visible', pct > 0.1);
+  }
+  update();
+  window.addEventListener('scroll', update, { passive: true });
 })();
 </script>
 </body>

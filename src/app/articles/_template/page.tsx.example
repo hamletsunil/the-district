@@ -47,7 +47,7 @@ const SOURCES: Source[] = [
   {
     title: "Hamlet — Search local government meetings",
     outlet: "Hamlet",
-    url: "https://www.myhamlet.com/search?q=your-city&ref=district"
+    url: "https://www.myhamlet.com/search?q=your-city&utm_source=district&utm_medium=internal&utm_content=sources"
   },
   // Add more validated sources (minimum 3 total)...
 ];

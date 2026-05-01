@@ -35,7 +35,7 @@ const SOURCES: Source[] = [
   { title: "Council-Manager Form of Government", outlet: "ICMA", url: "https://icma.org/page/council-manager-form-government" },
   { title: "Portland Voters Approve Sweeping Changes to City Government", outlet: "Oregon Public Broadcasting", url: "https://www.opb.org/article/2022/11/08/portland-oregon-ballot-measure-26-228-charter-reform-results/" },
   { title: "Commission Government: The History", outlet: "Texas State Historical Association", url: "https://www.tshaonline.org/handbook/entries/commission-form-of-city-government" },
-  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?ref=district" },
+  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?utm_source=district&utm_medium=internal&utm_content=sources" },
 ];
 
 const FORM_STEPS: { form: GovernmentForm; label: string; title: string; description: string }[] = [
@@ -220,7 +220,7 @@ export function FormsChapter() {
               ratings than comparable mayor-council cities. The trade-off is blunt: the person
               making the most consequential decisions &mdash; hiring, firing, allocating millions
               &mdash; never faces a voter. Search the{" "}
-              <a href="https://www.myhamlet.com/search?ref=district" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.myhamlet.com/search?utm_source=district&utm_medium=internal&utm_content=prose" target="_blank" rel="noopener noreferrer">
                 meeting transcripts on Hamlet
               </a>{" "}
               and you can watch the tension between efficiency and representation play out in real

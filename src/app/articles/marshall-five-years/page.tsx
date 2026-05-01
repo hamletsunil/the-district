@@ -451,7 +451,7 @@ const SOURCES: Source[] = [
   {
     title: "Hamlet — Search Boulder-area government meetings",
     outlet: "Hamlet",
-    url: "https://www.myhamlet.com/search?q=marshall+fire&ref=district",
+    url: "https://www.myhamlet.com/search?q=marshall+fire&utm_source=district&utm_medium=internal&utm_content=sources",
   },
 ];
 
@@ -960,7 +960,7 @@ function LedeSection() {
           Four years later, {DATA.rebuild.overallRebuildRatePct}% of the destroyed homes are rebuilt or permitted. That is roughly triple the national five-year wildfire recovery rate. Louisville reports {DATA.rebuild.louisvilleRebuiltPct}%. A local government does not control acts of God. It controls what gets built, and where. What filled the council calendar for four years was a rezoning in slow motion: ADUs, short-term rentals, grassland fuel management, setbacks, and the adjacency of rebuilt lots to newly approved density. The fights broke out between residents, trustees, and planning commissioners.
         </p>
         <p>
-          We transcribed every post-fire governing-body meeting we could reach across four burn-zone Granicus archives: Superior, Lafayette, Broomfield, and Erie. {DATA.meetings.totalTranscribed.toLocaleString()} meetings. {(DATA.meetings.totalWords / 1e6).toFixed(2)} million words of public record. We classified every ~2,000-word chunk on eight topics and four rhetorical dimensions, then pulled {DATA.meetings.totalCandidateQuotes.toLocaleString()} candidate quotes from the highest-signal segments. Explore the full archive on <a href="https://www.myhamlet.com/search?q=marshall+fire&ref=district">Hamlet</a>. The argument those quotes make is narrow: what gets built, who it is built next to, and who ends up owning it.
+          We transcribed every post-fire governing-body meeting we could reach across four burn-zone Granicus archives: Superior, Lafayette, Broomfield, and Erie. {DATA.meetings.totalTranscribed.toLocaleString()} meetings. {(DATA.meetings.totalWords / 1e6).toFixed(2)} million words of public record. We classified every ~2,000-word chunk on eight topics and four rhetorical dimensions, then pulled {DATA.meetings.totalCandidateQuotes.toLocaleString()} candidate quotes from the highest-signal segments. Explore the full archive on <a href="https://www.myhamlet.com/search?q=marshall+fire&utm_source=district&utm_medium=internal&utm_content=prose">Hamlet</a>. The argument those quotes make is narrow: what gets built, who it is built next to, and who ends up owning it.
         </p>
       </div>
     </FadeIn>

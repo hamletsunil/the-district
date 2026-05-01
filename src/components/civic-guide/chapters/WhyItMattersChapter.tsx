@@ -38,7 +38,7 @@ const SOURCES: Source[] = [
   { title: "Investigation of the Ferguson Police Department", outlet: "U.S. Department of Justice", url: "https://www.justice.gov/sites/default/files/opa/press-releases/attachments/2015/03/04/ferguson_police_department_report.pdf" },
   { title: "The Timing of Local Elections", outlet: "Center for Effective Government, University of Chicago", url: "https://effectivegov.uchicago.edu/primers/the-timing-of-local-elections" },
   { title: "Election Results 2024: Analysis of Voter Turnout", outlet: "Ballotpedia", url: "https://ballotpedia.org/Election_results,_2024:_Analysis_of_voter_turnout_in_the_2024_general_election" },
-  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?ref=district" },
+  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?utm_source=district&utm_medium=internal&utm_content=sources" },
 ];
 
 const SCROLLY_STEPS = [
@@ -264,7 +264,7 @@ export function WhyItMattersChapter() {
               counts 213 American counties that now qualify as &ldquo;news deserts&rdquo; — places
               with no locally based source of local news. Since 2005, more than 3,300 newspapers have
               shuttered, vanishing at a rate exceeding two per week. Platforms like{" "}
-              <a href="https://www.myhamlet.com/search?ref=district" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.myhamlet.com/search?utm_source=district&utm_medium=internal&utm_content=prose" target="_blank" rel="noopener noreferrer">
                 Hamlet
               </a>{" "}
               are trying to fill the gap by making local government meeting transcripts searchable.

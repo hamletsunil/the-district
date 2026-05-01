@@ -39,7 +39,7 @@ const SOURCES: Source[] = [
   { title: "Detroit Bankruptcy: A Case Study", outlet: "Federal Reserve Bank of Chicago", url: "https://www.chicagofed.org/publications/chicago-fed-letter/2014/special-january" },
   { title: "Proposition 13 (1978)", outlet: "California Tax Foundation", url: "https://www.caltax.org/proposition-13/" },
   { title: "Investigation of the Ferguson Police Department", outlet: "U.S. Department of Justice", url: "https://www.justice.gov/sites/default/files/opa/press-releases/attachments/2015/03/04/ferguson_police_department_report.pdf" },
-  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?ref=district" },
+  { title: "Hamlet — Search local government meetings", outlet: "Hamlet", url: "https://www.myhamlet.com/search?utm_source=district&utm_medium=internal&utm_content=sources" },
 ];
 
 export function MoneyChapter() {
@@ -123,7 +123,7 @@ export function MoneyChapter() {
               single most consequential act of local governance. It determines whether the library
               stays open, whether the potholes get filled, whether the fire station gets a new truck.
               These debates are{" "}
-              <a href="https://www.myhamlet.com/search?ref=district" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.myhamlet.com/search?utm_source=district&utm_medium=internal&utm_content=prose" target="_blank" rel="noopener noreferrer">
                 searchable on Hamlet
               </a>.
             </p>

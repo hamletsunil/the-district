@@ -87,7 +87,24 @@ a Democratic stronghold where bucking consensus carries political risk.
 - [ ] 500+ words of narrative
 - [ ] Read it aloud - does it sound like The Economist or a consulting deck?
 - [ ] **Every quote in prose has a date AND a link to the source video** (Swagit, YouTube, Granicus, PrimeGov, etc.) — if the video ID is in the DATA object, link it. No orphaned quotes with just a date and no link.
-- [ ] **Every article MUST include at least one link to myhamlet.com in the prose and one in SOURCES, with `?ref=district` UTM parameter.** Use city-specific search URLs where possible (e.g., `https://www.myhamlet.com/search?q=piedmont&ref=district`).
+- [ ] **Every article MUST include at least one link to myhamlet.com in the prose and one in SOURCES, with `?utm_source=district&utm_medium=internal&utm_content=<value>` UTM parameters.** Pick `<value>` from the table below. Use city-specific search URLs where possible (e.g., `https://www.myhamlet.com/search?q=piedmont&utm_source=district&utm_medium=internal&utm_content=prose`).
+
+---
+
+## UTM `utm_content` values for myhamlet.com links
+
+Every link to `myhamlet.com` should carry `?utm_source=district&utm_medium=internal&utm_content=<value>`. Pick the value that matches where the link lives:
+
+| Where the link lives | `utm_content` |
+|---|---|
+| Entry in the `SOURCES` array | `sources` |
+| Inline `<a>` in article prose | `prose` |
+| Author bio paragraph at end of article | `author-bio` |
+| `<ArticleEndCTA hamletSearchUrl="..." />` prop | `article-end-cta` |
+| `<HamletMeetingEmbed hamletMeetingUrl="..." />` prop | `meeting-embed` |
+| `<HamletMeetingEmbed searchUrl="..." />` prop | `meeting-embed-search` |
+
+Shared components (`Header`, `Footer`, `DistrictLogo`, `SubscribeBar`) already have their own `utm_content` values baked in (`logo`, `footer`, `subscribe-bar`, etc.) — don't override them when consuming those components.
 
 ---
 
@@ -294,11 +311,11 @@ import { HamletMeetingEmbed } from "@/components/article/HamletMeetingEmbed";
   meetingDate="May 20, 2024"
   bodyName="City of Oakland"
   location="Oakland, CA"
-  hamletMeetingUrl="https://www.myhamlet.com/meeting/MEETING_ID"
+  hamletMeetingUrl="https://www.myhamlet.com/meeting/MEETING_ID?utm_source=district&utm_medium=internal&utm_content=meeting-embed"
   moments={[
     { time: "30:09", seconds: 1809, quote: "relevant transcript excerpt" },
   ]}
-  searchUrl="https://www.myhamlet.com/search?q=search+terms"
+  searchUrl="https://www.myhamlet.com/search?q=search+terms&utm_source=district&utm_medium=internal&utm_content=meeting-embed-search"
   searchLabel="16 Oakland housing meetings"
 />
 ```

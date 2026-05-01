@@ -418,7 +418,7 @@ const SOURCES: Source[] = [
   {
     title: "Hamlet — Search Austin government meetings",
     outlet: "Hamlet",
-    url: "https://www.myhamlet.com/search?q=austin&ref=district",
+    url: "https://www.myhamlet.com/search?q=austin&utm_source=district&utm_medium=internal&utm_content=sources",
   },
 ];
 
@@ -661,7 +661,7 @@ function LedeSection() {
           every passage for topic, urgency, and contentiousness using AI,
           then extracted the most significant quotes and speakers.
           Explore the full archive on{" "}
-          <a href="https://www.myhamlet.com/search?q=austin&ref=district" target="_blank" rel="noopener noreferrer">Hamlet</a>.
+          <a href="https://www.myhamlet.com/search?q=austin&utm_source=district&utm_medium=internal&utm_content=prose" target="_blank" rel="noopener noreferrer">Hamlet</a>.
         </p>
         <p>
           The window captures Austin at its most volatile. The Austin metro

@@ -341,7 +341,7 @@ export default function ColophonPage() {
         <section className="colophon-section">
           <p className="colophon-prose">
             The District is a visual journalism publication by{" "}
-            <a href="https://myhamlet.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=colophon" target="_blank" rel="noopener">
               Hamlet
             </a>
             . We analyze transcripts, votes, and public records from more than
@@ -402,7 +402,7 @@ export default function ColophonPage() {
             built specifically for the story it tells.
           </p>
           <p className="colophon-prose">
-            <a href="https://myhamlet.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=colophon" target="_blank" rel="noopener">
               Learn more about Hamlet &rarr;
             </a>
           </p>
@@ -411,7 +411,7 @@ export default function ColophonPage() {
         <footer className="colophon-footer-section">
           <p className="colophon-prose">
             The District is a publication by{" "}
-            <a href="https://myhamlet.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=colophon" target="_blank" rel="noopener">
               Hamlet
             </a>
             .
@@ -544,9 +544,9 @@ export function Footer() {
       <p className="footer-attribution">
         A{" "}
         <a
-          href="https://myhamlet.com"
+          href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=footer"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
         >
           Hamlet
         </a>{" "}

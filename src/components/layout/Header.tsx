@@ -11,7 +11,7 @@ export function Header() {
       <div className="masthead-inner">
         <div className="masthead-lockup">
           <a
-            href="https://www.myhamlet.com?ref=district"
+            href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=logo"
             target="_blank"
             rel="noopener noreferrer"
             className="district-logo-mark hamlet-mark-link"
@@ -21,7 +21,9 @@ export function Header() {
           </a>
           <Link href="/" className="masthead-wordmark">
             <span className="district-logo-title">The District</span>
-            <span className="district-logo-tagline">Stories from city halls</span>
+            <span className="district-logo-tagline">
+              Stories from city halls
+            </span>
           </Link>
         </div>
 

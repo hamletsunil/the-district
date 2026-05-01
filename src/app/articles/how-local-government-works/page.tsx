@@ -197,7 +197,7 @@ export default function HowLocalGovernmentWorks() {
       <footer className="lg-hub-footer">
         <p>
           A{" "}
-          <a href="https://www.myhamlet.com?ref=district" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=prose" target="_blank" rel="noopener noreferrer">
             Hamlet
           </a>{" "}
           Research Publication &middot; Data from the 2022 Census of Governments

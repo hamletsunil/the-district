@@ -83,7 +83,7 @@ export function ArticleEndCTA({ cityName, hamletSearchUrl }: ArticleEndCTAProps 
         <div className="article-end-cta__divider" />
 
         <a
-          href={hamletSearchUrl ?? "https://www.myhamlet.com?ref=district"}
+          href={hamletSearchUrl ?? "https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=article-end-cta"}
           target="_blank"
           rel="noopener noreferrer"
           className="article-end-cta__hamlet-link"

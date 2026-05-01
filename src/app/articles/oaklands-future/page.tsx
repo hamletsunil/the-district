@@ -126,7 +126,7 @@ const SOURCES: Source[] = [
   {
     title: "Hamlet",
     outlet: "Civic Intelligence Platform",
-    url: "https://www.myhamlet.com?ref=district",
+    url: "https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=sources",
   },
 ];
 
@@ -585,13 +585,13 @@ function GovernanceSection() {
         meetingDate="May 20, 2024"
         bodyName="City of Oakland"
         location="Oakland, CA"
-        hamletMeetingUrl="https://www.myhamlet.com/meeting/cmkqel5ak0009kx61pp33mrsx?ref=district"
+        hamletMeetingUrl="https://www.myhamlet.com/meeting/cmkqel5ak0009kx61pp33mrsx?utm_source=district&utm_medium=internal&utm_content=meeting-embed"
         moments={[
           { time: "30:09", seconds: 1809, quote: "programs Oakland Housing and Community" },
           { time: "14:28", seconds: 868, quote: "affordable housing for Oakland's as" },
           { time: "27:28", seconds: 1648, quote: "the city of Oakland's Housing Community" },
         ]}
-        searchUrl="https://www.myhamlet.com/search?q=oakland%20housing&ref=district"
+        searchUrl="https://www.myhamlet.com/search?q=oakland%20housing&utm_source=district&utm_medium=internal&utm_content=meeting-embed-search"
         searchLabel="16 Oakland housing meetings"
       />
 

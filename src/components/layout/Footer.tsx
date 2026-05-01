@@ -4,7 +4,7 @@ export function Footer() {
       <p className="footer-attribution">
         A{" "}
         <a
-          href="https://www.myhamlet.com?ref=district"
+          href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=footer"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -14,7 +14,7 @@ export function Footer() {
       </p>
       <p className="footer-colophon">
         <a
-          href="https://www.myhamlet.com/about?ref=district"
+          href="https://www.myhamlet.com/about?utm_source=district&utm_medium=internal&utm_content=footer"
           target="_blank"
           rel="noopener noreferrer"
         >

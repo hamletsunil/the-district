@@ -5,13 +5,13 @@
  *
  * Sticky footer bar that appears after user scrolls 60% of the article.
  * Links to Hamlet for local government alerts.
- * Dismissable and remembers dismissal for 7 days via localStorage.
+ * Dismissable and remembers dismissal for 1 day via localStorage.
  */
 
 import { useEffect, useState } from "react";
 
 const DISMISSED_KEY = "district-alerts-dismissed";
-const DISMISS_DURATION = 7 * 24 * 60 * 60 * 1000; // 7 days
+const DISMISS_DURATION = 24 * 60 * 60 * 1000; // 1 day
 
 export function SubscribeBar() {
   const [visible, setVisible] = useState(false);
@@ -35,9 +35,11 @@ export function SubscribeBar() {
     if (dismissed) return;
 
     const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-      setVisible(scrollPercent > 0.6);
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent =
+        scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
+      setVisible(scrollPercent > 0.1);
     };
 
     handleScroll();
@@ -64,9 +66,9 @@ export function SubscribeBar() {
         </div>
 
         <a
-          href="https://www.myhamlet.com?ref=district"
+          href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=subscribe-bar"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
           className="subscribe-bar__button"
         >
           Try Hamlet Free

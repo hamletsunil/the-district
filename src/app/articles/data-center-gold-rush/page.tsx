@@ -105,7 +105,7 @@ const SOURCES = [
   {
     title: "Hamlet",
     outlet: "Civic Intelligence Platform",
-    url: "https://www.myhamlet.com?ref=district",
+    url: "https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=sources",
   },
 ];
 

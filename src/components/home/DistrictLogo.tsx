@@ -11,7 +11,11 @@ interface DistrictLogoProps {
   size?: "default" | "large";
 }
 
-export function DistrictLogo({ className, showTagline = true, size = "default" }: DistrictLogoProps) {
+export function DistrictLogo({
+  className,
+  showTagline = true,
+  size = "default",
+}: DistrictLogoProps) {
   const markSize = size === "large" ? "w-8 h-7" : "w-6 h-5";
   const titleSize = size === "large" ? "text-xl" : "text-lg";
 
@@ -38,7 +42,9 @@ export function DistrictLogo({ className, showTagline = true, size = "default" }
 
       {/* Wordmark */}
       <div className="flex flex-col leading-none">
-        <span className={`${titleSize} font-bold tracking-tight district-logo-title`}>
+        <span
+          className={`${titleSize} font-bold tracking-tight district-logo-title`}
+        >
           The District
         </span>
         {showTagline && (
@@ -47,7 +53,7 @@ export function DistrictLogo({ className, showTagline = true, size = "default" }
               Stories from city halls
             </span>
             <a
-              href="https://www.myhamlet.com?ref=district"
+              href="https://www.myhamlet.com?utm_source=district&utm_medium=internal&utm_content=logo"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[9px] font-medium tracking-[0.15em] district-logo-attribution uppercase mt-2 hamlet-link"
