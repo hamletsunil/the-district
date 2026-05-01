@@ -126,7 +126,7 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            Nine council members. One project. Nine ways of pulling on a lever. Charlotte, February 23, 2026.
+            Eight council members. One mayor. One state highway. One Republican who cast the deciding vote himself.
           </div>
 
           {/* Byline */}

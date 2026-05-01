@@ -7,7 +7,7 @@ const URL = `${BASE_URL}/articles/${SLUG}`;
 export const metadata: Metadata = {
   title: "Eleven Theories of a Highway — The District",
   description:
-    "On February 23, 2026, nine of Charlotte's eleven city council members took the I-77 South Express Lanes apart nine different ways. A 3-hour deliberation, fully indexed and attributed, with the May 11 vote ahead.",
+    "On February 23, 2026, eight of Charlotte's eleven city council members took the floor on the I-77 South Express Lanes — a state project the city does not control. By April, ten of eleven supported pausing. The lone Republican, who had cast Charlotte's deciding regional vote himself in October 2024, argued against pausing.",
   keywords: [
     "Charlotte",
     "Charlotte City Council",
@@ -16,15 +16,25 @@ export const metadata: Metadata = {
     "toll lanes",
     "NCDOT",
     "CRTPO",
+    "Cintra",
     "Mecklenburg County",
     "Vi Lyles",
-    "JD Mazuera Arias",
-    "Dimple Ajmera",
-    "Ed Driggs",
-    "Malcolm Graham",
-    "Renee Johnson",
-    "Kimberly Owens",
+    "James Mitchell",
     "Dante Anderson",
+    "Malcolm Graham",
+    "Joi Mayo",
+    "Renee Johnson",
+    "JD Mazuera Arias",
+    "Kimberly Owens",
+    "Ed Driggs",
+    "Dimple Ajmera",
+    "LaWana Mayfield",
+    "Victoria Watlington",
+    "Black Political Caucus",
+    "Sustain Charlotte",
+    "Wilmore",
+    "McCrorey Heights",
+    "Brookhill",
     "transcript analysis",
     "local government",
     "The District",
@@ -36,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Eleven Theories of a Highway",
     description:
-      "How Charlotte City Council took a $3.2 billion state highway proposal apart, member by member, on a single Monday night in February 2026.",
+      "How eight Charlotte council members and a mayor took a state highway proposal apart on a Monday night in February — and how the lone Republican turned out to have cast the deciding regional vote himself.",
     type: "article",
     publishedTime: "2026-05-01T00:00:00.000Z",
     modifiedTime: "2026-05-01T00:00:00.000Z",
@@ -48,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Eleven Theories of a Highway",
     description:
-      "Nine council members. One project. Nine ways of pulling on a lever. Charlotte, February 23, 2026.",
+      "Eight council members. One mayor. One state highway. One Republican who cast the deciding vote himself. Charlotte, February 23, 2026.",
   },
 };
 
@@ -67,7 +77,7 @@ export default function CharlotteThePauseLayout({
             "@type": "NewsArticle",
             headline: "Eleven Theories of a Highway",
             description:
-              "On February 23, 2026, nine of eleven Charlotte City Council members each articulated a different theory of how to influence the I-77 South Express Lanes project. The night ended with a 60-day pause request, a deferral to the council retreat, and a fragmented record of where local power actually lies.",
+              "On February 23, 2026, eight Charlotte City Council members and Mayor Vi Lyles articulated incompatible positions on the I-77 South Express Lanes project — a $3.2-to-$4 billion NCDOT highway expansion through historically Black west-side neighborhoods. The lone Republican argued against pausing the project, while the same member had cast Charlotte's deciding CRTPO vote backing it on October 16, 2024. The meeting deferred to the March 2 council retreat; a follow-on resolution is on the May 11 agenda.",
             datePublished: "2026-05-01T00:00:00.000Z",
             dateModified: "2026-05-01T00:00:00.000Z",
             author: {

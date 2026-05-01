@@ -1,11 +1,12 @@
 "use client";
 
 /**
- * Twelve Theories of a Highway
+ * Eleven Theories of a Highway
  *
- * On February 23, 2026, twelve members of Charlotte City Council took the
- * I-77 South Express Lanes apart twelve different ways. This is the story
- * of that meeting, reconstructed from the official transcript.
+ * On February 23, 2026, eight members of Charlotte's eleven-member city
+ * council took the floor on the I-77 South Express Lanes. Mayor Lyles
+ * presided. Reconstructed from the official meeting transcript and from
+ * Steve Harrison's contemporaneous WFAE reporting.
  */
 
 import { AtAGlance } from "@/components/article/AtAGlance";
@@ -39,20 +40,24 @@ const DATA = {
     duration_seconds: 10536, // ~2h 56m
     utterances_total: 508,
     utterances_named_council: 348,
-    council_members_who_spoke: 10,
+    council_members_who_spoke_on_i77: 8, // 8 council members + Mayor Lyles presiding
+    council_members_silent_on_i77: 2, // Joi Mayo (D3), Victoria Watlington (At-Large)
+    council_members_absent: 1, // LaWana Mayfield
   },
 
-  // Per-member speaking volume, this single meeting only
+  // Per-member speaking volume on I-77 specifically, this single meeting.
+  // 8 council members + Mayor Lyles presiding = 9 voices on the record that night.
+  // Mayfield was absent. Mayo and Watlington were present but did not speak on I-77.
   speakers: [
     { name: "Vi Lyles", role: "Mayor", utts: 132, chars: 21198 },
-    { name: "Kimberly Owens", role: "Council Member (sworn in Dec 2025)", utts: 45, chars: 12121 },
+    { name: "Kimberly Owens", role: "Council Member, District 6 (sworn in Dec 2025)", utts: 45, chars: 12121 },
     { name: "Renee Johnson", role: "Council Member, District 4", utts: 44, chars: 7938 },
-    { name: "James Mitchell", role: "Mayor Pro Tem", utts: 34, chars: 5771 },
+    { name: "James Mitchell", role: "Mayor Pro Tem (elected Dec 2025)", utts: 34, chars: 5771 },
     { name: "Dimple Ajmera", role: "Council Member, At-Large", utts: 30, chars: 7853 },
     { name: "Malcolm Graham", role: "Council Member, District 2", utts: 21, chars: 10745 },
-    { name: "Dante Anderson", role: "Council Member, District 1; Mayor Pro Tem-elect", utts: 19, chars: 7365 },
-    { name: "JD Mazuera Arias", role: "Council Member (sworn in Dec 2025)", utts: 12, chars: 8092 },
-    { name: "Ed Driggs", role: "Council Member, District 7 (R)", utts: 11, chars: 5382 },
+    { name: "Dante Anderson", role: "Council Member, District 1", utts: 19, chars: 7365 },
+    { name: "JD Mazuera Arias", role: "Council Member, District 5 (sworn in Dec 2025)", utts: 12, chars: 8092 },
+    { name: "Ed Driggs", role: "Council Member, District 7 (R) — sole CRTPO delegate, October 2024", utts: 11, chars: 5382 },
   ],
 
   // I-77 mentions per month — the run-up to + aftermath of February 23
@@ -224,14 +229,14 @@ export default function CharlotteThePauseArticle() {
       <HeroSection />
 
       <AtAGlance
-        finding="The pause request that came out of Charlotte's February 23 meeting was not unanimous, not procedural, and not really about a highway. Of eleven council members, nine spoke for some version of pausing, one spoke against it, one was absent. Each of the nine had a different reason."
+        finding="On February 23, 2026, eight council members took the floor on a state highway project the city does not control. By April, ten of eleven supported some form of a pause. The eight who spoke that night did not agree on what kind of pause, what kind of leverage, or whose phone to dial first. The lone Republican on the dais — the same member who cast Charlotte's deciding CRTPO vote backing the project sixteen months earlier — argued against pausing at all."
         stats={[
-          { label: "Council members who took the floor", value: "9 of 11" },
-          { label: "Total utterances in the meeting", value: "508" },
+          { label: "Council members on the floor Feb 23", value: "8 of 11" },
+          { label: "Council members supporting a pause by April", value: "10 of 11" },
           { label: "Hours on the record", value: "2h 56m" },
-          { label: "Project total · State share", value: "$3.2B · $600M" },
-          { label: "I-77 mentions, Feb 2026", value: "23" },
-          { label: "Prior monthly average", value: "<2" },
+          { label: "Project total · State share", value: "$3.2B–$4B · $600M" },
+          { label: "Charlotte's CRTPO weighted vote", value: "46%" },
+          { label: "I-77 mentions, Feb 2026 vs. baseline", value: "23 vs. <2" },
         ]}
       />
 
@@ -270,7 +275,7 @@ export default function CharlotteThePauseArticle() {
           {
             label: "Speaker attribution",
             content:
-              "AssemblyAI labels speakers anonymously (Speaker A, B, C…). To map those labels to specific council members, we passed sampled utterances per speaker plus the canonical Charlotte council roster to Gemini 3.1 Pro for a one-shot attribution pass. Charlotte's elected dais is a mayor (Vi Lyles) plus eleven council members (four at-large, seven district). We applied any mapping at confidence ≥ 0.70. For this meeting, mean applied confidence was 0.97. Of the nine council members who spoke on I-77, all nine were correctly attributed; the mayor's remarks were also attributed at high confidence.",
+              "AssemblyAI labels speakers anonymously (Speaker A, B, C…). To map those labels to specific council members, we passed sampled utterances per speaker plus the canonical Charlotte council roster to Gemini 3.1 Pro for a one-shot attribution pass. Charlotte's elected dais is the mayor (Vi Lyles) plus eleven council members: four at-large (Ajmera, Watlington, Mayfield, Mitchell) and seven district (Anderson D1, Graham D2, Mayo D3, Johnson D4, Mazuera Arias D5, Owens D6, Driggs D7). We applied any mapping at confidence ≥ 0.70. For this meeting, mean applied confidence was 0.97. Of the eight council members who spoke on I-77, all eight were correctly attributed; Mayor Lyles's remarks were also attributed at high confidence. Joi Mayo, Victoria Watlington, and LaWana Mayfield (absent) did not speak on I-77 and are not in the speakers table.",
           },
           {
             label: "Quote verification",
@@ -321,9 +326,10 @@ function HeroSection() {
           <span className="charlotte-hero__title-accent">Highway</span>
         </h1>
         <p className="charlotte-hero__subtitle">
-          Nine council members took the floor. Each had a different idea of
-          who had the power to stop a highway. The motion that passed was
-          about whether to keep talking about it next Monday.
+          Eight council members took the floor on a state project the city
+          does not control. By April, ten of eleven supported some form of
+          a pause. The lone Republican &mdash; who had cast the deciding
+          regional vote himself &mdash; argued against pausing at all.
         </p>
         <div className="charlotte-hero__byline">
           The District &middot; May 1, 2026
@@ -341,58 +347,67 @@ function TheRoomSection() {
       className={`charlotte-section charlotte-room ${isVisible ? "charlotte-section--visible" : ""}`}
     >
       <div className="charlotte-section__inner">
-        <h2 className="charlotte-section__title">The room</h2>
+        <h2 className="charlotte-section__title">Three hours of testimony</h2>
         <div className="charlotte-prose">
           <p>
             The agenda did not say I-77. It said opening remarks, a moment of
             silence, a public forum, and then the regular business of a
             Monday-night Charlotte City Council meeting in late February. The
-            forum portion ran 90 minutes. The chamber overflowed. Speakers came
-            on housing displacement, on airport workers, and on the I-77 South
-            Express Lanes &mdash; a $3.2 billion tolled-highway expansion that
-            would add roughly eleven miles of toll lanes south from uptown
-            Charlotte to the South Carolina line, cutting through Wilmore,
-            Wesley Heights, McCrorey Heights, and Brookhill, neighborhoods
-            historically Black and historically already cut through once before
-            by I-77 itself.
+            forum portion ran 90 minutes. The chamber filled past capacity.
+            Speakers came on housing displacement, on airport workers, and on
+            the I-77 South Express Lanes &mdash; a state-led project, recently
+            re-priced by NCDOT at more than $4 billion, that would add roughly
+            eleven miles of tolled lanes south from uptown to the South
+            Carolina line. The corridor crosses Wilmore, Wesley Heights,
+            McCrorey Heights, Reid Park, Revolution Park, and Brookhill, west-
+            and south-side neighborhoods historically Black and already cut
+            through once before by I-77 itself in the 1960s, on the back of
+            uptown&rsquo;s razed Brooklyn neighborhood.
           </p>
           <p>
-            What was actually on the table was narrower than the room. The
-            state, not the city, owns the road. The state, not the city, signs
-            the procurement. Charlotte&rsquo;s only formal seat is on the
-            Charlotte Regional Transportation Planning Organization (CRTPO),
-            where the city holds roughly forty percent of the board vote. That
-            is the leverage every council member who spoke that night was
-            reaching for. Most were reaching for a different part of it.
+            Charlotte&rsquo;s formal power over this project is small. NCDOT
+            owns the road and signs the procurement. The city&rsquo;s only
+            seat at the table is on the Charlotte Regional Transportation
+            Planning Organization (CRTPO), where Charlotte holds 46 percent of
+            the weighted board vote. That seat was filled, on October 16,
+            2024, by Council Member Ed Driggs &mdash; the lone Republican on
+            the dais on Feb 23 &mdash; whose vote that day was the deciding
+            one to back NCDOT&rsquo;s plan. WFAE&rsquo;s Steve Harrison would
+            later call the eighteen-month sequence between that vote and the
+            February meeting &ldquo;a masterful, bureaucratic bait and
+            switch.&rdquo;
           </p>
           <p>
-            The unspoken second meeting in the room was 2019. That was the year
-            the I-77 North Express Lanes opened, built by the Spanish toll
-            operator Cintra under a fifty-year contract that became politically
-            toxic almost from the day construction signs went up. Every speaker
-            on Feb 23 was implicitly arguing about Cintra without naming
-            Cintra.
+            The unspoken reference point was 2019, when the I-77 North Express
+            Lanes opened &mdash; operated by the Spanish toll firm Cintra
+            under a fifty-year contract whose Q2 2025 toll revenue alone hit
+            $35.1 million, up roughly thirty percent year over year. Cintra is
+            winning. Every council member who spoke on Feb 23 was arguing
+            about Cintra without saying so.
           </p>
           <p>
-            The council members did not have a vote scheduled on I-77 South.
-            They had a presentation scheduled. They also had, in their email
-            inboxes, a memo from Council Member Ed Driggs, the lone Republican
-            on the dais, arguing the council should not pause the project.
-            Charlotte&rsquo;s eleven council members are mayor-led; Mayor Vi
-            Lyles presides and votes only to break ties. By the time the room
-            cleared and the council&rsquo;s own deliberation began, nine of the
-            eleven had taken the floor. One, LaWana Mayfield, was absent. One,
-            Victoria Watlington, sat through the night without speaking on
-            I-77. Each member who did speak reached for a different lever.
+            Charlotte runs on a council-manager charter. There are eleven
+            council members &mdash; four at-large, seven district. Mayor Vi
+            Lyles presides and votes only to break ties. City Manager Marcus
+            Jones runs the day-to-day. That arrangement is the reason the
+            council&rsquo;s reasoning, on a night like this, matters more than
+            its formal authority. Of the eleven council members, eight took
+            the floor on I-77. LaWana Mayfield was absent. Joi Mayo, sworn in
+            two months earlier, and Victoria Watlington, the at-large
+            representative on housing, did not speak on the project that
+            night. Each member who did speak reached for a different lever.
           </p>
           <p>
             Council Member Renee Johnson opened the council&rsquo;s
             deliberation by attacking the meeting&rsquo;s own structure.
-            Charlotte&rsquo;s rules require six council members to put a new
-            item on the agenda. She had been arguing since 2021 that the
-            threshold should be lower. With three hundred residents in the
-            chamber that night, the threshold had not been met. The three-hour
-            discussion that followed was technically off-agenda.
+            Charlotte&rsquo;s rules require unanimous consent &mdash; all
+            eleven council members &mdash; to put a new item on the agenda
+            same-night. Driggs declined. The three-hour discussion that
+            followed was, technically, off-agenda. Outside the chamber, the
+            organized opposition had names: Sustain Charlotte (Shannon Binns),
+            Action NC, and the Black Political Caucus of
+            Charlotte-Mecklenburg, whose transportation chair Raki McGregor
+            would, weeks later, announce a TRO suit to stop the project.
           </p>
         </div>
       </div>
@@ -452,37 +467,37 @@ function TheoriesSection() {
       className={`charlotte-section charlotte-theories ${isVisible ? "charlotte-section--visible" : ""}`}
     >
       <div className="charlotte-section__inner">
-        <h2 className="charlotte-section__title">Nine theories on a single road</h2>
+        <h2 className="charlotte-section__title">Eight council members, plus the mayor</h2>
         <div className="charlotte-prose">
           <p>
-            The simplest reading of what happened next is the one WFAE has
-            offered for two months: the council, faced with a project that has
-            galvanized residents and exposed an October 2024 procedural
-            misstep, fragmented. They expressed uniform concern and produced
-            no concrete authority to act. That is one true reading.
+            The simplest reading is the one Steve Harrison has run on WFAE
+            for two months: a council that, faced with a project galvanizing
+            the west side and exposing an October 2024 procedural misstep,
+            fragmented and produced no concrete authority to act. That
+            reading is partly right. It is also incomplete.
           </p>
           <p>
-            The other reading is that the fragmentation was substantive. Each
-            of the nine council members who took the floor was actually
-            reaching for a different lever, drawn from a different theory of
-            what kind of body a city council is supposed to be. Renee Johnson
-            reached for the agenda rule. Malcolm Graham reached for the
-            council&rsquo;s own retreat. JD Mazuera Arias and Kimberly Owens
-            &mdash; sworn in less than ten weeks earlier &mdash; reached for
-            trust. Vi Lyles reached for the staff in the room. Dimple Ajmera
-            reached for the procurement timeline. Ed Driggs, alone, reached
-            for the $600 million dollars at risk and tried to pull the rest of
-            the council back from the lever they were each trying to grab.
+            Look at what each member reached for. Renee Johnson reached for
+            the agenda rule. Malcolm Graham reached for the council&rsquo;s
+            own retreat. JD Mazuera Arias &mdash; the council&rsquo;s first
+            Latino member, who had won District 5 by 34 votes in a recount
+            two months earlier &mdash; and Kimberly Owens, the first Democrat
+            ever to hold District 6, reached for trust. Mayor Lyles reached
+            for the NCDOT community-relations staff seated in the chamber.
+            Dimple Ajmera reached for the procurement timeline. Dante
+            Anderson, the District 1 representative whose ward absorbs the
+            corridor, reached for nine months of work he had already done
+            with NCDOT staff on noise walls and transit-justice money.
+            Driggs, alone, reached for the $600 million state allocation and
+            tried to pull the rest of the council back. The fragmentation was
+            not failure of nerve. It was eight incompatible bets on where
+            municipal power lives.
           </p>
           <p>
-            Both readings are true. The council did not deliver an actionable
-            ask. The council also did not deliver a single ask because eleven
-            people had nine different ideas about whose phone to dial first.
-            The grid below catalogs each theory as it was actually stated, in
-            the order each council member spoke, with timestamped jumps to the
-            words. Read across rows and the diversity is a feature. Read down
-            and the silence at the bottom &mdash; the absent member, the
-            seated member who never spoke &mdash; is a theory too.
+            Across the grid below, eight council members and the mayor in the
+            order they spoke, with timestamped jumps. Down the grid, the
+            absences: Mayfield (absent), Mayo and Watlington (silent on
+            I-77).
           </p>
         </div>
         <TheoriesGrid />
@@ -523,41 +538,49 @@ function DriggsSection() {
       className={`charlotte-section charlotte-driggs ${isVisible ? "charlotte-section--visible" : ""}`}
     >
       <div className="charlotte-section__inner">
-        <h2 className="charlotte-section__title">The dissent</h2>
+        <h2 className="charlotte-section__title">Ed Driggs alone</h2>
         <div className="charlotte-prose">
           <p>
-            Council Member Ed Driggs was the only Republican on the dais and
-            the only member to argue, in detail, against the pause. He did not
-            do this by defending the project. He did this by walking the
-            council through, point by point, the legal architecture of how
-            the project had reached this moment, what the procurement timeline
-            looked like, and what would happen to the $600 million in state
-            allocation if Charlotte stepped out of CRTPO.
+            Driggs is now the council&rsquo;s only Republican &mdash; Tariq
+            Bokhari left, and Krista Bokhari lost her District 6 seat to
+            Owens. He was also, on the night of February 23, the council&rsquo;s
+            only voice arguing in detail against pausing the project. He did
+            not do this by defending it. He did this by walking the council
+            through, point by point, the legal architecture of how the
+            project had reached this moment, what the procurement timeline
+            looked like, and what would happen to the $600 million state
+            allocation if Charlotte instructed its CRTPO delegate to vote
+            against NCDOT.
           </p>
           <p>
-            Driggs had circulated a memo to colleagues that night. He read
-            from it. The reading lasted seven minutes. It was the longest
-            single uninterrupted speech of the night.
+            That CRTPO delegate, on October 16, 2024, had been Driggs himself
+            &mdash; and his vote on that date was the deciding one to back
+            NCDOT&rsquo;s plan.
           </p>
           <p>
-            His position, in his own framing: a 60-day pause forfeits the
-            money. Lean on NCDOT instead. He argued the council had not in
-            fact reauthorized the project in 2024 (a point on which he and
-            other members read the record differently); that the council&rsquo;s
-            actual leverage was rhetorical, not procedural; and that
-            instructing the city&rsquo;s CRTPO representative to obstruct
-            NCDOT was not, in his view, a legally available move. He spoke as
-            someone who had been in the CRTPO meetings the rest of the
-            council had not.
+            Driggs had circulated a memo to colleagues. He read from it.
+            The reading ran roughly seven minutes &mdash; the longest
+            uninterrupted speech of the evening. His position, in his own
+            framing: a 60-day pause forfeits the money. Lean on NCDOT
+            instead. He argued the council had not actually reauthorized the
+            project in 2024 (a point on which he and his colleagues read the
+            record differently); that the council&rsquo;s influence was
+            rhetorical, not procedural; and that instructing CRTPO to
+            obstruct NCDOT was not a legally available move. He spoke as
+            someone who had been in the CRTPO meetings most of the council
+            had not.
           </p>
           <p>
-            What did not appear in the memo, but which has appeared in WFAE
-            reporting since, is what Driggs himself told constituents on
-            October 14, 2024 &mdash; the date most of his colleagues now point
-            to as the moment Charlotte&rsquo;s leverage slipped. &ldquo;There&rsquo;s
-            nothing to stop us in nine months from&hellip; just saying no,&rdquo;
-            he said then. The nine months elapsed. The council, in February,
-            was trying to figure out whether saying no still worked.
+            What did not appear in the memo, but which Steve Harrison has
+            since surfaced on WFAE, is what Driggs himself told constituents
+            on October 14, 2024 &mdash; two days before he cast the deciding
+            CRTPO vote. &ldquo;Bear in mind, sometimes you get these early
+            votes and then later on you don&rsquo;t feel like you have a
+            choice. There&rsquo;s nothing to stop us in nine months from
+            looking at whatever comes out of this process and just saying no,
+            not going to do it.&rdquo; The nine months elapsed. The council,
+            in February, was trying to figure out whether saying no still
+            worked.
           </p>
         </div>
       </div>
@@ -616,17 +639,18 @@ function SparklineSection() {
       className={`charlotte-section charlotte-spike ${isVisible ? "charlotte-section--visible" : ""}`}
     >
       <div className="charlotte-section__inner">
-        <h2 className="charlotte-section__title">The shape of the spike</h2>
+        <h2 className="charlotte-section__title">From background noise to crisis</h2>
         <div className="charlotte-prose">
           <p>
-            Across the 40 Charlotte council meetings indexed for this analysis,
-            the I-77 South Express Lanes project surfaced in council speech
-            an average of fewer than two utterances a month. In February 2026
-            the count jumped to twenty-three. Almost all of them came from
-            this single meeting. The follow-on appearances in April represent
-            committee discussion; the matter came back to the dais on April
-            27, by which point the council had retreated, met privately with
-            NCDOT, and continued to differ on what should happen next.
+            Across the 40 Charlotte council meetings indexed for this analysis
+            (April 2024 through April 2026), the I-77 South Express Lanes
+            project surfaced in council speech fewer than two utterances per
+            month on average. In February 2026 the count jumped to twenty-
+            three, almost all of them from this single meeting. WFAE&rsquo;s
+            March 2 headline after the council retreat read &ldquo;Council
+            blinked.&rdquo; The matter returned to the dais on April 27,
+            2026; Mayor Lyles placed the resulting seven-page resolution on
+            the May 11 agenda. The April utterance count was thirteen.
           </p>
           <I77Sparkline />
         </div>
@@ -668,34 +692,35 @@ function ClosingSection() {
       className={`charlotte-section charlotte-close ${isVisible ? "charlotte-section--visible" : ""}`}
     >
       <div className="charlotte-section__inner">
-        <h2 className="charlotte-section__title">What the night actually decided</h2>
+        <h2 className="charlotte-section__title">What the council decided, and what it didn&rsquo;t</h2>
         <div className="charlotte-prose">
           <p>
-            Mayor Vi Lyles, who had presided through three hours of testimony
-            and deliberation, spoke briefly near midnight. She said: &ldquo;We
-            all know that McCrorey Heights is a special neighborhood. You know,
-            I grew up with my aunt&rsquo;s house still there. So when you
-            start doing these kinds of projects, they do get to be where you
-            have a place where it&rsquo;s human to you.&rdquo; It was the
-            only personal note Lyles offered all night. The motion that
-            ultimately passed was a motion to add the project to the
-            council&rsquo;s retreat agenda on March 2. That is, formally, what
-            the night decided.
+            Mayor Lyles, who had presided through three hours of testimony
+            and deliberation, spoke briefly near midnight. She said:
+            &ldquo;We all know that McCrorey Heights is a special
+            neighborhood. You know, I grew up with my aunt&rsquo;s house
+            still there. So when you start doing these kinds of projects,
+            they do get to be where you have a place where it&rsquo;s human
+            to you.&rdquo; It was the only personal note Lyles offered all
+            evening. The motion that ultimately passed was a motion to add
+            the project to the council&rsquo;s March 2 retreat agenda. That
+            is, formally, what the meeting decided.
           </p>
           <p>
-            What it also decided, less formally, was that nine theories of
-            leverage do not reconcile in a single meeting. The retreat motion
-            is what a council does when its members each understand the
-            problem differently and need another week to figure out which one
-            of them is the rest of them. The retreat happened. A committee
-            meeting on April 27 followed. A formal seven-page resolution is
-            now expected to come to the dais on May 11. None of those steps
-            stops the project. Each of them buys the council another chance
-            to decide whose theory of leverage was right.
+            What it also showed was that eight council members and a mayor
+            held incompatible ideas about how city power works on a state
+            project. The retreat motion bought a week to figure out which
+            idea was right. The retreat happened (WFAE&rsquo;s March 2
+            headline: &ldquo;Council blinked&rdquo;). A committee meeting on
+            April 27 followed. A seven-page resolution &mdash; directing
+            Charlotte&rsquo;s CRTPO delegate to withhold support &mdash; is
+            now scheduled for the dais on May 11, 2026. None of these steps
+            stops the project. Each one buys the council another chance to
+            decide which approach was right.
           </p>
           <p>
-            The full transcript of the night, fully searchable and timestamped
-            against the YouTube video, is available at{" "}
+            The full meeting transcript, searchable and timestamped against
+            the YouTube video, is at{" "}
             <a
               href="https://www.myhamlet.com/search?q=charlotte+i-77+february&utm_source=district&utm_medium=internal&utm_content=prose"
               target="_blank"
