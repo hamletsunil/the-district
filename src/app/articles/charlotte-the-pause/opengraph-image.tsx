@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
 export const alt =
-  "Why Charlotte Said No Just Once — 40 council meetings, 879 rezoning petitions, 1 denial";
+  "Twelve Theories of a Highway — Charlotte City Council, February 23, 2026";
 export const size = {
   width: 1200,
   height: 630,
@@ -92,7 +92,7 @@ export default async function Image() {
           {/* Title line 1 */}
           <div
             style={{
-              fontSize: 48,
+              fontSize: 56,
               fontWeight: 400,
               color: "#f4ede1",
               letterSpacing: "-0.01em",
@@ -100,13 +100,13 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            Why Charlotte Said No
+            Twelve Theories
           </div>
 
           {/* Title line 2 — accent */}
           <div
             style={{
-              fontSize: 92,
+              fontSize: 84,
               fontWeight: 700,
               color: "#00B4D8",
               letterSpacing: "-0.03em",
@@ -115,7 +115,7 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            Just Once
+            of a Highway
           </div>
 
           {/* Subtitle */}
@@ -124,12 +124,12 @@ export default async function Image() {
               fontSize: 22,
               color: "#9eb0c0",
               textAlign: "center",
-              maxWidth: "780px",
+              maxWidth: "820px",
               lineHeight: 1.45,
               display: "flex",
             }}
           >
-            40 council meetings · 12,370 attributed utterances · 879 rezoning petitions · 1 denial.
+            Twelve council members. One project. Twelve ways of pulling on a lever. Charlotte, February 23, 2026.
           </div>
 
           {/* Accent line */}
