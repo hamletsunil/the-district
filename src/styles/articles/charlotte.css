@@ -1,0 +1,995 @@
+/* ===========================
+   CHARLOTTE — Why Charlotte Said No Just Once
+
+   Theme variables live in tokens.css under [data-theme="charlotte"].
+   Palette: Catawba teal on deep Carolina navy.
+   This file holds article-specific layout, not theme tokens.
+   =========================== */
+
+[data-theme="charlotte"] {
+  /* Topic accents used in inline visualizations */
+  --topic-housing: #00B4D8;
+  --topic-zoning: #6EC4D6;
+  --topic-transit: #A78BFA;
+  --topic-i77: #F59E0B;
+  --topic-police: #EF4444;
+  --topic-procedural: #94A3B8;
+
+  background-color: var(--page-bg);
+  color: var(--page-text);
+}
+
+/* ---- Hero ---- */
+.charlotte-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--page-bg);
+}
+
+.charlotte-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    rgba(78, 205, 196, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.charlotte-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 2rem;
+}
+
+.charlotte-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(78, 205, 196, 0.4);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 2rem;
+}
+
+.charlotte-hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: lam-pulse 2s ease-in-out infinite;
+}
+
+@keyframes lam-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.charlotte-hero-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.charlotte-hero-title-line1 {
+  display: block;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--page-text);
+}
+
+.charlotte-hero-title-line2 {
+  display: block;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  padding-bottom: 0.15em;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.charlotte-hero-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--page-text-muted);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.charlotte-hero-scroll {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--page-text-muted);
+}
+
+.charlotte-hero-scroll-line {
+  width: 1px;
+  height: 60px;
+  margin: 0.75rem auto 0;
+  background: linear-gradient(
+    to bottom,
+    var(--accent-primary),
+    transparent
+  );
+  animation: lam-scroll-line 2s ease-in-out infinite;
+}
+
+@keyframes lam-scroll-line {
+  0% { opacity: 0.8; transform: scaleY(1); }
+  50% { opacity: 0.3; transform: scaleY(0.6); }
+  100% { opacity: 0.8; transform: scaleY(1); }
+}
+
+/* ---- Editorial sections ---- */
+.charlotte-editorial-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.charlotte-graphic {
+  max-width: 1080px;
+  margin: 3rem auto;
+}
+
+/* ---- Cards ---- */
+.charlotte-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: transform 0.3s var(--ease-elegant), border-color 0.3s var(--ease-elegant);
+}
+
+.charlotte-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+}
+
+/* ---- City comparison cards ---- */
+.charlotte-city-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 768px) {
+  .charlotte-city-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.charlotte-city-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border-top: 3px solid var(--city-color, var(--accent-primary));
+}
+
+.charlotte-city-card--lafayette { --city-color: var(--lafayette-color); }
+.charlotte-city-card--orinda { --city-color: var(--orinda-color); }
+.charlotte-city-card--moraga { --city-color: var(--moraga-color); }
+
+.charlotte-city-name {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--city-color, var(--accent-primary));
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Topic bar chart ---- */
+.charlotte-topic-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.charlotte-topic-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--page-text-muted);
+  min-width: 140px;
+  text-align: right;
+}
+
+.charlotte-topic-bar-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.charlotte-topic-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s var(--ease-elegant);
+}
+
+.charlotte-topic-pct {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--page-text-muted);
+  min-width: 35px;
+}
+
+/* ---- Map section ---- */
+.charlotte-map-container {
+  width: 100%;
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+}
+
+@media (max-width: 768px) {
+  .charlotte-map-container {
+    height: 350px;
+  }
+
+  /* Mobile: make comparison table scrollable */
+  .charlotte-comparison-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.7rem;
+  }
+
+  /* Mobile: reduce hero title size */
+  .charlotte-hero-title-line1,
+  .charlotte-hero-title-line2 {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  /* Mobile: reduce editorial section padding */
+  .charlotte-editorial-section {
+    padding: 3rem 1rem;
+  }
+
+  /* Mobile: reduce conclusion padding */
+  .charlotte-conclusion {
+    padding: 4rem 1.5rem;
+  }
+
+  .charlotte-conclusion-number {
+    font-size: 3.5rem;
+  }
+
+  /* Mobile: stat values smaller */
+  .charlotte-stat-value {
+    font-size: 1.75rem;
+  }
+
+  /* Mobile: ensure institutional web cards stack */
+  .charlotte-web-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Stats grid ---- */
+.charlotte-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.charlotte-stat {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.charlotte-stat-value {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.charlotte-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--page-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ---- Contentiousness meter ---- */
+.charlotte-meter {
+  display: flex;
+  gap: 2px;
+  margin: 0.5rem 0;
+}
+
+.charlotte-meter-segment {
+  height: 6px;
+  flex: 1;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.charlotte-meter-segment--active {
+  background: var(--accent-primary);
+}
+
+/* ---- Conclusion ---- */
+.charlotte-conclusion {
+  position: relative;
+  z-index: 10;
+  padding: 6rem 2rem;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(
+    180deg,
+    rgba(78, 205, 196, 0.05) 0%,
+    rgba(78, 205, 196, 0.12) 100%
+  );
+  border-radius: 12px;
+}
+
+.charlotte-conclusion-number {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  line-height: 1;
+}
+
+.charlotte-conclusion-label {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  color: var(--page-text-muted);
+  margin-top: 0.5rem;
+}
+
+/* ---- Table of Contents (Kings-style sticky sidebar) ---- */
+.charlotte-toc {
+  position: fixed;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  z-index: 100;
+  max-width: 200px;
+}
+
+.charlotte-toc-header {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  color: var(--accent-primary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.charlotte-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.charlotte-toc-item {
+  margin-bottom: 0.125rem;
+}
+
+.charlotte-toc-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s var(--ease-elegant);
+}
+
+.charlotte-toc-link:hover {
+  background: rgba(78, 205, 196, 0.08);
+}
+
+.charlotte-toc-link--active {
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.charlotte-toc-number {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  color: var(--page-text-muted);
+  min-width: 1.25rem;
+  opacity: 0.5;
+}
+
+.charlotte-toc-link--active .charlotte-toc-number {
+  color: var(--accent-primary);
+  opacity: 1;
+}
+
+.charlotte-toc-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: var(--page-text-muted);
+  line-height: 1.3;
+}
+
+.charlotte-toc-link--active .charlotte-toc-label {
+  color: var(--page-text);
+}
+
+.charlotte-toc-toggle {
+  display: none;
+}
+
+.charlotte-toc-overlay {
+  display: none;
+}
+
+/* ---- TOC Mobile (< 1280px) ---- */
+@media (max-width: 1280px) {
+  .charlotte-toc {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    max-width: 280px;
+    width: 280px;
+    background: var(--page-bg);
+    border-right: 1px solid var(--card-border);
+    padding: 4rem 1rem 2rem;
+    transition: transform 0.3s var(--ease-elegant);
+    z-index: 200;
+  }
+
+  .charlotte-toc--open {
+    transform: translateX(0);
+  }
+
+  .charlotte-toc-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 150;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--page-text-muted);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    cursor: pointer;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s var(--ease-elegant);
+  }
+
+  .charlotte-toc-toggle:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+  }
+
+  .charlotte-toc-toggle-icon {
+    font-size: 0.875rem;
+  }
+
+  .charlotte-toc-toggle-label {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .charlotte-toc-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 199;
+    backdrop-filter: blur(4px);
+  }
+}
+
+/* ---- Side-by-side City Comparison Table ---- */
+.charlotte-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  margin: 2rem 0;
+}
+
+.charlotte-comparison-table th {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--card-border);
+  text-align: right;
+}
+
+.charlotte-comparison-table th:first-child {
+  text-align: left;
+  color: var(--page-text-muted);
+}
+
+.charlotte-comparison-table td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  text-align: right;
+  color: var(--page-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.charlotte-comparison-table td:first-child {
+  text-align: left;
+  color: var(--page-text-muted);
+  font-size: 0.75rem;
+}
+
+.charlotte-comparison-table tr:hover td {
+  background: rgba(78, 205, 196, 0.04);
+}
+
+/* ---- Dot Plot with CI Whiskers ---- */
+.charlotte-dot-plot {
+  margin: 2rem 0;
+}
+
+.charlotte-dot-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.6rem 0;
+  position: relative;
+}
+
+.charlotte-dot-topic {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  color: var(--page-text-muted);
+  min-width: 160px;
+  text-align: right;
+}
+
+.charlotte-dot-track {
+  flex: 1;
+  height: 30px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.charlotte-dot-whisker {
+  position: absolute;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+.charlotte-dot-point {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ---- Institutional Web Layout ---- */
+.charlotte-web-diagram {
+  max-width: 700px;
+  margin: 2rem auto;
+}
+
+.charlotte-web-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 640px) {
+  .charlotte-web-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Radar Chart ---- */
+.charlotte-radar-container {
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+/* ---- Prose links ---- */
+[data-theme="lamorinda"] .article-body-prose a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: text-decoration 0.2s var(--ease-elegant);
+}
+
+[data-theme="lamorinda"] .article-body-prose a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Methodology Section (lam- prefix classes) ---- */
+.charlotte-section.charlotte-methodology {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.charlotte-prose-header {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.charlotte-prose-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  color: var(--page-text);
+  text-wrap: balance;
+  padding-bottom: 0.1em;
+}
+
+.charlotte-section-number {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 0.75rem;
+}
+
+.charlotte-prose {
+  width: 100%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: var(--font-body);
+  font-size: var(--type-body);
+  line-height: 1.6;
+  color: var(--page-text-muted);
+}
+
+@media (min-width: 768px) {
+  .charlotte-prose {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.charlotte-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.charlotte-prose strong {
+  color: var(--page-text);
+  font-weight: 600;
+}
+
+.charlotte-prose-small {
+  font-size: 0.9375rem;
+}
+
+/* ===========================
+   Charlotte article — BEM additions
+   (added 2026-05-01 alongside the cloned Lamorinda-derived layout classes)
+   =========================== */
+
+.charlotte-hero__skyline {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.95;
+  pointer-events: none;
+}
+.charlotte-hero__skyline svg {
+  width: 100%;
+  height: 100%;
+}
+
+.charlotte-hero__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+  text-align: left;
+}
+
+.charlotte-hero__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+}
+
+.charlotte-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6.5vw, 5.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--page-text);
+  margin: 0 0 1.4rem;
+  font-weight: 600;
+}
+
+.charlotte-hero__title-accent {
+  color: var(--accent-primary);
+  font-style: italic;
+}
+
+.charlotte-hero__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--page-text-muted);
+  max-width: 740px;
+  margin: 0 0 2rem;
+}
+
+.charlotte-hero__byline {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--page-text-muted);
+}
+
+/* Sections */
+.charlotte-section {
+  padding: clamp(3rem, 8vw, 7rem) clamp(1.25rem, 4vw, 3rem);
+  background: var(--page-bg);
+}
+.charlotte-section--visible {
+  /* fade-in trigger handled at component level */
+}
+.charlotte-section__inner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.charlotte-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 0 1.6rem;
+  color: var(--page-text);
+  letter-spacing: -0.01em;
+}
+
+/* Pull quote scoped class (PullQuote component reads .charlotte-pull-quote) */
+.charlotte-pull-quote {
+  margin: 4rem auto;
+  max-width: 880px;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Embed wrapper around HamletMeetingEmbed */
+.charlotte-embed-wrap {
+  max-width: 980px;
+  margin: 3rem auto;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
+}
+
+/* Tables (used by per-member share + petitioner mentions) */
+.charlotte-table-wrapper {
+  margin: 2.5rem 0 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  background: var(--card-bg);
+}
+.charlotte-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+}
+.charlotte-table th,
+.charlotte-table td {
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+.charlotte-table th {
+  background: var(--page-bg-alt);
+  color: var(--accent-primary);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+.charlotte-table td.num,
+.charlotte-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.charlotte-table td.muted {
+  color: var(--page-text-muted);
+  font-size: 0.85rem;
+}
+.charlotte-caption {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--page-text-muted);
+  padding: 0.8rem 1rem;
+  font-style: italic;
+}
+
+/* Petitioner bars */
+.charlotte-bars {
+  margin: 2.5rem 0;
+}
+.charlotte-bars__title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.charlotte-bar {
+  display: grid;
+  grid-template-columns: 1fr 2fr 60px;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+.charlotte-bar__label {
+  color: var(--page-text);
+  font-weight: 500;
+}
+.charlotte-bar__track {
+  background: rgba(0, 180, 216, 0.1);
+  height: 22px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.charlotte-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 4px;
+  transition: width 0.6s var(--ease-elegant, cubic-bezier(0.4, 0, 0.2, 1));
+}
+.charlotte-bar__value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--page-text);
+}
+.charlotte-bar--city .charlotte-bar__fill {
+  background: linear-gradient(90deg, #94a3b8, #64748b);
+}
+.charlotte-bar--nonprofit .charlotte-bar__fill {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+.charlotte-bar--institution .charlotte-bar__fill,
+.charlotte-bar--county .charlotte-bar__fill {
+  background: linear-gradient(90deg, #6b7280, #9ca3af);
+}
+.charlotte-bar--private-individual .charlotte-bar__fill {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+/* I-77 sparkline */
+.charlotte-spark {
+  margin: 2.5rem 0;
+}
+.charlotte-spark__title {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.charlotte-spark__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 180px;
+  padding: 0;
+}
+.charlotte-spark__col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  position: relative;
+}
+.charlotte-spark__bar {
+  width: 100%;
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: 2px 2px 0 0;
+  min-height: 4px;
+  transition: height 0.6s var(--ease-elegant, cubic-bezier(0.4, 0, 0.2, 1));
+}
+.charlotte-spark__bar--peak {
+  background: linear-gradient(180deg, #F59E0B, #FBBF24);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4);
+}
+.charlotte-spark__lbl {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  color: var(--page-text-muted);
+  margin-top: 0.4rem;
+  white-space: nowrap;
+  transform: rotate(-50deg);
+  transform-origin: left top;
+}
+
+/* Inline myhamlet link styling */
+.charlotte-link {
+  color: var(--accent-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.charlotte-link:hover {
+  color: var(--accent-secondary);
+}
+
+/* Visible-on-scroll fade pattern */
+.charlotte-section,
+.charlotte-hero {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s var(--ease-elegant, cubic-bezier(0.4, 0, 0.2, 1)),
+              transform 0.7s var(--ease-elegant, cubic-bezier(0.4, 0, 0.2, 1));
+}
+.charlotte-section--visible,
+.charlotte-hero--visible {
+  opacity: 1;
+  transform: translateY(0);
+}

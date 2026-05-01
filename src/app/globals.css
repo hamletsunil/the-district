@@ -20,6 +20,7 @@
 @import "../styles/articles/pittsburgh.css";
 @import "../styles/articles/lamorinda.css";
 @import "../styles/articles/piedmont.css";
+@import "../styles/articles/charlotte.css";
 
 /* Responsive breakpoint fixes */
 @import "../styles/responsive.css";

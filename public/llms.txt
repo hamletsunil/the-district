@@ -94,6 +94,13 @@ URL: https://district.myhamlet.com/articles/lamorinda-triangle
 Published: March 2026
 Summary: Analysis of government meetings across Lafayette, Orinda, and Moraga — three wealthy Contra Costa County cities sharing wildfire risk, school districts, and a fire district, yet governing with fundamentally different approaches. Examines how fire shapes every policy debate from housing to traffic to school budgets.
 
+### Why Charlotte Said No Just Once — Charlotte
+URL: https://district.myhamlet.com/articles/charlotte-talk-do-gap
+Published: May 2026
+Summary: Analysis of 40 Charlotte City Council meetings (April 2024 — April 2026), 12,370 attributed councilmember utterances, and 879 rezoning petitions. Of 198 resolved petitions, council denied exactly one — and the denied petitioner was an individual, not a corporate developer. The article quantifies the gap between what Charlotte's council says about housing (928 attributed housing/zoning utterances, 13% mentioning "affordable") and what it approves, with a single-meeting case study of the February 23, 2026 I-77 South Express Lanes pause.
+Data: 40 transcripts via AssemblyAI Best speech model with diarization, attributed via Gemini 3.1 Pro one-shot mapping (mean confidence 0.96). 879 rezoning petitions from Charlotte Legistar API. Council roster from canonical-v1 entity resolution.
+Sources: City of Charlotte Legistar (charlottenc.legistar.com), Charlotte Open Data Portal Rezonings dataset, City of Charlotte CLTgov YouTube channel, NCDOT I-77 South Express Lanes project records.
+
 ### How Local Government Works — The Definitive Guide
 URL: https://district.myhamlet.com/articles/how-local-government-works
 Published: March 2026
