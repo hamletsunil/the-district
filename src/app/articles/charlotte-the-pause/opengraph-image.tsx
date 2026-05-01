@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const runtime = "edge";
 
 export const alt =
-  "Twelve Theories of a Highway — Charlotte City Council, February 23, 2026";
+  "Eleven Theories of a Highway — Charlotte City Council, February 23, 2026";
 export const size = {
   width: 1200,
   height: 630,
@@ -100,7 +100,7 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            Twelve Theories
+            Eleven Theories
           </div>
 
           {/* Title line 2 — accent */}
@@ -129,7 +129,7 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            Twelve council members. One project. Twelve ways of pulling on a lever. Charlotte, February 23, 2026.
+            Nine council members. One project. Nine ways of pulling on a lever. Charlotte, February 23, 2026.
           </div>
 
           {/* Accent line */}

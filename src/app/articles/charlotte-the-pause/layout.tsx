@@ -5,9 +5,9 @@ const SLUG = "charlotte-the-pause";
 const URL = `${BASE_URL}/articles/${SLUG}`;
 
 export const metadata: Metadata = {
-  title: "Twelve Theories of a Highway — The District",
+  title: "Eleven Theories of a Highway — The District",
   description:
-    "On February 23, 2026, twelve members of Charlotte City Council took the I-77 South Express Lanes apart twelve different ways. A 3.5-hour deliberation, fully indexed and attributed.",
+    "On February 23, 2026, nine of Charlotte's eleven city council members took the I-77 South Express Lanes apart nine different ways. A 3-hour deliberation, fully indexed and attributed, with the May 11 vote ahead.",
   keywords: [
     "Charlotte",
     "Charlotte City Council",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     canonical: URL,
   },
   openGraph: {
-    title: "Twelve Theories of a Highway",
+    title: "Eleven Theories of a Highway",
     description:
-      "How Charlotte City Council took a multibillion-dollar state highway proposal apart, member by member, on a single Monday night in February 2026.",
+      "How Charlotte City Council took a $3.2 billion state highway proposal apart, member by member, on a single Monday night in February 2026.",
     type: "article",
     publishedTime: "2026-05-01T00:00:00.000Z",
     modifiedTime: "2026-05-01T00:00:00.000Z",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Twelve Theories of a Highway",
+    title: "Eleven Theories of a Highway",
     description:
-      "Twelve council members. One project. Twelve ways of pulling on a lever. Charlotte, February 23, 2026.",
+      "Nine council members. One project. Nine ways of pulling on a lever. Charlotte, February 23, 2026.",
   },
 };
 
@@ -65,9 +65,9 @@ export default function CharlotteThePauseLayout({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "NewsArticle",
-            headline: "Twelve Theories of a Highway",
+            headline: "Eleven Theories of a Highway",
             description:
-              "On February 23, 2026, twelve members of Charlotte City Council each articulated a different theory of how to influence the I-77 South Express Lanes project. The night ended with a 60-day pause request and a fragmented record of where local power actually lies.",
+              "On February 23, 2026, nine of eleven Charlotte City Council members each articulated a different theory of how to influence the I-77 South Express Lanes project. The night ended with a 60-day pause request, a deferral to the council retreat, and a fragmented record of where local power actually lies.",
             datePublished: "2026-05-01T00:00:00.000Z",
             dateModified: "2026-05-01T00:00:00.000Z",
             author: {
